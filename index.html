@@ -699,7 +699,6 @@
                 <button class="btn-outline" id="configBtn">配置</button>
                 <button class="btn-outline" id="exportBtn">导出</button>
                 <button class="btn-outline" id="importBtn">导入</button>
-                <button class="btn-outline" id="restoreBackupBtn">恢复备份</button>
                 <input type="file" id="fileInput" accept=".json" style="display: none;">
             </div>
             <div class="right-group">
@@ -711,24 +710,22 @@
             <h2>
                 添加
             </h2>
-<div class="form-grid">
-    <div class="form-group">
-        <label for="wordInput">单词 *</label>
-        <input type="text" id="wordInput" autofocus>
-    </div>
-
-    <div class="form-group full-width">
-        <label for="definitionInput">释义</label>
-        <input type="text" id="definitionInput">
-    </div>
-
-    <div class="form-group full-width">
-        <label for="exampleInput">例句</label>
-        <textarea id="exampleInput" rows="1"></textarea>
-    </div>
-
-    <button class="btn-primary" id="addBtn">添加</button>
-</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="wordInput">单词 *</label>
+                    <input type="text" id="wordInput" autofocus>
+                </div>
+                <div class="form-group full-width">
+                    <label for="definitionInput">释义</label>
+                    <input type="text" id="definitionInput">
+                </div>
+                <div class="form-group full-width">
+                    <label for="exampleInput">例句</label>
+                    <textarea id="exampleInput" rows="1"></textarea>
+                </div>
+                <button class="btn-primary" id="addBtn">添加单词</button>
+            </div>
+        </div>
 
         <div class="word-list-header">
             <h2>Words</h2>
@@ -890,7 +887,6 @@
             const clearAllBtn = document.getElementById('clearAllBtn');
             const exportBtn = document.getElementById('exportBtn');
             const importBtn = document.getElementById('importBtn');
-            const restoreBackupBtn = document.getElementById('restoreBackupBtn');
             const fileInput = document.getElementById('fileInput');
             const sortWordHead = document.getElementById('sortWordHead');
             const sortIcon = document.getElementById('sortIcon');
@@ -1341,7 +1337,6 @@
 
             function saveConflictBackups(backups) {
                 safeLocalSet(CONFLICT_BACKUP_KEY, JSON.stringify(backups.slice(-MAX_CONFLICT_BACKUPS)));
-                updateBackupButton();
             }
 
             function saveConflictBackup(snapshot, source) {
@@ -1353,37 +1348,6 @@
                     words: normalizeWordList(snapshot)
                 });
                 saveConflictBackups(backups);
-            }
-
-            function updateBackupButton() {
-    const count = loadConflictBackups().length;
-
-    restoreBackupBtn.hidden = count === 0;
-    restoreBackupBtn.disabled = count === 0;
-    restoreBackupBtn.textContent = count > 0
-        ? `恢复备份 (${count})`
-        : '恢复备份';
-}
-
-            function restoreLatestConflictBackup() {
-                const backups = loadConflictBackups();
-                if (backups.length === 0) {
-                    showToast('没有可恢复的冲突备份', 'info');
-                    return;
-                }
-
-                const latest = backups[backups.length - 1];
-                const date = new Date(latest.createdAt);
-                const timeText = Number.isNaN(date.getTime()) ? latest.createdAt : date.toLocaleString();
-                if (!confirm(`恢复最近一次冲突备份？\n\n时间：${timeText}\n条目：${latest.words.length}\n\n当前数据会先自动保存为新的备份。`)) {
-                    return;
-                }
-
-                saveConflictBackup(words, 'before_backup_restore');
-                words = normalizeWordList(latest.words);
-                applySortAndRender();
-                markLocalChange();
-                showToast(`已恢复 ${words.length} 个条目，请同步确认云端版本`, 'success');
             }
 
             // ---------- 冲突处理 ----------
@@ -1945,7 +1909,6 @@
             clearAllBtn.addEventListener('click', clearAll);
             exportBtn.addEventListener('click', exportData);
             importBtn.addEventListener('click', () => fileInput.click());
-            restoreBackupBtn.addEventListener('click', restoreLatestConflictBackup);
             fileInput.addEventListener('change', function() {
                 if (this.files?.length) importData(this.files[0]);
                 this.value = '';
@@ -2014,7 +1977,6 @@
             loadSyncMeta();
             loadFromLocal();
             updateLastSyncDisplay();
-            updateBackupButton();
 
             if (isConfigValid()) {
                 ensureSyncTarget();
