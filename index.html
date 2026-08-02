@@ -780,7 +780,7 @@
         <div class="config-box">
             <h3>GitHub 云端配置</h3>
             <div class="config-desc">
-                配置后数据将保存到您的 GitHub 仓库，在任何设备上打开都能同步。
+                本网页按当前网址路径独立保存本地词条、配置、同步状态和备份，不会读取其他仓库页面的数据。配置后仅与您在下方指定的 GitHub 仓库文件同步。
             </div>
             <div class="form-group">
                 <label for="cfgToken">GitHub Personal Access Token *</label>
@@ -797,7 +797,7 @@
             <div class="form-group">
                 <label for="cfgRepo">仓库名称 *</label>
                 <input type="text" id="cfgRepo" placeholder="wordbook">
-                <div class="hint">当前仓库名：<strong>wordbook</strong></div>
+                <div class="hint">请填写当前新网页所属或专用的仓库；不会自动沿用其他网页的仓库配置。</div>
             </div>
             <div class="form-group">
                 <label for="cfgFile">数据文件名</label>
@@ -815,15 +815,41 @@
 
     <script>
         (function() {
-            // ---------- 配置与本地存储 ----------
-            const CONFIG_KEY = 'github_wordbook_config';
-            const TOKEN_KEY = 'github_wordbook_token_session';
-            const STORAGE_KEY = 'wordbook_az_data';
-            const SYNC_SCHEMA_VERSION = 3;
-            const SYNC_META_KEY = 'wordbook_az_sync_meta_v3';
-            const LEGACY_SYNC_META_KEYS = ['wordbook_az_sync_meta_v2'];
-            const CONFLICT_BACKUP_KEY = 'wordbook_az_conflict_backups_v3';
-            const LEGACY_CONFLICT_BACKUP_KEY = 'wordbook_az_conflict_backup_v2';
+            // ---------- 页面实例隔离与本地存储 ----------
+            // localStorage/sessionStorage 按域名共享，不按 GitHub 仓库路径隔离。
+            // 使用当前网页的 origin + pathname 生成稳定命名空间，使不同仓库页面互不读取配置、词条、同步基线和备份。
+            function getPageInstanceIdentity() {
+                let pathname = window.location.pathname || '/';
+                pathname = pathname
+                    .replace(/\\/g, '/')
+                    .replace(/\/+/g, '/')
+                    .replace(/\/(?:index\.html?)$/i, '/');
+
+                if (pathname.length > 1 && pathname.endsWith('/')) {
+                    pathname = pathname.slice(0, -1);
+                }
+
+                return `${window.location.origin}${pathname}`;
+            }
+
+            function hashIdentity(value) {
+                // FNV-1a 32 位哈希，仅用于生成存储键名，不用于安全用途。
+                let hash = 0x811c9dc5;
+                for (let i = 0; i < value.length; i++) {
+                    hash ^= value.charCodeAt(i);
+                    hash = Math.imul(hash, 0x01000193);
+                }
+                return (hash >>> 0).toString(16).padStart(8, '0');
+            }
+
+            const PAGE_INSTANCE_ID = hashIdentity(getPageInstanceIdentity());
+            const STORAGE_NAMESPACE = `english_wordbook:${PAGE_INSTANCE_ID}`;
+            const CONFIG_KEY = `${STORAGE_NAMESPACE}:config`;
+            const TOKEN_KEY = `${STORAGE_NAMESPACE}:token_session`;
+            const STORAGE_KEY = `${STORAGE_NAMESPACE}:words`;
+            const SYNC_SCHEMA_VERSION = 4;
+            const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v4`;
+            const CONFLICT_BACKUP_KEY = `${STORAGE_NAMESPACE}:conflict_backups_v4`;
             const MAX_CONFLICT_BACKUPS = 10;
             const MAX_SYNC_BYTES = 750 * 1024;
             const AUTO_SYNC_DELAY = 700;
@@ -1063,25 +1089,13 @@
                     }
                 }
 
-                // 兼容旧版：将曾经保存在 localStorage 中的 Token 迁移到本次会话。
-                const sessionToken = safeSessionGet(TOKEN_KEY);
-                const legacyToken = typeof parsed.token === 'string' ? parsed.token : '';
+                // 只读取当前网页实例自己的命名空间，不迁移或读取旧页面/其他仓库的全局配置。
                 config = {
-                    token: sessionToken || legacyToken || '',
+                    token: safeSessionGet(TOKEN_KEY) || '',
                     owner: typeof parsed.owner === 'string' ? parsed.owner : '',
                     repo: typeof parsed.repo === 'string' ? parsed.repo : '',
                     file: typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json'
                 };
-
-                if (legacyToken) {
-                    safeSessionSet(TOKEN_KEY, legacyToken);
-                    delete parsed.token;
-                    safeLocalSet(CONFIG_KEY, JSON.stringify({
-                        owner: config.owner,
-                        repo: config.repo,
-                        file: config.file
-                    }));
-                }
 
                 cfgToken.value = config.token;
                 cfgOwner.value = config.owner;
@@ -1119,9 +1133,7 @@
             }
 
             function loadSyncMeta() {
-                // v2 的指纹包含已经删除的词性字段，不能继续作为同步基线。
-                LEGACY_SYNC_META_KEYS.forEach(safeLocalRemove);
-
+                // 只读取当前网页实例的同步基线，绝不复用其他仓库页面的同步状态。
                 const stored = safeLocalGet(SYNC_META_KEY);
                 if (!stored) {
                     syncMeta = createEmptySyncMeta();
@@ -1299,8 +1311,8 @@
             // ---------- 冲突备份 ----------
             function loadConflictBackups() {
                 const backups = [];
-                let migratedLegacy = false;
                 const stored = safeLocalGet(CONFLICT_BACKUP_KEY);
+
                 if (stored) {
                     try {
                         const parsed = JSON.parse(stored);
@@ -1320,33 +1332,9 @@
                     }
                 }
 
-                const legacy = safeLocalGet(LEGACY_CONFLICT_BACKUP_KEY);
-                if (legacy) {
-                    try {
-                        const parsed = JSON.parse(legacy);
-                        if (parsed && Array.isArray(parsed.words)) {
-                            backups.push({
-                                createdAt: typeof parsed.createdAt === 'string' ? parsed.createdAt : new Date().toISOString(),
-                                source: typeof parsed.source === 'string' ? parsed.source : 'legacy',
-                                target: typeof parsed.target === 'string' ? parsed.target : '',
-                                words: normalizeWordList(parsed.words)
-                            });
-                        }
-                    } catch (error) {
-                        console.error('旧冲突备份解析失败:', error);
-                    }
-                    safeLocalRemove(LEGACY_CONFLICT_BACKUP_KEY);
-                    migratedLegacy = true;
-                }
-
-                const normalized = backups
+                return backups
                     .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)))
                     .slice(-MAX_CONFLICT_BACKUPS);
-
-                if (migratedLegacy) {
-                    safeLocalSet(CONFLICT_BACKUP_KEY, JSON.stringify(normalized));
-                }
-                return normalized;
             }
 
             function saveConflictBackups(backups) {
@@ -1648,14 +1636,8 @@
                         words = [];
                     }
                 } else {
-                    words = [
-                        { word: 'apple', definition: '苹果；苹果树', example: 'An apple a day keeps the doctor away.' },
-                        { word: 'book', definition: '书；书籍', example: 'This book is very interesting.' },
-                        { word: 'book', definition: '预订；预约', example: 'I need to book a hotel room.' },
-                        { word: 'light', definition: '光；光线', example: 'The light is too bright.' },
-                        { word: 'light', definition: '轻的；轻松的', example: 'This bag is very light.' },
-                        { word: 'light', definition: '点燃；照亮', example: 'Please light the candle.' }
-                    ];
+                    // 新仓库/新路径首次打开时从空列表开始，不加载示例词条，也不读取其他页面的旧数据。
+                    words = [];
                 }
 
                 applySortAndRender();
@@ -2020,6 +2002,7 @@
             });
 
             // ---------- 初始化 ----------
+            console.info('当前网页独立存储实例：', PAGE_INSTANCE_ID, getPageInstanceIdentity());
             sortWordHead.setAttribute('tabindex', '0');
             sortWordHead.setAttribute('role', 'button');
             toast.setAttribute('role', 'status');
