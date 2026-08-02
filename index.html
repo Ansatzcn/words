@@ -379,13 +379,6 @@
             color: #334155;
         }
 
-        .footer-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 1.2rem;
-            gap: 12px;
-        }
-
         /* 编辑弹窗 */
         .modal-overlay {
             position: fixed;
@@ -749,9 +742,6 @@
             </table>
         </div>
 
-        <div class="footer-actions">
-            <button class="btn-outline" id="clearAllBtn">清空全部</button>
-        </div>
     </div>
 
     <!-- 编辑弹窗 -->
@@ -884,7 +874,6 @@
             const addBtn = document.getElementById('addBtn');
             const tableBody = document.getElementById('tableBody');
             const countDisplay = document.getElementById('countDisplay');
-            const clearAllBtn = document.getElementById('clearAllBtn');
             const exportBtn = document.getElementById('exportBtn');
             const importBtn = document.getElementById('importBtn');
             const fileInput = document.getElementById('fileInput');
@@ -1793,21 +1782,6 @@
                 reader.readAsText(file, 'utf-8');
             }
 
-            // ---------- 清空 ----------
-            function clearAll() {
-                if (words.length === 0) {
-                    alert('列表已经是空的。');
-                    return;
-                }
-
-                if (confirm('确定要删除所有单词条目吗？此操作不可撤销！')) {
-                    words = [];
-                    applySortAndRender();
-                    markLocalChange();
-                    wordInput.focus();
-                }
-            }
-
             // ---------- 状态与提示 ----------
             function setCloudStatus(status, text) {
                 statusDot.className = `dot ${status}`;
@@ -1906,7 +1880,6 @@
                 });
             });
 
-            clearAllBtn.addEventListener('click', clearAll);
             exportBtn.addEventListener('click', exportData);
             importBtn.addEventListener('click', () => fileInput.click());
             fileInput.addEventListener('change', function() {
