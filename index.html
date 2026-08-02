@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f5f7fa;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+            padding: 2rem 1.8rem;
+            transition: 0.2s;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1e293b;
+            letter-spacing: -0.5px;
+            border-bottom: 2px solid #e9edf4;
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+        }
+        h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-left: auto;
+            background: #f1f5f9;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+        }
+        .cloud-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #475569;
+            padding: 0.3rem 1rem;
+            background: #f1f5f9;
+            border-radius: 40px;
+            margin-left: 10px;
+        }
+        .cloud-status .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .cloud-status .dot.online {
+            background: #22c55e;
+        }
+        .cloud-status .dot.offline {
+            background: #ef4444;
+        }
+        .cloud-status .dot.syncing {
+            background: #f59e0b;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e9edf4;
+            padding-bottom: 1rem;
+        }
+        .toolbar .left-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .toolbar .right-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .toolbar .btn-outline {
+            background: transparent;
+            border: 1px solid #d1d9e6;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #334155;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.85rem;
+        }
+        .toolbar .btn-outline:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+        .toolbar .btn-primary-outline {
+            background: #1e293b;
+            border: 1px solid #1e293b;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.85rem;
+        }
+        .toolbar .btn-primary-outline:hover {
+            background: #0f172a;
+        }
+        .toolbar .btn-sync {
+            background: #2563eb;
+            border: 1px solid #2563eb;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.85rem;
+        }
+        .toolbar .btn-sync:hover {
+            background: #1d4ed8;
+        }
+        .toolbar .btn-sync:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .add-section {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 1.6rem 1.5rem;
+            margin-bottom: 2.2rem;
+            border: 1px solid #e2e8f0;
+        }
+        .add-section h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .info-tip {
+            font-size: 0.8rem;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 1.2rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #475569;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: white;
+            border: 1px solid #d1d9e6;
+            border-radius: 16px;
+            padding: 0.7rem 1rem;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: 2px solid #7c9bff;
+            border-color: transparent;
+            box-shadow: 0 0 0 3px rgba(124, 155, 255, 0.2);
+        }
+        .form-group textarea {
+            min-height: 60px;
+        }
+        .form-group select {
+            appearance: auto;
+            cursor: pointer;
+        }
+        .btn-primary {
+            grid-column: 1 / -1;
+            background: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 0.85rem 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0.4rem;
+        }
+        .btn-primary:hover {
+            background: #0f172a;
+            transform: scale(0.98);
+        }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid #e9edf4;
+            margin-top: 0.5rem;
+        }
+        .word-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .word-table th {
+            background: #f1f5f9;
+            text-align: left;
+            padding: 0.9rem 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #d1d9e6;
+            white-space: nowrap;
+        }
+        .word-table th.sortable {
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s;
+        }
+        .word-table th.sortable:hover {
+            background: #e2e8f0;
+        }
+        .word-table th.sortable .sort-icon {
+            margin-left: 6px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        .word-table td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #eef2f6;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .word-table tbody tr:hover {
+            background: #fafcff;
+        }
+        .word-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .word-table .col-word {
+            font-weight: 600;
+            color: #0f172a;
+            white-space: nowrap;
+            min-width: 100px;
+        }
+        .word-table .col-def {
+            min-width: 160px;
+        }
+        .word-table .col-example {
+            color: #475569;
+            font-style: normal;
+            min-width: 160px;
+        }
+        .word-table .col-action {
+            text-align: center;
+            white-space: nowrap;
+            width: 110px;
+        }
+        .word-table .action-btn {
+            background: none;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0 2px;
+        }
+        .word-table .action-btn.edit-btn {
+            color: #1e3a8a;
+            background: #dbeafe;
+        }
+        .word-table .action-btn.edit-btn:hover {
+            background: #bfdbfe;
+            transform: scale(1.05);
+        }
+        .word-table .action-btn.delete-btn {
+            color: #991b1b;
+            background: #fee2e2;
+        }
+        .word-table .action-btn.delete-btn:hover {
+            background: #fecaca;
+            transform: scale(1.05);
+        }
+        .empty-row td {
+            padding: 2.5rem 1rem;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1rem;
+            background: #fafcff;
+        }
+
+        .word-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin: 1.8rem 0 0.8rem 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .word-list-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        .word-list-header .badge {
+            background: #e9edf4;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.2rem;
+            gap: 12px;
+        }
+
+        /* 编辑弹窗 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            animation: fadeIn 0.2s ease;
+        }
+        .modal-overlay.hidden {
+            display: none;
+        }
+        .modal-box {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2rem 1.8rem;
+            max-width: 520px;
+            width: 92%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            animation: slideUp 0.25s ease;
+        }
+        .modal-box h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.2rem;
+        }
+        .modal-box .modal-sub {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #e9edf4;
+            padding-bottom: 0.8rem;
+        }
+        .modal-box .form-group {
+            margin-bottom: 1rem;
+        }
+        .modal-box .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #475569;
+        }
+        .modal-box .form-group input,
+        .modal-box .form-group textarea,
+        .modal-box .form-group select {
+            width: 100%;
+            background: white;
+            border: 1px solid #d1d9e6;
+            border-radius: 14px;
+            padding: 0.6rem 1rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .modal-box .form-group input:focus,
+        .modal-box .form-group textarea:focus,
+        .modal-box .form-group select:focus {
+            outline: 2px solid #7c9bff;
+            border-color: transparent;
+        }
+        .modal-box .form-group textarea {
+            min-height: 56px;
+            resize: vertical;
+        }
+        .modal-box .form-group select {
+            appearance: auto;
+            cursor: pointer;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 1.2rem;
+        }
+        .modal-actions .btn-modal {
+            padding: 0.5rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .modal-actions .btn-modal.cancel {
+            background: #f1f5f9;
+            color: #334155;
+        }
+        .modal-actions .btn-modal.cancel:hover {
+            background: #e2e8f0;
+        }
+        .modal-actions .btn-modal.save {
+            background: #1e293b;
+            color: white;
+        }
+        .modal-actions .btn-modal.save:hover {
+            background: #0f172a;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Toast 消息 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            background: #1e293b;
+            max-width: 90%;
+            text-align: center;
+        }
+        .toast.success {
+            background: #16a34a;
+        }
+        .toast.error {
+            background: #dc2626;
+        }
+        .toast.info {
+            background: #2563eb;
+        }
+        .toast.hidden {
+            display: none;
+        }
+
+        /* 配置弹窗 */
+        .config-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.25s ease;
+        }
+        .config-overlay.hidden {
+            display: none;
+        }
+        .config-box {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2rem 1.8rem;
+            max-width: 560px;
+            width: 94%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.25s ease;
+        }
+        .config-box h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        .config-box .config-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #e9edf4;
+            padding-bottom: 0.8rem;
+        }
+        .config-box .form-group {
+            margin-bottom: 1rem;
+        }
+        .config-box .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #475569;
+        }
+        .config-box .form-group input {
+            width: 100%;
+            background: white;
+            border: 1px solid #d1d9e6;
+            border-radius: 14px;
+            padding: 0.7rem 1rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .config-box .form-group input:focus {
+            outline: 2px solid #7c9bff;
+            border-color: transparent;
+        }
+        .config-box .form-group .hint {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .config-box .form-group .hint a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .config-box .form-group .hint a:hover {
+            text-decoration: underline;
+        }
+        .config-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 1.2rem;
+        }
+        .config-actions .btn-config {
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .config-actions .btn-config.primary {
+            background: #1e293b;
+            color: white;
+        }
+        .config-actions .btn-config.primary:hover {
+            background: #0f172a;
+        }
+        .config-actions .btn-config.secondary {
+            background: #f1f5f9;
+            color: #334155;
+        }
+        .config-actions .btn-config.secondary:hover {
+            background: #e2e8f0;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .word-table th,
+            .word-table td {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .word-table .col-word {
+                min-width: 70px;
+            }
+            .word-table .col-action {
+                width: 80px;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .toolbar .left-group,
+            .toolbar .right-group {
+                justify-content: center;
+            }
+            .cloud-status {
+                margin-left: 0;
+            }
+            .config-box {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            English
+            <small>A-Z</small>
+            <span class="cloud-status" id="cloudStatus">
+                <span class="dot" id="statusDot"></span>
+                <span id="statusText">未配置</span>
+            </span>
+        </h1>
+
+        <div class="toolbar">
+            <div class="left-group">
+                <button class="btn-sync" id="syncBtn">同步</button>
+                <button class="btn-outline" id="configBtn">配置</button>
+                <button class="btn-outline" id="exportBtn">导出</button>
+                <button class="btn-outline" id="importBtn">导入</button>
+                <button class="btn-outline" id="restoreBackupBtn">恢复备份</button>
+                <input type="file" id="fileInput" accept=".json" style="display: none;">
+            </div>
+            <div class="right-group">
+                <span style="font-size:0.8rem;color:#94a3b8;" id="lastSyncTime">未同步</span>
+            </div>
+        </div>
+
+        <div class="add-section">
+            <h2>
+                添加
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="wordInput">单词 *</label>
+                    <input type="text" id="wordInput" placeholder="例如: apple" autofocus>
+                </div>
+                <div class="form-group full-width">
+                    <label for="definitionInput">释义</label>
+                    <input type="text" id="definitionInput" placeholder="苹果；苹果树">
+                </div>
+                <div class="form-group full-width">
+                    <label for="exampleInput">例句</label>
+                    <textarea id="exampleInput" placeholder="I eat an apple every day." rows="1"></textarea>
+                </div>
+                <button class="btn-primary" id="addBtn">添加单词</button>
+            </div>
+        </div>
+
+        <div class="word-list-header">
+            <h2>Words</h2>
+            <span class="badge" id="countDisplay">0</span>
+        </div>
+        <div class="table-wrapper">
+            <table class="word-table" id="wordTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" id="sortWordHead">单词 <span class="sort-icon" id="sortIcon">▼</span></th>
+                        <th>释义</th>
+                        <th>例句</th>
+                        <th class="col-action">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr class="empty-row">
+                        <td colspan="4">加载中...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer-actions">
+            <button class="btn-outline" id="clearAllBtn">清空全部</button>
+        </div>
+    </div>
+
+    <!-- 编辑弹窗 -->
+    <div class="modal-overlay hidden" id="editModal">
+        <div class="modal-box">
+            <h3>编辑条目</h3>
+            <div class="modal-sub" id="editModalWord">单词：<span id="editWordDisplay"></span></div>
+            <div class="form-group">
+                <label for="editDefinition">释义</label>
+                <input type="text" id="editDefinition" placeholder="请输入释义">
+            </div>
+            <div class="form-group">
+                <label for="editExample">例句</label>
+                <textarea id="editExample" placeholder="请输入例句" rows="2"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal cancel" id="editCancelBtn">取消</button>
+                <button class="btn-modal save" id="editSaveBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 配置弹窗 -->
+    <div class="config-overlay hidden" id="configModal">
+        <div class="config-box">
+            <h3>GitHub 云端配置</h3>
+            <div class="config-desc">
+                配置后数据将保存到您的 GitHub 仓库，在任何设备上打开都能同步。
+            </div>
+            <div class="form-group">
+                <label for="cfgToken">GitHub Personal Access Token *</label>
+                <input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
+                <div class="hint">
+                    <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer">创建细粒度 Token</a>
+                    （仅授权目标仓库，并授予 <strong>Contents: Read and write</strong>；Token 只在当前浏览器会话中保存）
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cfgOwner">仓库所有者 *</label>
+                <input type="text" id="cfgOwner" placeholder="你的GitHub用户名">
+            </div>
+            <div class="form-group">
+                <label for="cfgRepo">仓库名称 *</label>
+                <input type="text" id="cfgRepo" placeholder="wordbook">
+                <div class="hint">当前仓库名：<strong>wordbook</strong></div>
+            </div>
+            <div class="form-group">
+                <label for="cfgFile">数据文件名</label>
+                <input type="text" id="cfgFile" placeholder="wordbook_data.json" value="wordbook_data.json">
+            </div>
+            <div class="config-actions">
+                <button class="btn-config secondary" id="configCancelBtn">取消</button>
+                <button class="btn-config primary" id="configSaveBtn">保存并连接</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 消息 -->
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        (function() {
+            // ---------- 配置与本地存储 ----------
+            const CONFIG_KEY = 'github_wordbook_config';
+            const TOKEN_KEY = 'github_wordbook_token_session';
+            const STORAGE_KEY = 'wordbook_az_data';
+            const SYNC_SCHEMA_VERSION = 3;
+            const SYNC_META_KEY = 'wordbook_az_sync_meta_v3';
+            const LEGACY_SYNC_META_KEYS = ['wordbook_az_sync_meta_v2'];
+            const CONFLICT_BACKUP_KEY = 'wordbook_az_conflict_backups_v3';
+            const LEGACY_CONFLICT_BACKUP_KEY = 'wordbook_az_conflict_backup_v2';
+            const MAX_CONFLICT_BACKUPS = 10;
+            const MAX_SYNC_BYTES = 750 * 1024;
+            const AUTO_SYNC_DELAY = 700;
+
+            // ---------- 全局状态 ----------
+            let words = [];
+            let sortOrder = 'asc';
+            let editingIndex = null;
+            let isSyncing = false;
+            let syncQueued = false;
+            let autoSyncTimer = null;
+            let hasStoredLocalData = false;
+
+            let config = {
+                token: '',
+                owner: '',
+                repo: '',
+                file: 'wordbook_data.json'
+            };
+
+            let syncMeta = {
+                schemaVersion: SYNC_SCHEMA_VERSION,
+                target: '',
+                remoteSha: null,
+                lastSyncedFingerprint: null,
+                lastSyncAt: null
+            };
+
+            // ---------- DOM 引用 ----------
+            const wordInput = document.getElementById('wordInput');
+            const definitionInput = document.getElementById('definitionInput');
+            const exampleInput = document.getElementById('exampleInput');
+            const addBtn = document.getElementById('addBtn');
+            const tableBody = document.getElementById('tableBody');
+            const countDisplay = document.getElementById('countDisplay');
+            const clearAllBtn = document.getElementById('clearAllBtn');
+            const exportBtn = document.getElementById('exportBtn');
+            const importBtn = document.getElementById('importBtn');
+            const restoreBackupBtn = document.getElementById('restoreBackupBtn');
+            const fileInput = document.getElementById('fileInput');
+            const sortWordHead = document.getElementById('sortWordHead');
+            const sortIcon = document.getElementById('sortIcon');
+            const syncBtn = document.getElementById('syncBtn');
+            const lastSyncTime = document.getElementById('lastSyncTime');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const configBtn = document.getElementById('configBtn');
+
+            const editModal = document.getElementById('editModal');
+            const editWordDisplay = document.getElementById('editWordDisplay');
+            const editDefinition = document.getElementById('editDefinition');
+            const editExample = document.getElementById('editExample');
+            const editCancelBtn = document.getElementById('editCancelBtn');
+            const editSaveBtn = document.getElementById('editSaveBtn');
+
+            const configModal = document.getElementById('configModal');
+            const cfgToken = document.getElementById('cfgToken');
+            const cfgOwner = document.getElementById('cfgOwner');
+            const cfgRepo = document.getElementById('cfgRepo');
+            const cfgFile = document.getElementById('cfgFile');
+            const configCancelBtn = document.getElementById('configCancelBtn');
+            const configSaveBtn = document.getElementById('configSaveBtn');
+
+            const toast = document.getElementById('toast');
+            let toastTimer = null;
+
+            // ---------- 通用工具 ----------
+            function safeLocalGet(key) {
+                try {
+                    return localStorage.getItem(key);
+                } catch (error) {
+                    console.error('读取本地存储失败:', error);
+                    return null;
+                }
+            }
+
+            function safeLocalSet(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                    return true;
+                } catch (error) {
+                    console.error('写入本地存储失败:', error);
+                    showToast(`本地保存失败：${error.message}`, 'error');
+                    return false;
+                }
+            }
+
+            function safeLocalRemove(key) {
+                try {
+                    localStorage.removeItem(key);
+                    return true;
+                } catch (error) {
+                    console.error('删除本地存储失败:', error);
+                    return false;
+                }
+            }
+
+            function safeSessionGet(key) {
+                try {
+                    return sessionStorage.getItem(key);
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function safeSessionSet(key, value) {
+                try {
+                    sessionStorage.setItem(key, value);
+                    return true;
+                } catch (error) {
+                    showToast(`Token 临时保存失败：${error.message}`, 'error');
+                    return false;
+                }
+            }
+
+            function normalizeWordItem(item) {
+                if (!item || typeof item !== 'object' || typeof item.word !== 'string') {
+                    return null;
+                }
+
+                const word = item.word.trim();
+                if (!word) return null;
+
+                return {
+                    word,
+                    definition: typeof item.definition === 'string' ? item.definition.trim() : '',
+                    example: typeof item.example === 'string' ? item.example.trim() : ''
+                };
+            }
+
+            function normalizeWordList(value) {
+                if (!Array.isArray(value)) return [];
+                return value.map(normalizeWordItem).filter(Boolean);
+            }
+
+            const fingerprintCollator = new Intl.Collator('en', {
+                sensitivity: 'variant',
+                numeric: true
+            });
+
+            function getWordsFingerprint(list) {
+                const canonical = normalizeWordList(list)
+                    .map(item => ({
+                        word: item.word,
+                        definition: item.definition,
+                        example: item.example
+                    }))
+                    .sort((a, b) => {
+                        const fields = ['word', 'definition', 'example'];
+                        for (const field of fields) {
+                            const compared = fingerprintCollator.compare(a[field], b[field]);
+                            if (compared !== 0) return compared;
+                        }
+                        return 0;
+                    });
+                return JSON.stringify(canonical);
+            }
+
+            function serializeSnapshot(snapshot) {
+                return JSON.stringify(normalizeWordList(snapshot), null, 2);
+            }
+
+            function getSnapshotByteLength(snapshot) {
+                return new TextEncoder().encode(serializeSnapshot(snapshot)).length;
+            }
+
+            function assertSnapshotSyncSize(snapshot) {
+                const byteLength = getSnapshotByteLength(snapshot);
+                if (byteLength > MAX_SYNC_BYTES) {
+                    const sizeKb = Math.ceil(byteLength / 1024);
+                    throw new Error(`数据文件约 ${sizeKb} KB，超过安全同步上限 750 KB；请导出并拆分数据后再同步`);
+                }
+            }
+
+            function utf8ToBase64(text) {
+                const bytes = new TextEncoder().encode(text);
+                let binary = '';
+                const chunkSize = 0x8000;
+                for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+                    const chunk = bytes.subarray(offset, offset + chunkSize);
+                    binary += String.fromCharCode(...chunk);
+                }
+                return btoa(binary);
+            }
+
+            function base64ToUtf8(base64) {
+                const clean = String(base64 || '').replace(/\s/g, '');
+                const binary = atob(clean);
+                const bytes = new Uint8Array(binary.length);
+                for (let i = 0; i < binary.length; i++) {
+                    bytes[i] = binary.charCodeAt(i);
+                }
+                return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = String(text);
+                return div.innerHTML;
+            }
+
+            function getSyncTarget() {
+                if (!config.owner || !config.repo || !config.file) return '';
+                return `${config.owner}/${config.repo}/${config.file}`;
+            }
+
+            function encodePath(path) {
+                return String(path)
+                    .split('/')
+                    .filter(segment => segment.length > 0)
+                    .map(encodeURIComponent)
+                    .join('/');
+            }
+
+            function formatError(error) {
+                if (!error) return '未知错误';
+                if (error.status === 401) return 'Token 无效或已过期';
+                if (error.status === 403) return 'Token 权限不足、仓库访问被拒绝或触发了 API 限制';
+                if (error.status === 404) return '仓库、分支或文件路径不存在，或 Token 无权访问';
+                if (error.status === 409) return '云端文件已被其他设备修改';
+                if (error.status === 422) return `请求校验失败：${error.message}`;
+                return error.message || String(error);
+            }
+
+
+            // ---------- 配置管理 ----------
+            function loadConfig() {
+                const stored = safeLocalGet(CONFIG_KEY);
+                let parsed = {};
+
+                if (stored) {
+                    try {
+                        parsed = JSON.parse(stored) || {};
+                    } catch (error) {
+                        console.error('配置解析失败:', error);
+                    }
+                }
+
+                // 兼容旧版：将曾经保存在 localStorage 中的 Token 迁移到本次会话。
+                const sessionToken = safeSessionGet(TOKEN_KEY);
+                const legacyToken = typeof parsed.token === 'string' ? parsed.token : '';
+                config = {
+                    token: sessionToken || legacyToken || '',
+                    owner: typeof parsed.owner === 'string' ? parsed.owner : '',
+                    repo: typeof parsed.repo === 'string' ? parsed.repo : '',
+                    file: typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json'
+                };
+
+                if (legacyToken) {
+                    safeSessionSet(TOKEN_KEY, legacyToken);
+                    delete parsed.token;
+                    safeLocalSet(CONFIG_KEY, JSON.stringify({
+                        owner: config.owner,
+                        repo: config.repo,
+                        file: config.file
+                    }));
+                }
+
+                cfgToken.value = config.token;
+                cfgOwner.value = config.owner;
+                cfgRepo.value = config.repo;
+                cfgFile.value = config.file;
+            }
+
+            function saveConfig() {
+                config.token = cfgToken.value.trim();
+                config.owner = cfgOwner.value.trim();
+                config.repo = cfgRepo.value.trim();
+                config.file = cfgFile.value.trim() || 'wordbook_data.json';
+
+                safeSessionSet(TOKEN_KEY, config.token);
+                safeLocalSet(CONFIG_KEY, JSON.stringify({
+                    owner: config.owner,
+                    repo: config.repo,
+                    file: config.file
+                }));
+            }
+
+            function isConfigValid() {
+                return Boolean(config.token && config.owner && config.repo && config.file);
+            }
+
+            // ---------- 同步元数据 ----------
+            function createEmptySyncMeta(target = '') {
+                return {
+                    schemaVersion: SYNC_SCHEMA_VERSION,
+                    target,
+                    remoteSha: null,
+                    lastSyncedFingerprint: null,
+                    lastSyncAt: null
+                };
+            }
+
+            function loadSyncMeta() {
+                // v2 的指纹包含已经删除的词性字段，不能继续作为同步基线。
+                LEGACY_SYNC_META_KEYS.forEach(safeLocalRemove);
+
+                const stored = safeLocalGet(SYNC_META_KEY);
+                if (!stored) {
+                    syncMeta = createEmptySyncMeta();
+                    return;
+                }
+
+                try {
+                    const parsed = JSON.parse(stored);
+                    if (!parsed || parsed.schemaVersion !== SYNC_SCHEMA_VERSION) {
+                        syncMeta = createEmptySyncMeta();
+                        saveSyncMeta();
+                        return;
+                    }
+
+                    syncMeta = {
+                        schemaVersion: SYNC_SCHEMA_VERSION,
+                        target: typeof parsed.target === 'string' ? parsed.target : '',
+                        remoteSha: typeof parsed.remoteSha === 'string' ? parsed.remoteSha : null,
+                        lastSyncedFingerprint: typeof parsed.lastSyncedFingerprint === 'string'
+                            ? parsed.lastSyncedFingerprint
+                            : null,
+                        lastSyncAt: typeof parsed.lastSyncAt === 'string' ? parsed.lastSyncAt : null
+                    };
+                } catch (error) {
+                    console.error('同步元数据解析失败:', error);
+                    syncMeta = createEmptySyncMeta();
+                    saveSyncMeta();
+                }
+            }
+
+            function saveSyncMeta() {
+                safeLocalSet(SYNC_META_KEY, JSON.stringify(syncMeta));
+                updateLastSyncDisplay();
+            }
+
+            function ensureSyncTarget() {
+                const target = getSyncTarget();
+                if (syncMeta.target !== target) {
+                    syncMeta = createEmptySyncMeta(target);
+                    saveSyncMeta();
+                }
+            }
+
+            function recordSynced(snapshot, remoteSha) {
+                syncMeta = {
+                    schemaVersion: SYNC_SCHEMA_VERSION,
+                    target: getSyncTarget(),
+                    remoteSha: remoteSha || null,
+                    lastSyncedFingerprint: getWordsFingerprint(snapshot),
+                    lastSyncAt: new Date().toISOString()
+                };
+                saveSyncMeta();
+            }
+
+            function updateLastSyncDisplay() {
+                if (!syncMeta.lastSyncAt || syncMeta.target !== getSyncTarget()) {
+                    lastSyncTime.textContent = '未同步';
+                    return;
+                }
+                const date = new Date(syncMeta.lastSyncAt);
+                lastSyncTime.textContent = Number.isNaN(date.getTime())
+                    ? '已同步'
+                    : `已同步 ${date.toLocaleString()}`;
+            }
+
+            function hasUnsyncedLocalChanges() {
+                if (!isConfigValid()) return false;
+                if (syncMeta.target !== getSyncTarget() || syncMeta.lastSyncedFingerprint === null) {
+                    return hasStoredLocalData;
+                }
+                return getWordsFingerprint(words) !== syncMeta.lastSyncedFingerprint;
+            }
+
+            // ---------- GitHub API ----------
+            async function githubApi(method, endpoint, body = null) {
+                const owner = encodeURIComponent(config.owner);
+                const repo = encodeURIComponent(config.repo);
+                const url = `https://api.github.com/repos/${owner}/${repo}/${endpoint}`;
+                const headers = {
+                    'Authorization': `Bearer ${config.token}`,
+                    'Accept': 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': '2026-03-10'
+                };
+
+                const options = { method, headers };
+                if (body !== null) {
+                    headers['Content-Type'] = 'application/json';
+                    options.body = JSON.stringify(body);
+                }
+
+                const response = await fetch(url, options);
+                const raw = await response.text();
+                let payload = null;
+
+                if (raw) {
+                    try {
+                        payload = JSON.parse(raw);
+                    } catch (error) {
+                        payload = { message: raw };
+                    }
+                }
+
+                if (!response.ok) {
+                    const apiError = new Error(payload?.message || `HTTP ${response.status}`);
+                    apiError.status = response.status;
+                    apiError.payload = payload;
+                    throw apiError;
+                }
+
+                return payload;
+            }
+
+            function getContentsEndpoint() {
+                const path = encodePath(config.file);
+                if (!path) throw new Error('数据文件名不能为空');
+                return `contents/${path}`;
+            }
+
+            async function readRemoteFile() {
+                try {
+                    const data = await githubApi('GET', getContentsEndpoint());
+                    if (!data || data.type !== 'file') {
+                        throw new Error('云端路径不是普通文件');
+                    }
+
+                    if (Number.isFinite(data.size) && data.size > MAX_SYNC_BYTES) {
+                        throw new Error(`云端数据文件为 ${Math.ceil(data.size / 1024)} KB，超过本应用 750 KB 的安全同步上限`);
+                    }
+
+                    if (data.encoding !== 'base64' || typeof data.content !== 'string' || !data.sha) {
+                        throw new Error('云端文件无法通过 Contents API 安全读取；请确认文件小于 750 KB');
+                    }
+
+                    let parsed;
+                    try {
+                        parsed = JSON.parse(base64ToUtf8(data.content));
+                    } catch (error) {
+                        throw new Error(`云端数据无法解析：${error.message}`);
+                    }
+
+                    if (!Array.isArray(parsed)) {
+                        throw new Error('云端 JSON 格式错误：根节点必须是数组');
+                    }
+
+                    const normalized = normalizeWordList(parsed);
+                    assertSnapshotSyncSize(normalized);
+                    return {
+                        exists: true,
+                        sha: data.sha,
+                        size: Number.isFinite(data.size) ? data.size : getSnapshotByteLength(normalized),
+                        words: normalized
+                    };
+                } catch (error) {
+                    if (error.status === 404) {
+                        return { exists: false, sha: null, size: 0, words: [] };
+                    }
+                    throw error;
+                }
+            }
+
+            async function writeRemoteFile(snapshot, sha) {
+                const normalized = normalizeWordList(snapshot);
+                assertSnapshotSyncSize(normalized);
+
+                const body = {
+                    message: `更新单词数据 - ${new Date().toLocaleString()}`,
+                    content: utf8ToBase64(serializeSnapshot(normalized))
+                };
+                if (sha) body.sha = sha;
+
+                const result = await githubApi('PUT', getContentsEndpoint(), body);
+                return result?.content?.sha || null;
+            }
+
+            // ---------- 冲突备份 ----------
+            function loadConflictBackups() {
+                const backups = [];
+                let migratedLegacy = false;
+                const stored = safeLocalGet(CONFLICT_BACKUP_KEY);
+                if (stored) {
+                    try {
+                        const parsed = JSON.parse(stored);
+                        const list = Array.isArray(parsed) ? parsed : [parsed];
+                        for (const item of list) {
+                            if (item && Array.isArray(item.words)) {
+                                backups.push({
+                                    createdAt: typeof item.createdAt === 'string' ? item.createdAt : new Date().toISOString(),
+                                    source: typeof item.source === 'string' ? item.source : 'unknown',
+                                    target: typeof item.target === 'string' ? item.target : '',
+                                    words: normalizeWordList(item.words)
+                                });
+                            }
+                        }
+                    } catch (error) {
+                        console.error('冲突备份解析失败:', error);
+                    }
+                }
+
+                const legacy = safeLocalGet(LEGACY_CONFLICT_BACKUP_KEY);
+                if (legacy) {
+                    try {
+                        const parsed = JSON.parse(legacy);
+                        if (parsed && Array.isArray(parsed.words)) {
+                            backups.push({
+                                createdAt: typeof parsed.createdAt === 'string' ? parsed.createdAt : new Date().toISOString(),
+                                source: typeof parsed.source === 'string' ? parsed.source : 'legacy',
+                                target: typeof parsed.target === 'string' ? parsed.target : '',
+                                words: normalizeWordList(parsed.words)
+                            });
+                        }
+                    } catch (error) {
+                        console.error('旧冲突备份解析失败:', error);
+                    }
+                    safeLocalRemove(LEGACY_CONFLICT_BACKUP_KEY);
+                    migratedLegacy = true;
+                }
+
+                const normalized = backups
+                    .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)))
+                    .slice(-MAX_CONFLICT_BACKUPS);
+
+                if (migratedLegacy) {
+                    safeLocalSet(CONFLICT_BACKUP_KEY, JSON.stringify(normalized));
+                }
+                return normalized;
+            }
+
+            function saveConflictBackups(backups) {
+                safeLocalSet(CONFLICT_BACKUP_KEY, JSON.stringify(backups.slice(-MAX_CONFLICT_BACKUPS)));
+                updateBackupButton();
+            }
+
+            function saveConflictBackup(snapshot, source) {
+                const backups = loadConflictBackups();
+                backups.push({
+                    createdAt: new Date().toISOString(),
+                    source,
+                    target: getSyncTarget(),
+                    words: normalizeWordList(snapshot)
+                });
+                saveConflictBackups(backups);
+            }
+
+            function updateBackupButton() {
+    const count = loadConflictBackups().length;
+
+    restoreBackupBtn.hidden = count === 0;
+    restoreBackupBtn.disabled = count === 0;
+    restoreBackupBtn.textContent = count > 0
+        ? `恢复备份 (${count})`
+        : '恢复备份';
+}
+
+            function restoreLatestConflictBackup() {
+                const backups = loadConflictBackups();
+                if (backups.length === 0) {
+                    showToast('没有可恢复的冲突备份', 'info');
+                    return;
+                }
+
+                const latest = backups[backups.length - 1];
+                const date = new Date(latest.createdAt);
+                const timeText = Number.isNaN(date.getTime()) ? latest.createdAt : date.toLocaleString();
+                if (!confirm(`恢复最近一次冲突备份？\n\n时间：${timeText}\n条目：${latest.words.length}\n\n当前数据会先自动保存为新的备份。`)) {
+                    return;
+                }
+
+                saveConflictBackup(words, 'before_backup_restore');
+                words = normalizeWordList(latest.words);
+                applySortAndRender();
+                markLocalChange();
+                showToast(`已恢复 ${words.length} 个条目，请同步确认云端版本`, 'success');
+            }
+
+            // ---------- 冲突处理 ----------
+            async function adoptRemote(remote, expectedLocalFingerprint, showToastMsg, revalidate = true) {
+                if (getWordsFingerprint(words) !== expectedLocalFingerprint) {
+                    syncQueued = true;
+                    showToast('同步期间本地数据发生变化，已保留本地内容并重新排队同步', 'info');
+                    return { ok: false, conflict: false };
+                }
+
+                let candidate = remote;
+                if (revalidate) {
+                    const latest = await readRemoteFile();
+                    if (!latest.exists) {
+                        setCloudStatus('offline', '存在冲突');
+                        showToast('准备下载时发现云端文件已被删除，未覆盖本地数据', 'error');
+                        return { ok: false, conflict: true };
+                    }
+                    candidate = latest;
+                }
+
+                if (getWordsFingerprint(words) !== expectedLocalFingerprint) {
+                    syncQueued = true;
+                    showToast('下载期间本地数据发生变化，已保留本地内容并重新排队同步', 'info');
+                    return { ok: false, conflict: false };
+                }
+
+                saveConflictBackup(words, 'before_remote_replace');
+                words = normalizeWordList(candidate.words);
+                applySortAndRender();
+                recordSynced(words, candidate.sha);
+                setCloudStatus('online', '已连接');
+                if (showToastMsg) {
+                    showToast(`已从 GitHub 更新 ${words.length} 个条目`, 'success');
+                }
+                return { ok: true, conflict: false };
+            }
+
+            async function resolveRemoteDeletion(localSnapshot, interactive) {
+                setCloudStatus('offline', '云端文件已删除');
+
+                if (!interactive) {
+                    showToast('检测到云端数据文件已被删除，已停止自动同步；请点击“同步”决定是否重新创建', 'error');
+                    return { ok: false, conflict: true };
+                }
+
+                const recreate = confirm(
+                    '检测到云端数据文件已被删除。\n\n' +
+                    '点击“确定”：用当前本地数据重新创建云端文件。\n' +
+                    '点击“取消”：保留本地数据并停止同步，不创建云端文件。'
+                );
+
+                if (!recreate) {
+                    showToast('已保留本地数据，云端文件仍保持删除状态', 'info');
+                    return { ok: false, conflict: true };
+                }
+
+                // 确认期间云端可能重新出现；只有仍不存在时才允许创建。
+                const latest = await readRemoteFile();
+                if (latest.exists) {
+                    const error = new Error('确认期间云端文件已重新出现，请重新同步后选择版本');
+                    error.status = 409;
+                    throw error;
+                }
+
+                const newSha = await writeRemoteFile(localSnapshot, null);
+                recordSynced(localSnapshot, newSha);
+                setCloudStatus('online', '已连接');
+                showToast(`已重新创建云端文件并同步 ${localSnapshot.length} 个条目`, 'success');
+                return { ok: true, conflict: false, uploadedFingerprint: getWordsFingerprint(localSnapshot) };
+            }
+
+            async function resolveConflict(remote, localSnapshot, localFingerprint, interactive) {
+                setCloudStatus('offline', '存在冲突');
+
+                if (!interactive) {
+                    showToast('检测到本地和云端都发生了修改，已停止自动同步；请点击“同步”选择保留哪一份', 'error');
+                    return { ok: false, conflict: true };
+                }
+
+                const useLocal = confirm(
+                    '检测到同步冲突：本地和云端都发生了修改。\n\n' +
+                    '点击“确定”：用本地数据覆盖刚才读取到的云端版本。\n' +
+                    '点击“取消”：继续选择是否用云端数据覆盖本地。'
+                );
+
+                if (useLocal) {
+                    saveConflictBackup(remote.words, 'remote_before_local_override');
+                    // 必须使用发现冲突时的 SHA。若云端在用户确认期间再次变化，GitHub 会拒绝写入。
+                    const newSha = await writeRemoteFile(localSnapshot, remote.sha);
+                    recordSynced(localSnapshot, newSha);
+                    setCloudStatus('online', '已连接');
+                    showToast(`已用本地 ${localSnapshot.length} 个条目覆盖云端`, 'success');
+                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
+                }
+
+                const useRemote = confirm(
+                    '是否用云端数据覆盖本地？\n\n' +
+                    '点击“确定”：重新读取最新云端数据，本地当前数据会保存为冲突备份。\n' +
+                    '点击“取消”：暂不处理，任何一方都不会被覆盖。'
+                );
+
+                if (useRemote) {
+                    return adoptRemote(remote, getWordsFingerprint(words), true, true);
+                }
+
+                showToast('已取消同步，未覆盖本地或云端数据', 'info');
+                return { ok: false, conflict: true };
+            }
+
+            // ---------- 同步主流程 ----------
+            async function performSync({ showToastMsg, interactive }) {
+                ensureSyncTarget();
+
+                const localSnapshot = normalizeWordList(words);
+                assertSnapshotSyncSize(localSnapshot);
+                const localFingerprint = getWordsFingerprint(localSnapshot);
+                const baseline = syncMeta.lastSyncedFingerprint;
+                const hasBaseline = typeof baseline === 'string';
+                const remote = await readRemoteFile();
+
+                // 曾经同步成功后远端文件消失，必须由用户决定，不能自动重建。
+                if (!remote.exists && hasBaseline) {
+                    return resolveRemoteDeletion(localSnapshot, interactive);
+                }
+
+                // 真正的首次连接且远端文件不存在时，创建文件；空数组同样是有效数据。
+                if (!remote.exists) {
+                    const newSha = await writeRemoteFile(localSnapshot, null);
+                    recordSynced(localSnapshot, newSha);
+                    setCloudStatus('online', '已连接');
+                    if (showToastMsg) {
+                        showToast(`已创建云端文件并同步 ${localSnapshot.length} 个条目`, 'success');
+                    }
+                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
+                }
+
+                const remoteFingerprint = getWordsFingerprint(remote.words);
+
+                // 内容相同：建立或刷新同步基线，不产生无意义提交。
+                if (localFingerprint === remoteFingerprint) {
+                    recordSynced(localSnapshot, remote.sha);
+                    setCloudStatus('online', '已连接');
+                    if (showToastMsg) showToast('本地与云端已一致', 'success');
+                    return { ok: true, conflict: false };
+                }
+
+                const localChanged = !hasBaseline || localFingerprint !== baseline;
+                const remoteChanged = !hasBaseline || remoteFingerprint !== baseline;
+
+                if (hasBaseline && localChanged && !remoteChanged) {
+                    const newSha = await writeRemoteFile(localSnapshot, remote.sha);
+                    recordSynced(localSnapshot, newSha);
+                    setCloudStatus('online', '已连接');
+                    if (showToastMsg) {
+                        showToast(`成功同步 ${localSnapshot.length} 个条目到 GitHub`, 'success');
+                    }
+                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
+                }
+
+                if (hasBaseline && !localChanged && remoteChanged) {
+                    // 再读取一次最新 SHA 后采用远端，缩小下载竞态窗口。
+                    return adoptRemote(remote, localFingerprint, showToastMsg, true);
+                }
+
+                if (!hasBaseline && !hasStoredLocalData) {
+                    // 浏览器确实从未保存过本地数据时，才自动采用云端。
+                    return adoptRemote(remote, localFingerprint, showToastMsg, true);
+                }
+
+                // 本地即使是合法空数组，只要已经保存过，也不能自动被云端旧数据覆盖。
+                return resolveConflict(remote, localSnapshot, localFingerprint, interactive);
+            }
+
+            async function syncToCloud(showToastMsg = true, interactive = showToastMsg) {
+                if (!isConfigValid()) {
+                    showToast('请先点击“配置”设置 GitHub 连接', 'error');
+                    return false;
+                }
+
+                if (isSyncing) {
+                    syncQueued = true;
+                    return false;
+                }
+
+                clearTimeout(autoSyncTimer);
+                autoSyncTimer = null;
+                isSyncing = true;
+                syncBtn.disabled = true;
+                setCloudStatus('syncing', '同步中...');
+
+                let result = { ok: false, conflict: false };
+                try {
+                    result = await performSync({ showToastMsg, interactive });
+                } catch (error) {
+                    console.error('同步失败:', error);
+                    if (error.status === 409) {
+                        setCloudStatus('offline', '存在冲突');
+                        showToast('云端在上传期间再次发生变化，未覆盖任何数据；请重新点击“同步”', 'error');
+                        result = { ok: false, conflict: true };
+                    } else {
+                        setCloudStatus('offline', '同步失败');
+                        showToast(`同步失败：${formatError(error)}`, 'error');
+                    }
+                } finally {
+                    isSyncing = false;
+                    syncBtn.disabled = false;
+                }
+
+                const currentFingerprint = getWordsFingerprint(words);
+                if (result.uploadedFingerprint && currentFingerprint !== result.uploadedFingerprint) {
+                    syncQueued = true;
+                }
+
+                if (syncQueued && !result.conflict) {
+                    syncQueued = false;
+                    setTimeout(() => syncToCloud(false, false), 0);
+                } else if (result.conflict) {
+                    syncQueued = false;
+                }
+
+                return result.ok;
+            }
+
+            function scheduleAutoSync() {
+                if (!isConfigValid()) return;
+                clearTimeout(autoSyncTimer);
+                autoSyncTimer = setTimeout(() => {
+                    autoSyncTimer = null;
+                    syncToCloud(false, false);
+                }, AUTO_SYNC_DELAY);
+            }
+
+            function markLocalChange() {
+                if (isConfigValid()) {
+                    setCloudStatus('offline', '待同步');
+                    lastSyncTime.textContent = '有未同步修改';
+                }
+                scheduleAutoSync();
+            }
+
+            // ---------- 本地存储 ----------
+            function loadFromLocal() {
+                const stored = safeLocalGet(STORAGE_KEY);
+                hasStoredLocalData = stored !== null;
+
+                if (stored) {
+                    try {
+                        words = normalizeWordList(JSON.parse(stored));
+                    } catch (error) {
+                        console.error('本地数据解析失败:', error);
+                        words = [];
+                    }
+                } else {
+                    words = [
+                        { word: 'apple', definition: '苹果；苹果树', example: 'An apple a day keeps the doctor away.' },
+                        { word: 'book', definition: '书；书籍', example: 'This book is very interesting.' },
+                        { word: 'book', definition: '预订；预约', example: 'I need to book a hotel room.' },
+                        { word: 'light', definition: '光；光线', example: 'The light is too bright.' },
+                        { word: 'light', definition: '轻的；轻松的', example: 'This bag is very light.' },
+                        { word: 'light', definition: '点燃；照亮', example: 'Please light the candle.' }
+                    ];
+                }
+
+                applySortAndRender();
+            }
+
+            function saveToLocal() {
+                safeLocalSet(STORAGE_KEY, JSON.stringify(words));
+            }
+
+            // ---------- 排序与渲染 ----------
+            const wordCollator = new Intl.Collator('en', {
+                sensitivity: 'base',
+                numeric: true
+            });
+
+            function sortWords(order) {
+                const direction = order || sortOrder;
+                const multiplier = direction === 'asc' ? 1 : -1;
+                words.sort((a, b) => {
+                    const primary = wordCollator.compare(a.word || '', b.word || '');
+                    if (primary !== 0) return primary * multiplier;
+
+                    return wordCollator.compare(a.definition || '', b.definition || '') * multiplier;
+                });
+            }
+
+            function applySortAndRender() {
+                sortWords(sortOrder);
+                renderTable();
+                updateSortIcon();
+                saveToLocal();
+            }
+
+            function renderTable() {
+                countDisplay.textContent = words.length;
+
+                if (words.length === 0) {
+                    tableBody.innerHTML = '<tr class="empty-row"><td colspan="4">单词列表为空，添加一个新词吧！</td></tr>';
+                    return;
+                }
+
+                tableBody.innerHTML = words.map((item, index) => {
+                    const word = escapeHtml(item.word);
+                    const definition = escapeHtml(item.definition);
+                    const example = escapeHtml(item.example);
+                    return `
+                        <tr data-index="${index}">
+                            <td class="col-word">${word}</td>
+                            <td class="col-def">${definition}</td>
+                            <td class="col-example">${example}</td>
+                            <td class="col-action">
+                                <button class="action-btn edit-btn" data-index="${index}" title="编辑">编辑</button>
+                                <button class="action-btn delete-btn" data-index="${index}" title="删除">删除</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            function updateSortIcon() {
+                sortIcon.textContent = sortOrder === 'asc' ? '▲' : '▼';
+            }
+
+            // ---------- 编辑功能 ----------
+            function openEditModal(index) {
+                editingIndex = index;
+                const item = words[index];
+                editWordDisplay.textContent = item.word;
+                editDefinition.value = item.definition;
+                editExample.value = item.example;
+                editModal.classList.remove('hidden');
+                setTimeout(() => editDefinition.focus(), 100);
+            }
+
+            function closeEditModal() {
+                editModal.classList.add('hidden');
+                editingIndex = null;
+            }
+
+            function saveEdit() {
+                if (editingIndex === null || editingIndex < 0 || editingIndex >= words.length) {
+                    alert('编辑出错，请重试。');
+                    closeEditModal();
+                    return;
+                }
+
+                words[editingIndex] = {
+                    ...words[editingIndex],
+                    definition: editDefinition.value.trim(),
+                    example: editExample.value.trim()
+                };
+
+                closeEditModal();
+                applySortAndRender();
+                markLocalChange();
+            }
+
+            // ---------- 添加 ----------
+            function addWord() {
+                const word = wordInput.value.trim();
+                if (!word) {
+                    alert('请填写“单词”字段。');
+                    wordInput.focus();
+                    return;
+                }
+
+                words.push({
+                    word,
+                    definition: definitionInput.value.trim(),
+                    example: exampleInput.value.trim()
+                });
+
+                applySortAndRender();
+                markLocalChange();
+
+                wordInput.value = '';
+                definitionInput.value = '';
+                exampleInput.value = '';
+                wordInput.focus();
+            }
+
+            // ---------- 导出/导入 ----------
+            function downloadJson(data, filename) {
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(url);
+            }
+
+            function exportData() {
+                if (words.length === 0) {
+                    alert('单词列表为空，没有什么可导出的。');
+                    return;
+                }
+                downloadJson(words, `wordbook_backup_${new Date().toISOString().slice(0, 10)}.json`);
+                showToast('导出成功', 'success');
+            }
+
+            function importData(file) {
+                if (!file || file.size > MAX_SYNC_BYTES) {
+                    alert('文件过大，请选择不超过 750 KB 的 JSON 文件，以确保能够安全同步到 GitHub。');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        if (!Array.isArray(imported)) {
+                            alert('文件格式错误：根节点必须是数组。');
+                            return;
+                        }
+
+                        const valid = normalizeWordList(imported);
+                        if (valid.length === 0 && imported.length > 0) {
+                            alert('文件中没有找到有效的单词数据。');
+                            return;
+                        }
+
+                        try {
+                            assertSnapshotSyncSize(valid);
+                        } catch (error) {
+                            alert(error.message);
+                            return;
+                        }
+
+                        if (words.length > 0 && !confirm(`当前有 ${words.length} 个条目，导入将完全替换当前列表。确定继续吗？`)) {
+                            return;
+                        }
+
+                        words = valid;
+                        applySortAndRender();
+                        markLocalChange();
+                        showToast(`成功导入 ${words.length} 个条目`, 'success');
+                    } catch (error) {
+                        alert(`解析文件失败：${error.message}`);
+                    }
+                };
+                reader.onerror = function() {
+                    alert('读取文件失败。');
+                };
+                reader.readAsText(file, 'utf-8');
+            }
+
+            // ---------- 清空 ----------
+            function clearAll() {
+                if (words.length === 0) {
+                    alert('列表已经是空的。');
+                    return;
+                }
+
+                if (confirm('确定要删除所有单词条目吗？此操作不可撤销！')) {
+                    words = [];
+                    applySortAndRender();
+                    markLocalChange();
+                    wordInput.focus();
+                }
+            }
+
+            // ---------- 状态与提示 ----------
+            function setCloudStatus(status, text) {
+                statusDot.className = `dot ${status}`;
+                statusText.textContent = text;
+            }
+
+            function showToast(message, type = 'info') {
+                toast.textContent = message;
+                toast.className = `toast ${type}`;
+                toast.classList.remove('hidden');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.add('hidden'), 3500);
+            }
+
+            // ---------- 配置弹窗 ----------
+            function openConfigModal() {
+                cfgToken.value = config.token;
+                cfgOwner.value = config.owner;
+                cfgRepo.value = config.repo;
+                cfgFile.value = config.file;
+                configModal.classList.remove('hidden');
+                setTimeout(() => cfgToken.focus(), 100);
+            }
+
+            function closeConfigModal() {
+                configModal.classList.add('hidden');
+            }
+
+            function saveConfigAndConnect() {
+                const previousTarget = getSyncTarget();
+                const token = cfgToken.value.trim();
+                const owner = cfgOwner.value.trim();
+                const repo = cfgRepo.value.trim();
+                const file = cfgFile.value.trim() || 'wordbook_data.json';
+
+                if (!token) {
+                    showToast('请输入 GitHub Token', 'error');
+                    cfgToken.focus();
+                    return;
+                }
+                if (!owner) {
+                    showToast('请输入仓库所有者', 'error');
+                    cfgOwner.focus();
+                    return;
+                }
+                if (!repo) {
+                    showToast('请输入仓库名称', 'error');
+                    cfgRepo.focus();
+                    return;
+                }
+
+                config = { token, owner, repo, file };
+                saveConfig();
+
+                if (previousTarget !== getSyncTarget()) {
+                    syncMeta = createEmptySyncMeta(getSyncTarget());
+                    saveSyncMeta();
+                }
+
+                closeConfigModal();
+                showToast('配置已保存，正在安全同步...', 'info');
+                syncToCloud(true, true);
+            }
+
+            // ---------- 表格事件委托 ----------
+            tableBody.addEventListener('click', function(event) {
+                const editButton = event.target.closest('.edit-btn');
+                const deleteButton = event.target.closest('.delete-btn');
+                const button = editButton || deleteButton;
+                if (!button) return;
+
+                const index = Number.parseInt(button.dataset.index, 10);
+                if (!Number.isInteger(index) || index < 0 || index >= words.length) return;
+
+                if (editButton) {
+                    openEditModal(index);
+                    return;
+                }
+
+                if (confirm(`确定要删除“${words[index].word}”的这条释义吗？`)) {
+                    words.splice(index, 1);
+                    applySortAndRender();
+                    markLocalChange();
+                }
+            });
+
+            // ---------- 事件绑定 ----------
+            addBtn.addEventListener('click', addWord);
+
+            document.querySelectorAll('.add-section input, .add-section textarea').forEach(input => {
+                input.addEventListener('keydown', function(event) {
+                    if (event.key !== 'Enter') return;
+                    if (this.tagName === 'TEXTAREA' && !(event.ctrlKey || event.metaKey)) return;
+                    event.preventDefault();
+                    addWord();
+                });
+            });
+
+            clearAllBtn.addEventListener('click', clearAll);
+            exportBtn.addEventListener('click', exportData);
+            importBtn.addEventListener('click', () => fileInput.click());
+            restoreBackupBtn.addEventListener('click', restoreLatestConflictBackup);
+            fileInput.addEventListener('change', function() {
+                if (this.files?.length) importData(this.files[0]);
+                this.value = '';
+            });
+
+            sortWordHead.addEventListener('click', function() {
+                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                applySortAndRender();
+            });
+
+            sortWordHead.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    sortWordHead.click();
+                }
+            });
+
+            syncBtn.addEventListener('click', () => syncToCloud(true, true));
+
+            configBtn.addEventListener('click', openConfigModal);
+            configCancelBtn.addEventListener('click', closeConfigModal);
+            configSaveBtn.addEventListener('click', saveConfigAndConnect);
+
+            configModal.addEventListener('click', event => {
+                if (event.target === configModal) closeConfigModal();
+            });
+
+            configModal.querySelectorAll('input').forEach(input => {
+                input.addEventListener('keydown', event => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        saveConfigAndConnect();
+                    }
+                });
+            });
+
+            editCancelBtn.addEventListener('click', closeEditModal);
+            editSaveBtn.addEventListener('click', saveEdit);
+            editModal.addEventListener('click', event => {
+                if (event.target === editModal) closeEditModal();
+            });
+
+            editModal.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('keydown', function(event) {
+                    if (event.key !== 'Enter') return;
+                    if (this.tagName === 'TEXTAREA' && !(event.ctrlKey || event.metaKey)) return;
+                    event.preventDefault();
+                    saveEdit();
+                });
+            });
+
+            document.addEventListener('keydown', event => {
+                if (event.key !== 'Escape') return;
+                if (!editModal.classList.contains('hidden')) closeEditModal();
+                if (!configModal.classList.contains('hidden')) closeConfigModal();
+            });
+
+            // ---------- 初始化 ----------
+            sortWordHead.setAttribute('tabindex', '0');
+            sortWordHead.setAttribute('role', 'button');
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
+
+            loadConfig();
+            loadSyncMeta();
+            loadFromLocal();
+            updateLastSyncDisplay();
+            updateBackupButton();
+
+            if (isConfigValid()) {
+                ensureSyncTarget();
+                syncToCloud(false, false);
+            } else {
+                setCloudStatus('offline', '未配置');
+            }
+        })();
+    </script>
+</body>
+</html>
