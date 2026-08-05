@@ -640,6 +640,46 @@
             background: #e2e8f0;
         }
 
+
+
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            right: 18px;
+            top: 64%;
+            transform: translateY(-50%);
+            z-index: 900;
+            border: 1px solid rgba(148, 163, 184, 0.55);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            color: #64748b;
+            padding: 0.48rem 0.75rem;
+            font-family: inherit;
+            font-size: 0.78rem;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease, visibility 0.2s ease, background 0.2s ease,
+                color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+        .back-to-top.visible {
+            opacity: 0.72;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .back-to-top:hover,
+        .back-to-top:focus-visible {
+            opacity: 1;
+            color: #334155;
+            background: rgba(255, 255, 255, 0.98);
+            border-color: #94a3b8;
+            transform: translateY(-50%) translateX(-2px);
+            outline: none;
+        }
+
         @media (max-width: 700px) {
             .container {
                 padding: 1.2rem;
@@ -671,6 +711,12 @@
             }
             .config-box {
                 padding: 1.5rem;
+            }
+            .back-to-top {
+                right: 8px;
+                top: 66%;
+                padding: 0.45rem 0.62rem;
+                font-size: 0.72rem;
             }
         }
     </style>
@@ -743,6 +789,10 @@
         </div>
 
     </div>
+
+    <button type="button" class="back-to-top" id="backToTopBtn" aria-label="回到顶部" title="回到顶部">
+        ↑ 回到顶部
+    </button>
 
     <!-- 编辑弹窗 -->
     <div class="modal-overlay hidden" id="editModal">
@@ -884,6 +934,7 @@
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
             const configBtn = document.getElementById('configBtn');
+            const backToTopBtn = document.getElementById('backToTopBtn');
 
             const editModal = document.getElementById('editModal');
             const editWordDisplay = document.getElementById('editWordDisplay');
@@ -1938,6 +1989,17 @@
                 if (!editModal.classList.contains('hidden')) closeEditModal();
                 if (!configModal.classList.contains('hidden')) closeConfigModal();
             });
+
+            function updateBackToTopVisibility() {
+                backToTopBtn.classList.toggle('visible', window.scrollY > 240);
+            }
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+            updateBackToTopVisibility();
 
             // ---------- 初始化 ----------
             console.info('当前网页独立存储实例：', PAGE_INSTANCE_ID, getPageInstanceIdentity());
