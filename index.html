@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="app-build" content="2026-08-07-token-scroll-v1">
     <title>Words</title>
     <style>
         * {
@@ -538,15 +539,18 @@
         /* 配置弹窗 */
         .config-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
+            height: 100dvh;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+                max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+            overflow: hidden;
             z-index: 1000;
             animation: fadeIn 0.25s ease;
         }
@@ -556,11 +560,40 @@
         .config-box {
             background: white;
             border-radius: 28px;
-            padding: 2rem 2rem 1.8rem;
+            padding: 0;
             max-width: 560px;
             width: 94%;
+            max-height: calc(100vh - 24px);
+            max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.25s ease;
+        }
+        .config-scroll-body {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-gutter: stable;
+            padding: 2rem 2rem 1rem;
+        }
+        .config-scroll-body::-webkit-scrollbar {
+            width: 10px;
+        }
+        .config-scroll-body::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 999px;
+        }
+        .config-scroll-body::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border: 2px solid #f1f5f9;
+            border-radius: 999px;
+        }
+        .config-scroll-body::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
         .config-box h3 {
             font-size: 1.3rem;
@@ -669,10 +702,16 @@
             line-height: 1.5;
         }
         .config-actions {
+            flex: 0 0 auto;
             display: flex;
             gap: 10px;
             justify-content: flex-end;
-            margin-top: 1.2rem;
+            margin-top: 0;
+            padding: 1rem 2rem max(1rem, env(safe-area-inset-bottom));
+            border-top: 1px solid #e9edf4;
+            background: white;
+            box-shadow: 0 -8px 20px rgba(15, 23, 42, 0.05);
+            z-index: 2;
         }
         .config-actions .btn-config {
             padding: 0.5rem 1.8rem;
@@ -767,8 +806,33 @@
             .cloud-status {
                 margin-left: 0;
             }
+            .config-overlay {
+                align-items: stretch;
+                padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
+                    max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+            }
             .config-box {
-                padding: 1.5rem;
+                width: 100%;
+                max-height: calc(100vh - 16px);
+                max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                border-radius: 20px;
+            }
+            .config-scroll-body {
+                padding: 1.25rem 1.25rem 0.75rem;
+            }
+            .config-actions {
+                padding: 0.85rem 1.25rem max(0.85rem, env(safe-area-inset-bottom));
+            }
+            .config-actions .btn-config {
+                flex: 1 1 0;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            .config-box .token-profile-row {
+                grid-template-columns: minmax(0, 1fr) auto;
+            }
+            .config-box .token-profile-btn.danger {
+                grid-column: 1 / -1;
             }
             .back-to-top {
                 right: 8px;
@@ -873,61 +937,63 @@
     </div>
 
     <!-- 配置弹窗 -->
-    <div class="config-overlay hidden" id="configModal">
+    <div class="config-overlay hidden" id="configModal" role="dialog" aria-modal="true" aria-labelledby="configModalHeading">
         <div class="config-box">
-            <h3>GitHub 云端配置</h3>
-            <div class="config-desc">
-                本网页按当前网址路径独立保存本地词条、配置、同步状态和备份，不会读取其他仓库页面的数据。配置后仅与您在下方指定的 GitHub 仓库文件同步。
-            </div>
-            <div class="form-group">
-                <label for="cfgSavedToken">已保存 Token</label>
-                <div class="token-profile-row">
-                    <select id="cfgSavedToken" aria-label="选择已保存的 Token">
-                        <option value="">新增 Token</option>
-                    </select>
-                    <button type="button" class="token-profile-btn" id="cfgNewTokenBtn">新增</button>
-                    <button type="button" class="token-profile-btn danger" id="cfgDeleteTokenBtn" disabled>删除</button>
+            <div class="config-scroll-body" tabindex="0">
+                <h3 id="configModalHeading">GitHub 云端配置</h3>
+                <div class="config-desc">
+                    本网页按当前网址路径独立保存本地词条、配置、同步状态和备份，不会读取其他仓库页面的数据。配置后仅与您在下方指定的 GitHub 仓库文件同步。
                 </div>
-                <div class="hint">可在本设备保存多个 Token；选择后会自动填充对应的仓库配置。</div>
-            </div>
-            <div class="form-group">
-                <label for="cfgTokenName">Token 名称</label>
-                <input type="text" id="cfgTokenName" autocomplete="off" placeholder="例如：个人仓库">
-            </div>
-            <div class="form-group">
-                <label for="cfgToken">GitHub Personal Access Token *</label>
-                <input
-                    type="password"
-                    id="cfgToken"
-                    name="github-token-new"
-                    autocomplete="new-password"
-                    spellcheck="false"
-                    placeholder="ghp_xxxxxxxxxxxx"
-                >
-                <label class="token-save-option" for="cfgRememberToken">
-                    <input type="checkbox" id="cfgRememberToken" checked>
-                    <span>在本设备保存Token。</span>
-                </label>
-                <div class="hint token-save-hint">
-                    若浏览器出现“保存密码”提示，请选择保存；开启浏览器密码同步后，其他设备可自动填充。
+                <div class="form-group">
+                    <label for="cfgSavedToken">已保存 Token</label>
+                    <div class="token-profile-row">
+                        <select id="cfgSavedToken" aria-label="选择已保存的 Token">
+                            <option value="">新增 Token</option>
+                        </select>
+                        <button type="button" class="token-profile-btn" id="cfgNewTokenBtn">新增</button>
+                        <button type="button" class="token-profile-btn danger" id="cfgDeleteTokenBtn" disabled>删除</button>
+                    </div>
+                    <div class="hint">可在本设备保存多个 Token；选择后会自动填充对应的仓库配置。</div>
                 </div>
-                <div class="hint">
-                    <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer">创建细粒度 Token</a>
-                    （仅授权目标仓库，并授予 <strong>Contents: Read and write</strong>）
+                <div class="form-group">
+                    <label for="cfgTokenName">Token 名称</label>
+                    <input type="text" id="cfgTokenName" autocomplete="off" placeholder="例如：个人仓库">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="cfgOwner">仓库所有者 *</label>
-                <input type="text" id="cfgOwner" name="github-owner" autocomplete="username" placeholder="你的GitHub用户名">
-            </div>
-            <div class="form-group">
-                <label for="cfgRepo">仓库名称 *</label>
-                <input type="text" id="cfgRepo" placeholder="wordbook">
-                <div class="hint">请填写当前新网页所属或专用的仓库；不会自动沿用其他网页的仓库配置。</div>
-            </div>
-            <div class="form-group">
-                <label for="cfgFile">数据文件名</label>
-                <input type="text" id="cfgFile" placeholder="wordbook_data.json" value="wordbook_data.json">
+                <div class="form-group">
+                    <label for="cfgToken">GitHub Personal Access Token *</label>
+                    <input
+                        type="password"
+                        id="cfgToken"
+                        name="github-token-new"
+                        autocomplete="new-password"
+                        spellcheck="false"
+                        placeholder="ghp_xxxxxxxxxxxx"
+                    >
+                    <label class="token-save-option" for="cfgRememberToken">
+                        <input type="checkbox" id="cfgRememberToken" checked>
+                        <span>在本设备保存Token。</span>
+                    </label>
+                    <div class="hint token-save-hint">
+                        若浏览器出现“保存密码”提示，请选择保存；开启浏览器密码同步后，其他设备可自动填充。
+                    </div>
+                    <div class="hint">
+                        <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer">创建细粒度 Token</a>
+                        （仅授权目标仓库，并授予 <strong>Contents: Read and write</strong>）
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cfgOwner">仓库所有者 *</label>
+                    <input type="text" id="cfgOwner" name="github-owner" autocomplete="username" placeholder="你的GitHub用户名">
+                </div>
+                <div class="form-group">
+                    <label for="cfgRepo">仓库名称 *</label>
+                    <input type="text" id="cfgRepo" placeholder="wordbook">
+                    <div class="hint">请填写当前新网页所属或专用的仓库；不会自动沿用其他网页的仓库配置。</div>
+                </div>
+                <div class="form-group">
+                    <label for="cfgFile">数据文件名</label>
+                    <input type="text" id="cfgFile" placeholder="wordbook_data.json" value="wordbook_data.json">
+                </div>
             </div>
             <div class="config-actions">
                 <button type="button" class="btn-config secondary" id="configCancelBtn">取消</button>
