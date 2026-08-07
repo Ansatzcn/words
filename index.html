@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English</title>
+    <title>Words</title>
     <style>
         * {
             box-sizing: border-box;
@@ -610,6 +610,32 @@
         .config-box .form-group .hint a:hover {
             text-decoration: underline;
         }
+        .config-box .token-save-option {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            color: #475569;
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0;
+            cursor: pointer;
+        }
+        .config-box .token-save-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+            padding: 0;
+            accent-color: #2563eb;
+            cursor: pointer;
+        }
+        .config-box .token-save-hint {
+            margin-left: 24px;
+            color: #64748b;
+            line-height: 1.5;
+        }
         .config-actions {
             display: flex;
             gap: 10px;
@@ -724,7 +750,7 @@
 <body>
     <div class="container">
         <h1>
-            English
+            Words
             <small>A-Z</small>
             <span class="cloud-status" id="cloudStatus">
                 <span class="dot" id="statusDot"></span>
@@ -751,7 +777,7 @@
             </h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="wordInput">单词 *</label>
+                    <label for="wordInput">单词</label>
                     <input type="text" id="wordInput" autofocus>
                 </div>
                 <div class="form-group full-width">
@@ -767,7 +793,7 @@
         </div>
 
         <div class="word-list-header">
-            <h2>Words</h2>
+            <h2>List</h2>
             <span class="badge" id="countDisplay">0</span>
         </div>
         <div class="table-wrapper">
@@ -823,15 +849,28 @@
             </div>
             <div class="form-group">
                 <label for="cfgToken">GitHub Personal Access Token *</label>
-                <input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
+                <input
+                    type="password"
+                    id="cfgToken"
+                    name="github-token"
+                    autocomplete="current-password"
+                    placeholder="ghp_xxxxxxxxxxxx"
+                >
+                <label class="token-save-option" for="cfgRememberToken">
+                    <input type="checkbox" id="cfgRememberToken" checked>
+                    <span>在本设备保存Token。</span>
+                </label>
+                <div class="hint token-save-hint">
+                    若浏览器出现“保存密码”提示，请选择保存；开启浏览器密码同步后，其他设备可自动填充。
+                </div>
                 <div class="hint">
                     <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer">创建细粒度 Token</a>
-                    （仅授权目标仓库，并授予 <strong>Contents: Read and write</strong>；Token 只在当前浏览器会话中保存）
+                    （仅授权目标仓库，并授予 <strong>Contents: Read and write</strong>）
                 </div>
             </div>
             <div class="form-group">
                 <label for="cfgOwner">仓库所有者 *</label>
-                <input type="text" id="cfgOwner" placeholder="你的GitHub用户名">
+                <input type="text" id="cfgOwner" name="github-owner" autocomplete="username" placeholder="你的GitHub用户名">
             </div>
             <div class="form-group">
                 <label for="cfgRepo">仓库名称 *</label>
@@ -884,7 +923,8 @@
             const PAGE_INSTANCE_ID = hashIdentity(getPageInstanceIdentity());
             const STORAGE_NAMESPACE = `english_wordbook:${PAGE_INSTANCE_ID}`;
             const CONFIG_KEY = `${STORAGE_NAMESPACE}:config`;
-            const TOKEN_KEY = `${STORAGE_NAMESPACE}:token_session`;
+            const TOKEN_LOCAL_KEY = `${STORAGE_NAMESPACE}:token_local`;
+            const TOKEN_SESSION_KEY = `${STORAGE_NAMESPACE}:token_session`;
             const STORAGE_KEY = `${STORAGE_NAMESPACE}:words`;
             const SYNC_SCHEMA_VERSION = 4;
             const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v4`;
@@ -945,6 +985,7 @@
 
             const configModal = document.getElementById('configModal');
             const cfgToken = document.getElementById('cfgToken');
+            const cfgRememberToken = document.getElementById('cfgRememberToken');
             const cfgOwner = document.getElementById('cfgOwner');
             const cfgRepo = document.getElementById('cfgRepo');
             const cfgFile = document.getElementById('cfgFile');
@@ -999,6 +1040,16 @@
                     return true;
                 } catch (error) {
                     showToast(`Token 临时保存失败：${error.message}`, 'error');
+                    return false;
+                }
+            }
+
+            function safeSessionRemove(key) {
+                try {
+                    sessionStorage.removeItem(key);
+                    return true;
+                } catch (error) {
+                    console.error('删除会话存储失败:', error);
                     return false;
                 }
             }
@@ -1128,14 +1179,23 @@
                 }
 
                 // 只读取当前网页实例自己的命名空间，不迁移或读取旧页面/其他仓库的全局配置。
+                const locallySavedToken = safeLocalGet(TOKEN_LOCAL_KEY) || '';
+                const sessionToken = safeSessionGet(TOKEN_SESSION_KEY) || '';
+
+                const rememberToken = typeof parsed.rememberToken === 'boolean'
+                    ? parsed.rememberToken
+                    : (Boolean(locallySavedToken) || (!locallySavedToken && !sessionToken));
+
                 config = {
-                    token: safeSessionGet(TOKEN_KEY) || '',
+                    token: locallySavedToken || sessionToken,
                     owner: typeof parsed.owner === 'string' ? parsed.owner : '',
                     repo: typeof parsed.repo === 'string' ? parsed.repo : '',
-                    file: typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json'
+                    file: typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json',
+                    rememberToken
                 };
 
                 cfgToken.value = config.token;
+                cfgRememberToken.checked = config.rememberToken;
                 cfgOwner.value = config.owner;
                 cfgRepo.value = config.repo;
                 cfgFile.value = config.file;
@@ -1146,12 +1206,21 @@
                 config.owner = cfgOwner.value.trim();
                 config.repo = cfgRepo.value.trim();
                 config.file = cfgFile.value.trim() || 'wordbook_data.json';
+                config.rememberToken = cfgRememberToken.checked;
 
-                safeSessionSet(TOKEN_KEY, config.token);
+                if (config.rememberToken) {
+                    safeLocalSet(TOKEN_LOCAL_KEY, config.token);
+                    safeSessionRemove(TOKEN_SESSION_KEY);
+                } else {
+                    safeSessionSet(TOKEN_SESSION_KEY, config.token);
+                    safeLocalRemove(TOKEN_LOCAL_KEY);
+                }
+
                 safeLocalSet(CONFIG_KEY, JSON.stringify({
                     owner: config.owner,
                     repo: config.repo,
-                    file: config.file
+                    file: config.file,
+                    rememberToken: config.rememberToken
                 }));
             }
 
@@ -1850,6 +1919,7 @@
             // ---------- 配置弹窗 ----------
             function openConfigModal() {
                 cfgToken.value = config.token;
+                cfgRememberToken.checked = config.rememberToken !== false;
                 cfgOwner.value = config.owner;
                 cfgRepo.value = config.repo;
                 cfgFile.value = config.file;
