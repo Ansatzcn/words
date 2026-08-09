@@ -306,16 +306,23 @@
         .word-table .col-word {
             font-weight: 600;
             color: #0f172a;
-            white-space: nowrap;
+            white-space: normal;
             min-width: 100px;
         }
-        .word-table .col-def {
-            min-width: 160px;
+        .word-table .word-definition {
+            margin-top: 0.28rem;
+            color: #334155;
+            font-weight: 400;
+            white-space: normal;
+            overflow-wrap: anywhere;
         }
-        .word-table .col-example {
-            color: #475569;
+        .word-table .word-example {
+            margin-top: 0.22rem;
+            color: #64748b;
+            font-weight: 400;
             font-style: normal;
-            min-width: 160px;
+            white-space: normal;
+            overflow-wrap: anywhere;
         }
         .word-table .col-action {
             text-align: center;
@@ -897,14 +904,12 @@
                 <thead>
                     <tr>
                         <th class="sortable" id="sortWordHead">单词 <span class="sort-icon" id="sortIcon">▼</span></th>
-                        <th>释义</th>
-                        <th>例句</th>
                         <th class="col-action">操作</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr class="empty-row">
-                        <td colspan="4">加载中...</td>
+                        <td colspan="2">加载中...</td>
                     </tr>
                 </tbody>
             </table>
@@ -2048,7 +2053,7 @@
                 countDisplay.textContent = words.length;
 
                 if (words.length === 0) {
-                    tableBody.innerHTML = '<tr class="empty-row"><td colspan="4">单词列表为空，添加一个新词吧！</td></tr>';
+                    tableBody.innerHTML = '<tr class="empty-row"><td colspan="2">单词列表为空，添加一个新词吧！</td></tr>';
                     return;
                 }
 
@@ -2056,11 +2061,19 @@
                     const word = escapeHtml(item.word);
                     const definition = escapeHtml(item.definition);
                     const example = escapeHtml(item.example);
+                    const definitionHtml = definition
+                        ? `<div class="word-definition">${definition}</div>`
+                        : '';
+                    const exampleHtml = example
+                        ? `<div class="word-example">${example}</div>`
+                        : '';
                     return `
                         <tr data-index="${index}">
-                            <td class="col-word">${word}</td>
-                            <td class="col-def">${definition}</td>
-                            <td class="col-example">${example}</td>
+                            <td class="col-word">
+                                <div>${word}</div>
+                                ${definitionHtml}
+                                ${exampleHtml}
+                            </td>
                             <td class="col-action">
                                 <button class="action-btn edit-btn" data-index="${index}" title="编辑">编辑</button>
                                 <button class="action-btn delete-btn" data-index="${index}" title="删除">删除</button>
