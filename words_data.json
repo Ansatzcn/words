@@ -43,6 +43,12 @@
   },
   {
     "word": "absolute",
+    "partOfSpeech": "noun",
+    "definition": "a value or principle that is regarded as universally valid",
+    "example": "Respect for human dignity should be treated as a moral absolute in any civilised society."
+  },
+  {
+    "word": "absolute",
     "partOfSpeech": "adjective",
     "definition": "not dependent on or relative to anything else; independent of arbitrary standards",
     "example": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth."
