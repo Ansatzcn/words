@@ -280,6 +280,9 @@
             background: white;
             box-shadow: 0 15px 30px rgba(15, 23, 42, 0.14);
         }
+        .pos-panel.hidden {
+            display: none !important;
+        }
         .pos-option {
             display: block;
             width: 100%;
@@ -2538,6 +2541,7 @@
 
             // ---------- 编辑功能 ----------
             function openEditModal(index) {
+                closePartOfSpeechPanels();
                 editingIndex = index;
                 const item = words[index];
                 editWordDisplay.textContent = item.word;
@@ -2599,6 +2603,7 @@
                 partOfSpeechInput.value = '';
                 definitionInput.value = '';
                 exampleInput.value = '';
+                setPartOfSpeechPanelOpen('add', false);
                 renderPartOfSpeechCombo('add');
                 wordInput.focus();
             }
@@ -2793,8 +2798,13 @@
                 if (event.target.closest('.pos-history-delete')) deletePartOfSpeechHistory(oldValue);
             });
             document.addEventListener('click', event => {
-                if (!partOfSpeechCombo.contains(event.target)) setPartOfSpeechPanelOpen('add', false);
-                if (!editPartOfSpeechCombo.contains(event.target)) setPartOfSpeechPanelOpen('edit', false);
+                const addInsidePanel = partOfSpeechPanel.contains(event.target);
+                const addOnTrigger = partOfSpeechTrigger.contains(event.target);
+                const editInsidePanel = editPartOfSpeechPanel.contains(event.target);
+                const editOnTrigger = editPartOfSpeechTrigger.contains(event.target);
+
+                if (!addInsidePanel && !addOnTrigger) setPartOfSpeechPanelOpen('add', false);
+                if (!editInsidePanel && !editOnTrigger) setPartOfSpeechPanelOpen('edit', false);
             });
 
             // ---------- 表格事件委托 ----------
