@@ -1,701 +1,841 @@
 [
   {
     "word": "abandon",
+    "partOfSpeech": "noun",
     "definition": "a complete lack of control or restraint",
     "example": "Children played with abandon in the newly opened public park."
   },
   {
     "word": "abandon",
+    "partOfSpeech": "",
     "definition": "to leave someone or something permanently or for a long time",
     "example": "Rising sea levels may force coastal communities to abandon their ancestral homelands."
   },
   {
     "word": "abandon",
+    "partOfSpeech": "",
     "definition": "to stop doing an activity before it is finished",
     "example": "The government had to abandon the controversial infrastructure project due to public protest."
   },
   {
     "word": "abandon",
+    "partOfSpeech": "",
     "definition": "to surrender oneself completely to a feeling, impulse, or activity without restraint",
     "example": "Some young professionals abandon themselves to consumerism in order to relieve work-related stress."
   },
   {
     "word": "ablaze",
+    "partOfSpeech": "",
     "definition": "brightly illuminated or decorated",
     "example": "The entire harbour was ablaze with fireworks to celebrate the new year."
   },
   {
     "word": "ablaze",
+    "partOfSpeech": "",
     "definition": "burning fiercely and brightly",
     "example": "The historic building was set ablaze by a lightning strike during the thunderstorm."
   },
   {
     "word": "ablaze",
+    "partOfSpeech": "",
     "definition": "filled with strong emotion or excitement",
     "example": "The young researcher had eyes ablaze with enthusiasm while presenting the scientific breakthrough."
   },
   {
     "word": "absolute",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "accelerate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "accelerate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "accent",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "accept",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "acclimation",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "accurate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "achievement",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "acquire",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "activity",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "adapt",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "adaptation",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "administrative",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "agent",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "agreement",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "alacrity",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "allocate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "ambiguous",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "ancestral",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "ansatz",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "appropriate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "artefact",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "astonish",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "attitude",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "belief",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "boost",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "captivate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "causal",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "challenge",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "collocation",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "compel",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "compensate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "complexity",
+    "partOfSpeech": "",
     "definition": "a factor or issue that makes a situation more complicated or difficult to deal with",
     "example": "The legal complexities of the merger delayed the agreement by several months."
   },
   {
     "word": "complexity",
+    "partOfSpeech": "",
     "definition": "the state or quality of being intricate, complicated, or consisting of many interconnected parts",
     "example": "The complexity of the human brain continues to challenge scientists around the world."
   },
   {
     "word": "complicate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "compromise",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "concentrate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "conduct",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "confirm",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "conform",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "connect",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "conspicuous",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "context",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "continue",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "control",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "controversial",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "conviction",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "create",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "daunt",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "deception",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "deliberate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "deliberation",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "demonstrate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "designate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "desire",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "destroy",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "deteriorate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "diffuse",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "disaster",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "dismay",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "downturn",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "drastic",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "effect",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "effort",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "elaborate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "embrace",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "emerge",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "emergency",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "emotion",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "enthusiasm",
+    "partOfSpeech": "",
     "definition": "a strong feeling of excitement and interest in something and a desire to become involved in it",
     "example": "Her enthusiasm for the environmental project inspired the entire community to participate."
   },
   {
     "word": "enthusiasm",
+    "partOfSpeech": "",
     "definition": "an activity or subject that one is very interested in and excited about",
     "example": "Photography is his lifelong enthusiasm and the primary subject of his blog."
   },
   {
     "word": "etiquette",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "excitement",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "existence",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "explore",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "expose",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "fastidious",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "force",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "formality",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "gain",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "harbour",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "illuminate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "improve",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "information",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "inspire",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "instrument",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "interaction",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "intricate",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "involve",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "navigate",
+    "partOfSpeech": "",
     "definition": "to plan and direct the route or course of a ship, aircraft, or other vehicle, especially by using instruments or maps",
     "example": "Modern ships use satellite systems to navigate safely through narrow channels."
   },
   {
     "word": "obtain",
+    "partOfSpeech": "",
     "definition": "to be in effect or be established, used for rules or conditions",
     "example": "These ancient traditions no longer obtain in the rapidly modernising urban centres."
   },
   {
     "word": "obtain",
+    "partOfSpeech": "",
     "definition": "to get or acquire something, usually through effort or request",
     "example": "Many students obtain valuable work experience through internship programmes."
   },
   {
     "word": "opinion",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "ossify",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "passenger",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "performance",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "permanent",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "pertain",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "pledge",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "primary",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "procedure",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "promote",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "prompt",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "pursue",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "quality",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "quantity",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "rampant",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "recommend",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "refuse",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "relieve",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "reluctant",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "remark",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "remarkable",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "restraint",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "review",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "rigid",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "safeguard",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "satellite",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "sprawl",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "statement",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "stingy",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "structure",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "struggle",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "supersede",
+    "partOfSpeech": "",
     "definition": "to replace something older or less effective",
     "example": "Digital downloads have largely superseded physical media in the music industry."
   },
   {
     "word": "supersede",
+    "partOfSpeech": "",
     "definition": "to set aside or make void by a later legal decision or action",
     "example": "The new legislation supersedes all previous regulations regarding data privacy."
   },
   {
     "word": "support",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "surrender",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "tragical",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "transparency",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "undermine",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "vehicle",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "violent",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   },
   {
     "word": "yogurt",
+    "partOfSpeech": "",
     "definition": "",
     "example": ""
   }
