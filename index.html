@@ -2774,6 +2774,16 @@
                 const option = event.target.closest('.pos-option[data-value]');
                 if (option) choosePartOfSpeech('edit', option.dataset.value);
             });
+            partOfSpeechInput.addEventListener('click', event => {
+                event.stopPropagation();
+                setPartOfSpeechPanelOpen('edit', false);
+                setPartOfSpeechPanelOpen('add', true);
+            });
+            editPartOfSpeechInput.addEventListener('click', event => {
+                event.stopPropagation();
+                setPartOfSpeechPanelOpen('add', false);
+                setPartOfSpeechPanelOpen('edit', true);
+            });
             partOfSpeechInput.addEventListener('input', () => renderPartOfSpeechCombo('add'));
             editPartOfSpeechInput.addEventListener('input', () => renderPartOfSpeechCombo('edit'));
             partOfSpeechAddNew.addEventListener('click', () => openNewPartOfSpeech('add'));
@@ -2800,11 +2810,17 @@
             document.addEventListener('click', event => {
                 const addInsidePanel = partOfSpeechPanel.contains(event.target);
                 const addOnTrigger = partOfSpeechTrigger.contains(event.target);
+                const addOnInput = partOfSpeechInput.contains(event.target);
                 const editInsidePanel = editPartOfSpeechPanel.contains(event.target);
                 const editOnTrigger = editPartOfSpeechTrigger.contains(event.target);
+                const editOnInput = editPartOfSpeechInput.contains(event.target);
 
-                if (!addInsidePanel && !addOnTrigger) setPartOfSpeechPanelOpen('add', false);
-                if (!editInsidePanel && !editOnTrigger) setPartOfSpeechPanelOpen('edit', false);
+                if (!addInsidePanel && !addOnTrigger && !addOnInput) {
+                    setPartOfSpeechPanelOpen('add', false);
+                }
+                if (!editInsidePanel && !editOnTrigger && !editOnInput) {
+                    setPartOfSpeechPanelOpen('edit', false);
+                }
             });
 
             // ---------- 表格事件委托 ----------
