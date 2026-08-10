@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-07-token-scroll-v1">
+    <meta name="app-build" content="2026-08-10-part-of-speech-v1">
     <title>Words</title>
     <style>
         * {
@@ -228,6 +228,148 @@
             appearance: auto;
             cursor: pointer;
         }
+        /* 词性组合下拉：交互结构与 Publish 的书号字段一致 */
+        .pos-combo {
+            position: relative;
+        }
+        .pos-primary-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 44px;
+            gap: 7px;
+        }
+        .pos-primary-row input {
+            width: 100%;
+            min-height: 44px;
+            padding: 0.7rem 1rem;
+            border: 1px solid #d1d9e6;
+            border-radius: 16px;
+            background: white;
+            color: #0f172a;
+            outline: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+        .pos-primary-row input:focus {
+            outline: 2px solid #7c9bff;
+            border-color: transparent;
+            box-shadow: 0 0 0 3px rgba(124, 155, 255, 0.2);
+        }
+        .pos-history-toggle {
+            min-height: 44px;
+            border: 1px solid #d1d9e6;
+            border-radius: 16px;
+            background: white;
+            color: #475569;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .pos-history-toggle:hover {
+            background: #f1f5f9;
+        }
+        .pos-panel {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(44px + 7px);
+            z-index: 1200;
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 0.55rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.14);
+        }
+        .pos-option {
+            display: block;
+            width: 100%;
+            padding: 0.55rem 0.65rem;
+            border: 0;
+            border-radius: 10px;
+            background: white;
+            color: #0f172a;
+            text-align: left;
+            cursor: pointer;
+        }
+        .pos-option:hover {
+            background: #f1f5f9;
+        }
+        .pos-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 0.45rem;
+            padding-top: 0.55rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .pos-action {
+            flex: 1;
+            padding: 0.48rem 0.6rem;
+            border: 0;
+            border-radius: 10px;
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 0.82rem;
+            font-weight: 650;
+            cursor: pointer;
+        }
+        .pos-action:hover {
+            background: #e2e8f0;
+        }
+        .pos-empty {
+            padding: 0.6rem;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 0.82rem;
+        }
+        .pos-history-list {
+            display: flex;
+            flex-direction: column;
+            max-height: min(50vh, 420px);
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .pos-history-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto;
+            gap: 8px;
+            align-items: center;
+            padding: 0.65rem 0.75rem;
+            background: white;
+        }
+        .pos-history-row + .pos-history-row {
+            border-top: 1px solid #e2e8f0;
+        }
+        .pos-history-row input {
+            width: 100%;
+            min-height: 38px;
+            padding: 0.5rem 0.7rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+        .pos-history-btn {
+            padding: 0.4rem 0.68rem;
+            border: 0;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 650;
+            cursor: pointer;
+        }
+        .pos-history-save {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+        .pos-history-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .pos-history-empty {
+            padding: 1.2rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
         .btn-primary {
             grid-column: 1 / -1;
             background: #1e293b;
@@ -308,6 +450,13 @@
             color: #0f172a;
             white-space: normal;
             min-width: 100px;
+        }
+        .word-table .word-part-of-speech {
+            margin-top: 0.28rem;
+            color: #475569;
+            font-weight: 500;
+            white-space: normal;
+            overflow-wrap: anywhere;
         }
         .word-table .word-definition {
             margin-top: 0.28rem;
@@ -842,6 +991,12 @@
             .config-box .token-profile-btn.danger {
                 grid-column: 1 / -1;
             }
+            .pos-history-row {
+                grid-template-columns: minmax(0, 1fr) auto;
+            }
+            .pos-history-delete {
+                grid-column: 2;
+            }
             .back-to-top {
                 right: 8px;
                 top: 66%;
@@ -883,6 +1038,22 @@
                 <div class="form-group">
                     <label for="wordInput">单词</label>
                     <input type="text" id="wordInput" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="partOfSpeechInput">词性</label>
+                    <div class="pos-combo" id="partOfSpeechCombo">
+                        <div class="pos-primary-row">
+                            <input type="text" id="partOfSpeechInput" autocomplete="off">
+                            <button class="pos-history-toggle" id="partOfSpeechTrigger" type="button" aria-label="展开词性历史" aria-expanded="false">▾</button>
+                        </div>
+                        <div class="pos-panel hidden" id="partOfSpeechPanel">
+                            <div id="partOfSpeechOptions"></div>
+                            <div class="pos-actions">
+                                <button class="pos-action" id="partOfSpeechAddNew" type="button">＋ 新增词性…</button>
+                                <button class="pos-action" id="partOfSpeechManage" type="button">管理词性历史…</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group full-width">
                     <label for="definitionInput">释义</label>
@@ -928,6 +1099,22 @@
             <h3>编辑条目</h3>
             <div class="modal-sub" id="editModalWord">单词：<span id="editWordDisplay"></span></div>
             <div class="form-group">
+                <label for="editPartOfSpeechInput">词性</label>
+                <div class="pos-combo" id="editPartOfSpeechCombo">
+                    <div class="pos-primary-row">
+                        <input type="text" id="editPartOfSpeechInput" autocomplete="off">
+                        <button class="pos-history-toggle" id="editPartOfSpeechTrigger" type="button" aria-label="展开词性历史" aria-expanded="false">▾</button>
+                    </div>
+                    <div class="pos-panel hidden" id="editPartOfSpeechPanel">
+                        <div id="editPartOfSpeechOptions"></div>
+                        <div class="pos-actions">
+                            <button class="pos-action" id="editPartOfSpeechAddNew" type="button">＋ 新增词性…</button>
+                            <button class="pos-action" id="editPartOfSpeechManage" type="button">管理词性历史…</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="editDefinition">释义</label>
                 <input type="text" id="editDefinition" placeholder="请输入释义">
             </div>
@@ -938,6 +1125,34 @@
             <div class="modal-actions">
                 <button class="btn-modal cancel" id="editCancelBtn">取消</button>
                 <button class="btn-modal save" id="editSaveBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增词性弹窗 -->
+    <div class="modal-overlay hidden" id="partOfSpeechNewModal">
+        <div class="modal-box">
+            <h3>新增词性</h3>
+            <div class="modal-sub">新增条目会保存到当前网页的词性下拉历史中。</div>
+            <div class="form-group">
+                <label for="partOfSpeechNewInput">词性</label>
+                <input type="text" id="partOfSpeechNewInput" autocomplete="off" placeholder="请输入词性">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal cancel" id="partOfSpeechNewCancel" type="button">取消</button>
+                <button class="btn-modal save" id="partOfSpeechNewSave" type="button">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 管理词性历史弹窗 -->
+    <div class="modal-overlay hidden" id="partOfSpeechManagerModal">
+        <div class="modal-box">
+            <h3>管理词性历史</h3>
+            <div class="modal-sub">可重命名或从下拉历史中删除词性；删除历史不会修改已有词条。</div>
+            <div class="pos-history-list" id="partOfSpeechHistoryList"></div>
+            <div class="modal-actions">
+                <button class="btn-modal save" id="partOfSpeechManagerClose" type="button">完成</button>
             </div>
         </div>
     </div>
@@ -1047,9 +1262,10 @@
             const TOKEN_PROFILES_KEY = `${STORAGE_NAMESPACE}:token_profiles_v1`;
             const TOKEN_SESSION_KEY = `${STORAGE_NAMESPACE}:token_session`;
             const STORAGE_KEY = `${STORAGE_NAMESPACE}:words`;
-            const SYNC_SCHEMA_VERSION = 4;
-            const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v4`;
-            const CONFLICT_BACKUP_KEY = `${STORAGE_NAMESPACE}:conflict_backups_v4`;
+            const PART_OF_SPEECH_HISTORY_KEY = `${STORAGE_NAMESPACE}:part_of_speech_history_v1`;
+            const SYNC_SCHEMA_VERSION = 5;
+            const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v5`;
+            const CONFLICT_BACKUP_KEY = `${STORAGE_NAMESPACE}:conflict_backups_v5`;
             const MAX_CONFLICT_BACKUPS = 10;
             const MAX_SYNC_BYTES = 750 * 1024;
             const AUTO_SYNC_DELAY = 700;
@@ -1062,6 +1278,9 @@
             let syncQueued = false;
             let autoSyncTimer = null;
             let hasStoredLocalData = false;
+            let partOfSpeechHistory = [];
+            let partOfSpeechHistoryStored = false;
+            let partOfSpeechNewTarget = 'add';
 
             let tokenProfiles = [];
             let selectedTokenProfileId = '';
@@ -1086,6 +1305,13 @@
 
             // ---------- DOM 引用 ----------
             const wordInput = document.getElementById('wordInput');
+            const partOfSpeechCombo = document.getElementById('partOfSpeechCombo');
+            const partOfSpeechInput = document.getElementById('partOfSpeechInput');
+            const partOfSpeechTrigger = document.getElementById('partOfSpeechTrigger');
+            const partOfSpeechPanel = document.getElementById('partOfSpeechPanel');
+            const partOfSpeechOptions = document.getElementById('partOfSpeechOptions');
+            const partOfSpeechAddNew = document.getElementById('partOfSpeechAddNew');
+            const partOfSpeechManage = document.getElementById('partOfSpeechManage');
             const definitionInput = document.getElementById('definitionInput');
             const exampleInput = document.getElementById('exampleInput');
             const addBtn = document.getElementById('addBtn');
@@ -1105,10 +1331,25 @@
 
             const editModal = document.getElementById('editModal');
             const editWordDisplay = document.getElementById('editWordDisplay');
+            const editPartOfSpeechCombo = document.getElementById('editPartOfSpeechCombo');
+            const editPartOfSpeechInput = document.getElementById('editPartOfSpeechInput');
+            const editPartOfSpeechTrigger = document.getElementById('editPartOfSpeechTrigger');
+            const editPartOfSpeechPanel = document.getElementById('editPartOfSpeechPanel');
+            const editPartOfSpeechOptions = document.getElementById('editPartOfSpeechOptions');
+            const editPartOfSpeechAddNew = document.getElementById('editPartOfSpeechAddNew');
+            const editPartOfSpeechManage = document.getElementById('editPartOfSpeechManage');
             const editDefinition = document.getElementById('editDefinition');
             const editExample = document.getElementById('editExample');
             const editCancelBtn = document.getElementById('editCancelBtn');
             const editSaveBtn = document.getElementById('editSaveBtn');
+
+            const partOfSpeechNewModal = document.getElementById('partOfSpeechNewModal');
+            const partOfSpeechNewInput = document.getElementById('partOfSpeechNewInput');
+            const partOfSpeechNewCancel = document.getElementById('partOfSpeechNewCancel');
+            const partOfSpeechNewSave = document.getElementById('partOfSpeechNewSave');
+            const partOfSpeechManagerModal = document.getElementById('partOfSpeechManagerModal');
+            const partOfSpeechHistoryList = document.getElementById('partOfSpeechHistoryList');
+            const partOfSpeechManagerClose = document.getElementById('partOfSpeechManagerClose');
 
             const configModal = document.getElementById('configModal');
             const cfgSavedToken = document.getElementById('cfgSavedToken');
@@ -1185,6 +1426,73 @@
                 }
             }
 
+            const partOfSpeechCollator = new Intl.Collator('en', {
+                sensitivity: 'base',
+                numeric: true
+            });
+
+            function normalizePartOfSpeechValue(value) {
+                return typeof value === 'string' ? value.normalize('NFKC').trim() : '';
+            }
+
+            function partOfSpeechKey(value) {
+                return normalizePartOfSpeechValue(value).toLocaleLowerCase('en');
+            }
+
+            function uniquePartOfSpeech(values) {
+                const seen = new Map();
+                for (const raw of values || []) {
+                    const value = normalizePartOfSpeechValue(raw);
+                    const normalizedKey = partOfSpeechKey(value);
+                    if (value && !seen.has(normalizedKey)) seen.set(normalizedKey, value);
+                }
+                return [...seen.values()];
+            }
+
+            function sortPartOfSpeech(values) {
+                return uniquePartOfSpeech(values).sort((a, b) => partOfSpeechCollator.compare(a, b));
+            }
+
+            function loadPartOfSpeechHistory() {
+                const stored = safeLocalGet(PART_OF_SPEECH_HISTORY_KEY);
+                partOfSpeechHistoryStored = stored !== null;
+                if (!stored) {
+                    partOfSpeechHistory = [];
+                    return;
+                }
+                try {
+                    const parsed = JSON.parse(stored);
+                    partOfSpeechHistory = sortPartOfSpeech(Array.isArray(parsed) ? parsed : []);
+                } catch (error) {
+                    console.error('词性历史解析失败:', error);
+                    partOfSpeechHistory = [];
+                }
+            }
+
+            function savePartOfSpeechHistory() {
+                partOfSpeechHistory = sortPartOfSpeech(partOfSpeechHistory);
+                safeLocalSet(PART_OF_SPEECH_HISTORY_KEY, JSON.stringify(partOfSpeechHistory));
+                partOfSpeechHistoryStored = true;
+            }
+
+            function initializePartOfSpeechHistoryFromWordsIfNeeded() {
+                if (partOfSpeechHistoryStored) return;
+                const derived = sortPartOfSpeech(words.map(item => item.partOfSpeech).filter(Boolean));
+                if (!derived.length) return;
+                partOfSpeechHistory = derived;
+                savePartOfSpeechHistory();
+            }
+
+            function addPartOfSpeechHistory(value) {
+                const normalized = normalizePartOfSpeechValue(value);
+                if (!normalized) return '';
+                if (!partOfSpeechHistory.some(item => partOfSpeechKey(item) === partOfSpeechKey(normalized))) {
+                    partOfSpeechHistory.push(normalized);
+                    savePartOfSpeechHistory();
+                }
+                return normalized;
+            }
+
             function normalizeWordItem(item) {
                 if (!item || typeof item !== 'object' || typeof item.word !== 'string') {
                     return null;
@@ -1195,6 +1503,7 @@
 
                 return {
                     word,
+                    partOfSpeech: normalizePartOfSpeechValue(item.partOfSpeech),
                     definition: typeof item.definition === 'string' ? item.definition.trim() : '',
                     example: typeof item.example === 'string' ? item.example.trim() : ''
                 };
@@ -1214,11 +1523,12 @@
                 const canonical = normalizeWordList(list)
                     .map(item => ({
                         word: item.word,
+                        partOfSpeech: item.partOfSpeech,
                         definition: item.definition,
                         example: item.example
                     }))
                     .sort((a, b) => {
-                        const fields = ['word', 'definition', 'example'];
+                        const fields = ['word', 'partOfSpeech', 'definition', 'example'];
                         for (const field of fields) {
                             const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
@@ -1270,6 +1580,10 @@
                 const div = document.createElement('div');
                 div.textContent = String(text);
                 return div.innerHTML;
+            }
+
+            function escapeAttribute(text) {
+                return escapeHtml(text).replace(/"/g, '&quot;');
             }
 
             function getSyncTarget() {
@@ -2026,6 +2340,132 @@
                 safeLocalSet(STORAGE_KEY, JSON.stringify(words));
             }
 
+            // ---------- 词性下拉与历史管理 ----------
+            function renderPartOfSpeechCombo(which) {
+                const isAdd = which === 'add';
+                const input = isAdd ? partOfSpeechInput : editPartOfSpeechInput;
+                const optionsEl = isAdd ? partOfSpeechOptions : editPartOfSpeechOptions;
+                const primary = normalizePartOfSpeechValue(input.value);
+                const history = partOfSpeechHistory.filter(value => partOfSpeechKey(value) !== partOfSpeechKey(primary));
+
+                optionsEl.innerHTML = history.length
+                    ? history.map(value => `<button class="pos-option" type="button" data-value="${escapeAttribute(value)}">${escapeHtml(value)}</button>`).join('')
+                    : '<div class="pos-empty">暂无其它词性</div>';
+            }
+
+            function setPartOfSpeechPanelOpen(which, open) {
+                const panel = which === 'add' ? partOfSpeechPanel : editPartOfSpeechPanel;
+                const trigger = which === 'add' ? partOfSpeechTrigger : editPartOfSpeechTrigger;
+                panel.classList.toggle('hidden', !open);
+                trigger.setAttribute('aria-expanded', String(open));
+            }
+
+            function closePartOfSpeechPanels() {
+                setPartOfSpeechPanelOpen('add', false);
+                setPartOfSpeechPanelOpen('edit', false);
+            }
+
+            function choosePartOfSpeech(which, value) {
+                const input = which === 'add' ? partOfSpeechInput : editPartOfSpeechInput;
+                input.value = normalizePartOfSpeechValue(value);
+                setPartOfSpeechPanelOpen(which, false);
+                renderPartOfSpeechCombo(which);
+                input.focus();
+            }
+
+            function openNewPartOfSpeech(which) {
+                partOfSpeechNewTarget = which;
+                partOfSpeechNewInput.value = '';
+                closePartOfSpeechPanels();
+                partOfSpeechNewModal.classList.remove('hidden');
+                setTimeout(() => partOfSpeechNewInput.focus(), 30);
+            }
+
+            function saveNewPartOfSpeech() {
+                const value = normalizePartOfSpeechValue(partOfSpeechNewInput.value);
+                if (!value) {
+                    showToast('请输入词性', 'error');
+                    partOfSpeechNewInput.focus();
+                    return;
+                }
+                addPartOfSpeechHistory(value);
+                choosePartOfSpeech(partOfSpeechNewTarget, value);
+                partOfSpeechNewModal.classList.add('hidden');
+                renderPartOfSpeechCombo('add');
+                renderPartOfSpeechCombo('edit');
+                showToast('已添加词性', 'success');
+            }
+
+            function renderPartOfSpeechManager() {
+                partOfSpeechHistoryList.innerHTML = partOfSpeechHistory.length
+                    ? partOfSpeechHistory.map(value => `
+                        <div class="pos-history-row" data-old="${escapeAttribute(value)}">
+                            <input type="text" value="${escapeAttribute(value)}">
+                            <button class="pos-history-btn pos-history-save" type="button">保存</button>
+                            <button class="pos-history-btn pos-history-delete" type="button">删除</button>
+                        </div>
+                    `).join('')
+                    : '<div class="pos-history-empty">暂无已保存的词性</div>';
+            }
+
+            function openPartOfSpeechManager() {
+                closePartOfSpeechPanels();
+                renderPartOfSpeechManager();
+                partOfSpeechManagerModal.classList.remove('hidden');
+            }
+
+            function renamePartOfSpeechHistory(oldValue, newValue) {
+                const oldNormalized = normalizePartOfSpeechValue(oldValue);
+                const newNormalized = normalizePartOfSpeechValue(newValue);
+                if (!newNormalized) {
+                    showToast('词性不能为空', 'error');
+                    return false;
+                }
+                if (partOfSpeechHistory.some(value => partOfSpeechKey(value) === partOfSpeechKey(newNormalized) && partOfSpeechKey(value) !== partOfSpeechKey(oldNormalized))) {
+                    showToast('该词性已存在', 'error');
+                    return false;
+                }
+
+                partOfSpeechHistory = sortPartOfSpeech(partOfSpeechHistory.map(value =>
+                    partOfSpeechKey(value) === partOfSpeechKey(oldNormalized) ? newNormalized : value
+                ));
+
+                let wordsChanged = false;
+                for (const item of words) {
+                    if (partOfSpeechKey(item.partOfSpeech) === partOfSpeechKey(oldNormalized)) {
+                        item.partOfSpeech = newNormalized;
+                        wordsChanged = true;
+                    }
+                }
+                if (partOfSpeechKey(partOfSpeechInput.value) === partOfSpeechKey(oldNormalized)) partOfSpeechInput.value = newNormalized;
+                if (partOfSpeechKey(editPartOfSpeechInput.value) === partOfSpeechKey(oldNormalized)) editPartOfSpeechInput.value = newNormalized;
+
+                savePartOfSpeechHistory();
+                if (wordsChanged) {
+                    applySortAndRender();
+                    markLocalChange();
+                } else {
+                    renderPartOfSpeechCombo('add');
+                    renderPartOfSpeechCombo('edit');
+                }
+                renderPartOfSpeechManager();
+                showToast('已更新词性', 'success');
+                return true;
+            }
+
+            function deletePartOfSpeechHistory(value) {
+                const normalized = normalizePartOfSpeechValue(value);
+                if (!confirm(`确定从词性下拉历史中删除“${normalized}”吗？
+
+已有词条中的词性不会改变。`)) return;
+                partOfSpeechHistory = partOfSpeechHistory.filter(item => partOfSpeechKey(item) !== partOfSpeechKey(normalized));
+                savePartOfSpeechHistory();
+                renderPartOfSpeechManager();
+                renderPartOfSpeechCombo('add');
+                renderPartOfSpeechCombo('edit');
+                showToast('已删除词性历史', 'success');
+            }
+
             // ---------- 排序与渲染 ----------
             const wordCollator = new Intl.Collator('en', {
                 sensitivity: 'base',
@@ -2051,6 +2491,9 @@
             }
 
             function renderTable() {
+                initializePartOfSpeechHistoryFromWordsIfNeeded();
+                renderPartOfSpeechCombo('add');
+                renderPartOfSpeechCombo('edit');
                 countDisplay.textContent = words.length;
 
                 if (words.length === 0) {
@@ -2060,8 +2503,12 @@
 
                 tableBody.innerHTML = words.map((item, index) => {
                     const word = escapeHtml(item.word);
+                    const partOfSpeech = escapeHtml(item.partOfSpeech);
                     const definition = escapeHtml(item.definition);
                     const example = escapeHtml(item.example);
+                    const partOfSpeechHtml = partOfSpeech
+                        ? `<div class="word-part-of-speech">${partOfSpeech}</div>`
+                        : '';
                     const definitionHtml = definition
                         ? `<div class="word-definition">${definition}</div>`
                         : '';
@@ -2072,6 +2519,7 @@
                         <tr data-index="${index}">
                             <td class="col-word">
                                 <div>${word}</div>
+                                ${partOfSpeechHtml}
                                 ${definitionHtml}
                                 ${exampleHtml}
                             </td>
@@ -2093,13 +2541,16 @@
                 editingIndex = index;
                 const item = words[index];
                 editWordDisplay.textContent = item.word;
+                editPartOfSpeechInput.value = item.partOfSpeech;
                 editDefinition.value = item.definition;
                 editExample.value = item.example;
+                renderPartOfSpeechCombo('edit');
                 editModal.classList.remove('hidden');
-                setTimeout(() => editDefinition.focus(), 100);
+                setTimeout(() => editPartOfSpeechInput.focus(), 100);
             }
 
             function closeEditModal() {
+                setPartOfSpeechPanelOpen('edit', false);
                 editModal.classList.add('hidden');
                 editingIndex = null;
             }
@@ -2111,8 +2562,10 @@
                     return;
                 }
 
+                const partOfSpeech = addPartOfSpeechHistory(editPartOfSpeechInput.value);
                 words[editingIndex] = {
                     ...words[editingIndex],
+                    partOfSpeech,
                     definition: editDefinition.value.trim(),
                     example: editExample.value.trim()
                 };
@@ -2131,8 +2584,10 @@
                     return;
                 }
 
+                const partOfSpeech = addPartOfSpeechHistory(partOfSpeechInput.value);
                 words.push({
                     word,
+                    partOfSpeech,
                     definition: definitionInput.value.trim(),
                     example: exampleInput.value.trim()
                 });
@@ -2141,8 +2596,10 @@
                 markLocalChange();
 
                 wordInput.value = '';
+                partOfSpeechInput.value = '';
                 definitionInput.value = '';
                 exampleInput.value = '';
+                renderPartOfSpeechCombo('add');
                 wordInput.focus();
             }
 
@@ -2291,6 +2748,55 @@
                 syncToCloud(true, true);
             }
 
+            // ---------- 词性下拉事件 ----------
+            partOfSpeechTrigger.addEventListener('click', event => {
+                event.stopPropagation();
+                const willOpen = partOfSpeechPanel.classList.contains('hidden');
+                setPartOfSpeechPanelOpen('edit', false);
+                setPartOfSpeechPanelOpen('add', willOpen);
+            });
+            editPartOfSpeechTrigger.addEventListener('click', event => {
+                event.stopPropagation();
+                const willOpen = editPartOfSpeechPanel.classList.contains('hidden');
+                setPartOfSpeechPanelOpen('add', false);
+                setPartOfSpeechPanelOpen('edit', willOpen);
+            });
+            partOfSpeechOptions.addEventListener('click', event => {
+                const option = event.target.closest('.pos-option[data-value]');
+                if (option) choosePartOfSpeech('add', option.dataset.value);
+            });
+            editPartOfSpeechOptions.addEventListener('click', event => {
+                const option = event.target.closest('.pos-option[data-value]');
+                if (option) choosePartOfSpeech('edit', option.dataset.value);
+            });
+            partOfSpeechInput.addEventListener('input', () => renderPartOfSpeechCombo('add'));
+            editPartOfSpeechInput.addEventListener('input', () => renderPartOfSpeechCombo('edit'));
+            partOfSpeechAddNew.addEventListener('click', () => openNewPartOfSpeech('add'));
+            editPartOfSpeechAddNew.addEventListener('click', () => openNewPartOfSpeech('edit'));
+            partOfSpeechManage.addEventListener('click', openPartOfSpeechManager);
+            editPartOfSpeechManage.addEventListener('click', openPartOfSpeechManager);
+            partOfSpeechNewCancel.addEventListener('click', () => partOfSpeechNewModal.classList.add('hidden'));
+            partOfSpeechNewSave.addEventListener('click', saveNewPartOfSpeech);
+            partOfSpeechNewInput.addEventListener('keydown', event => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    saveNewPartOfSpeech();
+                }
+            });
+            partOfSpeechManagerClose.addEventListener('click', () => partOfSpeechManagerModal.classList.add('hidden'));
+            partOfSpeechHistoryList.addEventListener('click', event => {
+                const row = event.target.closest('.pos-history-row');
+                if (!row) return;
+                const oldValue = row.dataset.old;
+                const input = row.querySelector('input');
+                if (event.target.closest('.pos-history-save')) renamePartOfSpeechHistory(oldValue, input.value);
+                if (event.target.closest('.pos-history-delete')) deletePartOfSpeechHistory(oldValue);
+            });
+            document.addEventListener('click', event => {
+                if (!partOfSpeechCombo.contains(event.target)) setPartOfSpeechPanelOpen('add', false);
+                if (!editPartOfSpeechCombo.contains(event.target)) setPartOfSpeechPanelOpen('edit', false);
+            });
+
             // ---------- 表格事件委托 ----------
             tableBody.addEventListener('click', function(event) {
                 const editButton = event.target.closest('.edit-btn');
@@ -2395,6 +2901,9 @@
 
             document.addEventListener('keydown', event => {
                 if (event.key !== 'Escape') return;
+                closePartOfSpeechPanels();
+                if (!partOfSpeechNewModal.classList.contains('hidden')) partOfSpeechNewModal.classList.add('hidden');
+                if (!partOfSpeechManagerModal.classList.contains('hidden')) partOfSpeechManagerModal.classList.add('hidden');
                 if (!editModal.classList.contains('hidden')) closeEditModal();
                 if (!configModal.classList.contains('hidden')) closeConfigModal();
             });
@@ -2419,6 +2928,7 @@
 
             loadConfig();
             loadSyncMeta();
+            loadPartOfSpeechHistory();
             loadFromLocal();
             updateLastSyncDisplay();
 
