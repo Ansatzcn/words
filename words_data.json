@@ -44,6 +44,12 @@
   {
     "word": "absolute",
     "partOfSpeech": "adjective",
+    "definition": "not dependent on or relative to anything else; independent of arbitrary standards",
+    "example": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth."
+  },
+  {
+    "word": "absolute",
+    "partOfSpeech": "adjective",
     "definition": "total and complete, without any restriction or limitation",
     "example": "The scientific experiment must be conducted under absolute control of all environmental variables."
   },
