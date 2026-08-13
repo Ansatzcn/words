@@ -253,6 +253,12 @@
   },
   {
     "word": "blend",
+    "partOfSpeech": "noun",
+    "definition": "a mixture of different things, qualities, or people",
+    "example": "A balanced urban community should represent a healthy blend of residential, commercial, and recreational spaces."
+  },
+  {
+    "word": "blend",
     "partOfSpeech": "verb",
     "definition": "to harmonise or go well with something else",
     "example": "The new library design blends seamlessly with the surrounding historic buildings."
