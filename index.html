@@ -437,10 +437,10 @@
             color: #94a3b8;
         }
         .word-table td {
-            padding: 0.8rem 1.2rem;
+            padding: 0.58rem 1.2rem;
             border-bottom: 1px solid #eef2f6;
             vertical-align: top;
-            line-height: 1.5;
+            line-height: 1.34;
         }
         .word-table tbody tr:hover {
             background: #fafcff;
@@ -466,25 +466,28 @@
             overflow-wrap: anywhere;
         }
         .word-table .word-part-of-speech {
-            margin-top: 0.28rem;
+            margin-top: 0.12rem;
             color: #475569;
             font-weight: 500;
+            line-height: 1.3;
             white-space: normal;
             overflow-wrap: anywhere;
         }
         .word-table .word-definition {
-            margin-top: 0.28rem;
+            margin-top: 0.12rem;
             color: #334155;
             font-weight: 400;
             font-style: italic;
+            line-height: 1.32;
             white-space: normal;
             overflow-wrap: anywhere;
         }
         .word-table .word-example {
-            margin-top: 0.22rem;
+            margin-top: 0.1rem;
             color: #334155;
             font-weight: 400;
             font-style: normal;
+            line-height: 1.32;
             white-space: normal;
             overflow-wrap: anywhere;
         }
@@ -952,7 +955,7 @@
             }
             .word-table th,
             .word-table td {
-                padding: 0.6rem 0.8rem;
+                padding: 0.5rem 0.8rem;
                 font-size: 0.85rem;
             }
             .word-table .col-word {
@@ -1105,7 +1108,10 @@
     <div class="modal-overlay hidden" id="editModal">
         <div class="modal-box">
             <h3>编辑条目</h3>
-            <div class="modal-sub" id="editModalWord">单词：<span id="editWordDisplay"></span></div>
+            <div class="form-group">
+                <label for="editWordInput">单词</label>
+                <input type="text" id="editWordInput" autocomplete="off" placeholder="请输入单词">
+            </div>
             <div class="form-group">
                 <label for="editPartOfSpeechInput">词性</label>
                 <div class="pos-combo" id="editPartOfSpeechCombo">
@@ -1339,7 +1345,7 @@
             const backToTopBtn = document.getElementById('backToTopBtn');
 
             const editModal = document.getElementById('editModal');
-            const editWordDisplay = document.getElementById('editWordDisplay');
+            const editWordInput = document.getElementById('editWordInput');
             const editPartOfSpeechCombo = document.getElementById('editPartOfSpeechCombo');
             const editPartOfSpeechInput = document.getElementById('editPartOfSpeechInput');
             const editPartOfSpeechTrigger = document.getElementById('editPartOfSpeechTrigger');
@@ -2550,13 +2556,13 @@
                 closePartOfSpeechPanels();
                 editingIndex = index;
                 const item = words[index];
-                editWordDisplay.textContent = item.word;
+                editWordInput.value = item.word;
                 editPartOfSpeechInput.value = item.partOfSpeech;
                 editDefinition.value = item.definition;
                 editExample.value = item.example;
                 renderPartOfSpeechCombo('edit');
                 editModal.classList.remove('hidden');
-                setTimeout(() => editPartOfSpeechInput.focus(), 100);
+                setTimeout(() => editWordInput.focus(), 100);
             }
 
             function closeEditModal() {
@@ -2572,9 +2578,17 @@
                     return;
                 }
 
+                const word = editWordInput.value.trim();
+                if (!word) {
+                    alert('请填写“单词”字段。');
+                    editWordInput.focus();
+                    return;
+                }
+
                 const partOfSpeech = addPartOfSpeechHistory(editPartOfSpeechInput.value);
                 words[editingIndex] = {
                     ...words[editingIndex],
+                    word,
                     partOfSpeech,
                     definition: editDefinition.value.trim(),
                     example: editExample.value.trim()
