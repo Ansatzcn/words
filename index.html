@@ -449,12 +449,21 @@
             border-bottom: none;
         }
         .word-table .col-word {
-            position: relative;
             font-weight: 600;
             color: #0f172a;
             white-space: normal;
             min-width: 100px;
-            padding-bottom: 2.1rem;
+        }
+        .word-table .word-title-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+        }
+        .word-table .word-title-text {
+            min-width: 0;
+            overflow-wrap: anywhere;
         }
         .word-table .word-part-of-speech {
             margin-top: 0.28rem;
@@ -480,9 +489,8 @@
             overflow-wrap: anywhere;
         }
         .word-table .edit-link {
-            position: absolute;
-            right: 1.2rem;
-            bottom: 0.55rem;
+            flex: 0 0 auto;
+            margin: 0;
             border: none;
             background: none;
             padding: 0;
@@ -490,7 +498,7 @@
             font-family: inherit;
             font-size: 0.78rem;
             font-weight: 500;
-            line-height: 1.4;
+            line-height: 1.5;
             text-decoration: underline;
             text-underline-offset: 2px;
             cursor: pointer;
@@ -950,9 +958,8 @@
             .word-table .col-word {
                 min-width: 70px;
             }
-            .word-table .edit-link {
-                right: 0.8rem;
-                bottom: 0.45rem;
+            .word-table .word-title-row {
+                gap: 0.75rem;
             }
             .toolbar {
                 flex-direction: column;
@@ -2521,11 +2528,13 @@
                     return `
                         <tr data-index="${index}">
                             <td class="col-word">
-                                <div>${word}</div>
+                                <div class="word-title-row">
+                                    <div class="word-title-text">${word}</div>
+                                    <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
+                                </div>
                                 ${partOfSpeechHtml}
                                 ${definitionHtml}
                                 ${exampleHtml}
-                                <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
                             </td>
                         </tr>
                     `;
