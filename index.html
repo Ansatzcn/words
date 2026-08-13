@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-10-part-of-speech-v1">
+    <meta name="app-build" content="2026-08-13-edit-modal-delete-v1">
     <title>Words</title>
     <style>
         * {
@@ -449,10 +449,12 @@
             border-bottom: none;
         }
         .word-table .col-word {
+            position: relative;
             font-weight: 600;
             color: #0f172a;
             white-space: normal;
             min-width: 100px;
+            padding-bottom: 2.1rem;
         }
         .word-table .word-part-of-speech {
             margin-top: 0.28rem;
@@ -477,38 +479,27 @@
             white-space: normal;
             overflow-wrap: anywhere;
         }
-        .word-table .col-action {
-            text-align: center;
-            white-space: nowrap;
-            width: 110px;
-        }
-        .word-table .action-btn {
-            background: none;
+        .word-table .edit-link {
+            position: absolute;
+            right: 1.2rem;
+            bottom: 0.55rem;
             border: none;
-            padding: 4px 10px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.15s;
-            font-size: 0.85rem;
+            background: none;
+            padding: 0;
+            color: #64748b;
+            font-family: inherit;
+            font-size: 0.78rem;
             font-weight: 500;
             line-height: 1.4;
-            margin: 0 2px;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            cursor: pointer;
+            transition: color 0.15s;
         }
-        .word-table .action-btn.edit-btn {
+        .word-table .edit-link:hover,
+        .word-table .edit-link:focus-visible {
             color: #1e3a8a;
-            background: #dbeafe;
-        }
-        .word-table .action-btn.edit-btn:hover {
-            background: #bfdbfe;
-            transform: scale(1.05);
-        }
-        .word-table .action-btn.delete-btn {
-            color: #991b1b;
-            background: #fee2e2;
-        }
-        .word-table .action-btn.delete-btn:hover {
-            background: #fecaca;
-            transform: scale(1.05);
+            outline: none;
         }
         .empty-row td {
             padding: 2.5rem 1rem;
@@ -629,6 +620,13 @@
             border: none;
             cursor: pointer;
             transition: 0.15s;
+        }
+        .modal-actions .btn-modal.delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .modal-actions .btn-modal.delete:hover {
+            background: #fecaca;
         }
         .modal-actions .btn-modal.cancel {
             background: #f1f5f9;
@@ -952,8 +950,9 @@
             .word-table .col-word {
                 min-width: 70px;
             }
-            .word-table .col-action {
-                width: 80px;
+            .word-table .edit-link {
+                right: 0.8rem;
+                bottom: 0.45rem;
             }
             .toolbar {
                 flex-direction: column;
@@ -1079,12 +1078,11 @@
                 <thead>
                     <tr>
                         <th class="sortable" id="sortWordHead">单词 <span class="sort-icon" id="sortIcon">▼</span></th>
-                        <th class="col-action">操作</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr class="empty-row">
-                        <td colspan="2">加载中...</td>
+                        <td>加载中...</td>
                     </tr>
                 </tbody>
             </table>
@@ -1126,8 +1124,9 @@
                 <textarea id="editExample" placeholder="请输入例句" rows="2"></textarea>
             </div>
             <div class="modal-actions">
-                <button class="btn-modal cancel" id="editCancelBtn">取消</button>
-                <button class="btn-modal save" id="editSaveBtn">保存</button>
+                <button class="btn-modal delete" id="editDeleteBtn" type="button">删除</button>
+                <button class="btn-modal cancel" id="editCancelBtn" type="button">取消</button>
+                <button class="btn-modal save" id="editSaveBtn" type="button">保存</button>
             </div>
         </div>
     </div>
@@ -1343,6 +1342,7 @@
             const editPartOfSpeechManage = document.getElementById('editPartOfSpeechManage');
             const editDefinition = document.getElementById('editDefinition');
             const editExample = document.getElementById('editExample');
+            const editDeleteBtn = document.getElementById('editDeleteBtn');
             const editCancelBtn = document.getElementById('editCancelBtn');
             const editSaveBtn = document.getElementById('editSaveBtn');
 
@@ -2500,7 +2500,7 @@
                 countDisplay.textContent = words.length;
 
                 if (words.length === 0) {
-                    tableBody.innerHTML = '<tr class="empty-row"><td colspan="2">单词列表为空，添加一个新词吧！</td></tr>';
+                    tableBody.innerHTML = '<tr class="empty-row"><td>单词列表为空，添加一个新词吧！</td></tr>';
                     return;
                 }
 
@@ -2525,10 +2525,7 @@
                                 ${partOfSpeechHtml}
                                 ${definitionHtml}
                                 ${exampleHtml}
-                            </td>
-                            <td class="col-action">
-                                <button class="action-btn edit-btn" data-index="${index}" title="编辑">编辑</button>
-                                <button class="action-btn delete-btn" data-index="${index}" title="删除">删除</button>
+                                <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
                             </td>
                         </tr>
                     `;
@@ -2574,6 +2571,22 @@
                     example: editExample.value.trim()
                 };
 
+                closeEditModal();
+                applySortAndRender();
+                markLocalChange();
+            }
+
+            function deleteEditingWord() {
+                if (editingIndex === null || editingIndex < 0 || editingIndex >= words.length) {
+                    alert('删除出错，请重试。');
+                    closeEditModal();
+                    return;
+                }
+
+                const item = words[editingIndex];
+                if (!confirm(`确定要删除“${item.word}”的这条释义吗？`)) return;
+
+                words.splice(editingIndex, 1);
                 closeEditModal();
                 applySortAndRender();
                 markLocalChange();
@@ -2825,24 +2838,13 @@
 
             // ---------- 表格事件委托 ----------
             tableBody.addEventListener('click', function(event) {
-                const editButton = event.target.closest('.edit-btn');
-                const deleteButton = event.target.closest('.delete-btn');
-                const button = editButton || deleteButton;
-                if (!button) return;
+                const editButton = event.target.closest('.edit-link');
+                if (!editButton) return;
 
-                const index = Number.parseInt(button.dataset.index, 10);
+                const index = Number.parseInt(editButton.dataset.index, 10);
                 if (!Number.isInteger(index) || index < 0 || index >= words.length) return;
 
-                if (editButton) {
-                    openEditModal(index);
-                    return;
-                }
-
-                if (confirm(`确定要删除“${words[index].word}”的这条释义吗？`)) {
-                    words.splice(index, 1);
-                    applySortAndRender();
-                    markLocalChange();
-                }
+                openEditModal(index);
             });
 
             // ---------- 事件绑定 ----------
@@ -2910,6 +2912,7 @@
                 });
             });
 
+            editDeleteBtn.addEventListener('click', deleteEditingWord);
             editCancelBtn.addEventListener('click', closeEditModal);
             editSaveBtn.addEventListener('click', saveEdit);
             editModal.addEventListener('click', event => {
