@@ -482,6 +482,12 @@
   {
     "word": "decorate",
     "partOfSpeech": "verb",
+    "definition": "to apply paint or wallpaper to the interior or exterior of a building",
+    "example": "The city council plans to decorate the facades of all buildings along the central square before the cultural festival."
+  },
+  {
+    "word": "decorate",
+    "partOfSpeech": "verb",
     "definition": "to give someone a medal or other honour as a mark of recognition",
     "example": "The government will decorate the distinguished scientists for their contributions to public health."
   },
