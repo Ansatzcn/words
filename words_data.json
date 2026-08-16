@@ -133,9 +133,9 @@
   },
   {
     "word": "absorb",
-    "partOfSpeech": "",
-    "definition": "",
-    "example": ""
+    "partOfSpeech": "verb",
+    "definition": "to take in or soak up a liquid, gas, heat, or other substance",
+    "example": "Dense urban surfaces absorb and retain more heat than surrounding rural areas, contributing to the heat island effect."
   },
   {
     "word": "absorption",
@@ -1530,6 +1530,12 @@
     "example": ""
   },
   {
+    "word": "invisible",
+    "partOfSpeech": "",
+    "definition": "",
+    "example": ""
+  },
+  {
     "word": "involve",
     "partOfSpeech": "",
     "definition": "",
@@ -2185,6 +2191,12 @@
   },
   {
     "word": "violent",
+    "partOfSpeech": "",
+    "definition": "",
+    "example": ""
+  },
+  {
+    "word": "visible",
     "partOfSpeech": "",
     "definition": "",
     "example": ""
