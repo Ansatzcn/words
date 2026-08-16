@@ -92,6 +92,12 @@
   {
     "word": "abrupt",
     "partOfSpeech": "adjective",
+    "definition": "brief and rudely direct in speech or manner",
+    "example": "The manager abrupt dismissal of reasonable questions damaged staff morale throughout the department."
+  },
+  {
+    "word": "abrupt",
+    "partOfSpeech": "adjective",
     "definition": "sudden and unexpected, often without warning",
     "example": "The abrupt closure of the factory left thousands of workers without income."
   },
