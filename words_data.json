@@ -67,12 +67,6 @@
   },
   {
     "word": "abnormal",
-    "partOfSpeech": "",
-    "definition": "",
-    "example": ""
-  },
-  {
-    "word": "abnormal",
     "partOfSpeech": "adjective",
     "definition": "deviating from the standard or the norm in a statistical or biological sense",
     "example": "Researchers recorded abnormal cell growth in the tissue samples collected from the contaminated site."
@@ -85,6 +79,12 @@
   },
   {
     "word": "abolish",
+    "partOfSpeech": "",
+    "definition": "",
+    "example": ""
+  },
+  {
+    "word": "abrupt",
     "partOfSpeech": "",
     "definition": "",
     "example": ""
