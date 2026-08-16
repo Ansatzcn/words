@@ -476,6 +476,12 @@
   {
     "word": "breakthrough",
     "partOfSpeech": "noun",
+    "definition": "an act of breaking through an obstacle or barrier, especially in a military context",
+    "example": "The successful military breakthrough ended a prolonged period of stalemate on the battlefield."
+  },
+  {
+    "word": "breakthrough",
+    "partOfSpeech": "noun",
     "definition": "an important discovery or development that helps solve a problem or removes a barrier to progress",
     "example": "The development of mRNA vaccines represented a major breakthrough in medical science."
   },
