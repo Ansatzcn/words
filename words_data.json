@@ -710,6 +710,12 @@
   {
     "word": "continuation",
     "partOfSpeech": "noun",
+    "definition": "something that follows or extends what has already been begun",
+    "example": "The new policy represents a natural continuation of the reforms introduced five years ago."
+  },
+  {
+    "word": "continuation",
+    "partOfSpeech": "noun",
     "definition": "the act or state of continuing without interruption",
     "example": "The continuation of deforestation will inevitably accelerate biodiversity loss across the Amazon basin."
   },
