@@ -78,16 +78,16 @@
     "example": "Researchers recorded abnormal cell growth in the tissue samples collected from the contaminated site."
   },
   {
+    "word": "abnormal",
+    "partOfSpeech": "adjective",
+    "definition": "different from what is usual or expected, typically in a way that is worrying or undesirable",
+    "example": "Abnormal weather patterns have become increasingly frequent due to global climate change."
+  },
+  {
     "word": "abolish",
     "partOfSpeech": "",
     "definition": "",
     "example": ""
-  },
-  {
-    "word": "abrupt",
-    "partOfSpeech": "adjective",
-    "definition": "different from what is usual or expected, typically in a way that is worrying or undesirable",
-    "example": "Abnormal weather patterns have become increasingly frequent due to global climate change."
   },
   {
     "word": "absolute",
