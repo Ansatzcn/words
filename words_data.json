@@ -428,6 +428,12 @@
   {
     "word": "comparison",
     "partOfSpeech": "noun",
+    "definition": "in grammar, the form of an adjective or adverb that shows a degree of quality or quantity",
+    "example": "The comparison of adjectives in English involves adding suffixes or using the words more and most."
+  },
+  {
+    "word": "comparison",
+    "partOfSpeech": "noun",
     "definition": "the act of examining similarities and differences between two or more people, things, or ideas",
     "example": "A careful comparison of renewable energy sources reveals significant variation in long-term cost efficiency."
   },
