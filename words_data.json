@@ -1446,6 +1446,12 @@
     "example": ""
   },
   {
+    "word": "plain",
+    "partOfSpeech": "",
+    "definition": "",
+    "example": ""
+  },
+  {
     "word": "plate",
     "partOfSpeech": "",
     "definition": "",
@@ -1834,6 +1840,12 @@
     "partOfSpeech": "",
     "definition": "",
     "example": ""
+  },
+  {
+    "word": "tectonic",
+    "partOfSpeech": "adjective",
+    "definition": "having a profound and far-reaching effect on something, especially on a large scale",
+    "example": "The invention of the internet caused a tectonic shift in global communication patterns."
   },
   {
     "word": "tectonic",
