@@ -422,6 +422,12 @@
   {
     "word": "comparison",
     "partOfSpeech": "noun",
+    "definition": "a statement that shows how two or more people, things, or ideas are similar or different",
+    "example": "The report included a detailed comparison of crime rates in urban and rural areas."
+  },
+  {
+    "word": "comparison",
+    "partOfSpeech": "noun",
     "definition": "the act of examining similarities and differences between two or more people, things, or ideas",
     "example": "A careful comparison of renewable energy sources reveals significant variation in long-term cost efficiency."
   },
