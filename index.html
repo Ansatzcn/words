@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-17-mobile-add-grid-containment-v1">
+    <meta name="app-build" content="2026-08-17-pos-dropdown-row-edit-delete-v1">
     <title>Words</title>
     <style>
         * {
@@ -301,19 +301,63 @@
         .pos-panel.hidden {
             display: none !important;
         }
+        .pos-option-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto;
+            gap: 6px;
+            align-items: stretch;
+            width: 100%;
+            min-width: 0;
+        }
+        .pos-option-row + .pos-option-row {
+            margin-top: 6px;
+        }
         .pos-option {
             display: block;
             width: 100%;
+            min-width: 0;
             padding: 0.55rem 0.65rem;
             border: 0;
             border-radius: 10px;
             background: white;
             color: #0f172a;
             text-align: left;
+            overflow-wrap: anywhere;
             cursor: pointer;
         }
         .pos-option:hover {
             background: #f1f5f9;
+        }
+        .pos-option.is-current {
+            background: #eef2ff;
+            color: #1e3a8a;
+            font-weight: 650;
+        }
+        .pos-option-control {
+            align-self: stretch;
+            min-width: 46px;
+            padding: 0.45rem 0.6rem;
+            border: 0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 650;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .pos-option-edit {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+        .pos-option-edit:hover {
+            background: #bfdbfe;
+        }
+        .pos-option-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .pos-option-delete:hover {
+            background: #fecaca;
         }
         .pos-actions {
             display: flex;
@@ -987,6 +1031,16 @@
             .pos-primary-row {
                 min-width: 0;
                 max-width: 100%;
+            }
+
+            .pos-option-row {
+                grid-template-columns: minmax(0, 1fr) auto auto;
+                max-width: 100%;
+            }
+            .pos-option-control {
+                min-width: 42px;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
             }
             .word-table th,
             .word-table td {
@@ -2397,10 +2451,16 @@
                 const input = isAdd ? partOfSpeechInput : editPartOfSpeechInput;
                 const optionsEl = isAdd ? partOfSpeechOptions : editPartOfSpeechOptions;
                 const primary = normalizePartOfSpeechValue(input.value);
-                const history = partOfSpeechHistory.filter(value => partOfSpeechKey(value) !== partOfSpeechKey(primary));
+                const history = partOfSpeechHistory;
 
                 optionsEl.innerHTML = history.length
-                    ? history.map(value => `<button class="pos-option" type="button" data-value="${escapeAttribute(value)}">${escapeHtml(value)}</button>`).join('')
+                    ? history.map(value => `
+                        <div class="pos-option-row">
+                            <button class="pos-option${partOfSpeechKey(value) === partOfSpeechKey(primary) ? ' is-current' : ''}" type="button" data-value="${escapeAttribute(value)}" title="选择 ${escapeAttribute(value)}">${escapeHtml(value)}</button>
+                            <button class="pos-option-control pos-option-edit" type="button" data-value="${escapeAttribute(value)}" aria-label="编辑词性 ${escapeAttribute(value)}">编辑</button>
+                            <button class="pos-option-control pos-option-delete" type="button" data-value="${escapeAttribute(value)}" aria-label="删除词性 ${escapeAttribute(value)}">删除</button>
+                        </div>
+                    `).join('')
                     : '<div class="pos-empty">暂无其它词性</div>';
             }
 
@@ -2515,6 +2575,13 @@
                 renderPartOfSpeechCombo('add');
                 renderPartOfSpeechCombo('edit');
                 showToast('已删除词性历史', 'success');
+            }
+
+            function editPartOfSpeechHistoryFromDropdown(value) {
+                const oldValue = normalizePartOfSpeechValue(value);
+                const nextValue = prompt('编辑词性：', oldValue);
+                if (nextValue === null) return;
+                renamePartOfSpeechHistory(oldValue, nextValue);
             }
 
             // ---------- 排序与渲染 ----------
@@ -2837,14 +2904,24 @@
                 setPartOfSpeechPanelOpen('add', false);
                 setPartOfSpeechPanelOpen('edit', willOpen);
             });
-            partOfSpeechOptions.addEventListener('click', event => {
+            function handlePartOfSpeechOptionClick(event, which) {
+                const editButton = event.target.closest('.pos-option-edit[data-value]');
+                if (editButton) {
+                    event.stopPropagation();
+                    editPartOfSpeechHistoryFromDropdown(editButton.dataset.value);
+                    return;
+                }
+                const deleteButton = event.target.closest('.pos-option-delete[data-value]');
+                if (deleteButton) {
+                    event.stopPropagation();
+                    deletePartOfSpeechHistory(deleteButton.dataset.value);
+                    return;
+                }
                 const option = event.target.closest('.pos-option[data-value]');
-                if (option) choosePartOfSpeech('add', option.dataset.value);
-            });
-            editPartOfSpeechOptions.addEventListener('click', event => {
-                const option = event.target.closest('.pos-option[data-value]');
-                if (option) choosePartOfSpeech('edit', option.dataset.value);
-            });
+                if (option) choosePartOfSpeech(which, option.dataset.value);
+            }
+            partOfSpeechOptions.addEventListener('click', event => handlePartOfSpeechOptionClick(event, 'add'));
+            editPartOfSpeechOptions.addEventListener('click', event => handlePartOfSpeechOptionClick(event, 'edit'));
             partOfSpeechInput.addEventListener('click', event => {
                 event.stopPropagation();
                 setPartOfSpeechPanelOpen('edit', false);
