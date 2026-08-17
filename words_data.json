@@ -134,6 +134,12 @@
   {
     "word": "absorb",
     "partOfSpeech": "verb",
+    "definition": "to incorporate a smaller group or entity into a larger one",
+    "example": "Large multinational corporations often absorb smaller competitors to gain access to new markets and proprietary technology."
+  },
+  {
+    "word": "absorb",
+    "partOfSpeech": "verb",
     "definition": "to occupy the complete attention or interest of someone",
     "example": "The immersive virtual reality simulation completely absorbed the attention of every participant in the training session."
   },
