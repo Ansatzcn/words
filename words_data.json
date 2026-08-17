@@ -134,6 +134,12 @@
   {
     "word": "absorb",
     "partOfSpeech": "verb",
+    "definition": "to occupy the complete attention or interest of someone",
+    "example": "The immersive virtual reality simulation completely absorbed the attention of every participant in the training session."
+  },
+  {
+    "word": "absorb",
+    "partOfSpeech": "verb",
     "definition": "to take in and fully understand information or ideas",
     "example": "Interactive teaching methods help students absorb complex scientific concepts more effectively than passive lectures."
   },
