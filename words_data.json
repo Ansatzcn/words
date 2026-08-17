@@ -134,6 +134,12 @@
   {
     "word": "absorb",
     "partOfSpeech": "verb",
+    "definition": "to take in and fully understand information or ideas",
+    "example": "Interactive teaching methods help students absorb complex scientific concepts more effectively than passive lectures."
+  },
+  {
+    "word": "absorb",
+    "partOfSpeech": "verb",
     "definition": "to take in or soak up a liquid, gas, heat, or other substance",
     "example": "Dense urban surfaces absorb and retain more heat than surrounding rural areas, contributing to the heat island effect."
   },
