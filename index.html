@@ -359,80 +359,22 @@
         .pos-option-delete:hover {
             background: #fecaca;
         }
-        .pos-actions {
-            display: flex;
-            gap: 7px;
-            margin-top: 0.45rem;
-            padding-top: 0.55rem;
-            border-top: 1px solid #e2e8f0;
-        }
-        .pos-action {
-            flex: 1;
+        .pos-new-hint {
+            margin-bottom: 0.5rem;
             padding: 0.48rem 0.6rem;
-            border: 0;
             border-radius: 10px;
-            background: #f1f5f9;
-            color: #334155;
+            background: #eff6ff;
+            color: #2563eb;
             font-size: 0.82rem;
-            font-weight: 650;
-            cursor: pointer;
-        }
-        .pos-action:hover {
-            background: #e2e8f0;
+            font-weight: 600;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
         }
         .pos-empty {
             padding: 0.6rem;
             color: #94a3b8;
             text-align: center;
             font-size: 0.82rem;
-        }
-        .pos-history-list {
-            display: flex;
-            flex-direction: column;
-            max-height: min(50vh, 420px);
-            overflow-y: auto;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-        }
-        .pos-history-row {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto auto;
-            gap: 8px;
-            align-items: center;
-            padding: 0.65rem 0.75rem;
-            background: white;
-        }
-        .pos-history-row + .pos-history-row {
-            border-top: 1px solid #e2e8f0;
-        }
-        .pos-history-row input {
-            width: 100%;
-            min-height: 38px;
-            padding: 0.5rem 0.7rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-family: inherit;
-        }
-        .pos-history-btn {
-            padding: 0.4rem 0.68rem;
-            border: 0;
-            border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 650;
-            cursor: pointer;
-        }
-        .pos-history-save {
-            background: #dbeafe;
-            color: #1e3a8a;
-        }
-        .pos-history-delete {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-        .pos-history-empty {
-            padding: 1.2rem;
-            text-align: center;
-            color: #94a3b8;
         }
 
         .btn-primary {
@@ -1092,12 +1034,6 @@
             .config-box .token-profile-btn.danger {
                 grid-column: 1 / -1;
             }
-            .pos-history-row {
-                grid-template-columns: minmax(0, 1fr) auto;
-            }
-            .pos-history-delete {
-                grid-column: 2;
-            }
             .back-to-top {
                 right: 8px;
                 top: 70%;
@@ -1149,10 +1085,6 @@
                         </div>
                         <div class="pos-panel hidden" id="partOfSpeechPanel">
                             <div id="partOfSpeechOptions"></div>
-                            <div class="pos-actions">
-                                <button class="pos-action" id="partOfSpeechAddNew" type="button">＋ 新增词性…</button>
-                                <button class="pos-action" id="partOfSpeechManage" type="button">管理词性历史…</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1210,10 +1142,6 @@
                     </div>
                     <div class="pos-panel hidden" id="editPartOfSpeechPanel">
                         <div id="editPartOfSpeechOptions"></div>
-                        <div class="pos-actions">
-                            <button class="pos-action" id="editPartOfSpeechAddNew" type="button">＋ 新增词性…</button>
-                            <button class="pos-action" id="editPartOfSpeechManage" type="button">管理词性历史…</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1229,34 +1157,6 @@
                 <button class="btn-modal delete" id="editDeleteBtn" type="button">删除</button>
                 <button class="btn-modal cancel" id="editCancelBtn" type="button">取消</button>
                 <button class="btn-modal save" id="editSaveBtn" type="button">保存</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 新增词性弹窗 -->
-    <div class="modal-overlay hidden" id="partOfSpeechNewModal">
-        <div class="modal-box">
-            <h3>新增词性</h3>
-            <div class="modal-sub">新增条目会保存到当前网页的词性下拉历史中。</div>
-            <div class="form-group">
-                <label for="partOfSpeechNewInput">词性</label>
-                <input type="text" id="partOfSpeechNewInput" autocomplete="off" placeholder="请输入词性">
-            </div>
-            <div class="modal-actions">
-                <button class="btn-modal cancel" id="partOfSpeechNewCancel" type="button">取消</button>
-                <button class="btn-modal save" id="partOfSpeechNewSave" type="button">添加</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 管理词性历史弹窗 -->
-    <div class="modal-overlay hidden" id="partOfSpeechManagerModal">
-        <div class="modal-box">
-            <h3>管理词性历史</h3>
-            <div class="modal-sub">可重命名或从下拉历史中删除词性；删除历史不会修改已有词条。</div>
-            <div class="pos-history-list" id="partOfSpeechHistoryList"></div>
-            <div class="modal-actions">
-                <button class="btn-modal save" id="partOfSpeechManagerClose" type="button">完成</button>
             </div>
         </div>
     </div>
@@ -1384,7 +1284,6 @@
             let hasStoredLocalData = false;
             let partOfSpeechHistory = [];
             let partOfSpeechHistoryStored = false;
-            let partOfSpeechNewTarget = 'add';
 
             let tokenProfiles = [];
             let selectedTokenProfileId = '';
@@ -1414,8 +1313,6 @@
             const partOfSpeechTrigger = document.getElementById('partOfSpeechTrigger');
             const partOfSpeechPanel = document.getElementById('partOfSpeechPanel');
             const partOfSpeechOptions = document.getElementById('partOfSpeechOptions');
-            const partOfSpeechAddNew = document.getElementById('partOfSpeechAddNew');
-            const partOfSpeechManage = document.getElementById('partOfSpeechManage');
             const definitionInput = document.getElementById('definitionInput');
             const exampleInput = document.getElementById('exampleInput');
             const addBtn = document.getElementById('addBtn');
@@ -1440,21 +1337,12 @@
             const editPartOfSpeechTrigger = document.getElementById('editPartOfSpeechTrigger');
             const editPartOfSpeechPanel = document.getElementById('editPartOfSpeechPanel');
             const editPartOfSpeechOptions = document.getElementById('editPartOfSpeechOptions');
-            const editPartOfSpeechAddNew = document.getElementById('editPartOfSpeechAddNew');
-            const editPartOfSpeechManage = document.getElementById('editPartOfSpeechManage');
             const editDefinition = document.getElementById('editDefinition');
             const editExample = document.getElementById('editExample');
             const editDeleteBtn = document.getElementById('editDeleteBtn');
             const editCancelBtn = document.getElementById('editCancelBtn');
             const editSaveBtn = document.getElementById('editSaveBtn');
 
-            const partOfSpeechNewModal = document.getElementById('partOfSpeechNewModal');
-            const partOfSpeechNewInput = document.getElementById('partOfSpeechNewInput');
-            const partOfSpeechNewCancel = document.getElementById('partOfSpeechNewCancel');
-            const partOfSpeechNewSave = document.getElementById('partOfSpeechNewSave');
-            const partOfSpeechManagerModal = document.getElementById('partOfSpeechManagerModal');
-            const partOfSpeechHistoryList = document.getElementById('partOfSpeechHistoryList');
-            const partOfSpeechManagerClose = document.getElementById('partOfSpeechManagerClose');
 
             const configModal = document.getElementById('configModal');
             const cfgSavedToken = document.getElementById('cfgSavedToken');
@@ -2452,8 +2340,12 @@
                 const optionsEl = isAdd ? partOfSpeechOptions : editPartOfSpeechOptions;
                 const primary = normalizePartOfSpeechValue(input.value);
                 const history = partOfSpeechHistory;
+                const isNewValue = Boolean(primary) && !history.some(value => partOfSpeechKey(value) === partOfSpeechKey(primary));
 
-                optionsEl.innerHTML = history.length
+                const newHint = isNewValue
+                    ? `<div class="pos-new-hint">新词性：${escapeHtml(primary)}（提交后自动保存到历史）</div>`
+                    : '';
+                const optionRows = history.length
                     ? history.map(value => `
                         <div class="pos-option-row">
                             <button class="pos-option${partOfSpeechKey(value) === partOfSpeechKey(primary) ? ' is-current' : ''}" type="button" data-value="${escapeAttribute(value)}" title="选择 ${escapeAttribute(value)}">${escapeHtml(value)}</button>
@@ -2461,7 +2353,9 @@
                             <button class="pos-option-control pos-option-delete" type="button" data-value="${escapeAttribute(value)}" aria-label="删除词性 ${escapeAttribute(value)}">删除</button>
                         </div>
                     `).join('')
-                    : '<div class="pos-empty">暂无其它词性</div>';
+                    : '<div class="pos-empty">暂无已保存词性</div>';
+
+                optionsEl.innerHTML = newHint + optionRows;
             }
 
             function setPartOfSpeechPanelOpen(which, open) {
@@ -2482,47 +2376,6 @@
                 setPartOfSpeechPanelOpen(which, false);
                 renderPartOfSpeechCombo(which);
                 input.focus();
-            }
-
-            function openNewPartOfSpeech(which) {
-                partOfSpeechNewTarget = which;
-                partOfSpeechNewInput.value = '';
-                closePartOfSpeechPanels();
-                partOfSpeechNewModal.classList.remove('hidden');
-                setTimeout(() => partOfSpeechNewInput.focus(), 30);
-            }
-
-            function saveNewPartOfSpeech() {
-                const value = normalizePartOfSpeechValue(partOfSpeechNewInput.value);
-                if (!value) {
-                    showToast('请输入词性', 'error');
-                    partOfSpeechNewInput.focus();
-                    return;
-                }
-                addPartOfSpeechHistory(value);
-                choosePartOfSpeech(partOfSpeechNewTarget, value);
-                partOfSpeechNewModal.classList.add('hidden');
-                renderPartOfSpeechCombo('add');
-                renderPartOfSpeechCombo('edit');
-                showToast('已添加词性', 'success');
-            }
-
-            function renderPartOfSpeechManager() {
-                partOfSpeechHistoryList.innerHTML = partOfSpeechHistory.length
-                    ? partOfSpeechHistory.map(value => `
-                        <div class="pos-history-row" data-old="${escapeAttribute(value)}">
-                            <input type="text" value="${escapeAttribute(value)}">
-                            <button class="pos-history-btn pos-history-save" type="button">保存</button>
-                            <button class="pos-history-btn pos-history-delete" type="button">删除</button>
-                        </div>
-                    `).join('')
-                    : '<div class="pos-history-empty">暂无已保存的词性</div>';
-            }
-
-            function openPartOfSpeechManager() {
-                closePartOfSpeechPanels();
-                renderPartOfSpeechManager();
-                partOfSpeechManagerModal.classList.remove('hidden');
             }
 
             function renamePartOfSpeechHistory(oldValue, newValue) {
@@ -2559,7 +2412,6 @@
                     renderPartOfSpeechCombo('add');
                     renderPartOfSpeechCombo('edit');
                 }
-                renderPartOfSpeechManager();
                 showToast('已更新词性', 'success');
                 return true;
             }
@@ -2571,7 +2423,6 @@
 已有词条中的词性不会改变。`)) return;
                 partOfSpeechHistory = partOfSpeechHistory.filter(item => partOfSpeechKey(item) !== partOfSpeechKey(normalized));
                 savePartOfSpeechHistory();
-                renderPartOfSpeechManager();
                 renderPartOfSpeechCombo('add');
                 renderPartOfSpeechCombo('edit');
                 showToast('已删除词性历史', 'success');
@@ -2932,28 +2783,13 @@
                 setPartOfSpeechPanelOpen('add', false);
                 setPartOfSpeechPanelOpen('edit', true);
             });
-            partOfSpeechInput.addEventListener('input', () => renderPartOfSpeechCombo('add'));
-            editPartOfSpeechInput.addEventListener('input', () => renderPartOfSpeechCombo('edit'));
-            partOfSpeechAddNew.addEventListener('click', () => openNewPartOfSpeech('add'));
-            editPartOfSpeechAddNew.addEventListener('click', () => openNewPartOfSpeech('edit'));
-            partOfSpeechManage.addEventListener('click', openPartOfSpeechManager);
-            editPartOfSpeechManage.addEventListener('click', openPartOfSpeechManager);
-            partOfSpeechNewCancel.addEventListener('click', () => partOfSpeechNewModal.classList.add('hidden'));
-            partOfSpeechNewSave.addEventListener('click', saveNewPartOfSpeech);
-            partOfSpeechNewInput.addEventListener('keydown', event => {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    saveNewPartOfSpeech();
-                }
+            partOfSpeechInput.addEventListener('input', () => {
+                renderPartOfSpeechCombo('add');
+                setPartOfSpeechPanelOpen('add', true);
             });
-            partOfSpeechManagerClose.addEventListener('click', () => partOfSpeechManagerModal.classList.add('hidden'));
-            partOfSpeechHistoryList.addEventListener('click', event => {
-                const row = event.target.closest('.pos-history-row');
-                if (!row) return;
-                const oldValue = row.dataset.old;
-                const input = row.querySelector('input');
-                if (event.target.closest('.pos-history-save')) renamePartOfSpeechHistory(oldValue, input.value);
-                if (event.target.closest('.pos-history-delete')) deletePartOfSpeechHistory(oldValue);
+            editPartOfSpeechInput.addEventListener('input', () => {
+                renderPartOfSpeechCombo('edit');
+                setPartOfSpeechPanelOpen('edit', true);
             });
             document.addEventListener('click', event => {
                 const addInsidePanel = partOfSpeechPanel.contains(event.target);
@@ -3066,8 +2902,6 @@
             document.addEventListener('keydown', event => {
                 if (event.key !== 'Escape') return;
                 closePartOfSpeechPanels();
-                if (!partOfSpeechNewModal.classList.contains('hidden')) partOfSpeechNewModal.classList.add('hidden');
-                if (!partOfSpeechManagerModal.classList.contains('hidden')) partOfSpeechManagerModal.classList.add('hidden');
                 if (!editModal.classList.contains('hidden')) closeEditModal();
                 if (!configModal.classList.contains('hidden')) closeConfigModal();
             });
