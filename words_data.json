@@ -80,6 +80,12 @@
   {
     "word": "abate",
     "partOfSpeech": "verb",
+    "definition": "in law, to make something void or to suspend legal proceedings",
+    "example": "The court decided to abate the lawsuit pending the outcome of the related criminal investigation."
+  },
+  {
+    "word": "abate",
+    "partOfSpeech": "verb",
     "definition": "to become less intense, severe, or widespread",
     "example": "The public outcry over the controversial policy did not abate until a formal apology was issued."
   },
