@@ -1047,7 +1047,6 @@
     <div class="container">
         <h1>
             Words
-            <small>A-Z</small>
             <span class="cloud-status" id="cloudStatus">
                 <span class="dot" id="statusDot"></span>
                 <span id="statusText">未配置</span>
@@ -1102,7 +1101,7 @@
 
         <div class="word-list-header">
             <h2>List</h2>
-            <span class="badge" id="countDisplay">0</span>
+            <span class="badge" id="countDisplay">0/0</span>
         </div>
         <div class="table-wrapper">
             <table class="word-table" id="wordTable">
@@ -2349,8 +2348,8 @@
                     ? history.map(value => `
                         <div class="pos-option-row">
                             <button class="pos-option${partOfSpeechKey(value) === partOfSpeechKey(primary) ? ' is-current' : ''}" type="button" data-value="${escapeAttribute(value)}" title="选择 ${escapeAttribute(value)}">${escapeHtml(value)}</button>
-                            <button class="pos-option-control pos-option-edit" type="button" data-value="${escapeAttribute(value)}" aria-label="编辑词性 ${escapeAttribute(value)}">编辑</button>
-                            <button class="pos-option-control pos-option-delete" type="button" data-value="${escapeAttribute(value)}" aria-label="删除词性 ${escapeAttribute(value)}">删除</button>
+                            <button class="pos-option-control pos-option-edit" type="button" data-value="${escapeAttribute(value)}" aria-label="编辑词性 ${escapeAttribute(value)}">改</button>
+                            <button class="pos-option-control pos-option-delete" type="button" data-value="${escapeAttribute(value)}" aria-label="删除词性 ${escapeAttribute(value)}">删</button>
                         </div>
                     `).join('')
                     : '<div class="pos-empty">暂无已保存词性</div>';
@@ -2463,7 +2462,10 @@
                 initializePartOfSpeechHistoryFromWordsIfNeeded();
                 renderPartOfSpeechCombo('add');
                 renderPartOfSpeechCombo('edit');
-                countDisplay.textContent = words.length;
+                const uniqueWordCount = new Set(words.map(item =>
+                    (item.word || '').normalize('NFKC').trim().toLocaleLowerCase('en')
+                )).size;
+                countDisplay.textContent = `${uniqueWordCount}/${words.length}`;
 
                 if (words.length === 0) {
                     tableBody.innerHTML = '<tr class="empty-row"><td>单词列表为空，添加一个新词吧！</td></tr>';
