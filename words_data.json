@@ -2342,6 +2342,12 @@
   {
     "word": "pattern",
     "partOfSpeech": "noun",
+    "definition": "a model, example, or standard used as a guide for producing things or making decisions",
+    "example": "The circular economy offers a sustainable pattern for industrial production that minimises waste and maximises resource efficiency."
+  },
+  {
+    "word": "pattern",
+    "partOfSpeech": "noun",
     "definition": "a regular or repeated way in which something happens or is done",
     "example": "Climate scientists have detected alarming changes in long-term weather patterns across the polar regions."
   },
