@@ -2264,6 +2264,12 @@
   {
     "word": "navigate",
     "partOfSpeech": "verb",
+    "definition": "to find a way through a difficult or complex situation",
+    "example": ""
+  },
+  {
+    "word": "navigate",
+    "partOfSpeech": "verb",
     "definition": "to plan and direct the route of a ship, aircraft, or other vehicle",
     "example": "The captain navigated the ship through the narrow channel."
   },
