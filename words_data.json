@@ -2336,6 +2336,12 @@
   {
     "word": "pattern",
     "partOfSpeech": "noun",
+    "definition": "a regular or repeated way in which something happens or is done",
+    "example": "Climate scientists have detected alarming changes in long-term weather patterns across the polar regions."
+  },
+  {
+    "word": "pattern",
+    "partOfSpeech": "noun",
     "definition": "a repeated decorative design or regular arrangement of shapes, colours, or lines",
     "example": "Traditional tile patterns in Moroccan architecture reflect centuries of cultural exchange between Africa and Europe."
   },
