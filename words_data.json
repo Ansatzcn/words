@@ -2094,6 +2094,12 @@
     "imitation": "You need to exert more force to open this door."
   },
   {
+    "word": "exert",
+    "partOfSpeech": "verb",
+    "original": "Students who consistently exert themselves in demanding academic environments are more likely to develop resilience, provided that the pressure they experience does not become excessive.",
+    "imitation": "I really exerted myself to finish the project on time."
+  },
+  {
     "word": "existence",
     "partOfSpeech": "",
     "original": "",
