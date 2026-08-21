@@ -240,8 +240,7 @@
             appearance: auto;
             cursor: pointer;
         }
-
-        /* 词性组合下拉 */
+        /* 词性组合下拉：交互结构与 Publish 的书号字段一致 */
         .pos-combo {
             position: relative;
             width: 100%;
@@ -304,7 +303,7 @@
         }
         .pos-option-row {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+            grid-template-columns: minmax(0, 1fr) auto auto;
             gap: 6px;
             align-items: stretch;
             width: 100%;
@@ -347,43 +346,39 @@
             cursor: pointer;
         }
         .pos-option-move {
-            min-width: 34px;
-            padding-left: 0.45rem;
-            padding-right: 0.45rem;
+            min-width: 40px;
             background: #f1f5f9;
             color: #475569;
         }
         .pos-option-move:hover:not(:disabled) {
             background: #e2e8f0;
         }
-        .pos-option-control:disabled {
+        .pos-option-move:disabled {
             opacity: 0.32;
             cursor: not-allowed;
         }
-        .pos-option-edit {
-            background: #dbeafe;
-            color: #1e3a8a;
-        }
-        .pos-option-edit:hover {
-            background: #bfdbfe;
-        }
-        .pos-option-delete {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-        .pos-option-delete:hover {
-            background: #fecaca;
-        }
-        .pos-new-hint {
+        .pos-new-option-wrap {
             margin-bottom: 0.5rem;
-            padding: 0.48rem 0.6rem;
-            border-radius: 10px;
+        }
+        .pos-new-option {
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            min-height: 34px;
+            padding: 0.42rem 0.9rem;
+            border: 1px solid #bfdbfe;
+            border-radius: 999px;
             background: #eff6ff;
             color: #2563eb;
+            font-family: inherit;
             font-size: 0.82rem;
             font-weight: 600;
-            line-height: 1.45;
+            line-height: 1.35;
             overflow-wrap: anywhere;
+            cursor: pointer;
+        }
+        .pos-new-option:hover {
+            background: #dbeafe;
         }
         .pos-empty {
             padding: 0.6rem;
@@ -505,6 +500,7 @@
             white-space: normal;
             overflow-wrap: anywhere;
         }
+
         .word-table .word-imitation {
             font-style: italic;
         }
@@ -652,6 +648,7 @@
         #editModal .modal-actions .btn-modal.delete {
             margin-right: auto;
         }
+
         .modal-actions .btn-modal.delete {
             background: #fee2e2;
             color: #991b1b;
@@ -673,6 +670,7 @@
         .modal-actions .btn-modal.save:hover {
             background: #0f172a;
         }
+
 
         @keyframes fadeIn {
             from {
@@ -925,6 +923,8 @@
             background: #e2e8f0;
         }
 
+
+
         /* 回到顶部按钮 */
         .back-to-top {
             position: fixed;
@@ -984,8 +984,9 @@
                 min-width: 0;
                 max-width: 100%;
             }
+
             .pos-option-row {
-                grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+                grid-template-columns: minmax(0, 1fr) auto auto;
                 max-width: 100%;
             }
             .pos-option-control {
@@ -1078,7 +1079,9 @@
         </div>
 
         <div class="add-section">
-            <h2>添加</h2>
+            <h2>
+                添加
+            </h2>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="wordInput">单词</label>
@@ -1126,6 +1129,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 
     <button type="button" class="back-to-top" id="backToTopBtn" aria-label="回到顶部" title="回到顶部"></button>
@@ -1232,11 +1236,14 @@
         </div>
     </div>
 
+    <!-- Toast 消息 -->
     <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
 
     <script>
         (function() {
             // ---------- 页面实例隔离与本地存储 ----------
+            // localStorage/sessionStorage 按域名共享，不按 GitHub 仓库路径隔离。
+            // 使用当前网页的 origin + pathname 生成稳定命名空间，使不同仓库页面互不读取配置、词条、同步基线和备份。
             function getPageInstanceIdentity() {
                 let pathname = window.location.pathname || '/';
                 pathname = pathname
@@ -1252,6 +1259,7 @@
             }
 
             function hashIdentity(value) {
+                // FNV-1a 32 位哈希，仅用于生成存储键名，不用于安全用途。
                 let hash = 0x811c9dc5;
                 for (let i = 0; i < value.length; i++) {
                     hash ^= value.charCodeAt(i);
@@ -1263,7 +1271,7 @@
             const PAGE_INSTANCE_ID = hashIdentity(getPageInstanceIdentity());
             const STORAGE_NAMESPACE = `english_wordbook:${PAGE_INSTANCE_ID}`;
             const CONFIG_KEY = `${STORAGE_NAMESPACE}:config`;
-            const TOKEN_LOCAL_KEY = `${STORAGE_NAMESPACE}:token_local`;
+            const TOKEN_LOCAL_KEY = `${STORAGE_NAMESPACE}:token_local`; // 旧版单 Token 键，仅用于迁移
             const TOKEN_PROFILES_KEY = `${STORAGE_NAMESPACE}:token_profiles_v1`;
             const TOKEN_SESSION_KEY = `${STORAGE_NAMESPACE}:token_session`;
             const STORAGE_KEY = `${STORAGE_NAMESPACE}:words`;
@@ -1343,6 +1351,7 @@
             const editDeleteBtn = document.getElementById('editDeleteBtn');
             const editCancelBtn = document.getElementById('editCancelBtn');
             const editSaveBtn = document.getElementById('editSaveBtn');
+
 
             const configModal = document.getElementById('configModal');
             const cfgSavedToken = document.getElementById('cfgSavedToken');
@@ -1437,37 +1446,25 @@
                 for (const raw of values || []) {
                     const value = normalizePartOfSpeechValue(raw);
                     const normalizedKey = partOfSpeechKey(value);
-                    if (value && !seen.has(normalizedKey)) {
-                        seen.set(normalizedKey, value);
-                    }
+                    if (value && !seen.has(normalizedKey)) seen.set(normalizedKey, value);
                 }
                 return [...seen.values()];
             }
 
             function sortPartOfSpeech(values) {
-                return uniquePartOfSpeech(values).sort(
-                    (a, b) => partOfSpeechCollator.compare(a, b)
-                );
-            }
-
-            function normalizePartOfSpeechHistory(values) {
-                return uniquePartOfSpeech(values);
+                return uniquePartOfSpeech(values).sort((a, b) => partOfSpeechCollator.compare(a, b));
             }
 
             function loadPartOfSpeechHistory() {
                 const stored = safeLocalGet(PART_OF_SPEECH_HISTORY_KEY);
                 partOfSpeechHistoryStored = stored !== null;
-
                 if (!stored) {
                     partOfSpeechHistory = [];
                     return;
                 }
-
                 try {
                     const parsed = JSON.parse(stored);
-                    partOfSpeechHistory = normalizePartOfSpeechHistory(
-                        Array.isArray(parsed) ? parsed : []
-                    );
+                    partOfSpeechHistory = uniquePartOfSpeech(Array.isArray(parsed) ? parsed : []);
                 } catch (error) {
                     console.error('词性历史解析失败:', error);
                     partOfSpeechHistory = [];
@@ -1475,23 +1472,15 @@
             }
 
             function savePartOfSpeechHistory() {
-                partOfSpeechHistory = normalizePartOfSpeechHistory(partOfSpeechHistory);
-                safeLocalSet(
-                    PART_OF_SPEECH_HISTORY_KEY,
-                    JSON.stringify(partOfSpeechHistory)
-                );
+                partOfSpeechHistory = uniquePartOfSpeech(partOfSpeechHistory);
+                safeLocalSet(PART_OF_SPEECH_HISTORY_KEY, JSON.stringify(partOfSpeechHistory));
                 partOfSpeechHistoryStored = true;
             }
 
             function initializePartOfSpeechHistoryFromWordsIfNeeded() {
                 if (partOfSpeechHistoryStored) return;
-
-                const derived = sortPartOfSpeech(
-                    words.map(item => item.partOfSpeech).filter(Boolean)
-                );
-
+                const derived = sortPartOfSpeech(words.map(item => item.partOfSpeech).filter(Boolean));
                 if (!derived.length) return;
-
                 partOfSpeechHistory = derived;
                 savePartOfSpeechHistory();
             }
@@ -1499,18 +1488,10 @@
             function addPartOfSpeechHistory(value) {
                 const normalized = normalizePartOfSpeechValue(value);
                 if (!normalized) return '';
-
-                if (
-                    !partOfSpeechHistory.some(
-                        item =>
-                            partOfSpeechKey(item) ===
-                            partOfSpeechKey(normalized)
-                    )
-                ) {
+                if (!partOfSpeechHistory.some(item => partOfSpeechKey(item) === partOfSpeechKey(normalized))) {
                     partOfSpeechHistory.push(normalized);
                     savePartOfSpeechHistory();
                 }
-
                 return normalized;
             }
 
@@ -1528,9 +1509,7 @@
                     original: typeof item.original === 'string'
                         ? item.original.trim()
                         : (typeof item.example === 'string' ? item.example.trim() : ''),
-                    imitation: typeof item.imitation === 'string'
-                        ? item.imitation.trim()
-                        : ''
+                    imitation: typeof item.imitation === 'string' ? item.imitation.trim() : ''
                 };
             }
 
@@ -1553,25 +1532,13 @@
                         imitation: item.imitation
                     }))
                     .sort((a, b) => {
-                        const fields = [
-                            'word',
-                            'partOfSpeech',
-                            'original',
-                            'imitation'
-                        ];
-
+                        const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
                         for (const field of fields) {
-                            const compared = fingerprintCollator.compare(
-                                a[field],
-                                b[field]
-                            );
-
+                            const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
                         }
-
                         return 0;
                     });
-
                 return JSON.stringify(canonical);
             }
 
@@ -1580,19 +1547,14 @@
             }
 
             function getSnapshotByteLength(snapshot) {
-                return new TextEncoder().encode(
-                    serializeSnapshot(snapshot)
-                ).length;
+                return new TextEncoder().encode(serializeSnapshot(snapshot)).length;
             }
 
             function assertSnapshotSyncSize(snapshot) {
                 const byteLength = getSnapshotByteLength(snapshot);
-
                 if (byteLength > MAX_SYNC_BYTES) {
                     const sizeKb = Math.ceil(byteLength / 1024);
-                    throw new Error(
-                        `数据文件约 ${sizeKb} KB，超过安全同步上限 750 KB；请导出并拆分数据后再同步`
-                    );
+                    throw new Error(`数据文件约 ${sizeKb} KB，超过安全同步上限 750 KB；请导出并拆分数据后再同步`);
                 }
             }
 
@@ -1600,19 +1562,10 @@
                 const bytes = new TextEncoder().encode(text);
                 let binary = '';
                 const chunkSize = 0x8000;
-
-                for (
-                    let offset = 0;
-                    offset < bytes.length;
-                    offset += chunkSize
-                ) {
-                    const chunk = bytes.subarray(
-                        offset,
-                        offset + chunkSize
-                    );
+                for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+                    const chunk = bytes.subarray(offset, offset + chunkSize);
                     binary += String.fromCharCode(...chunk);
                 }
-
                 return btoa(binary);
             }
 
@@ -1620,14 +1573,10 @@
                 const clean = String(base64 || '').replace(/\s/g, '');
                 const binary = atob(clean);
                 const bytes = new Uint8Array(binary.length);
-
                 for (let i = 0; i < binary.length; i++) {
                     bytes[i] = binary.charCodeAt(i);
                 }
-
-                return new TextDecoder('utf-8', {
-                    fatal: true
-                }).decode(bytes);
+                return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
             }
 
             function escapeHtml(text) {
@@ -1642,10 +1591,7 @@
             }
 
             function getSyncTarget() {
-                if (!config.owner || !config.repo || !config.file) {
-                    return '';
-                }
-
+                if (!config.owner || !config.repo || !config.file) return '';
                 return `${config.owner}/${config.repo}/${config.file}`;
             }
 
@@ -1660,90 +1606,44 @@
             function formatError(error) {
                 if (!error) return '未知错误';
                 if (error.status === 401) return 'Token 无效或已过期';
-                if (error.status === 403) {
-                    return 'Token 权限不足、仓库访问被拒绝或触发了 API 限制';
-                }
-                if (error.status === 404) {
-                    return '仓库、分支或文件路径不存在，或 Token 无权访问';
-                }
-                if (error.status === 409) {
-                    return '云端文件已被其他设备修改';
-                }
-                if (error.status === 422) {
-                    return `请求校验失败：${error.message}`;
-                }
-
+                if (error.status === 403) return 'Token 权限不足、仓库访问被拒绝或触发了 API 限制';
+                if (error.status === 404) return '仓库、分支或文件路径不存在，或 Token 无权访问';
+                if (error.status === 409) return '云端文件已被其他设备修改';
+                if (error.status === 422) return `请求校验失败：${error.message}`;
                 return error.message || String(error);
             }
 
+
             // ---------- 配置管理 ----------
             function createTokenProfileId() {
-                if (
-                    window.crypto &&
-                    typeof window.crypto.randomUUID === 'function'
-                ) {
+                if (window.crypto && typeof window.crypto.randomUUID === 'function') {
                     return window.crypto.randomUUID();
                 }
-
-                return `token_${Date.now()}_${Math.random()
-                    .toString(36)
-                    .slice(2, 10)}`;
+                return `token_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
             }
 
             function normalizeTokenProfile(item) {
                 if (!item || typeof item !== 'object') return null;
-
-                const token =
-                    typeof item.token === 'string'
-                        ? item.token.trim()
-                        : '';
-
+                const token = typeof item.token === 'string' ? item.token.trim() : '';
                 if (!token) return null;
-
                 return {
-                    id:
-                        typeof item.id === 'string' && item.id
-                            ? item.id
-                            : createTokenProfileId(),
-                    name:
-                        typeof item.name === 'string'
-                            ? item.name.trim()
-                            : '',
+                    id: typeof item.id === 'string' && item.id ? item.id : createTokenProfileId(),
+                    name: typeof item.name === 'string' ? item.name.trim() : '',
                     token,
-                    owner:
-                        typeof item.owner === 'string'
-                            ? item.owner.trim()
-                            : '',
-                    repo:
-                        typeof item.repo === 'string'
-                            ? item.repo.trim()
-                            : '',
-                    file:
-                        typeof item.file === 'string' &&
-                        item.file.trim()
-                            ? item.file.trim()
-                            : 'wordbook_data.json',
-                    updatedAt:
-                        typeof item.updatedAt === 'string'
-                            ? item.updatedAt
-                            : new Date().toISOString()
+                    owner: typeof item.owner === 'string' ? item.owner.trim() : '',
+                    repo: typeof item.repo === 'string' ? item.repo.trim() : '',
+                    file: typeof item.file === 'string' && item.file.trim() ? item.file.trim() : 'wordbook_data.json',
+                    updatedAt: typeof item.updatedAt === 'string' ? item.updatedAt : new Date().toISOString()
                 };
             }
 
             function loadTokenProfiles() {
                 const stored = safeLocalGet(TOKEN_PROFILES_KEY);
                 if (!stored) return [];
-
                 try {
                     const parsed = JSON.parse(stored);
-
-                    if (!Array.isArray(parsed)) {
-                        return [];
-                    }
-
-                    return parsed
-                        .map(normalizeTokenProfile)
-                        .filter(Boolean);
+                    if (!Array.isArray(parsed)) return [];
+                    return parsed.map(normalizeTokenProfile).filter(Boolean);
                 } catch (error) {
                     console.error('Token 列表解析失败:', error);
                     return [];
@@ -1751,77 +1651,37 @@
             }
 
             function saveTokenProfiles() {
-                safeLocalSet(
-                    TOKEN_PROFILES_KEY,
-                    JSON.stringify(tokenProfiles)
-                );
+                safeLocalSet(TOKEN_PROFILES_KEY, JSON.stringify(tokenProfiles));
             }
 
             function getTokenProfileLabel(profile, index) {
-                const suffix =
-                    profile.token.length > 4
-                        ? profile.token.slice(-4)
-                        : profile.token;
-
-                const target = [
-                    profile.owner,
-                    profile.repo
-                ].filter(Boolean).join('/');
-
-                return (
-                    profile.name ||
-                    target ||
-                    `Token ${index + 1} ····${suffix}`
-                );
+                const suffix = profile.token.length > 4 ? profile.token.slice(-4) : profile.token;
+                const target = [profile.owner, profile.repo].filter(Boolean).join('/');
+                return profile.name || target || `Token ${index + 1} ····${suffix}`;
             }
 
-            function renderTokenProfileSelect(
-                preferredId = selectedTokenProfileId
-            ) {
-                const options = [
-                    '<option value="">新增 Token</option>'
-                ];
-
+            function renderTokenProfileSelect(preferredId = selectedTokenProfileId) {
+                const options = ['<option value="">新增 Token</option>'];
                 tokenProfiles.forEach((profile, index) => {
-                    const option =
-                        document.createElement('option');
-
+                    const option = document.createElement('option');
                     option.value = profile.id;
-                    option.textContent =
-                        getTokenProfileLabel(profile, index);
-
+                    option.textContent = getTokenProfileLabel(profile, index);
                     options.push(option.outerHTML);
                 });
-
                 cfgSavedToken.innerHTML = options.join('');
-
-                selectedTokenProfileId =
-                    tokenProfiles.some(
-                        item => item.id === preferredId
-                    )
-                        ? preferredId
-                        : '';
-
+                selectedTokenProfileId = tokenProfiles.some(item => item.id === preferredId) ? preferredId : '';
                 cfgSavedToken.value = selectedTokenProfileId;
-                cfgDeleteTokenBtn.disabled =
-                    !selectedTokenProfileId;
+                cfgDeleteTokenBtn.disabled = !selectedTokenProfileId;
             }
 
             function applyTokenProfile(profileId) {
                 selectedTokenProfileId = profileId || '';
-
-                const profile = tokenProfiles.find(
-                    item =>
-                        item.id ===
-                        selectedTokenProfileId
-                );
-
+                const profile = tokenProfiles.find(item => item.id === selectedTokenProfileId);
                 if (!profile) {
                     cfgSavedToken.value = '';
                     cfgDeleteTokenBtn.disabled = true;
                     return;
                 }
-
                 cfgTokenName.value = profile.name;
                 cfgToken.value = profile.token;
                 cfgOwner.value = profile.owner;
@@ -1841,82 +1701,36 @@
                 cfgRememberToken.checked = true;
                 cfgDeleteTokenBtn.disabled = true;
                 configSaveBtn.disabled = false;
-
-                setTimeout(
-                    () => cfgTokenName.focus(),
-                    0
-                );
+                setTimeout(() => cfgTokenName.focus(), 0);
             }
 
             function deleteSelectedTokenProfile() {
-                const profile = tokenProfiles.find(
-                    item =>
-                        item.id ===
-                        selectedTokenProfileId
-                );
-
+                const profile = tokenProfiles.find(item => item.id === selectedTokenProfileId);
                 if (!profile) return;
+                const label = profile.name || [profile.owner, profile.repo].filter(Boolean).join('/') || '该 Token';
+                if (!confirm(`确定从本设备删除“${label}”吗？`)) return;
 
-                const label =
-                    profile.name ||
-                    [
-                        profile.owner,
-                        profile.repo
-                    ].filter(Boolean).join('/') ||
-                    '该 Token';
-
-                if (
-                    !confirm(
-                        `确定从本设备删除“${label}”吗？`
-                    )
-                ) {
-                    return;
-                }
-
-                tokenProfiles =
-                    tokenProfiles.filter(
-                        item => item.id !== profile.id
-                    );
-
+                tokenProfiles = tokenProfiles.filter(item => item.id !== profile.id);
                 saveTokenProfiles();
-
-                if (
-                    config.activeTokenId ===
-                    profile.id
-                ) {
+                if (config.activeTokenId === profile.id) {
                     config.activeTokenId = '';
                     config.token = '';
                 }
-
                 renderTokenProfileSelect('');
                 beginNewToken();
-
-                showToast(
-                    '已从本设备删除该 Token',
-                    'success'
-                );
+                showToast('已从本设备删除该 Token', 'success');
             }
 
             function upsertCurrentTokenProfile() {
                 const token = cfgToken.value.trim();
                 const owner = cfgOwner.value.trim();
                 const repo = cfgRepo.value.trim();
-                const file =
-                    cfgFile.value.trim() ||
-                    'wordbook_data.json';
-
+                const file = cfgFile.value.trim() || 'wordbook_data.json';
                 const name = cfgTokenName.value.trim();
-
-                let profile = tokenProfiles.find(
-                    item =>
-                        item.id ===
-                        selectedTokenProfileId
-                );
+                let profile = tokenProfiles.find(item => item.id === selectedTokenProfileId);
 
                 if (!profile) {
-                    profile = tokenProfiles.find(
-                        item => item.token === token
-                    );
+                    profile = tokenProfiles.find(item => item.token === token);
                 }
 
                 if (profile) {
@@ -1925,8 +1739,7 @@
                     profile.owner = owner;
                     profile.repo = repo;
                     profile.file = file;
-                    profile.updatedAt =
-                        new Date().toISOString();
+                    profile.updatedAt = new Date().toISOString();
                 } else {
                     profile = {
                         id: createTokenProfileId(),
@@ -1935,234 +1748,112 @@
                         owner,
                         repo,
                         file,
-                        updatedAt:
-                            new Date().toISOString()
+                        updatedAt: new Date().toISOString()
                     };
-
                     tokenProfiles.push(profile);
                 }
 
                 selectedTokenProfileId = profile.id;
                 saveTokenProfiles();
                 renderTokenProfileSelect(profile.id);
-
                 return profile.id;
             }
 
             function loadConfig() {
                 const stored = safeLocalGet(CONFIG_KEY);
                 let parsed = {};
-
                 if (stored) {
                     try {
                         parsed = JSON.parse(stored) || {};
                     } catch (error) {
-                        console.error(
-                            '配置解析失败:',
-                            error
-                        );
+                        console.error('配置解析失败:', error);
                     }
                 }
 
                 tokenProfiles = loadTokenProfiles();
 
-                const legacyToken =
-                    safeLocalGet(TOKEN_LOCAL_KEY) ||
-                    '';
-
-                if (
-                    legacyToken &&
-                    !tokenProfiles.some(
-                        item =>
-                            item.token === legacyToken
-                    )
-                ) {
+                // 将旧版单 Token 自动迁移到多 Token 列表，避免覆盖或丢失。
+                const legacyToken = safeLocalGet(TOKEN_LOCAL_KEY) || '';
+                if (legacyToken && !tokenProfiles.some(item => item.token === legacyToken)) {
                     tokenProfiles.push({
                         id: createTokenProfileId(),
                         name: '已保存 Token',
                         token: legacyToken,
-                        owner:
-                            typeof parsed.owner ===
-                            'string'
-                                ? parsed.owner
-                                : '',
-                        repo:
-                            typeof parsed.repo ===
-                            'string'
-                                ? parsed.repo
-                                : '',
-                        file:
-                            typeof parsed.file ===
-                                'string' &&
-                            parsed.file.trim()
-                                ? parsed.file.trim()
-                                : 'wordbook_data.json',
-                        updatedAt:
-                            new Date().toISOString()
+                        owner: typeof parsed.owner === 'string' ? parsed.owner : '',
+                        repo: typeof parsed.repo === 'string' ? parsed.repo : '',
+                        file: typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json',
+                        updatedAt: new Date().toISOString()
                     });
-
                     saveTokenProfiles();
                     safeLocalRemove(TOKEN_LOCAL_KEY);
                 }
 
-                const requestedId =
-                    typeof parsed.activeTokenId ===
-                    'string'
-                        ? parsed.activeTokenId
-                        : '';
-
-                const activeProfile =
-                    tokenProfiles.find(
-                        item =>
-                            item.id === requestedId
-                    ) ||
-                    tokenProfiles[0] ||
-                    null;
-
-                const sessionToken =
-                    safeSessionGet(TOKEN_SESSION_KEY) ||
-                    '';
-
-                const rememberToken =
-                    typeof parsed.rememberToken ===
-                    'boolean'
-                        ? parsed.rememberToken
-                        : true;
+                const requestedId = typeof parsed.activeTokenId === 'string' ? parsed.activeTokenId : '';
+                const activeProfile = tokenProfiles.find(item => item.id === requestedId) || tokenProfiles[0] || null;
+                const sessionToken = safeSessionGet(TOKEN_SESSION_KEY) || '';
+                const rememberToken = typeof parsed.rememberToken === 'boolean'
+                    ? parsed.rememberToken
+                    : true;
 
                 config = {
-                    token:
-                        rememberToken && activeProfile
-                            ? activeProfile.token
-                            : sessionToken,
-                    tokenName:
-                        rememberToken && activeProfile
-                            ? activeProfile.name
-                            : '',
-                    activeTokenId:
-                        rememberToken && activeProfile
-                            ? activeProfile.id
-                            : '',
+                    token: rememberToken && activeProfile ? activeProfile.token : sessionToken,
+                    tokenName: rememberToken && activeProfile ? activeProfile.name : '',
+                    activeTokenId: rememberToken && activeProfile ? activeProfile.id : '',
                     rememberToken,
-                    owner:
-                        rememberToken && activeProfile
-                            ? activeProfile.owner
-                            : (
-                                typeof parsed.owner ===
-                                'string'
-                                    ? parsed.owner
-                                    : ''
-                            ),
-                    repo:
-                        rememberToken && activeProfile
-                            ? activeProfile.repo
-                            : (
-                                typeof parsed.repo ===
-                                'string'
-                                    ? parsed.repo
-                                    : ''
-                            ),
-                    file:
-                        rememberToken && activeProfile
-                            ? activeProfile.file
-                            : (
-                                typeof parsed.file ===
-                                    'string' &&
-                                parsed.file.trim()
-                                    ? parsed.file.trim()
-                                    : 'wordbook_data.json'
-                            )
+                    owner: rememberToken && activeProfile
+                        ? activeProfile.owner
+                        : (typeof parsed.owner === 'string' ? parsed.owner : ''),
+                    repo: rememberToken && activeProfile
+                        ? activeProfile.repo
+                        : (typeof parsed.repo === 'string' ? parsed.repo : ''),
+                    file: rememberToken && activeProfile
+                        ? activeProfile.file
+                        : (typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json')
                 };
 
-                selectedTokenProfileId =
-                    config.activeTokenId;
-
-                renderTokenProfileSelect(
-                    selectedTokenProfileId
-                );
-
-                cfgTokenName.value =
-                    config.tokenName;
-
-                cfgToken.value =
-                    config.token;
-
-                cfgRememberToken.checked =
-                    config.rememberToken;
-
-                cfgOwner.value =
-                    config.owner;
-
-                cfgRepo.value =
-                    config.repo;
-
-                cfgFile.value =
-                    config.file;
+                selectedTokenProfileId = config.activeTokenId;
+                renderTokenProfileSelect(selectedTokenProfileId);
+                cfgTokenName.value = config.tokenName;
+                cfgToken.value = config.token;
+                cfgRememberToken.checked = config.rememberToken;
+                cfgOwner.value = config.owner;
+                cfgRepo.value = config.repo;
+                cfgFile.value = config.file;
             }
 
             function saveConfig() {
-                config.token =
-                    cfgToken.value.trim();
-
-                config.tokenName =
-                    cfgTokenName.value.trim();
-
-                config.owner =
-                    cfgOwner.value.trim();
-
-                config.repo =
-                    cfgRepo.value.trim();
-
-                config.file =
-                    cfgFile.value.trim() ||
-                    'wordbook_data.json';
-
-                config.rememberToken =
-                    cfgRememberToken.checked;
+                config.token = cfgToken.value.trim();
+                config.tokenName = cfgTokenName.value.trim();
+                config.owner = cfgOwner.value.trim();
+                config.repo = cfgRepo.value.trim();
+                config.file = cfgFile.value.trim() || 'wordbook_data.json';
+                config.rememberToken = cfgRememberToken.checked;
 
                 if (config.rememberToken) {
-                    config.activeTokenId =
-                        upsertCurrentTokenProfile();
-
-                    safeSessionRemove(
-                        TOKEN_SESSION_KEY
-                    );
+                    config.activeTokenId = upsertCurrentTokenProfile();
+                    safeSessionRemove(TOKEN_SESSION_KEY);
                 } else {
                     config.activeTokenId = '';
-
-                    safeSessionSet(
-                        TOKEN_SESSION_KEY,
-                        config.token
-                    );
+                    safeSessionSet(TOKEN_SESSION_KEY, config.token);
                 }
 
-                safeLocalSet(
-                    CONFIG_KEY,
-                    JSON.stringify({
-                        owner: config.owner,
-                        repo: config.repo,
-                        file: config.file,
-                        rememberToken:
-                            config.rememberToken,
-                        activeTokenId:
-                            config.activeTokenId
-                    })
-                );
+                safeLocalSet(CONFIG_KEY, JSON.stringify({
+                    owner: config.owner,
+                    repo: config.repo,
+                    file: config.file,
+                    rememberToken: config.rememberToken,
+                    activeTokenId: config.activeTokenId
+                }));
             }
 
             function isConfigValid() {
-                return Boolean(
-                    config.token &&
-                    config.owner &&
-                    config.repo &&
-                    config.file
-                );
+                return Boolean(config.token && config.owner && config.repo && config.file);
             }
 
             // ---------- 同步元数据 ----------
             function createEmptySyncMeta(target = '') {
                 return {
-                    schemaVersion:
-                        SYNC_SCHEMA_VERSION,
+                    schemaVersion: SYNC_SCHEMA_VERSION,
                     target,
                     remoteSha: null,
                     lastSyncedFingerprint: null,
@@ -2171,235 +1862,113 @@
             }
 
             function loadSyncMeta() {
-                const stored =
-                    safeLocalGet(SYNC_META_KEY);
-
+                // 只读取当前网页实例的同步基线，绝不复用其他仓库页面的同步状态。
+                const stored = safeLocalGet(SYNC_META_KEY);
                 if (!stored) {
-                    syncMeta =
-                        createEmptySyncMeta();
+                    syncMeta = createEmptySyncMeta();
                     return;
                 }
 
                 try {
-                    const parsed =
-                        JSON.parse(stored);
-
-                    if (
-                        !parsed ||
-                        parsed.schemaVersion !==
-                        SYNC_SCHEMA_VERSION
-                    ) {
-                        syncMeta =
-                            createEmptySyncMeta();
-
+                    const parsed = JSON.parse(stored);
+                    if (!parsed || parsed.schemaVersion !== SYNC_SCHEMA_VERSION) {
+                        syncMeta = createEmptySyncMeta();
                         saveSyncMeta();
                         return;
                     }
 
                     syncMeta = {
-                        schemaVersion:
-                            SYNC_SCHEMA_VERSION,
-                        target:
-                            typeof parsed.target ===
-                            'string'
-                                ? parsed.target
-                                : '',
-                        remoteSha:
-                            typeof parsed.remoteSha ===
-                            'string'
-                                ? parsed.remoteSha
-                                : null,
-                        lastSyncedFingerprint:
-                            typeof parsed.lastSyncedFingerprint ===
-                            'string'
-                                ? parsed.lastSyncedFingerprint
-                                : null,
-                        lastSyncAt:
-                            typeof parsed.lastSyncAt ===
-                            'string'
-                                ? parsed.lastSyncAt
-                                : null
+                        schemaVersion: SYNC_SCHEMA_VERSION,
+                        target: typeof parsed.target === 'string' ? parsed.target : '',
+                        remoteSha: typeof parsed.remoteSha === 'string' ? parsed.remoteSha : null,
+                        lastSyncedFingerprint: typeof parsed.lastSyncedFingerprint === 'string'
+                            ? parsed.lastSyncedFingerprint
+                            : null,
+                        lastSyncAt: typeof parsed.lastSyncAt === 'string' ? parsed.lastSyncAt : null
                     };
                 } catch (error) {
-                    console.error(
-                        '同步元数据解析失败:',
-                        error
-                    );
-
-                    syncMeta =
-                        createEmptySyncMeta();
-
+                    console.error('同步元数据解析失败:', error);
+                    syncMeta = createEmptySyncMeta();
                     saveSyncMeta();
                 }
             }
 
             function saveSyncMeta() {
-                safeLocalSet(
-                    SYNC_META_KEY,
-                    JSON.stringify(syncMeta)
-                );
-
+                safeLocalSet(SYNC_META_KEY, JSON.stringify(syncMeta));
                 updateLastSyncDisplay();
             }
 
             function ensureSyncTarget() {
-                const target =
-                    getSyncTarget();
-
-                if (
-                    syncMeta.target !== target
-                ) {
-                    syncMeta =
-                        createEmptySyncMeta(
-                            target
-                        );
-
+                const target = getSyncTarget();
+                if (syncMeta.target !== target) {
+                    syncMeta = createEmptySyncMeta(target);
                     saveSyncMeta();
                 }
             }
 
-            function recordSynced(
-                snapshot,
-                remoteSha
-            ) {
+            function recordSynced(snapshot, remoteSha) {
                 syncMeta = {
-                    schemaVersion:
-                        SYNC_SCHEMA_VERSION,
-                    target:
-                        getSyncTarget(),
-                    remoteSha:
-                        remoteSha || null,
-                    lastSyncedFingerprint:
-                        getWordsFingerprint(
-                            snapshot
-                        ),
-                    lastSyncAt:
-                        new Date().toISOString()
+                    schemaVersion: SYNC_SCHEMA_VERSION,
+                    target: getSyncTarget(),
+                    remoteSha: remoteSha || null,
+                    lastSyncedFingerprint: getWordsFingerprint(snapshot),
+                    lastSyncAt: new Date().toISOString()
                 };
-
                 saveSyncMeta();
             }
 
             function updateLastSyncDisplay() {
-                if (
-                    !syncMeta.lastSyncAt ||
-                    syncMeta.target !==
-                    getSyncTarget()
-                ) {
-                    lastSyncTime.textContent =
-                        '未同步';
+                if (!syncMeta.lastSyncAt || syncMeta.target !== getSyncTarget()) {
+                    lastSyncTime.textContent = '未同步';
                     return;
                 }
-
-                const date =
-                    new Date(
-                        syncMeta.lastSyncAt
-                    );
-
-                lastSyncTime.textContent =
-                    Number.isNaN(
-                        date.getTime()
-                    )
-                        ? '已同步'
-                        : `已同步 ${date.toLocaleString()}`;
+                const date = new Date(syncMeta.lastSyncAt);
+                lastSyncTime.textContent = Number.isNaN(date.getTime())
+                    ? '已同步'
+                    : `已同步 ${date.toLocaleString()}`;
             }
 
             function hasUnsyncedLocalChanges() {
-                if (!isConfigValid()) {
-                    return false;
-                }
-
-                if (
-                    syncMeta.target !==
-                        getSyncTarget() ||
-                    syncMeta.lastSyncedFingerprint ===
-                        null
-                ) {
+                if (!isConfigValid()) return false;
+                if (syncMeta.target !== getSyncTarget() || syncMeta.lastSyncedFingerprint === null) {
                     return hasStoredLocalData;
                 }
-
-                return (
-                    getWordsFingerprint(words) !==
-                    syncMeta.lastSyncedFingerprint
-                );
+                return getWordsFingerprint(words) !== syncMeta.lastSyncedFingerprint;
             }
 
             // ---------- GitHub API ----------
-            async function githubApi(
-                method,
-                endpoint,
-                body = null
-            ) {
-                const owner =
-                    encodeURIComponent(
-                        config.owner
-                    );
-
-                const repo =
-                    encodeURIComponent(
-                        config.repo
-                    );
-
-                const url =
-                    `https://api.github.com/repos/${owner}/${repo}/${endpoint}`;
-
+            async function githubApi(method, endpoint, body = null) {
+                const owner = encodeURIComponent(config.owner);
+                const repo = encodeURIComponent(config.repo);
+                const url = `https://api.github.com/repos/${owner}/${repo}/${endpoint}`;
                 const headers = {
-                    'Authorization':
-                        `Bearer ${config.token}`,
-                    'Accept':
-                        'application/vnd.github+json',
-                    'X-GitHub-Api-Version':
-                        '2026-03-10'
+                    'Authorization': `Bearer ${config.token}`,
+                    'Accept': 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': '2026-03-10'
                 };
 
-                const options = {
-                    method,
-                    headers
-                };
-
+                const options = { method, headers };
                 if (body !== null) {
-                    headers['Content-Type'] =
-                        'application/json';
-
-                    options.body =
-                        JSON.stringify(body);
+                    headers['Content-Type'] = 'application/json';
+                    options.body = JSON.stringify(body);
                 }
 
-                const response =
-                    await fetch(
-                        url,
-                        options
-                    );
-
-                const raw =
-                    await response.text();
-
+                const response = await fetch(url, options);
+                const raw = await response.text();
                 let payload = null;
 
                 if (raw) {
                     try {
-                        payload =
-                            JSON.parse(raw);
+                        payload = JSON.parse(raw);
                     } catch (error) {
-                        payload = {
-                            message: raw
-                        };
+                        payload = { message: raw };
                     }
                 }
 
                 if (!response.ok) {
-                    const apiError =
-                        new Error(
-                            payload?.message ||
-                            `HTTP ${response.status}`
-                        );
-
-                    apiError.status =
-                        response.status;
-
-                    apiError.payload =
-                        payload;
-
+                    const apiError = new Error(payload?.message || `HTTP ${response.status}`);
+                    apiError.status = response.status;
+                    apiError.payload = payload;
                     throw apiError;
                 }
 
@@ -2407,755 +1976,286 @@
             }
 
             function getContentsEndpoint() {
-                const path =
-                    encodePath(config.file);
-
-                if (!path) {
-                    throw new Error(
-                        '数据文件名不能为空'
-                    );
-                }
-
+                const path = encodePath(config.file);
+                if (!path) throw new Error('数据文件名不能为空');
                 return `contents/${path}`;
             }
 
             async function readRemoteFile() {
                 try {
-                    const data =
-                        await githubApi(
-                            'GET',
-                            getContentsEndpoint()
-                        );
-
-                    if (
-                        !data ||
-                        data.type !== 'file'
-                    ) {
-                        throw new Error(
-                            '云端路径不是普通文件'
-                        );
+                    const data = await githubApi('GET', getContentsEndpoint());
+                    if (!data || data.type !== 'file') {
+                        throw new Error('云端路径不是普通文件');
                     }
 
-                    if (
-                        Number.isFinite(
-                            data.size
-                        ) &&
-                        data.size >
-                            MAX_SYNC_BYTES
-                    ) {
-                        throw new Error(
-                            `云端数据文件为 ${Math.ceil(data.size / 1024)} KB，超过本应用 750 KB 的安全同步上限`
-                        );
+                    if (Number.isFinite(data.size) && data.size > MAX_SYNC_BYTES) {
+                        throw new Error(`云端数据文件为 ${Math.ceil(data.size / 1024)} KB，超过本应用 750 KB 的安全同步上限`);
                     }
 
-                    if (
-                        data.encoding !==
-                            'base64' ||
-                        typeof data.content !==
-                            'string' ||
-                        !data.sha
-                    ) {
-                        throw new Error(
-                            '云端文件无法通过 Contents API 安全读取；请确认文件小于 750 KB'
-                        );
+                    if (data.encoding !== 'base64' || typeof data.content !== 'string' || !data.sha) {
+                        throw new Error('云端文件无法通过 Contents API 安全读取；请确认文件小于 750 KB');
                     }
 
                     let parsed;
-
                     try {
-                        parsed =
-                            JSON.parse(
-                                base64ToUtf8(
-                                    data.content
-                                )
-                            );
+                        parsed = JSON.parse(base64ToUtf8(data.content));
                     } catch (error) {
-                        throw new Error(
-                            `云端数据无法解析：${error.message}`
-                        );
+                        throw new Error(`云端数据无法解析：${error.message}`);
                     }
 
-                    if (
-                        !Array.isArray(parsed)
-                    ) {
-                        throw new Error(
-                            '云端 JSON 格式错误：根节点必须是数组'
-                        );
+                    if (!Array.isArray(parsed)) {
+                        throw new Error('云端 JSON 格式错误：根节点必须是数组');
                     }
 
-                    const normalized =
-                        normalizeWordList(
-                            parsed
-                        );
-
-                    assertSnapshotSyncSize(
-                        normalized
-                    );
-
+                    const normalized = normalizeWordList(parsed);
+                    assertSnapshotSyncSize(normalized);
                     return {
                         exists: true,
                         sha: data.sha,
-                        size:
-                            Number.isFinite(
-                                data.size
-                            )
-                                ? data.size
-                                : getSnapshotByteLength(
-                                    normalized
-                                ),
+                        size: Number.isFinite(data.size) ? data.size : getSnapshotByteLength(normalized),
                         words: normalized
                     };
                 } catch (error) {
-                    if (
-                        error.status === 404
-                    ) {
-                        return {
-                            exists: false,
-                            sha: null,
-                            size: 0,
-                            words: []
-                        };
+                    if (error.status === 404) {
+                        return { exists: false, sha: null, size: 0, words: [] };
                     }
-
                     throw error;
                 }
             }
 
-            async function writeRemoteFile(
-                snapshot,
-                sha
-            ) {
-                const normalized =
-                    normalizeWordList(
-                        snapshot
-                    );
-
-                assertSnapshotSyncSize(
-                    normalized
-                );
+            async function writeRemoteFile(snapshot, sha) {
+                const normalized = normalizeWordList(snapshot);
+                assertSnapshotSyncSize(normalized);
 
                 const body = {
-                    message:
-                        `更新单词数据 - ${new Date().toLocaleString()}`,
-                    content:
-                        utf8ToBase64(
-                            serializeSnapshot(
-                                normalized
-                            )
-                        )
+                    message: `更新单词数据 - ${new Date().toLocaleString()}`,
+                    content: utf8ToBase64(serializeSnapshot(normalized))
                 };
+                if (sha) body.sha = sha;
 
-                if (sha) {
-                    body.sha = sha;
-                }
-
-                const result =
-                    await githubApi(
-                        'PUT',
-                        getContentsEndpoint(),
-                        body
-                    );
-
-                return (
-                    result?.content?.sha ||
-                    null
-                );
+                const result = await githubApi('PUT', getContentsEndpoint(), body);
+                return result?.content?.sha || null;
             }
 
             // ---------- 冲突备份 ----------
             function loadConflictBackups() {
                 const backups = [];
-
-                const stored =
-                    safeLocalGet(
-                        CONFLICT_BACKUP_KEY
-                    );
+                const stored = safeLocalGet(CONFLICT_BACKUP_KEY);
 
                 if (stored) {
                     try {
-                        const parsed =
-                            JSON.parse(stored);
-
-                        const list =
-                            Array.isArray(
-                                parsed
-                            )
-                                ? parsed
-                                : [parsed];
-
-                        for (
-                            const item of list
-                        ) {
-                            if (
-                                item &&
-                                Array.isArray(
-                                    item.words
-                                )
-                            ) {
+                        const parsed = JSON.parse(stored);
+                        const list = Array.isArray(parsed) ? parsed : [parsed];
+                        for (const item of list) {
+                            if (item && Array.isArray(item.words)) {
                                 backups.push({
-                                    createdAt:
-                                        typeof item.createdAt ===
-                                        'string'
-                                            ? item.createdAt
-                                            : new Date().toISOString(),
-                                    source:
-                                        typeof item.source ===
-                                        'string'
-                                            ? item.source
-                                            : 'unknown',
-                                    target:
-                                        typeof item.target ===
-                                        'string'
-                                            ? item.target
-                                            : '',
-                                    words:
-                                        normalizeWordList(
-                                            item.words
-                                        )
+                                    createdAt: typeof item.createdAt === 'string' ? item.createdAt : new Date().toISOString(),
+                                    source: typeof item.source === 'string' ? item.source : 'unknown',
+                                    target: typeof item.target === 'string' ? item.target : '',
+                                    words: normalizeWordList(item.words)
                                 });
                             }
                         }
                     } catch (error) {
-                        console.error(
-                            '冲突备份解析失败:',
-                            error
-                        );
+                        console.error('冲突备份解析失败:', error);
                     }
                 }
 
                 return backups
-                    .sort(
-                        (a, b) =>
-                            String(
-                                a.createdAt
-                            ).localeCompare(
-                                String(
-                                    b.createdAt
-                                )
-                            )
-                    )
-                    .slice(
-                        -MAX_CONFLICT_BACKUPS
-                    );
+                    .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)))
+                    .slice(-MAX_CONFLICT_BACKUPS);
             }
 
-            function saveConflictBackups(
-                backups
-            ) {
-                safeLocalSet(
-                    CONFLICT_BACKUP_KEY,
-                    JSON.stringify(
-                        backups.slice(
-                            -MAX_CONFLICT_BACKUPS
-                        )
-                    )
-                );
+            function saveConflictBackups(backups) {
+                safeLocalSet(CONFLICT_BACKUP_KEY, JSON.stringify(backups.slice(-MAX_CONFLICT_BACKUPS)));
             }
 
-            function saveConflictBackup(
-                snapshot,
-                source
-            ) {
-                const backups =
-                    loadConflictBackups();
-
+            function saveConflictBackup(snapshot, source) {
+                const backups = loadConflictBackups();
                 backups.push({
-                    createdAt:
-                        new Date().toISOString(),
+                    createdAt: new Date().toISOString(),
                     source,
-                    target:
-                        getSyncTarget(),
-                    words:
-                        normalizeWordList(
-                            snapshot
-                        )
+                    target: getSyncTarget(),
+                    words: normalizeWordList(snapshot)
                 });
-
-                saveConflictBackups(
-                    backups
-                );
+                saveConflictBackups(backups);
             }
 
             // ---------- 冲突处理 ----------
-            async function adoptRemote(
-                remote,
-                expectedLocalFingerprint,
-                showToastMsg,
-                revalidate = true
-            ) {
-                if (
-                    getWordsFingerprint(
-                        words
-                    ) !==
-                    expectedLocalFingerprint
-                ) {
+            async function adoptRemote(remote, expectedLocalFingerprint, showToastMsg, revalidate = true) {
+                if (getWordsFingerprint(words) !== expectedLocalFingerprint) {
                     syncQueued = true;
-
-                    showToast(
-                        '同步期间本地数据发生变化，已保留本地内容并重新排队同步',
-                        'info'
-                    );
-
-                    return {
-                        ok: false,
-                        conflict: false
-                    };
+                    showToast('同步期间本地数据发生变化，已保留本地内容并重新排队同步', 'info');
+                    return { ok: false, conflict: false };
                 }
 
-                let candidate =
-                    remote;
-
+                let candidate = remote;
                 if (revalidate) {
-                    const latest =
-                        await readRemoteFile();
-
+                    const latest = await readRemoteFile();
                     if (!latest.exists) {
-                        setCloudStatus(
-                            'offline',
-                            '存在冲突'
-                        );
-
-                        showToast(
-                            '准备下载时发现云端文件已被删除，未覆盖本地数据',
-                            'error'
-                        );
-
-                        return {
-                            ok: false,
-                            conflict: true
-                        };
+                        setCloudStatus('offline', '存在冲突');
+                        showToast('准备下载时发现云端文件已被删除，未覆盖本地数据', 'error');
+                        return { ok: false, conflict: true };
                     }
-
-                    candidate =
-                        latest;
+                    candidate = latest;
                 }
 
-                if (
-                    getWordsFingerprint(
-                        words
-                    ) !==
-                    expectedLocalFingerprint
-                ) {
+                if (getWordsFingerprint(words) !== expectedLocalFingerprint) {
                     syncQueued = true;
-
-                    showToast(
-                        '下载期间本地数据发生变化，已保留本地内容并重新排队同步',
-                        'info'
-                    );
-
-                    return {
-                        ok: false,
-                        conflict: false
-                    };
+                    showToast('下载期间本地数据发生变化，已保留本地内容并重新排队同步', 'info');
+                    return { ok: false, conflict: false };
                 }
 
-                saveConflictBackup(
-                    words,
-                    'before_remote_replace'
-                );
-
-                words =
-                    normalizeWordList(
-                        candidate.words
-                    );
-
+                saveConflictBackup(words, 'before_remote_replace');
+                words = normalizeWordList(candidate.words);
                 applySortAndRender();
-
-                recordSynced(
-                    words,
-                    candidate.sha
-                );
-
-                setCloudStatus(
-                    'online',
-                    '已连接'
-                );
-
+                recordSynced(words, candidate.sha);
+                setCloudStatus('online', '已连接');
                 if (showToastMsg) {
-                    showToast(
-                        `已从 GitHub 更新 ${words.length} 个条目`,
-                        'success'
-                    );
+                    showToast(`已从 GitHub 更新 ${words.length} 个条目`, 'success');
                 }
-
-                return {
-                    ok: true,
-                    conflict: false
-                };
+                return { ok: true, conflict: false };
             }
 
-            async function resolveRemoteDeletion(
-                localSnapshot,
-                interactive
-            ) {
-                setCloudStatus(
-                    'offline',
-                    '云端文件已删除'
-                );
+            async function resolveRemoteDeletion(localSnapshot, interactive) {
+                setCloudStatus('offline', '云端文件已删除');
 
                 if (!interactive) {
-                    showToast(
-                        '检测到云端数据文件已被删除，已停止自动同步；请点击“同步”决定是否重新创建',
-                        'error'
-                    );
-
-                    return {
-                        ok: false,
-                        conflict: true
-                    };
+                    showToast('检测到云端数据文件已被删除，已停止自动同步；请点击“同步”决定是否重新创建', 'error');
+                    return { ok: false, conflict: true };
                 }
 
-                const recreate =
-                    confirm(
-                        '检测到云端数据文件已被删除。\n\n' +
-                        '点击“确定”：用当前本地数据重新创建云端文件。\n' +
-                        '点击“取消”：保留本地数据并停止同步，不创建云端文件。'
-                    );
+                const recreate = confirm(
+                    '检测到云端数据文件已被删除。\n\n' +
+                    '点击“确定”：用当前本地数据重新创建云端文件。\n' +
+                    '点击“取消”：保留本地数据并停止同步，不创建云端文件。'
+                );
 
                 if (!recreate) {
-                    showToast(
-                        '已保留本地数据，云端文件仍保持删除状态',
-                        'info'
-                    );
-
-                    return {
-                        ok: false,
-                        conflict: true
-                    };
+                    showToast('已保留本地数据，云端文件仍保持删除状态', 'info');
+                    return { ok: false, conflict: true };
                 }
 
-                const latest =
-                    await readRemoteFile();
-
+                // 确认期间云端可能重新出现；只有仍不存在时才允许创建。
+                const latest = await readRemoteFile();
                 if (latest.exists) {
-                    const error =
-                        new Error(
-                            '确认期间云端文件已重新出现，请重新同步后选择版本'
-                        );
-
+                    const error = new Error('确认期间云端文件已重新出现，请重新同步后选择版本');
                     error.status = 409;
                     throw error;
                 }
 
-                const newSha =
-                    await writeRemoteFile(
-                        localSnapshot,
-                        null
-                    );
-
-                recordSynced(
-                    localSnapshot,
-                    newSha
-                );
-
-                setCloudStatus(
-                    'online',
-                    '已连接'
-                );
-
-                showToast(
-                    `已重新创建云端文件并同步 ${localSnapshot.length} 个条目`,
-                    'success'
-                );
-
-                return {
-                    ok: true,
-                    conflict: false,
-                    uploadedFingerprint:
-                        getWordsFingerprint(
-                            localSnapshot
-                        )
-                };
+                const newSha = await writeRemoteFile(localSnapshot, null);
+                recordSynced(localSnapshot, newSha);
+                setCloudStatus('online', '已连接');
+                showToast(`已重新创建云端文件并同步 ${localSnapshot.length} 个条目`, 'success');
+                return { ok: true, conflict: false, uploadedFingerprint: getWordsFingerprint(localSnapshot) };
             }
 
-            async function resolveConflict(
-                remote,
-                localSnapshot,
-                localFingerprint,
-                interactive
-            ) {
-                setCloudStatus(
-                    'offline',
-                    '存在冲突'
-                );
+            async function resolveConflict(remote, localSnapshot, localFingerprint, interactive) {
+                setCloudStatus('offline', '存在冲突');
 
                 if (!interactive) {
-                    showToast(
-                        '检测到本地和云端都发生了修改，已停止自动同步；请点击“同步”选择保留哪一份',
-                        'error'
-                    );
-
-                    return {
-                        ok: false,
-                        conflict: true
-                    };
+                    showToast('检测到本地和云端都发生了修改，已停止自动同步；请点击“同步”选择保留哪一份', 'error');
+                    return { ok: false, conflict: true };
                 }
 
-                const useLocal =
-                    confirm(
-                        '检测到同步冲突：本地和云端都发生了修改。\n\n' +
-                        '点击“确定”：用本地数据覆盖刚才读取到的云端版本。\n' +
-                        '点击“取消”：继续选择是否用云端数据覆盖本地。'
-                    );
-
-                if (useLocal) {
-                    saveConflictBackup(
-                        remote.words,
-                        'remote_before_local_override'
-                    );
-
-                    const newSha =
-                        await writeRemoteFile(
-                            localSnapshot,
-                            remote.sha
-                        );
-
-                    recordSynced(
-                        localSnapshot,
-                        newSha
-                    );
-
-                    setCloudStatus(
-                        'online',
-                        '已连接'
-                    );
-
-                    showToast(
-                        `已用本地 ${localSnapshot.length} 个条目覆盖云端`,
-                        'success'
-                    );
-
-                    return {
-                        ok: true,
-                        conflict: false,
-                        uploadedFingerprint:
-                            localFingerprint
-                    };
-                }
-
-                const useRemote =
-                    confirm(
-                        '是否用云端数据覆盖本地？\n\n' +
-                        '点击“确定”：重新读取最新云端数据，本地当前数据会保存为冲突备份。\n' +
-                        '点击“取消”：暂不处理，任何一方都不会被覆盖。'
-                    );
-
-                if (useRemote) {
-                    return adoptRemote(
-                        remote,
-                        getWordsFingerprint(
-                            words
-                        ),
-                        true,
-                        true
-                    );
-                }
-
-                showToast(
-                    '已取消同步，未覆盖本地或云端数据',
-                    'info'
+                const useLocal = confirm(
+                    '检测到同步冲突：本地和云端都发生了修改。\n\n' +
+                    '点击“确定”：用本地数据覆盖刚才读取到的云端版本。\n' +
+                    '点击“取消”：继续选择是否用云端数据覆盖本地。'
                 );
 
-                return {
-                    ok: false,
-                    conflict: true
-                };
+                if (useLocal) {
+                    saveConflictBackup(remote.words, 'remote_before_local_override');
+                    // 必须使用发现冲突时的 SHA。若云端在用户确认期间再次变化，GitHub 会拒绝写入。
+                    const newSha = await writeRemoteFile(localSnapshot, remote.sha);
+                    recordSynced(localSnapshot, newSha);
+                    setCloudStatus('online', '已连接');
+                    showToast(`已用本地 ${localSnapshot.length} 个条目覆盖云端`, 'success');
+                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
+                }
+
+                const useRemote = confirm(
+                    '是否用云端数据覆盖本地？\n\n' +
+                    '点击“确定”：重新读取最新云端数据，本地当前数据会保存为冲突备份。\n' +
+                    '点击“取消”：暂不处理，任何一方都不会被覆盖。'
+                );
+
+                if (useRemote) {
+                    return adoptRemote(remote, getWordsFingerprint(words), true, true);
+                }
+
+                showToast('已取消同步，未覆盖本地或云端数据', 'info');
+                return { ok: false, conflict: true };
             }
 
             // ---------- 同步主流程 ----------
-            async function performSync({
-                showToastMsg,
-                interactive
-            }) {
+            async function performSync({ showToastMsg, interactive }) {
                 ensureSyncTarget();
 
-                const localSnapshot =
-                    normalizeWordList(
-                        words
-                    );
+                const localSnapshot = normalizeWordList(words);
+                assertSnapshotSyncSize(localSnapshot);
+                const localFingerprint = getWordsFingerprint(localSnapshot);
+                const baseline = syncMeta.lastSyncedFingerprint;
+                const hasBaseline = typeof baseline === 'string';
+                const remote = await readRemoteFile();
 
-                assertSnapshotSyncSize(
-                    localSnapshot
-                );
-
-                const localFingerprint =
-                    getWordsFingerprint(
-                        localSnapshot
-                    );
-
-                const baseline =
-                    syncMeta.lastSyncedFingerprint;
-
-                const hasBaseline =
-                    typeof baseline ===
-                    'string';
-
-                const remote =
-                    await readRemoteFile();
-
-                if (
-                    !remote.exists &&
-                    hasBaseline
-                ) {
-                    return resolveRemoteDeletion(
-                        localSnapshot,
-                        interactive
-                    );
+                // 曾经同步成功后远端文件消失，必须由用户决定，不能自动重建。
+                if (!remote.exists && hasBaseline) {
+                    return resolveRemoteDeletion(localSnapshot, interactive);
                 }
 
+                // 真正的首次连接且远端文件不存在时，创建文件；空数组同样是有效数据。
                 if (!remote.exists) {
-                    const newSha =
-                        await writeRemoteFile(
-                            localSnapshot,
-                            null
-                        );
-
-                    recordSynced(
-                        localSnapshot,
-                        newSha
-                    );
-
-                    setCloudStatus(
-                        'online',
-                        '已连接'
-                    );
-
+                    const newSha = await writeRemoteFile(localSnapshot, null);
+                    recordSynced(localSnapshot, newSha);
+                    setCloudStatus('online', '已连接');
                     if (showToastMsg) {
-                        showToast(
-                            `已创建云端文件并同步 ${localSnapshot.length} 个条目`,
-                            'success'
-                        );
+                        showToast(`已创建云端文件并同步 ${localSnapshot.length} 个条目`, 'success');
                     }
-
-                    return {
-                        ok: true,
-                        conflict: false,
-                        uploadedFingerprint:
-                            localFingerprint
-                    };
+                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
                 }
 
-                const remoteFingerprint =
-                    getWordsFingerprint(
-                        remote.words
-                    );
+                const remoteFingerprint = getWordsFingerprint(remote.words);
 
-                if (
-                    localFingerprint ===
-                    remoteFingerprint
-                ) {
-                    recordSynced(
-                        localSnapshot,
-                        remote.sha
-                    );
+                // 内容相同：建立或刷新同步基线，不产生无意义提交。
+                if (localFingerprint === remoteFingerprint) {
+                    recordSynced(localSnapshot, remote.sha);
+                    setCloudStatus('online', '已连接');
+                    if (showToastMsg) showToast('本地与云端已一致', 'success');
+                    return { ok: true, conflict: false };
+                }
 
-                    setCloudStatus(
-                        'online',
-                        '已连接'
-                    );
+                const localChanged = !hasBaseline || localFingerprint !== baseline;
+                const remoteChanged = !hasBaseline || remoteFingerprint !== baseline;
 
+                if (hasBaseline && localChanged && !remoteChanged) {
+                    const newSha = await writeRemoteFile(localSnapshot, remote.sha);
+                    recordSynced(localSnapshot, newSha);
+                    setCloudStatus('online', '已连接');
                     if (showToastMsg) {
-                        showToast(
-                            '本地与云端已一致',
-                            'success'
-                        );
+                        showToast(`成功同步 ${localSnapshot.length} 个条目到 GitHub`, 'success');
                     }
-
-                    return {
-                        ok: true,
-                        conflict: false
-                    };
+                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
                 }
 
-                const localChanged =
-                    !hasBaseline ||
-                    localFingerprint !==
-                        baseline;
-
-                const remoteChanged =
-                    !hasBaseline ||
-                    remoteFingerprint !==
-                        baseline;
-
-                if (
-                    hasBaseline &&
-                    localChanged &&
-                    !remoteChanged
-                ) {
-                    const newSha =
-                        await writeRemoteFile(
-                            localSnapshot,
-                            remote.sha
-                        );
-
-                    recordSynced(
-                        localSnapshot,
-                        newSha
-                    );
-
-                    setCloudStatus(
-                        'online',
-                        '已连接'
-                    );
-
-                    if (showToastMsg) {
-                        showToast(
-                            `成功同步 ${localSnapshot.length} 个条目到 GitHub`,
-                            'success'
-                        );
-                    }
-
-                    return {
-                        ok: true,
-                        conflict: false,
-                        uploadedFingerprint:
-                            localFingerprint
-                    };
+                if (hasBaseline && !localChanged && remoteChanged) {
+                    // 再读取一次最新 SHA 后采用远端，缩小下载竞态窗口。
+                    return adoptRemote(remote, localFingerprint, showToastMsg, true);
                 }
 
-                if (
-                    hasBaseline &&
-                    !localChanged &&
-                    remoteChanged
-                ) {
-                    return adoptRemote(
-                        remote,
-                        localFingerprint,
-                        showToastMsg,
-                        true
-                    );
+                if (!hasBaseline && !hasStoredLocalData) {
+                    // 浏览器确实从未保存过本地数据时，才自动采用云端。
+                    return adoptRemote(remote, localFingerprint, showToastMsg, true);
                 }
 
-                if (
-                    !hasBaseline &&
-                    !hasStoredLocalData
-                ) {
-                    return adoptRemote(
-                        remote,
-                        localFingerprint,
-                        showToastMsg,
-                        true
-                    );
-                }
-
-                return resolveConflict(
-                    remote,
-                    localSnapshot,
-                    localFingerprint,
-                    interactive
-                );
+                // 本地即使是合法空数组，只要已经保存过，也不能自动被云端旧数据覆盖。
+                return resolveConflict(remote, localSnapshot, localFingerprint, interactive);
             }
 
-            async function syncToCloud(
-                showToastMsg = true,
-                interactive = showToastMsg
-            ) {
+            async function syncToCloud(showToastMsg = true, interactive = showToastMsg) {
                 if (!isConfigValid()) {
-                    showToast(
-                        '请先点击“配置”设置 GitHub 连接',
-                        'error'
-                    );
-
+                    showToast('请先点击“配置”设置 GitHub 连接', 'error');
                     return false;
                 }
 
@@ -3164,100 +2264,39 @@
                     return false;
                 }
 
-                clearTimeout(
-                    autoSyncTimer
-                );
-
+                clearTimeout(autoSyncTimer);
                 autoSyncTimer = null;
                 isSyncing = true;
                 syncBtn.disabled = true;
+                setCloudStatus('syncing', '同步中...');
 
-                setCloudStatus(
-                    'syncing',
-                    '同步中...'
-                );
-
-                let result = {
-                    ok: false,
-                    conflict: false
-                };
-
+                let result = { ok: false, conflict: false };
                 try {
-                    result =
-                        await performSync({
-                            showToastMsg,
-                            interactive
-                        });
+                    result = await performSync({ showToastMsg, interactive });
                 } catch (error) {
-                    console.error(
-                        '同步失败:',
-                        error
-                    );
-
-                    if (
-                        error.status === 409
-                    ) {
-                        setCloudStatus(
-                            'offline',
-                            '存在冲突'
-                        );
-
-                        showToast(
-                            '云端在上传期间再次发生变化，未覆盖任何数据；请重新点击“同步”',
-                            'error'
-                        );
-
-                        result = {
-                            ok: false,
-                            conflict: true
-                        };
+                    console.error('同步失败:', error);
+                    if (error.status === 409) {
+                        setCloudStatus('offline', '存在冲突');
+                        showToast('云端在上传期间再次发生变化，未覆盖任何数据；请重新点击“同步”', 'error');
+                        result = { ok: false, conflict: true };
                     } else {
-                        setCloudStatus(
-                            'offline',
-                            '同步失败'
-                        );
-
-                        showToast(
-                            `同步失败：${formatError(error)}`,
-                            'error'
-                        );
+                        setCloudStatus('offline', '同步失败');
+                        showToast(`同步失败：${formatError(error)}`, 'error');
                     }
                 } finally {
                     isSyncing = false;
-                    syncBtn.disabled =
-                        false;
+                    syncBtn.disabled = false;
                 }
 
-                const currentFingerprint =
-                    getWordsFingerprint(
-                        words
-                    );
-
-                if (
-                    result.uploadedFingerprint &&
-                    currentFingerprint !==
-                    result.uploadedFingerprint
-                ) {
+                const currentFingerprint = getWordsFingerprint(words);
+                if (result.uploadedFingerprint && currentFingerprint !== result.uploadedFingerprint) {
                     syncQueued = true;
                 }
 
-                if (
-                    syncQueued &&
-                    !result.conflict
-                ) {
+                if (syncQueued && !result.conflict) {
                     syncQueued = false;
-
-                    setTimeout(
-                        () =>
-                            syncToCloud(
-                                false,
-                                false
-                            ),
-                        0
-                    );
-                } else if (
-                    result.conflict
-                ) {
+                    setTimeout(() => syncToCloud(false, false), 0);
+                } else if (result.conflict) {
                     syncQueued = false;
                 }
 
@@ -3265,67 +2304,36 @@
             }
 
             function scheduleAutoSync() {
-                if (!isConfigValid()) {
-                    return;
-                }
-
-                clearTimeout(
-                    autoSyncTimer
-                );
-
-                autoSyncTimer =
-                    setTimeout(() => {
-                        autoSyncTimer =
-                            null;
-
-                        syncToCloud(
-                            false,
-                            false
-                        );
-                    }, AUTO_SYNC_DELAY);
+                if (!isConfigValid()) return;
+                clearTimeout(autoSyncTimer);
+                autoSyncTimer = setTimeout(() => {
+                    autoSyncTimer = null;
+                    syncToCloud(false, false);
+                }, AUTO_SYNC_DELAY);
             }
 
             function markLocalChange() {
                 if (isConfigValid()) {
-                    setCloudStatus(
-                        'offline',
-                        '待同步'
-                    );
-
-                    lastSyncTime.textContent =
-                        '有未同步修改';
+                    setCloudStatus('offline', '待同步');
+                    lastSyncTime.textContent = '有未同步修改';
                 }
-
                 scheduleAutoSync();
             }
 
             // ---------- 本地存储 ----------
             function loadFromLocal() {
-                const stored =
-                    safeLocalGet(
-                        STORAGE_KEY
-                    );
-
-                hasStoredLocalData =
-                    stored !== null;
+                const stored = safeLocalGet(STORAGE_KEY);
+                hasStoredLocalData = stored !== null;
 
                 if (stored) {
                     try {
-                        words =
-                            normalizeWordList(
-                                JSON.parse(
-                                    stored
-                                )
-                            );
+                        words = normalizeWordList(JSON.parse(stored));
                     } catch (error) {
-                        console.error(
-                            '本地数据解析失败:',
-                            error
-                        );
-
+                        console.error('本地数据解析失败:', error);
                         words = [];
                     }
                 } else {
+                    // 新仓库/新路径首次打开时从空列表开始，不加载示例词条，也不读取其他页面的旧数据。
                     words = [];
                 }
 
@@ -3333,458 +2341,84 @@
             }
 
             function saveToLocal() {
-                safeLocalSet(
-                    STORAGE_KEY,
-                    JSON.stringify(words)
-                );
+                safeLocalSet(STORAGE_KEY, JSON.stringify(words));
             }
 
             // ---------- 词性下拉与历史管理 ----------
-            function renderPartOfSpeechCombo(
-                which
-            ) {
-                const isAdd =
-                    which === 'add';
+            function renderPartOfSpeechCombo(which) {
+                const isAdd = which === 'add';
+                const input = isAdd ? partOfSpeechInput : editPartOfSpeechInput;
+                const optionsEl = isAdd ? partOfSpeechOptions : editPartOfSpeechOptions;
+                const primary = normalizePartOfSpeechValue(input.value);
+                const history = partOfSpeechHistory;
+                const isNewValue = Boolean(primary) && !history.some(value => partOfSpeechKey(value) === partOfSpeechKey(primary));
 
-                const input =
-                    isAdd
-                        ? partOfSpeechInput
-                        : editPartOfSpeechInput;
-
-                const optionsEl =
-                    isAdd
-                        ? partOfSpeechOptions
-                        : editPartOfSpeechOptions;
-
-                const primary =
-                    normalizePartOfSpeechValue(
-                        input.value
-                    );
-
-                const history =
-                    partOfSpeechHistory;
-
-                const isNewValue =
-                    Boolean(primary) &&
-                    !history.some(
-                        value =>
-                            partOfSpeechKey(
-                                value
-                            ) ===
-                            partOfSpeechKey(
-                                primary
-                            )
-                    );
-
-                const newHint =
-                    isNewValue
-                        ? `<div class="pos-new-hint">新词性：${escapeHtml(primary)}（提交后自动保存到历史）</div>`
-                        : '';
-
-                const optionRows =
-                    history.length
-                        ? history
-                            .map(
-                                (
-                                    value,
-                                    index
-                                ) => `
+                const newHint = isNewValue
+                    ? `<div class="pos-new-option-wrap"><button class="pos-new-option" type="button" data-value="${escapeAttribute(primary)}" title="使用新词性 ${escapeAttribute(primary)}">${escapeHtml(primary)}</button></div>`
+                    : '';
+                const optionRows = history.length
+                    ? history.map((value, index) => `
                         <div class="pos-option-row">
-                            <button
-                                class="pos-option${partOfSpeechKey(value) === partOfSpeechKey(primary) ? ' is-current' : ''}"
-                                type="button"
-                                data-value="${escapeAttribute(value)}"
-                                title="选择 ${escapeAttribute(value)}"
-                            >${escapeHtml(value)}</button>
-
-                            <button
-                                class="pos-option-control pos-option-move pos-option-up"
-                                type="button"
-                                data-value="${escapeAttribute(value)}"
-                                aria-label="上移词性 ${escapeAttribute(value)}"
-                                title="上移"
-                                ${index === 0 ? 'disabled' : ''}
-                            >↑</button>
-
-                            <button
-                                class="pos-option-control pos-option-move pos-option-down"
-                                type="button"
-                                data-value="${escapeAttribute(value)}"
-                                aria-label="下移词性 ${escapeAttribute(value)}"
-                                title="下移"
-                                ${index === history.length - 1 ? 'disabled' : ''}
-                            >↓</button>
-
-                            <button
-                                class="pos-option-control pos-option-edit"
-                                type="button"
-                                data-value="${escapeAttribute(value)}"
-                                aria-label="编辑词性 ${escapeAttribute(value)}"
-                            >改</button>
-
-                            <button
-                                class="pos-option-control pos-option-delete"
-                                type="button"
-                                data-value="${escapeAttribute(value)}"
-                                aria-label="删除词性 ${escapeAttribute(value)}"
-                            >删</button>
+                            <button class="pos-option${partOfSpeechKey(value) === partOfSpeechKey(primary) ? ' is-current' : ''}" type="button" data-value="${escapeAttribute(value)}" title="选择 ${escapeAttribute(value)}">${escapeHtml(value)}</button>
+                            <button class="pos-option-control pos-option-move pos-option-up" type="button" data-value="${escapeAttribute(value)}" aria-label="上移词性 ${escapeAttribute(value)}" title="上移" ${index === 0 ? 'disabled' : ''}>↑</button>
+                            <button class="pos-option-control pos-option-move pos-option-down" type="button" data-value="${escapeAttribute(value)}" aria-label="下移词性 ${escapeAttribute(value)}" title="下移" ${index === history.length - 1 ? 'disabled' : ''}>↓</button>
                         </div>
-                    `
-                            )
-                            .join('')
-                        : '<div class="pos-empty">暂无已保存词性</div>';
+                    `).join('')
+                    : '<div class="pos-empty">暂无已保存词性</div>';
 
-                optionsEl.innerHTML =
-                    newHint + optionRows;
+                optionsEl.innerHTML = newHint + optionRows;
             }
 
-            function setPartOfSpeechPanelOpen(
-                which,
-                open
-            ) {
-                const panel =
-                    which === 'add'
-                        ? partOfSpeechPanel
-                        : editPartOfSpeechPanel;
-
-                const trigger =
-                    which === 'add'
-                        ? partOfSpeechTrigger
-                        : editPartOfSpeechTrigger;
-
-                panel.classList.toggle(
-                    'hidden',
-                    !open
-                );
-
-                trigger.setAttribute(
-                    'aria-expanded',
-                    String(open)
-                );
+            function setPartOfSpeechPanelOpen(which, open) {
+                const panel = which === 'add' ? partOfSpeechPanel : editPartOfSpeechPanel;
+                const trigger = which === 'add' ? partOfSpeechTrigger : editPartOfSpeechTrigger;
+                panel.classList.toggle('hidden', !open);
+                trigger.setAttribute('aria-expanded', String(open));
             }
 
             function closePartOfSpeechPanels() {
-                setPartOfSpeechPanelOpen(
-                    'add',
-                    false
-                );
-
-                setPartOfSpeechPanelOpen(
-                    'edit',
-                    false
-                );
+                setPartOfSpeechPanelOpen('add', false);
+                setPartOfSpeechPanelOpen('edit', false);
             }
 
-            function choosePartOfSpeech(
-                which,
-                value
-            ) {
-                const input =
-                    which === 'add'
-                        ? partOfSpeechInput
-                        : editPartOfSpeechInput;
-
-                input.value =
-                    normalizePartOfSpeechValue(
-                        value
-                    );
-
-                setPartOfSpeechPanelOpen(
-                    which,
-                    false
-                );
-
-                renderPartOfSpeechCombo(
-                    which
-                );
-
+            function choosePartOfSpeech(which, value) {
+                const input = which === 'add' ? partOfSpeechInput : editPartOfSpeechInput;
+                input.value = normalizePartOfSpeechValue(value);
+                setPartOfSpeechPanelOpen(which, false);
+                renderPartOfSpeechCombo(which);
                 input.focus();
             }
 
-            function renamePartOfSpeechHistory(
-                oldValue,
-                newValue
-            ) {
-                const oldNormalized =
-                    normalizePartOfSpeechValue(
-                        oldValue
-                    );
-
-                const newNormalized =
-                    normalizePartOfSpeechValue(
-                        newValue
-                    );
-
-                if (!newNormalized) {
-                    showToast(
-                        '词性不能为空',
-                        'error'
-                    );
-                    return false;
-                }
-
-                if (
-                    partOfSpeechHistory.some(
-                        value =>
-                            partOfSpeechKey(
-                                value
-                            ) ===
-                                partOfSpeechKey(
-                                    newNormalized
-                                ) &&
-                            partOfSpeechKey(
-                                value
-                            ) !==
-                                partOfSpeechKey(
-                                    oldNormalized
-                                )
-                    )
-                ) {
-                    showToast(
-                        '该词性已存在',
-                        'error'
-                    );
-
-                    return false;
-                }
-
-                partOfSpeechHistory =
-                    normalizePartOfSpeechHistory(
-                        partOfSpeechHistory.map(
-                            value =>
-                                partOfSpeechKey(
-                                    value
-                                ) ===
-                                partOfSpeechKey(
-                                    oldNormalized
-                                )
-                                    ? newNormalized
-                                    : value
-                        )
-                    );
-
-                let wordsChanged =
-                    false;
-
-                for (
-                    const item of words
-                ) {
-                    if (
-                        partOfSpeechKey(
-                            item.partOfSpeech
-                        ) ===
-                        partOfSpeechKey(
-                            oldNormalized
-                        )
-                    ) {
-                        item.partOfSpeech =
-                            newNormalized;
-
-                        wordsChanged = true;
-                    }
-                }
-
-                if (
-                    partOfSpeechKey(
-                        partOfSpeechInput.value
-                    ) ===
-                    partOfSpeechKey(
-                        oldNormalized
-                    )
-                ) {
-                    partOfSpeechInput.value =
-                        newNormalized;
-                }
-
-                if (
-                    partOfSpeechKey(
-                        editPartOfSpeechInput.value
-                    ) ===
-                    partOfSpeechKey(
-                        oldNormalized
-                    )
-                ) {
-                    editPartOfSpeechInput.value =
-                        newNormalized;
-                }
-
-                savePartOfSpeechHistory();
-
-                if (wordsChanged) {
-                    applySortAndRender();
-                    markLocalChange();
-                } else {
-                    renderPartOfSpeechCombo(
-                        'add'
-                    );
-
-                    renderPartOfSpeechCombo(
-                        'edit'
-                    );
-                }
-
-                showToast(
-                    '已更新词性',
-                    'success'
+            function movePartOfSpeechHistory(value, direction) {
+                const normalized = normalizePartOfSpeechValue(value);
+                const index = partOfSpeechHistory.findIndex(item =>
+                    partOfSpeechKey(item) === partOfSpeechKey(normalized)
                 );
-
-                return true;
-            }
-
-            function movePartOfSpeechHistory(
-                value,
-                direction
-            ) {
-                const normalized =
-                    normalizePartOfSpeechValue(
-                        value
-                    );
-
-                const index =
-                    partOfSpeechHistory.findIndex(
-                        item =>
-                            partOfSpeechKey(
-                                item
-                            ) ===
-                            partOfSpeechKey(
-                                normalized
-                            )
-                    );
-
                 if (index < 0) return;
 
-                const targetIndex =
-                    index + direction;
+                const targetIndex = index + direction;
+                if (targetIndex < 0 || targetIndex >= partOfSpeechHistory.length) return;
 
-                if (
-                    targetIndex < 0 ||
-                    targetIndex >=
-                        partOfSpeechHistory.length
-                ) {
-                    return;
-                }
-
-                [
-                    partOfSpeechHistory[index],
-                    partOfSpeechHistory[targetIndex]
-                ] = [
-                    partOfSpeechHistory[targetIndex],
-                    partOfSpeechHistory[index]
-                ];
+                [partOfSpeechHistory[index], partOfSpeechHistory[targetIndex]] =
+                    [partOfSpeechHistory[targetIndex], partOfSpeechHistory[index]];
 
                 savePartOfSpeechHistory();
-
-                renderPartOfSpeechCombo(
-                    'add'
-                );
-
-                renderPartOfSpeechCombo(
-                    'edit'
-                );
-            }
-
-            function deletePartOfSpeechHistory(
-                value
-            ) {
-                const normalized =
-                    normalizePartOfSpeechValue(
-                        value
-                    );
-
-                if (
-                    !confirm(
-                        `确定从词性下拉历史中删除“${normalized}”吗？
-
-已有词条中的词性不会改变。`
-                    )
-                ) {
-                    return;
-                }
-
-                partOfSpeechHistory =
-                    partOfSpeechHistory.filter(
-                        item =>
-                            partOfSpeechKey(
-                                item
-                            ) !==
-                            partOfSpeechKey(
-                                normalized
-                            )
-                    );
-
-                savePartOfSpeechHistory();
-
-                renderPartOfSpeechCombo(
-                    'add'
-                );
-
-                renderPartOfSpeechCombo(
-                    'edit'
-                );
-
-                showToast(
-                    '已删除词性历史',
-                    'success'
-                );
-            }
-
-            function editPartOfSpeechHistoryFromDropdown(
-                value
-            ) {
-                const oldValue =
-                    normalizePartOfSpeechValue(
-                        value
-                    );
-
-                const nextValue =
-                    prompt(
-                        '编辑词性：',
-                        oldValue
-                    );
-
-                if (
-                    nextValue === null
-                ) {
-                    return;
-                }
-
-                renamePartOfSpeechHistory(
-                    oldValue,
-                    nextValue
-                );
+                renderPartOfSpeechCombo('add');
+                renderPartOfSpeechCombo('edit');
             }
 
             // ---------- 排序与渲染 ----------
-            const wordCollator =
-                new Intl.Collator('en', {
-                    sensitivity: 'base',
-                    numeric: true
-                });
+            const wordCollator = new Intl.Collator('en', {
+                sensitivity: 'base',
+                numeric: true
+            });
 
             function sortWords(order) {
-                const direction =
-                    order || sortOrder;
-
-                const multiplier =
-                    direction === 'asc'
-                        ? 1
-                        : -1;
-
+                const direction = order || sortOrder;
+                const multiplier = direction === 'asc' ? 1 : -1;
                 words.sort((a, b) => {
-                    const primary =
-                        wordCollator.compare(
-                            a.word || '',
-                            b.word || ''
-                        );
-
-                    if (
-                        primary !== 0
-                    ) {
-                        return (
-                            primary *
-                            multiplier
-                        );
-                    }
+                    const primary = wordCollator.compare(a.word || '', b.word || '');
+                    if (primary !== 0) return primary * multiplier;
 
                     return 0;
                 });
@@ -3799,88 +2433,33 @@
 
             function renderTable() {
                 initializePartOfSpeechHistoryFromWordsIfNeeded();
+                renderPartOfSpeechCombo('add');
+                renderPartOfSpeechCombo('edit');
+                const uniqueWordCount = new Set(words.map(item =>
+                    (item.word || '').normalize('NFKC').trim().toLocaleLowerCase('en')
+                )).size;
+                countDisplay.textContent = `${uniqueWordCount}/${words.length}`;
 
-                renderPartOfSpeechCombo(
-                    'add'
-                );
-
-                renderPartOfSpeechCombo(
-                    'edit'
-                );
-
-                const uniqueWordCount =
-                    new Set(
-                        words.map(
-                            item =>
-                                (
-                                    item.word ||
-                                    ''
-                                )
-                                    .normalize(
-                                        'NFKC'
-                                    )
-                                    .trim()
-                                    .toLocaleLowerCase(
-                                        'en'
-                                    )
-                        )
-                    ).size;
-
-                countDisplay.textContent =
-                    `${uniqueWordCount}/${words.length}`;
-
-                if (
-                    words.length === 0
-                ) {
-                    tableBody.innerHTML =
-                        '<tr class="empty-row"><td>单词列表为空，添加一个新词吧！</td></tr>';
-
+                if (words.length === 0) {
+                    tableBody.innerHTML = '<tr class="empty-row"><td>单词列表为空，添加一个新词吧！</td></tr>';
                     return;
                 }
 
-                tableBody.innerHTML =
-                    words
-                        .map(
-                            (
-                                item,
-                                index
-                            ) => {
-                                const word =
-                                    escapeHtml(
-                                        item.word
-                                    );
-
-                                const partOfSpeech =
-                                    escapeHtml(
-                                        item.partOfSpeech
-                                    );
-
-                                const original =
-                                    escapeHtml(
-                                        item.original
-                                    );
-
-                                const imitation =
-                                    escapeHtml(
-                                        item.imitation
-                                    );
-
-                                const partOfSpeechHtml =
-                                    partOfSpeech
-                                        ? `<div class="word-part-of-speech">${partOfSpeech}</div>`
-                                        : '';
-
-                                const originalHtml =
-                                    original
-                                        ? `<div class="word-original">${original}</div>`
-                                        : '';
-
-                                const imitationHtml =
-                                    imitation
-                                        ? `<div class="word-imitation">${imitation}</div>`
-                                        : '';
-
-                                return `
+                tableBody.innerHTML = words.map((item, index) => {
+                    const word = escapeHtml(item.word);
+                    const partOfSpeech = escapeHtml(item.partOfSpeech);
+                    const original = escapeHtml(item.original);
+                    const imitation = escapeHtml(item.imitation);
+                    const partOfSpeechHtml = partOfSpeech
+                        ? `<div class="word-part-of-speech">${partOfSpeech}</div>`
+                        : '';
+                    const originalHtml = original
+                        ? `<div class="word-original">${original}</div>`
+                        : '';
+                    const imitationHtml = imitation
+                        ? `<div class="word-imitation">${imitation}</div>`
+                        : '';
+                    return `
                         <tr data-index="${index}">
                             <td class="col-word">
                                 <div class="word-title-row">
@@ -3893,107 +2472,54 @@
                             </td>
                         </tr>
                     `;
-                            }
-                        )
-                        .join('');
+                }).join('');
             }
 
             function updateSortIcon() {
-                sortIcon.textContent =
-                    sortOrder === 'asc'
-                        ? '▲'
-                        : '▼';
+                sortIcon.textContent = sortOrder === 'asc' ? '▲' : '▼';
             }
 
             // ---------- 编辑功能 ----------
             function openEditModal(index) {
                 closePartOfSpeechPanels();
-
                 editingIndex = index;
-
-                const item =
-                    words[index];
-
-                editWordInput.value =
-                    item.word;
-
-                editPartOfSpeechInput.value =
-                    item.partOfSpeech;
-
-                editOriginal.value =
-                    item.original;
-
-                editImitation.value =
-                    item.imitation;
-
-                renderPartOfSpeechCombo(
-                    'edit'
-                );
-
-                editModal.classList.remove(
-                    'hidden'
-                );
-
-                setTimeout(
-                    () =>
-                        editWordInput.focus(),
-                    100
-                );
+                const item = words[index];
+                editWordInput.value = item.word;
+                editPartOfSpeechInput.value = item.partOfSpeech;
+                editOriginal.value = item.original;
+                editImitation.value = item.imitation;
+                renderPartOfSpeechCombo('edit');
+                editModal.classList.remove('hidden');
+                setTimeout(() => editWordInput.focus(), 100);
             }
 
             function closeEditModal() {
-                setPartOfSpeechPanelOpen(
-                    'edit',
-                    false
-                );
-
-                editModal.classList.add(
-                    'hidden'
-                );
-
+                setPartOfSpeechPanelOpen('edit', false);
+                editModal.classList.add('hidden');
                 editingIndex = null;
             }
 
             function saveEdit() {
-                if (
-                    editingIndex === null ||
-                    editingIndex < 0 ||
-                    editingIndex >=
-                        words.length
-                ) {
-                    alert(
-                        '编辑出错，请重试。'
-                    );
-
+                if (editingIndex === null || editingIndex < 0 || editingIndex >= words.length) {
+                    alert('编辑出错，请重试。');
                     closeEditModal();
                     return;
                 }
 
-                const word =
-                    editWordInput.value.trim();
-
+                const word = editWordInput.value.trim();
                 if (!word) {
-                    alert(
-                        '请填写“单词”字段。'
-                    );
-
+                    alert('请填写“单词”字段。');
                     editWordInput.focus();
                     return;
                 }
 
-                const partOfSpeech =
-                    addPartOfSpeechHistory(
-                        editPartOfSpeechInput.value
-                    );
-
+                const partOfSpeech = addPartOfSpeechHistory(editPartOfSpeechInput.value);
                 words[editingIndex] = {
                     ...words[editingIndex],
                     word,
                     partOfSpeech,
-                    original:
-                        editOriginal.value.trim(),
-                    imitation:
-                        editImitation.value.trim()
+                    original: editOriginal.value.trim(),
+                    imitation: editImitation.value.trim()
                 };
 
                 closeEditModal();
@@ -4002,36 +2528,16 @@
             }
 
             function deleteEditingWord() {
-                if (
-                    editingIndex === null ||
-                    editingIndex < 0 ||
-                    editingIndex >=
-                        words.length
-                ) {
-                    alert(
-                        '删除出错，请重试。'
-                    );
-
+                if (editingIndex === null || editingIndex < 0 || editingIndex >= words.length) {
+                    alert('删除出错，请重试。');
                     closeEditModal();
                     return;
                 }
 
-                const item =
-                    words[editingIndex];
+                const item = words[editingIndex];
+                if (!confirm(`确定要删除“${item.word}”这条词条吗？`)) return;
 
-                if (
-                    !confirm(
-                        `确定要删除“${item.word}”这条词条吗？`
-                    )
-                ) {
-                    return;
-                }
-
-                words.splice(
-                    editingIndex,
-                    1
-                );
-
+                words.splice(editingIndex, 1);
                 closeEditModal();
                 applySortAndRender();
                 markLocalChange();
@@ -4039,30 +2545,19 @@
 
             // ---------- 添加 ----------
             function addWord() {
-                const word =
-                    wordInput.value.trim();
-
+                const word = wordInput.value.trim();
                 if (!word) {
-                    alert(
-                        '请填写“单词”字段。'
-                    );
-
+                    alert('请填写“单词”字段。');
                     wordInput.focus();
                     return;
                 }
 
-                const partOfSpeech =
-                    addPartOfSpeechHistory(
-                        partOfSpeechInput.value
-                    );
-
+                const partOfSpeech = addPartOfSpeechHistory(partOfSpeechInput.value);
                 words.push({
                     word,
                     partOfSpeech,
-                    original:
-                        originalInput.value.trim(),
-                    imitation:
-                        imitationInput.value.trim()
+                    original: originalInput.value.trim(),
+                    imitation: imitationInput.value.trim()
                 });
 
                 applySortAndRender();
@@ -4072,315 +2567,131 @@
                 partOfSpeechInput.value = '';
                 originalInput.value = '';
                 imitationInput.value = '';
-
-                setPartOfSpeechPanelOpen(
-                    'add',
-                    false
-                );
-
-                renderPartOfSpeechCombo(
-                    'add'
-                );
-
+                setPartOfSpeechPanelOpen('add', false);
+                renderPartOfSpeechCombo('add');
                 wordInput.focus();
             }
 
             // ---------- 导出/导入 ----------
-            function downloadJson(
-                data,
-                filename
-            ) {
-                const blob =
-                    new Blob(
-                        [
-                            JSON.stringify(
-                                data,
-                                null,
-                                2
-                            )
-                        ],
-                        {
-                            type:
-                                'application/json;charset=utf-8'
-                        }
-                    );
-
-                const url =
-                    URL.createObjectURL(
-                        blob
-                    );
-
-                const link =
-                    document.createElement(
-                        'a'
-                    );
-
+            function downloadJson(data, filename) {
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
                 link.href = url;
                 link.download = filename;
-
-                document.body.appendChild(
-                    link
-                );
-
+                document.body.appendChild(link);
                 link.click();
                 link.remove();
-
-                URL.revokeObjectURL(
-                    url
-                );
+                URL.revokeObjectURL(url);
             }
 
             function exportData() {
-                if (
-                    words.length === 0
-                ) {
-                    alert(
-                        '单词列表为空，没有什么可导出的。'
-                    );
+                if (words.length === 0) {
+                    alert('单词列表为空，没有什么可导出的。');
                     return;
                 }
-
-                downloadJson(
-                    words,
-                    `wordbook_backup_${new Date().toISOString().slice(0, 10)}.json`
-                );
-
-                showToast(
-                    '导出成功',
-                    'success'
-                );
+                downloadJson(words, `wordbook_backup_${new Date().toISOString().slice(0, 10)}.json`);
+                showToast('导出成功', 'success');
             }
 
             function importData(file) {
-                if (
-                    !file ||
-                    file.size >
-                        MAX_SYNC_BYTES
-                ) {
-                    alert(
-                        '文件过大，请选择不超过 750 KB 的 JSON 文件，以确保能够安全同步到 GitHub。'
-                    );
+                if (!file || file.size > MAX_SYNC_BYTES) {
+                    alert('文件过大，请选择不超过 750 KB 的 JSON 文件，以确保能够安全同步到 GitHub。');
                     return;
                 }
 
-                const reader =
-                    new FileReader();
-
-                reader.onload =
-                    function(event) {
-                        try {
-                            const imported =
-                                JSON.parse(
-                                    event.target.result
-                                );
-
-                            if (
-                                !Array.isArray(
-                                    imported
-                                )
-                            ) {
-                                alert(
-                                    '文件格式错误：根节点必须是数组。'
-                                );
-                                return;
-                            }
-
-                            const valid =
-                                normalizeWordList(
-                                    imported
-                                );
-
-                            if (
-                                valid.length === 0 &&
-                                imported.length > 0
-                            ) {
-                                alert(
-                                    '文件中没有找到有效的单词数据。'
-                                );
-                                return;
-                            }
-
-                            try {
-                                assertSnapshotSyncSize(
-                                    valid
-                                );
-                            } catch (error) {
-                                alert(
-                                    error.message
-                                );
-                                return;
-                            }
-
-                            if (
-                                words.length > 0 &&
-                                !confirm(
-                                    `当前有 ${words.length} 个条目，导入将完全替换当前列表。确定继续吗？`
-                                )
-                            ) {
-                                return;
-                            }
-
-                            words = valid;
-
-                            applySortAndRender();
-                            markLocalChange();
-
-                            showToast(
-                                `成功导入 ${words.length} 个条目`,
-                                'success'
-                            );
-                        } catch (error) {
-                            alert(
-                                `解析文件失败：${error.message}`
-                            );
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        if (!Array.isArray(imported)) {
+                            alert('文件格式错误：根节点必须是数组。');
+                            return;
                         }
-                    };
 
-                reader.onerror =
-                    function() {
-                        alert(
-                            '读取文件失败。'
-                        );
-                    };
+                        const valid = normalizeWordList(imported);
+                        if (valid.length === 0 && imported.length > 0) {
+                            alert('文件中没有找到有效的单词数据。');
+                            return;
+                        }
 
-                reader.readAsText(
-                    file,
-                    'utf-8'
-                );
+                        try {
+                            assertSnapshotSyncSize(valid);
+                        } catch (error) {
+                            alert(error.message);
+                            return;
+                        }
+
+                        if (words.length > 0 && !confirm(`当前有 ${words.length} 个条目，导入将完全替换当前列表。确定继续吗？`)) {
+                            return;
+                        }
+
+                        words = valid;
+                        applySortAndRender();
+                        markLocalChange();
+                        showToast(`成功导入 ${words.length} 个条目`, 'success');
+                    } catch (error) {
+                        alert(`解析文件失败：${error.message}`);
+                    }
+                };
+                reader.onerror = function() {
+                    alert('读取文件失败。');
+                };
+                reader.readAsText(file, 'utf-8');
             }
 
             // ---------- 状态与提示 ----------
-            function setCloudStatus(
-                status,
-                text
-            ) {
-                statusDot.className =
-                    `dot ${status}`;
-
-                statusText.textContent =
-                    text;
+            function setCloudStatus(status, text) {
+                statusDot.className = `dot ${status}`;
+                statusText.textContent = text;
             }
 
-            function showToast(
-                message,
-                type = 'info'
-            ) {
-                toast.textContent =
-                    message;
-
-                toast.className =
-                    `toast ${type}`;
-
-                toast.classList.remove(
-                    'hidden'
-                );
-
-                clearTimeout(
-                    toastTimer
-                );
-
-                toastTimer =
-                    setTimeout(
-                        () =>
-                            toast.classList.add(
-                                'hidden'
-                            ),
-                        3500
-                    );
+            function showToast(message, type = 'info') {
+                toast.textContent = message;
+                toast.className = `toast ${type}`;
+                toast.classList.remove('hidden');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.add('hidden'), 3500);
             }
 
             // ---------- 配置弹窗 ----------
             function openConfigModal() {
-                renderTokenProfileSelect(
-                    config.activeTokenId ||
-                    selectedTokenProfileId
-                );
-
-                cfgTokenName.value =
-                    config.tokenName || '';
-
-                cfgToken.value =
-                    config.token;
-
-                cfgRememberToken.checked =
-                    config.rememberToken !==
-                    false;
-
-                cfgOwner.value =
-                    config.owner;
-
-                cfgRepo.value =
-                    config.repo;
-
-                cfgFile.value =
-                    config.file;
-
-                configSaveBtn.disabled =
-                    false;
-
-                configModal.classList.remove(
-                    'hidden'
-                );
-
-                setTimeout(
-                    () =>
-                        cfgToken.focus(),
-                    100
-                );
+                renderTokenProfileSelect(config.activeTokenId || selectedTokenProfileId);
+                cfgTokenName.value = config.tokenName || '';
+                cfgToken.value = config.token;
+                cfgRememberToken.checked = config.rememberToken !== false;
+                cfgOwner.value = config.owner;
+                cfgRepo.value = config.repo;
+                cfgFile.value = config.file;
+                configSaveBtn.disabled = false;
+                configModal.classList.remove('hidden');
+                setTimeout(() => cfgToken.focus(), 100);
             }
 
             function closeConfigModal() {
-                configModal.classList.add(
-                    'hidden'
-                );
+                configModal.classList.add('hidden');
             }
 
             function saveConfigAndConnect() {
-                configSaveBtn.disabled =
-                    false;
-
-                const previousTarget =
-                    getSyncTarget();
-
-                const token =
-                    cfgToken.value.trim();
-
-                const owner =
-                    cfgOwner.value.trim();
-
-                const repo =
-                    cfgRepo.value.trim();
-
-                const file =
-                    cfgFile.value.trim() ||
-                    'wordbook_data.json';
+                configSaveBtn.disabled = false;
+                const previousTarget = getSyncTarget();
+                const token = cfgToken.value.trim();
+                const owner = cfgOwner.value.trim();
+                const repo = cfgRepo.value.trim();
+                const file = cfgFile.value.trim() || 'wordbook_data.json';
 
                 if (!token) {
-                    showToast(
-                        '请输入 GitHub Token',
-                        'error'
-                    );
-
+                    showToast('请输入 GitHub Token', 'error');
                     cfgToken.focus();
                     return;
                 }
-
                 if (!owner) {
-                    showToast(
-                        '请输入仓库所有者',
-                        'error'
-                    );
-
+                    showToast('请输入仓库所有者', 'error');
                     cfgOwner.focus();
                     return;
                 }
-
                 if (!repo) {
-                    showToast(
-                        '请输入仓库名称',
-                        'error'
-                    );
-
+                    showToast('请输入仓库名称', 'error');
                     cfgRepo.focus();
                     return;
                 }
@@ -4388,666 +2699,213 @@
                 config = {
                     ...config,
                     token,
-                    tokenName:
-                        cfgTokenName.value.trim(),
+                    tokenName: cfgTokenName.value.trim(),
                     owner,
                     repo,
                     file,
-                    rememberToken:
-                        cfgRememberToken.checked
+                    rememberToken: cfgRememberToken.checked
                 };
-
                 saveConfig();
 
-                if (
-                    previousTarget !==
-                    getSyncTarget()
-                ) {
-                    syncMeta =
-                        createEmptySyncMeta(
-                            getSyncTarget()
-                        );
-
+                if (previousTarget !== getSyncTarget()) {
+                    syncMeta = createEmptySyncMeta(getSyncTarget());
                     saveSyncMeta();
                 }
 
                 closeConfigModal();
-
-                showToast(
-                    '配置已保存，正在安全同步...',
-                    'info'
-                );
-
-                syncToCloud(
-                    true,
-                    true
-                );
+                showToast('配置已保存，正在安全同步...', 'info');
+                syncToCloud(true, true);
             }
 
             // ---------- 词性下拉事件 ----------
-            partOfSpeechTrigger.addEventListener(
-                'click',
-                event => {
-                    event.stopPropagation();
-
-                    const willOpen =
-                        partOfSpeechPanel.classList.contains(
-                            'hidden'
-                        );
-
-                    setPartOfSpeechPanelOpen(
-                        'edit',
-                        false
-                    );
-
-                    setPartOfSpeechPanelOpen(
-                        'add',
-                        willOpen
-                    );
-                }
-            );
-
-            editPartOfSpeechTrigger.addEventListener(
-                'click',
-                event => {
-                    event.stopPropagation();
-
-                    const willOpen =
-                        editPartOfSpeechPanel.classList.contains(
-                            'hidden'
-                        );
-
-                    setPartOfSpeechPanelOpen(
-                        'add',
-                        false
-                    );
-
-                    setPartOfSpeechPanelOpen(
-                        'edit',
-                        willOpen
-                    );
-                }
-            );
-
-            function handlePartOfSpeechOptionClick(
-                event,
-                which
-            ) {
-                const upButton =
-                    event.target.closest(
-                        '.pos-option-up[data-value]'
-                    );
-
+            partOfSpeechTrigger.addEventListener('click', event => {
+                event.stopPropagation();
+                const willOpen = partOfSpeechPanel.classList.contains('hidden');
+                setPartOfSpeechPanelOpen('edit', false);
+                setPartOfSpeechPanelOpen('add', willOpen);
+            });
+            editPartOfSpeechTrigger.addEventListener('click', event => {
+                event.stopPropagation();
+                const willOpen = editPartOfSpeechPanel.classList.contains('hidden');
+                setPartOfSpeechPanelOpen('add', false);
+                setPartOfSpeechPanelOpen('edit', willOpen);
+            });
+            function handlePartOfSpeechOptionClick(event, which) {
+                const upButton = event.target.closest('.pos-option-up[data-value]');
                 if (upButton) {
                     event.stopPropagation();
-
-                    movePartOfSpeechHistory(
-                        upButton.dataset.value,
-                        -1
-                    );
-
+                    movePartOfSpeechHistory(upButton.dataset.value, -1);
                     return;
                 }
 
-                const downButton =
-                    event.target.closest(
-                        '.pos-option-down[data-value]'
-                    );
-
+                const downButton = event.target.closest('.pos-option-down[data-value]');
                 if (downButton) {
                     event.stopPropagation();
-
-                    movePartOfSpeechHistory(
-                        downButton.dataset.value,
-                        1
-                    );
-
+                    movePartOfSpeechHistory(downButton.dataset.value, 1);
                     return;
                 }
 
-                const editButton =
-                    event.target.closest(
-                        '.pos-option-edit[data-value]'
-                    );
-
-                if (editButton) {
-                    event.stopPropagation();
-
-                    editPartOfSpeechHistoryFromDropdown(
-                        editButton.dataset.value
-                    );
-
+                const newOption = event.target.closest('.pos-new-option[data-value]');
+                if (newOption) {
+                    choosePartOfSpeech(which, newOption.dataset.value);
                     return;
                 }
 
-                const deleteButton =
-                    event.target.closest(
-                        '.pos-option-delete[data-value]'
-                    );
-
-                if (deleteButton) {
-                    event.stopPropagation();
-
-                    deletePartOfSpeechHistory(
-                        deleteButton.dataset.value
-                    );
-
-                    return;
-                }
-
-                const option =
-                    event.target.closest(
-                        '.pos-option[data-value]'
-                    );
-
-                if (option) {
-                    choosePartOfSpeech(
-                        which,
-                        option.dataset.value
-                    );
-                }
+                const option = event.target.closest('.pos-option[data-value]');
+                if (option) choosePartOfSpeech(which, option.dataset.value);
             }
+            partOfSpeechOptions.addEventListener('click', event => handlePartOfSpeechOptionClick(event, 'add'));
+            editPartOfSpeechOptions.addEventListener('click', event => handlePartOfSpeechOptionClick(event, 'edit'));
+            partOfSpeechInput.addEventListener('click', event => {
+                event.stopPropagation();
+                setPartOfSpeechPanelOpen('edit', false);
+                setPartOfSpeechPanelOpen('add', true);
+            });
+            editPartOfSpeechInput.addEventListener('click', event => {
+                event.stopPropagation();
+                setPartOfSpeechPanelOpen('add', false);
+                setPartOfSpeechPanelOpen('edit', true);
+            });
+            partOfSpeechInput.addEventListener('input', () => {
+                renderPartOfSpeechCombo('add');
+                setPartOfSpeechPanelOpen('add', true);
+            });
+            editPartOfSpeechInput.addEventListener('input', () => {
+                renderPartOfSpeechCombo('edit');
+                setPartOfSpeechPanelOpen('edit', true);
+            });
+            document.addEventListener('click', event => {
+                const addInsidePanel = partOfSpeechPanel.contains(event.target);
+                const addOnTrigger = partOfSpeechTrigger.contains(event.target);
+                const addOnInput = partOfSpeechInput.contains(event.target);
+                const editInsidePanel = editPartOfSpeechPanel.contains(event.target);
+                const editOnTrigger = editPartOfSpeechTrigger.contains(event.target);
+                const editOnInput = editPartOfSpeechInput.contains(event.target);
 
-            partOfSpeechOptions.addEventListener(
-                'click',
-                event =>
-                    handlePartOfSpeechOptionClick(
-                        event,
-                        'add'
-                    )
-            );
-
-            editPartOfSpeechOptions.addEventListener(
-                'click',
-                event =>
-                    handlePartOfSpeechOptionClick(
-                        event,
-                        'edit'
-                    )
-            );
-
-            partOfSpeechInput.addEventListener(
-                'click',
-                event => {
-                    event.stopPropagation();
-
-                    setPartOfSpeechPanelOpen(
-                        'edit',
-                        false
-                    );
-
-                    setPartOfSpeechPanelOpen(
-                        'add',
-                        true
-                    );
+                if (!addInsidePanel && !addOnTrigger && !addOnInput) {
+                    setPartOfSpeechPanelOpen('add', false);
                 }
-            );
-
-            editPartOfSpeechInput.addEventListener(
-                'click',
-                event => {
-                    event.stopPropagation();
-
-                    setPartOfSpeechPanelOpen(
-                        'add',
-                        false
-                    );
-
-                    setPartOfSpeechPanelOpen(
-                        'edit',
-                        true
-                    );
+                if (!editInsidePanel && !editOnTrigger && !editOnInput) {
+                    setPartOfSpeechPanelOpen('edit', false);
                 }
-            );
-
-            partOfSpeechInput.addEventListener(
-                'input',
-                () => {
-                    renderPartOfSpeechCombo(
-                        'add'
-                    );
-
-                    setPartOfSpeechPanelOpen(
-                        'add',
-                        true
-                    );
-                }
-            );
-
-            editPartOfSpeechInput.addEventListener(
-                'input',
-                () => {
-                    renderPartOfSpeechCombo(
-                        'edit'
-                    );
-
-                    setPartOfSpeechPanelOpen(
-                        'edit',
-                        true
-                    );
-                }
-            );
-
-            document.addEventListener(
-                'click',
-                event => {
-                    const addInsidePanel =
-                        partOfSpeechPanel.contains(
-                            event.target
-                        );
-
-                    const addOnTrigger =
-                        partOfSpeechTrigger.contains(
-                            event.target
-                        );
-
-                    const addOnInput =
-                        partOfSpeechInput.contains(
-                            event.target
-                        );
-
-                    const editInsidePanel =
-                        editPartOfSpeechPanel.contains(
-                            event.target
-                        );
-
-                    const editOnTrigger =
-                        editPartOfSpeechTrigger.contains(
-                            event.target
-                        );
-
-                    const editOnInput =
-                        editPartOfSpeechInput.contains(
-                            event.target
-                        );
-
-                    if (
-                        !addInsidePanel &&
-                        !addOnTrigger &&
-                        !addOnInput
-                    ) {
-                        setPartOfSpeechPanelOpen(
-                            'add',
-                            false
-                        );
-                    }
-
-                    if (
-                        !editInsidePanel &&
-                        !editOnTrigger &&
-                        !editOnInput
-                    ) {
-                        setPartOfSpeechPanelOpen(
-                            'edit',
-                            false
-                        );
-                    }
-                }
-            );
-
-            // ---------- 表格事件委托 ----------
-            tableBody.addEventListener(
-                'click',
-                function(event) {
-                    const editButton =
-                        event.target.closest(
-                            '.edit-link'
-                        );
-
-                    if (!editButton) {
-                        return;
-                    }
-
-                    const index =
-                        Number.parseInt(
-                            editButton.dataset.index,
-                            10
-                        );
-
-                    if (
-                        !Number.isInteger(
-                            index
-                        ) ||
-                        index < 0 ||
-                        index >=
-                            words.length
-                    ) {
-                        return;
-                    }
-
-                    openEditModal(
-                        index
-                    );
-                }
-            );
-
-            // ---------- 事件绑定 ----------
-            addBtn.addEventListener(
-                'click',
-                addWord
-            );
-
-            document
-                .querySelectorAll(
-                    '.add-section input, .add-section textarea'
-                )
-                .forEach(input => {
-                    input.addEventListener(
-                        'keydown',
-                        function(event) {
-                            if (
-                                event.key !==
-                                'Enter'
-                            ) {
-                                return;
-                            }
-
-                            if (
-                                this.tagName ===
-                                    'TEXTAREA' &&
-                                !(
-                                    event.ctrlKey ||
-                                    event.metaKey
-                                )
-                            ) {
-                                return;
-                            }
-
-                            event.preventDefault();
-                            addWord();
-                        }
-                    );
-                });
-
-            exportBtn.addEventListener(
-                'click',
-                exportData
-            );
-
-            importBtn.addEventListener(
-                'click',
-                () => fileInput.click()
-            );
-
-            fileInput.addEventListener(
-                'change',
-                function() {
-                    if (
-                        this.files?.length
-                    ) {
-                        importData(
-                            this.files[0]
-                        );
-                    }
-
-                    this.value = '';
-                }
-            );
-
-            sortWordHead.addEventListener(
-                'click',
-                function() {
-                    sortOrder =
-                        sortOrder === 'asc'
-                            ? 'desc'
-                            : 'asc';
-
-                    applySortAndRender();
-                }
-            );
-
-            sortWordHead.addEventListener(
-                'keydown',
-                function(event) {
-                    if (
-                        event.key ===
-                            'Enter' ||
-                        event.key === ' '
-                    ) {
-                        event.preventDefault();
-                        sortWordHead.click();
-                    }
-                }
-            );
-
-            syncBtn.addEventListener(
-                'click',
-                () =>
-                    syncToCloud(
-                        true,
-                        true
-                    )
-            );
-
-            configBtn.addEventListener(
-                'click',
-                openConfigModal
-            );
-
-            configCancelBtn.addEventListener(
-                'click',
-                closeConfigModal
-            );
-
-            configSaveBtn.addEventListener(
-                'click',
-                saveConfigAndConnect
-            );
-
-            cfgSavedToken.addEventListener(
-                'change',
-                () => {
-                    if (
-                        cfgSavedToken.value
-                    ) {
-                        applyTokenProfile(
-                            cfgSavedToken.value
-                        );
-                    } else {
-                        beginNewToken();
-                    }
-                }
-            );
-
-            cfgNewTokenBtn.addEventListener(
-                'click',
-                beginNewToken
-            );
-
-            cfgDeleteTokenBtn.addEventListener(
-                'click',
-                deleteSelectedTokenProfile
-            );
-
-            [
-                cfgTokenName,
-                cfgToken,
-                cfgOwner,
-                cfgRepo,
-                cfgFile
-            ].forEach(input => {
-                input.addEventListener(
-                    'input',
-                    () => {
-                        configSaveBtn.disabled =
-                            false;
-                    }
-                );
             });
 
-            configModal.addEventListener(
-                'click',
-                event => {
-                    if (
-                        event.target ===
-                        configModal
-                    ) {
-                        closeConfigModal();
-                    }
-                }
-            );
+            // ---------- 表格事件委托 ----------
+            tableBody.addEventListener('click', function(event) {
+                const editButton = event.target.closest('.edit-link');
+                if (!editButton) return;
 
-            configModal
-                .querySelectorAll(
-                    'input[type="text"], input[type="password"]'
-                )
-                .forEach(input => {
-                    input.addEventListener(
-                        'keydown',
-                        event => {
-                            if (
-                                event.key ===
-                                'Enter'
-                            ) {
-                                event.preventDefault();
-                                saveConfigAndConnect();
-                            }
-                        }
-                    );
+                const index = Number.parseInt(editButton.dataset.index, 10);
+                if (!Number.isInteger(index) || index < 0 || index >= words.length) return;
+
+                openEditModal(index);
+            });
+
+            // ---------- 事件绑定 ----------
+            addBtn.addEventListener('click', addWord);
+
+            document.querySelectorAll('.add-section input, .add-section textarea').forEach(input => {
+                input.addEventListener('keydown', function(event) {
+                    if (event.key !== 'Enter') return;
+                    if (this.tagName === 'TEXTAREA' && !(event.ctrlKey || event.metaKey)) return;
+                    event.preventDefault();
+                    addWord();
                 });
+            });
 
-            editDeleteBtn.addEventListener(
-                'click',
-                deleteEditingWord
-            );
+            exportBtn.addEventListener('click', exportData);
+            importBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', function() {
+                if (this.files?.length) importData(this.files[0]);
+                this.value = '';
+            });
 
-            editCancelBtn.addEventListener(
-                'click',
-                closeEditModal
-            );
+            sortWordHead.addEventListener('click', function() {
+                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                applySortAndRender();
+            });
 
-            editSaveBtn.addEventListener(
-                'click',
-                saveEdit
-            );
-
-            editModal.addEventListener(
-                'click',
-                event => {
-                    if (
-                        event.target ===
-                        editModal
-                    ) {
-                        closeEditModal();
-                    }
+            sortWordHead.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    sortWordHead.click();
                 }
-            );
+            });
 
-            editModal
-                .querySelectorAll(
-                    'input, textarea'
-                )
-                .forEach(input => {
-                    input.addEventListener(
-                        'keydown',
-                        function(event) {
-                            if (
-                                event.key !==
-                                'Enter'
-                            ) {
-                                return;
-                            }
+            syncBtn.addEventListener('click', () => syncToCloud(true, true));
 
-                            if (
-                                this.tagName ===
-                                    'TEXTAREA' &&
-                                !(
-                                    event.ctrlKey ||
-                                    event.metaKey
-                                )
-                            ) {
-                                return;
-                            }
+            configBtn.addEventListener('click', openConfigModal);
+            configCancelBtn.addEventListener('click', closeConfigModal);
+            configSaveBtn.addEventListener('click', saveConfigAndConnect);
+            cfgSavedToken.addEventListener('change', () => {
+                if (cfgSavedToken.value) {
+                    applyTokenProfile(cfgSavedToken.value);
+                } else {
+                    beginNewToken();
+                }
+            });
+            cfgNewTokenBtn.addEventListener('click', beginNewToken);
+            cfgDeleteTokenBtn.addEventListener('click', deleteSelectedTokenProfile);
 
-                            event.preventDefault();
-                            saveEdit();
-                        }
-                    );
+            [cfgTokenName, cfgToken, cfgOwner, cfgRepo, cfgFile].forEach(input => {
+                input.addEventListener('input', () => {
+                    configSaveBtn.disabled = false;
                 });
+            });
 
-            document.addEventListener(
-                'keydown',
-                event => {
-                    if (
-                        event.key !==
-                        'Escape'
-                    ) {
-                        return;
+            configModal.addEventListener('click', event => {
+                if (event.target === configModal) closeConfigModal();
+            });
+
+            configModal.querySelectorAll('input[type="text"], input[type="password"]').forEach(input => {
+                input.addEventListener('keydown', event => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        saveConfigAndConnect();
                     }
+                });
+            });
 
-                    closePartOfSpeechPanels();
+            editDeleteBtn.addEventListener('click', deleteEditingWord);
+            editCancelBtn.addEventListener('click', closeEditModal);
+            editSaveBtn.addEventListener('click', saveEdit);
+            editModal.addEventListener('click', event => {
+                if (event.target === editModal) closeEditModal();
+            });
 
-                    if (
-                        !editModal.classList.contains(
-                            'hidden'
-                        )
-                    ) {
-                        closeEditModal();
-                    }
+            editModal.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('keydown', function(event) {
+                    if (event.key !== 'Enter') return;
+                    if (this.tagName === 'TEXTAREA' && !(event.ctrlKey || event.metaKey)) return;
+                    event.preventDefault();
+                    saveEdit();
+                });
+            });
 
-                    if (
-                        !configModal.classList.contains(
-                            'hidden'
-                        )
-                    ) {
-                        closeConfigModal();
-                    }
-                }
-            );
+            document.addEventListener('keydown', event => {
+                if (event.key !== 'Escape') return;
+                closePartOfSpeechPanels();
+                if (!editModal.classList.contains('hidden')) closeEditModal();
+                if (!configModal.classList.contains('hidden')) closeConfigModal();
+            });
 
             function updateBackToTopVisibility() {
-                backToTopBtn.classList.toggle(
-                    'visible',
-                    window.scrollY > 240
-                );
+                backToTopBtn.classList.toggle('visible', window.scrollY > 240);
             }
 
-            backToTopBtn.addEventListener(
-                'click',
-                () => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }
-            );
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
-            window.addEventListener(
-                'scroll',
-                updateBackToTopVisibility,
-                {
-                    passive: true
-                }
-            );
-
+            window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
             updateBackToTopVisibility();
 
             // ---------- 初始化 ----------
-            console.info(
-                '当前网页独立存储实例：',
-                PAGE_INSTANCE_ID,
-                getPageInstanceIdentity()
-            );
-
-            sortWordHead.setAttribute(
-                'tabindex',
-                '0'
-            );
-
-            sortWordHead.setAttribute(
-                'role',
-                'button'
-            );
-
-            toast.setAttribute(
-                'role',
-                'status'
-            );
-
-            toast.setAttribute(
-                'aria-live',
-                'polite'
-            );
+            console.info('当前网页独立存储实例：', PAGE_INSTANCE_ID, getPageInstanceIdentity());
+            sortWordHead.setAttribute('tabindex', '0');
+            sortWordHead.setAttribute('role', 'button');
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
 
             loadConfig();
             loadSyncMeta();
@@ -5057,15 +2915,9 @@
 
             if (isConfigValid()) {
                 ensureSyncTarget();
-                syncToCloud(
-                    false,
-                    false
-                );
+                syncToCloud(false, false);
             } else {
-                setCloudStatus(
-                    'offline',
-                    '未配置'
-                );
+                setCloudStatus('offline', '未配置');
             }
         })();
     </script>
