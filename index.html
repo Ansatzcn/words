@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-21-no-definition-v1">
+    <meta name="app-build" content="2026-08-21-edit-selection-order-v2">
     <title>Words</title>
     <style>
         * {
@@ -1155,12 +1155,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="editOriginal">读写</label>
-                <textarea id="editOriginal" placeholder="请输入读写" rows="2"></textarea>
-            </div>
-            <div class="form-group">
                 <label for="editImitation">听说</label>
                 <textarea id="editImitation" placeholder="请输入听说" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editOriginal">读写</label>
+                <textarea id="editOriginal" placeholder="请输入读写" rows="2"></textarea>
             </div>
             <div class="modal-actions">
                 <button class="btn-modal delete" id="editDeleteBtn" type="button">删除</button>
@@ -2467,8 +2467,8 @@
                                     <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
                                 </div>
                                 ${partOfSpeechHtml}
-                                ${originalHtml}
                                 ${imitationHtml}
+                                ${originalHtml}
                             </td>
                         </tr>
                     `;
@@ -2869,8 +2869,29 @@
             editDeleteBtn.addEventListener('click', deleteEditingWord);
             editCancelBtn.addEventListener('click', closeEditModal);
             editSaveBtn.addEventListener('click', saveEdit);
+
+            // 仅当一次指针操作确实从遮罩层开始并在遮罩层结束时才关闭弹窗。
+            // 这样在 input/textarea 内拖拽选中文字，即使鼠标划出弹窗，也不会误触发关闭。
+            let editModalPointerStartedOnOverlay = false;
+            let editModalPointerEndedOnOverlay = false;
+            editModal.addEventListener('pointerdown', event => {
+                editModalPointerStartedOnOverlay = event.target === editModal;
+                editModalPointerEndedOnOverlay = false;
+            });
+            editModal.addEventListener('pointerup', event => {
+                editModalPointerEndedOnOverlay = event.target === editModal;
+            });
+            editModal.addEventListener('pointercancel', () => {
+                editModalPointerStartedOnOverlay = false;
+                editModalPointerEndedOnOverlay = false;
+            });
             editModal.addEventListener('click', event => {
-                if (event.target === editModal) closeEditModal();
+                const shouldClose = editModalPointerStartedOnOverlay
+                    && editModalPointerEndedOnOverlay
+                    && event.target === editModal;
+                editModalPointerStartedOnOverlay = false;
+                editModalPointerEndedOnOverlay = false;
+                if (shouldClose) closeEditModal();
             });
 
             editModal.querySelectorAll('input, textarea').forEach(input => {
