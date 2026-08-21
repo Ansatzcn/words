@@ -2022,6 +2022,12 @@
     "imitation": "I estimate that the journey will take about two hours."
   },
   {
+    "word": "estimate",
+    "partOfSpeech": "verb",
+    "original": "The total cost of the infrastructure project, which was initially estimated at $2 billion, rose substantially after construction was delayed by several years.",
+    "imitation": "The repairs were estimated at around £500."
+  },
+  {
     "word": "etiquette",
     "partOfSpeech": "",
     "original": "",
