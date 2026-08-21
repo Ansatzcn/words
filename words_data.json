@@ -1,6 +1,12 @@
 [
   {
     "word": "aback",
+    "partOfSpeech": "adverb",
+    "definition": "backward; toward the back (now rare, mostly in older writing)",
+    "example": "The boat’s sails were pressed aback by a sudden change of wind."
+  },
+  {
+    "word": "aback",
     "partOfSpeech": "adjective",
     "definition": "surprised or shocked, often so that you pause or don’t know how to respond",
     "example": "I was taken aback by his sudden apology."
