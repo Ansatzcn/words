@@ -654,6 +654,12 @@
     "imitation": "This product is widely available."
   },
   {
+    "word": "bail",
+    "partOfSpeech": "noun",
+    "original": "Defendants accused of non-violent offences may be released on bail while awaiting trial.",
+    "imitation": "He was released on bail while awaiting trial."
+  },
+  {
     "word": "ballot",
     "partOfSpeech": "",
     "original": "",
