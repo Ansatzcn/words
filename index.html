@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-17-pos-dropdown-row-edit-delete-v1">
+    <meta name="app-build" content="2026-08-21-no-definition-v1">
     <title>Words</title>
     <style>
         * {
@@ -480,16 +480,8 @@
             white-space: normal;
             overflow-wrap: anywhere;
         }
-        .word-table .word-definition {
-            margin-top: 0.12rem;
-            color: #334155;
-            font-weight: 400;
-            font-style: italic;
-            line-height: 1.32;
-            white-space: normal;
-            overflow-wrap: anywhere;
-        }
-        .word-table .word-example {
+        .word-table .word-original,
+        .word-table .word-imitation {
             margin-top: 0.1rem;
             color: #334155;
             font-weight: 400;
@@ -1094,12 +1086,12 @@
                     </div>
                 </div>
                 <div class="form-group full-width">
-                    <label for="definitionInput">释义</label>
-                    <input type="text" id="definitionInput">
+                    <label for="originalInput">原句</label>
+                    <textarea id="originalInput" rows="1"></textarea>
                 </div>
                 <div class="form-group full-width">
-                    <label for="exampleInput">例句</label>
-                    <textarea id="exampleInput" rows="1"></textarea>
+                    <label for="imitationInput">仿写</label>
+                    <textarea id="imitationInput" rows="1"></textarea>
                 </div>
                 <button class="btn-primary" id="addBtn">添加</button>
             </div>
@@ -1149,12 +1141,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="editDefinition">释义</label>
-                <input type="text" id="editDefinition" placeholder="请输入释义">
+                <label for="editOriginal">原句</label>
+                <textarea id="editOriginal" placeholder="请输入原句" rows="2"></textarea>
             </div>
             <div class="form-group">
-                <label for="editExample">例句</label>
-                <textarea id="editExample" placeholder="请输入例句" rows="2"></textarea>
+                <label for="editImitation">仿写</label>
+                <textarea id="editImitation" placeholder="请输入仿写" rows="2"></textarea>
             </div>
             <div class="modal-actions">
                 <button class="btn-modal delete" id="editDeleteBtn" type="button">删除</button>
@@ -1316,8 +1308,8 @@
             const partOfSpeechTrigger = document.getElementById('partOfSpeechTrigger');
             const partOfSpeechPanel = document.getElementById('partOfSpeechPanel');
             const partOfSpeechOptions = document.getElementById('partOfSpeechOptions');
-            const definitionInput = document.getElementById('definitionInput');
-            const exampleInput = document.getElementById('exampleInput');
+            const originalInput = document.getElementById('originalInput');
+            const imitationInput = document.getElementById('imitationInput');
             const addBtn = document.getElementById('addBtn');
             const tableBody = document.getElementById('tableBody');
             const countDisplay = document.getElementById('countDisplay');
@@ -1340,8 +1332,8 @@
             const editPartOfSpeechTrigger = document.getElementById('editPartOfSpeechTrigger');
             const editPartOfSpeechPanel = document.getElementById('editPartOfSpeechPanel');
             const editPartOfSpeechOptions = document.getElementById('editPartOfSpeechOptions');
-            const editDefinition = document.getElementById('editDefinition');
-            const editExample = document.getElementById('editExample');
+            const editOriginal = document.getElementById('editOriginal');
+            const editImitation = document.getElementById('editImitation');
             const editDeleteBtn = document.getElementById('editDeleteBtn');
             const editCancelBtn = document.getElementById('editCancelBtn');
             const editSaveBtn = document.getElementById('editSaveBtn');
@@ -1500,8 +1492,10 @@
                 return {
                     word,
                     partOfSpeech: normalizePartOfSpeechValue(item.partOfSpeech),
-                    definition: typeof item.definition === 'string' ? item.definition.trim() : '',
-                    example: typeof item.example === 'string' ? item.example.trim() : ''
+                    original: typeof item.original === 'string'
+                        ? item.original.trim()
+                        : (typeof item.example === 'string' ? item.example.trim() : ''),
+                    imitation: typeof item.imitation === 'string' ? item.imitation.trim() : ''
                 };
             }
 
@@ -1520,11 +1514,11 @@
                     .map(item => ({
                         word: item.word,
                         partOfSpeech: item.partOfSpeech,
-                        definition: item.definition,
-                        example: item.example
+                        original: item.original,
+                        imitation: item.imitation
                     }))
                     .sort((a, b) => {
-                        const fields = ['word', 'partOfSpeech', 'definition', 'example'];
+                        const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
                         for (const field of fields) {
                             const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
@@ -2451,7 +2445,7 @@
                     const primary = wordCollator.compare(a.word || '', b.word || '');
                     if (primary !== 0) return primary * multiplier;
 
-                    return wordCollator.compare(a.definition || '', b.definition || '') * multiplier;
+                    return 0;
                 });
             }
 
@@ -2479,16 +2473,16 @@
                 tableBody.innerHTML = words.map((item, index) => {
                     const word = escapeHtml(item.word);
                     const partOfSpeech = escapeHtml(item.partOfSpeech);
-                    const definition = escapeHtml(item.definition);
-                    const example = escapeHtml(item.example);
+                    const original = escapeHtml(item.original);
+                    const imitation = escapeHtml(item.imitation);
                     const partOfSpeechHtml = partOfSpeech
                         ? `<div class="word-part-of-speech">${partOfSpeech}</div>`
                         : '';
-                    const definitionHtml = definition
-                        ? `<div class="word-definition">${definition}</div>`
+                    const originalHtml = original
+                        ? `<div class="word-original">${original}</div>`
                         : '';
-                    const exampleHtml = example
-                        ? `<div class="word-example">${example}</div>`
+                    const imitationHtml = imitation
+                        ? `<div class="word-imitation">${imitation}</div>`
                         : '';
                     return `
                         <tr data-index="${index}">
@@ -2498,8 +2492,8 @@
                                     <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
                                 </div>
                                 ${partOfSpeechHtml}
-                                ${definitionHtml}
-                                ${exampleHtml}
+                                ${originalHtml}
+                                ${imitationHtml}
                             </td>
                         </tr>
                     `;
@@ -2517,8 +2511,8 @@
                 const item = words[index];
                 editWordInput.value = item.word;
                 editPartOfSpeechInput.value = item.partOfSpeech;
-                editDefinition.value = item.definition;
-                editExample.value = item.example;
+                editOriginal.value = item.original;
+                editImitation.value = item.imitation;
                 renderPartOfSpeechCombo('edit');
                 editModal.classList.remove('hidden');
                 setTimeout(() => editWordInput.focus(), 100);
@@ -2549,8 +2543,8 @@
                     ...words[editingIndex],
                     word,
                     partOfSpeech,
-                    definition: editDefinition.value.trim(),
-                    example: editExample.value.trim()
+                    original: editOriginal.value.trim(),
+                    imitation: editImitation.value.trim()
                 };
 
                 closeEditModal();
@@ -2566,7 +2560,7 @@
                 }
 
                 const item = words[editingIndex];
-                if (!confirm(`确定要删除“${item.word}”的这条释义吗？`)) return;
+                if (!confirm(`确定要删除“${item.word}”这条词条吗？`)) return;
 
                 words.splice(editingIndex, 1);
                 closeEditModal();
@@ -2587,8 +2581,8 @@
                 words.push({
                     word,
                     partOfSpeech,
-                    definition: definitionInput.value.trim(),
-                    example: exampleInput.value.trim()
+                    original: originalInput.value.trim(),
+                    imitation: imitationInput.value.trim()
                 });
 
                 applySortAndRender();
@@ -2596,8 +2590,8 @@
 
                 wordInput.value = '';
                 partOfSpeechInput.value = '';
-                definitionInput.value = '';
-                exampleInput.value = '';
+                originalInput.value = '';
+                imitationInput.value = '';
                 setPartOfSpeechPanelOpen('add', false);
                 renderPartOfSpeechCombo('add');
                 wordInput.focus();
