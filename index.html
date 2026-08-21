@@ -2914,9 +2914,25 @@
                 backToTopBtn.classList.toggle('visible', window.scrollY > 240);
             }
 
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            function fastScrollToTop() {
+                const startY = window.scrollY;
+                if (startY <= 0) return;
+
+                const duration = 160;
+                const startTime = performance.now();
+
+                function step(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    window.scrollTo(0, Math.round(startY * (1 - eased)));
+
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+
+                requestAnimationFrame(step);
+            }
+
+            backToTopBtn.addEventListener('click', fastScrollToTop);
 
             window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
             updateBackToTopVisibility();
