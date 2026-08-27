@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-21-edit-selection-order-v2">
+    <meta name="app-build" content="2026-08-27-pos-sort-added-order-v3">
     <title>Words</title>
     <style>
         * {
@@ -1055,7 +1055,7 @@
             }
         }
     
-/* Words 总表：单词 1.2rem，其余 1rem；仅“听说”为主色 */
+/* Words 总表：词汇 1.1rem，其余 1rem；仅“听说”为主色 */
 .word-table,
 .word-table th,
 .word-table td,
@@ -1066,7 +1066,7 @@
     font-size:1rem!important;
 }
 .word-table .word-title-text{
-    font-size:1.2rem!important;
+    font-size:1.1rem!important;
     line-height:1.4;
 }
 .word-table .col-word,
@@ -1555,19 +1555,52 @@
                 const word = item.word.trim();
                 if (!word) return null;
 
+                const addedOrder = Number.isSafeInteger(item.addedOrder) && item.addedOrder > 0
+                    ? item.addedOrder
+                    : null;
+
                 return {
                     word,
                     partOfSpeech: normalizePartOfSpeechValue(item.partOfSpeech),
                     original: typeof item.original === 'string'
                         ? item.original.trim()
                         : (typeof item.example === 'string' ? item.example.trim() : ''),
-                    imitation: typeof item.imitation === 'string' ? item.imitation.trim() : ''
+                    imitation: typeof item.imitation === 'string' ? item.imitation.trim() : '',
+                    addedOrder
                 };
             }
 
             function normalizeWordList(value) {
                 if (!Array.isArray(value)) return [];
-                return value.map(normalizeWordItem).filter(Boolean);
+
+                const normalized = value.map(normalizeWordItem).filter(Boolean);
+                const seenOrders = new Set();
+                const needsOrderMigration = normalized.some(item => {
+                    if (!Number.isSafeInteger(item.addedOrder) || item.addedOrder <= 0 || seenOrders.has(item.addedOrder)) {
+                        return true;
+                    }
+                    seenOrders.add(item.addedOrder);
+                    return false;
+                });
+
+                // 旧数据没有 addedOrder 时，按当前保存顺序一次性补齐。
+                // 原版本对同词比较返回 0，现代浏览器稳定排序会保留这些条目的原相对顺序。
+                if (needsOrderMigration) {
+                    return normalized.map((item, index) => ({
+                        ...item,
+                        addedOrder: index + 1
+                    }));
+                }
+
+                return normalized;
+            }
+
+            function getNextAddedOrder() {
+                return words.reduce((maxOrder, item) => {
+                    return Number.isSafeInteger(item.addedOrder) && item.addedOrder > maxOrder
+                        ? item.addedOrder
+                        : maxOrder;
+                }, 0) + 1;
             }
 
             const fingerprintCollator = new Intl.Collator('en', {
@@ -1581,7 +1614,8 @@
                         word: item.word,
                         partOfSpeech: item.partOfSpeech,
                         original: item.original,
-                        imitation: item.imitation
+                        imitation: item.imitation,
+                        addedOrder: item.addedOrder
                     }))
                     .sort((a, b) => {
                         const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
@@ -1589,7 +1623,7 @@
                             const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
                         }
-                        return 0;
+                        return a.addedOrder - b.addedOrder;
                     });
                 return JSON.stringify(canonical);
             }
@@ -2455,8 +2489,7 @@
                     [partOfSpeechHistory[targetIndex], partOfSpeechHistory[index]];
 
                 savePartOfSpeechHistory();
-                renderPartOfSpeechCombo('add');
-                renderPartOfSpeechCombo('edit');
+                applySortAndRender();
             }
 
             // ---------- 排序与渲染 ----------
@@ -2468,11 +2501,24 @@
             function sortWords(order) {
                 const direction = order || sortOrder;
                 const multiplier = direction === 'asc' ? 1 : -1;
+                const partOfSpeechRank = new Map(
+                    partOfSpeechHistory.map((value, index) => [partOfSpeechKey(value), index])
+                );
+                const unknownRank = partOfSpeechHistory.length;
+
                 words.sort((a, b) => {
                     const primary = wordCollator.compare(a.word || '', b.word || '');
                     if (primary !== 0) return primary * multiplier;
 
-                    return 0;
+                    // 同一词汇：始终按词性下拉菜单从上到下，不随单词升/降序反转。
+                    const aPartKey = partOfSpeechKey(a.partOfSpeech);
+                    const bPartKey = partOfSpeechKey(b.partOfSpeech);
+                    const aRank = partOfSpeechRank.has(aPartKey) ? partOfSpeechRank.get(aPartKey) : unknownRank;
+                    const bRank = partOfSpeechRank.has(bPartKey) ? partOfSpeechRank.get(bPartKey) : unknownRank;
+                    if (aRank !== bRank) return aRank - bRank;
+
+                    // 词性选项相同（或都不在下拉菜单）时，按添加顺序先后。
+                    return (a.addedOrder || 0) - (b.addedOrder || 0);
                 });
             }
 
@@ -2609,7 +2655,8 @@
                     word,
                     partOfSpeech,
                     original: originalInput.value.trim(),
-                    imitation: imitationInput.value.trim()
+                    imitation: imitationInput.value.trim(),
+                    addedOrder: getNextAddedOrder()
                 });
 
                 applySortAndRender();
