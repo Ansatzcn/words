@@ -750,6 +750,12 @@
     "imitation": "That brand isn’t available in my country."
   },
   {
+    "word": "available",
+    "partOfSpeech": "adjective",
+    "original": "When reliable information is freely available to the public, people are more likely to make informed decisions rather than relying on rumours or misleading claims.",
+    "imitation": "All the information is available online."
+  },
+  {
     "word": "aware",
     "partOfSpeech": "",
     "original": "",
