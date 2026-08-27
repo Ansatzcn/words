@@ -1001,6 +1001,13 @@
     "addedOrder": 745
   },
   {
+    "word": "bid",
+    "partOfSpeech": "noun",
+    "original": "Although the board rejected the initial takeover bid, shareholders remained divided because some believed that accepting the offer would generate substantial short-term returns.",
+    "imitation": "The company rejected a bid from one of its competitors.",
+    "addedOrder": 746
+  },
+  {
     "word": "bilateral",
     "partOfSpeech": "adjective",
     "original": "The data estimates that in the 2025-26 financial year, total bilateral trade was $1.63 billion, down sharply from over $17 billion in 2018-19.",
