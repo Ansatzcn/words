@@ -199,6 +199,12 @@
   },
   {
     "word": "absolute",
+    "partOfSpeech": "noun",
+    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
+    "imitation": ""
+  },
+  {
+    "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth.",
     "imitation": ""
@@ -207,12 +213,6 @@
     "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "The scientific experiment must be conducted under absolute control of all environmental variables.",
-    "imitation": ""
-  },
-  {
-    "word": "absolute",
-    "partOfSpeech": "noun",
-    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
     "imitation": ""
   },
   {
@@ -418,6 +418,18 @@
     "partOfSpeech": "verb",
     "original": "Children who are repeatedly exposed to violent conflict may be deeply affected by their experiences, even if they appear to adapt to their surroundings in the short term.",
     "imitation": "I was deeply affected by the film."
+  },
+  {
+    "word": "affect",
+    "partOfSpeech": "verb",
+    "original": "If climate change continues to intensify extreme weather events, agricultural regions that are already vulnerable to drought could be severely affected, which may threaten long-term food security.",
+    "imitation": "My hometown was badly affected by the floods."
+  },
+  {
+    "word": "affect",
+    "partOfSpeech": "verb",
+    "original": "Although some public figures may affect an air of confidence when speaking in front of large audiences, their outward behaviour does not necessarily reflect how secure they actually feel.",
+    "imitation": "He affected a British accent as a joke."
   },
   {
     "word": "affiliate",
@@ -2712,12 +2724,6 @@
     "imitation": ""
   },
   {
-    "word": "installation",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": ""
-  },
-  {
     "word": "instruct",
     "partOfSpeech": "",
     "original": "",
@@ -2803,12 +2809,6 @@
   },
   {
     "word": "introduction",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": ""
-  },
-  {
-    "word": "inundate",
     "partOfSpeech": "",
     "original": "",
     "imitation": ""
@@ -3079,12 +3079,6 @@
   },
   {
     "word": "overwhelm",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": ""
-  },
-  {
-    "word": "participant",
     "partOfSpeech": "",
     "original": "",
     "imitation": ""
@@ -3841,12 +3835,6 @@
   },
   {
     "word": "solid",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": ""
-  },
-  {
-    "word": "sorrow",
     "partOfSpeech": "",
     "original": "",
     "imitation": ""
