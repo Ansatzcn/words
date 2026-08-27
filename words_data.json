@@ -3,4314 +3,5040 @@
     "word": "aback",
     "partOfSpeech": "adverb",
     "original": "Although local residents had been warned that the redevelopment project might cause some disruption, many were taken aback by the extent to which rents increased once the area began to attract wealthier newcomers.",
-    "imitation": "I was really taken aback by how expensive everything was."
+    "imitation": "I was really taken aback by how expensive everything was.",
+    "inputOrder": 0
   },
   {
     "word": "abacus",
     "partOfSpeech": "noun",
     "original": "Although digital calculators have largely replaced the abacus in everyday life, some educators still encourage children to use this traditional tool because it can strengthen their understanding of numbers and improve their mental arithmetic skills.",
-    "imitation": "I learned how to use an abacus when I was in primary school."
+    "imitation": "I learned how to use an abacus when I was in primary school.",
+    "inputOrder": 1
   },
   {
     "word": "abacus",
     "partOfSpeech": "noun",
     "original": "When examining classical architecture, historians often pay close attention to the abacus, which forms the uppermost part of a column capital and helps distribute the weight of the structure above it.",
-    "imitation": "The abacus is the flat part at the top of a classical column."
+    "imitation": "The abacus is the flat part at the top of a classical column.",
+    "inputOrder": 2
   },
   {
     "word": "abaft",
     "partOfSpeech": "adverb",
     "original": "Although modern vessels rely heavily on electronic navigation systems, essential equipment is still carefully positioned abaft so that the weight of the ship remains properly balanced during long voyages.",
-    "imitation": "The crew moved abaft when the captain gave the order."
+    "imitation": "The crew moved abaft when the captain gave the order.",
+    "inputOrder": 3
   },
   {
     "word": "abaft",
     "partOfSpeech": "preposition",
     "original": "Because the passenger cabins were situated abaft the engine room, travellers experienced considerably less noise than they would have if their accommodation had been located closer to the machinery.",
-    "imitation": "Our cabin was abaft the main deck area."
+    "imitation": "Our cabin was abaft the main deck area.",
+    "inputOrder": 4
   },
   {
     "word": "abalone",
     "partOfSpeech": "noun",
     "original": "Although abalone has long been regarded as a delicacy in many coastal regions, excessive harvesting has caused wild populations to decline, which has prompted some governments to impose stricter fishing regulations.",
-    "imitation": "I tried abalone for the first time at a seafood restaurant."
+    "imitation": "I tried abalone for the first time at a seafood restaurant.",
+    "inputOrder": 5
   },
   {
     "word": "abalone",
     "partOfSpeech": "noun",
     "original": "Because abalone shell has a distinctive iridescent surface that reflects a wide range of colours, it has traditionally been used to decorate jewellery, ornaments and other handcrafted objects.",
-    "imitation": "The necklace was decorated with abalone shell."
-  },
-  {
-    "word": "abandon",
-    "partOfSpeech": "noun",
-    "original": "Although consumer spending can stimulate economic growth, encouraging people to spend with abandon may create serious financial problems if households rely excessively on credit.",
-    "imitation": "The children danced with abandon at the party."
+    "imitation": "The necklace was decorated with abalone shell.",
+    "inputOrder": 6
   },
   {
     "word": "abandon",
     "partOfSpeech": "verb",
     "original": "Although the government had invested substantial resources in the infrastructure project, it eventually decided to abandon the plan because the long-term financial costs were considered unsustainable.",
-    "imitation": "I abandoned the idea because it was too expensive."
+    "imitation": "I abandoned the idea because it was too expensive.",
+    "inputOrder": 8
   },
   {
     "word": "abandon",
     "partOfSpeech": "verb",
     "original": "People who abandon their pets when they become inconvenient not only place considerable pressure on animal shelters but also demonstrate a serious lack of responsibility towards living creatures.",
-    "imitation": "Some people abandon their pets when they can no longer look after them."
+    "imitation": "Some people abandon their pets when they can no longer look after them.",
+    "inputOrder": 9
   },
   {
     "word": "abandon",
     "partOfSpeech": "verb",
     "original": "When severe flooding made the region increasingly dangerous, thousands of residents were forced to abandon their homes and move to temporary shelters until conditions improved.",
-    "imitation": "We had to abandon the car because the road was completely flooded."
+    "imitation": "We had to abandon the car because the road was completely flooded.",
+    "inputOrder": 10
   },
   {
     "word": "abandon",
     "partOfSpeech": "verb",
     "original": "As technology continues to transform the workplace, companies that refuse to abandon outdated practices may find it increasingly difficult to remain competitive in a rapidly changing economy.",
-    "imitation": "I think we should abandon some outdated traditions."
+    "imitation": "I think we should abandon some outdated traditions.",
+    "inputOrder": 11
+  },
+  {
+    "word": "abandon",
+    "partOfSpeech": "noun",
+    "original": "Although consumer spending can stimulate economic growth, encouraging people to spend with abandon may create serious financial problems if households rely excessively on credit.",
+    "imitation": "The children danced with abandon at the party.",
+    "inputOrder": 7
   },
   {
     "word": "abase",
     "partOfSpeech": "verb",
     "original": "He refused to abase himself by begging for their approval.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 12
   },
   {
     "word": "abase",
     "partOfSpeech": "verb",
     "original": "The arrogant manager tried to abase his employees in front of others.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 13
   },
   {
     "word": "abasement",
     "partOfSpeech": "noun",
     "original": "He felt deep abasement after being publicly insulted.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 14
   },
   {
     "word": "abasement",
     "partOfSpeech": "noun",
     "original": "He lived in a state of abasement after the public scandal.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 15
   },
   {
     "word": "abash",
     "partOfSpeech": "verb",
     "original": "His rude comment abashed her in front of the whole class.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 16
   },
   {
     "word": "abate",
     "partOfSpeech": "verb",
     "original": "The court abated the proceedings until the dispute could be resolved.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 17
   },
   {
     "word": "abate",
     "partOfSpeech": "verb",
     "original": "The storm began to abate in the evening.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 18
   },
   {
     "word": "abate",
     "partOfSpeech": "verb",
     "original": "The new measures helped abate the noise in the city center.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 19
   },
   {
     "word": "aberration",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 20
   },
   {
     "word": "ability",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 21
   },
   {
     "word": "ablaze",
     "partOfSpeech": "adjective",
     "original": "The entire harbour was ablaze with fireworks to celebrate the new year.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 22
   },
   {
     "word": "ablaze",
     "partOfSpeech": "adjective",
     "original": "The historic building was set ablaze by a lightning strike during the thunderstorm.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 23
   },
   {
     "word": "ablaze",
     "partOfSpeech": "adjective",
     "original": "The young researcher had eyes ablaze with enthusiasm while presenting the scientific breakthrough.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 24
   },
   {
     "word": "abnormal",
     "partOfSpeech": "adjective",
     "original": "Researchers recorded abnormal cell growth in the tissue samples collected from the contaminated site.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 25
   },
   {
     "word": "abnormal",
     "partOfSpeech": "adjective",
     "original": "Abnormal weather patterns have become increasingly frequent due to global climate change.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 26
   },
   {
     "word": "abolish",
     "partOfSpeech": "verb",
     "original": "The government decided to abolish tuition fees for all undergraduate programmes at public universities.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 27
   },
   {
     "word": "abrupt",
     "partOfSpeech": "adjective",
     "original": "The manager abrupt dismissal of reasonable questions damaged staff morale throughout the department.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 28
   },
   {
     "word": "abrupt",
     "partOfSpeech": "adjective",
     "original": "The abrupt slope near the summit required specialised climbing equipment.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 29
   },
   {
     "word": "abrupt",
     "partOfSpeech": "adjective",
     "original": "The abrupt closure of the factory left thousands of workers without income.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 30
   },
   {
     "word": "absence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 31
   },
   {
     "word": "absent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
-  },
-  {
-    "word": "absolute",
-    "partOfSpeech": "noun",
-    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 32
   },
   {
     "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 34
   },
   {
     "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "The scientific experiment must be conducted under absolute control of all environmental variables.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 35
+  },
+  {
+    "word": "absolute",
+    "partOfSpeech": "noun",
+    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
+    "imitation": "",
+    "inputOrder": 33
   },
   {
     "word": "absorb",
     "partOfSpeech": "verb",
     "original": "Large multinational corporations often absorb smaller competitors to gain access to new markets and proprietary technology.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 36
   },
   {
     "word": "absorb",
     "partOfSpeech": "verb",
     "original": "The immersive virtual reality simulation completely absorbed the attention of every participant in the training session.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 37
   },
   {
     "word": "absorb",
     "partOfSpeech": "verb",
     "original": "Interactive teaching methods help students absorb complex scientific concepts more effectively than passive lectures.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 38
   },
   {
     "word": "absorb",
     "partOfSpeech": "verb",
     "original": "Dense urban surfaces absorb and retain more heat than surrounding rural areas, contributing to the heat island effect.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 39
   },
   {
     "word": "absorption",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 40
   },
   {
     "word": "abuse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 41
   },
   {
     "word": "abutilon",
     "partOfSpeech": "noun",
     "original": "Abutilon species are widely cultivated in temperate gardens for their bell-shaped flowers and extended blooming period.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 42
   },
   {
     "word": "accelerate",
     "partOfSpeech": "verb",
     "original": "The driver must accelerate smoothly to reduce fuel consumption on the motorway.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 43
   },
   {
     "word": "accelerate",
     "partOfSpeech": "verb",
     "original": "Unregulated industrial activity will accelerate the depletion of non-renewable natural resources.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 44
   },
   {
     "word": "accent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 45
   },
   {
     "word": "accept",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 46
   },
   {
     "word": "access",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 47
   },
   {
     "word": "acclaim",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 48
   },
   {
     "word": "acclaimed",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 49
   },
   {
     "word": "acclimation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 50
   },
   {
     "word": "accommodate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 51
   },
   {
     "word": "accompany",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 52
   },
   {
     "word": "accuracy",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 53
   },
   {
     "word": "accurate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 54
   },
   {
     "word": "achieve",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 55
   },
   {
     "word": "achievement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 56
   },
   {
     "word": "acquire",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 57
   },
   {
     "word": "acquisition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 58
   },
   {
     "word": "activity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 59
   },
   {
     "word": "adapt",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 60
   },
   {
     "word": "adaptation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 61
   },
   {
     "word": "address",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 62
   },
   {
     "word": "adequate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 63
   },
   {
     "word": "administrative",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 64
   },
   {
     "word": "adopt",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 65
   },
   {
     "word": "adoption",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 66
   },
   {
     "word": "advantage",
     "partOfSpeech": "noun",
     "original": "The biggest advantage Beijing draws from that trade relationship is geopolitical, said Andrea Ghiselli, a political scientist who specializes in China at the University of Exeter in England.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 67
   },
   {
     "word": "affect",
     "partOfSpeech": "verb",
     "original": "Although technological innovation has improved living standards in many respects, it can also affect employment patterns by replacing routine jobs that were traditionally performed by human workers.",
-    "imitation": "Lack of sleep really affects my concentration."
+    "imitation": "Lack of sleep really affects my concentration.",
+    "inputOrder": 68
   },
   {
     "word": "affect",
     "partOfSpeech": "verb",
     "original": "Children who are repeatedly exposed to violent conflict may be deeply affected by their experiences, even if they appear to adapt to their surroundings in the short term.",
-    "imitation": "I was deeply affected by the film."
+    "imitation": "I was deeply affected by the film.",
+    "inputOrder": 69
   },
   {
     "word": "affiliate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 70
   },
   {
     "word": "affiliation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 71
   },
   {
     "word": "affirm",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 72
   },
   {
     "word": "affluent",
     "partOfSpeech": "adjective",
     "original": "Children from affluent families often have access to a wider range of educational opportunities.",
-    "imitation": "Public transport tends to be less reliable in less affluent areas."
+    "imitation": "Public transport tends to be less reliable in less affluent areas.",
+    "inputOrder": 73
   },
   {
     "word": "agent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 74
   },
   {
     "word": "agree",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 75
   },
   {
     "word": "agreement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 76
   },
   {
     "word": "alacrity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 77
   },
   {
     "word": "align",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 78
   },
   {
     "word": "allocate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 79
   },
   {
     "word": "allow",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 80
   },
   {
     "word": "ambiguous",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 81
   },
   {
     "word": "amount",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 82
   },
   {
     "word": "ancestral",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 83
   },
   {
     "word": "anger",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 84
   },
   {
     "word": "announce",
     "partOfSpeech": "verb",
     "original": "On Wednesday, the United Arab Emirates appeared to pre-empt the president’s comments by announcing a halt to all trade and financial transactions with Iran.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 85
   },
   {
     "word": "ansatz",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 86
   },
   {
     "word": "apology",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 87
   },
   {
     "word": "appeal",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 88
   },
   {
     "word": "appear",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 89
   },
   {
     "word": "apply",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 90
   },
   {
     "word": "appropriate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 91
   },
   {
     "word": "arbitrary",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 92
   },
   {
     "word": "archaeologist",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 93
   },
   {
     "word": "ardent",
     "partOfSpeech": "adjective",
     "original": "Ardent advocates of environmental protection often play an important role in raising public awareness and exerting pressure on governments to adopt more sustainable policies.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 94
   },
   {
     "word": "argue",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 95
   },
   {
     "word": "arithmatic",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 96
   },
   {
     "word": "arrange",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 97
   },
   {
     "word": "arrogant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 98
   },
   {
     "word": "artefact",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 99
   },
   {
     "word": "arthritis",
     "partOfSpeech": "noun",
     "original": "My grandmother has arthritis in her knees.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 100
   },
   {
     "word": "ashame",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 101
   },
   {
     "word": "aspect",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 102
   },
   {
     "word": "assert",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 103
   },
   {
     "word": "assertion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 104
   },
   {
     "word": "assess",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 105
   },
   {
     "word": "assessment",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 106
   },
   {
     "word": "assure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 107
   },
   {
     "word": "astonish",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 108
   },
   {
     "word": "attach",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 109
   },
   {
     "word": "attachment",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 110
   },
   {
     "word": "attention",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 111
   },
   {
     "word": "attentive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 112
   },
   {
     "word": "attitude",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 113
   },
   {
     "word": "attract",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 114
   },
   {
     "word": "attraction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 115
   },
   {
     "word": "available",
     "partOfSpeech": "adjective",
     "original": "According to the latest available data, exports reached their highest level in 2022.",
-    "imitation": "There is not enough reliable data available on this issue."
+    "imitation": "There is not enough reliable data available on this issue.",
+    "inputOrder": 116
   },
   {
     "word": "aware",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 117
   },
   {
     "word": "awareness",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 118
   },
   {
     "word": "bail",
     "partOfSpeech": "noun",
     "original": "Defendants accused of non-violent offences may be released on bail while awaiting trial.",
-    "imitation": "He was released on bail while awaiting trial."
+    "imitation": "He was released on bail while awaiting trial.",
+    "inputOrder": 119
   },
   {
     "word": "ballot",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 120
   },
   {
     "word": "barrier",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 121
   },
   {
     "word": "basin",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 122
   },
   {
     "word": "behave",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 123
   },
   {
     "word": "belief",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 124
   },
   {
     "word": "bid",
     "partOfSpeech": "noun",
     "original": "Many cities have introduced congestion charges in a bid to reduce traffic volumes, improve air quality and encourage greater use of public transport.",
-    "imitation": "I started leaving my phone in another room while I study in a bid to stop myself from checking social media every five minutes."
+    "imitation": "I started leaving my phone in another room while I study in a bid to stop myself from checking social media every five minutes.",
+    "inputOrder": 125
   },
   {
     "word": "bid",
     "partOfSpeech": "noun",
     "original": "Political candidates increasingly rely on social media in their bids for office, as digital platforms allow them to reach large numbers of voters at relatively little cost.",
-    "imitation": "Our local football club made a serious bid for the championship last season, but they lost several key players towards the end of the competition."
+    "imitation": "Our local football club made a serious bid for the championship last season, but they lost several key players towards the end of the competition.",
+    "inputOrder": 126
   },
   {
     "word": "bilateral",
     "partOfSpeech": "adjective",
     "original": "The data estimates that in the 2025-26 financial year, total bilateral trade was $1.63 billion, down sharply from over $17 billion in 2018-19.",
-    "imitation": ""
-  },
-  {
-    "word": "blend",
-    "partOfSpeech": "noun",
-    "original": "A balanced urban community should represent a healthy blend of residential, commercial, and recreational spaces.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 127
   },
   {
     "word": "blend",
     "partOfSpeech": "verb",
     "original": "The new library design blends seamlessly with the surrounding historic buildings.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 129
   },
   {
     "word": "blend",
     "partOfSpeech": "verb",
     "original": "Effective teachers often blend theoretical instruction with practical application in the classroom.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 130
+  },
+  {
+    "word": "blend",
+    "partOfSpeech": "noun",
+    "original": "A balanced urban community should represent a healthy blend of residential, commercial, and recreational spaces.",
+    "imitation": "",
+    "inputOrder": 128
   },
   {
     "word": "block",
     "partOfSpeech": "verb",
     "original": "He had hoped to be a party secretary with direct authority over a town or county but the conservative provincial party secretary, Gao Yang, blocked that.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 131
   },
   {
     "word": "boast",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 132
   },
   {
     "word": "boost",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 133
   },
   {
     "word": "break",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 134
   },
   {
     "word": "breakthrough",
     "partOfSpeech": "noun",
     "original": "The successful military breakthrough ended a prolonged period of stalemate on the battlefield.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 135
   },
   {
     "word": "breakthrough",
     "partOfSpeech": "noun",
     "original": "The development of mRNA vaccines represented a major breakthrough in medical science.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 136
   },
   {
     "word": "brunt",
     "partOfSpeech": "noun",
     "original": "Low-income households bore the brunt of the sudden increase in energy prices.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 137
   },
   {
     "word": "buck",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 138
   },
   {
     "word": "calculate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 139
   },
   {
     "word": "capacity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 140
   },
   {
     "word": "capacity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 141
   },
   {
     "word": "capital",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 142
   },
   {
     "word": "captivate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 143
   },
   {
     "word": "causal",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 144
   },
   {
     "word": "causation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 145
   },
   {
     "word": "cause",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 146
   },
   {
     "word": "challenge",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 147
   },
   {
     "word": "character",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 148
   },
   {
     "word": "choose",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 149
   },
   {
     "word": "citizen",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 150
   },
   {
     "word": "claim",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 151
   },
   {
     "word": "clarify",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 152
   },
   {
     "word": "clarity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 153
   },
   {
     "word": "claw",
     "partOfSpeech": "verb",
     "original": "At the time, millions of young people were still clawing their way back to China’s urban centers after being exiled to the countryside in the Mao era.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 154
   },
   {
     "word": "climate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 155
   },
   {
     "word": "closure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 156
   },
   {
     "word": "collaborate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 157
   },
   {
     "word": "collaboration",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 158
   },
   {
     "word": "collapse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 159
   },
   {
     "word": "collision",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 160
   },
   {
     "word": "collocation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 161
   },
   {
     "word": "colonnade",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 162
   },
   {
     "word": "column",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 163
   },
   {
     "word": "combination",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 164
   },
   {
     "word": "combine",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 165
   },
   {
     "word": "comment",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 166
   },
   {
     "word": "communicate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 167
   },
   {
     "word": "community",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 168
   },
   {
     "word": "compare",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 169
   },
   {
     "word": "comparison",
     "partOfSpeech": "noun",
     "original": "The report included a detailed comparison of crime rates in urban and rural areas.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 170
   },
   {
     "word": "comparison",
     "partOfSpeech": "noun",
     "original": "The comparison of adjectives in English involves adding suffixes or using the words more and most.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 171
   },
   {
     "word": "comparison",
     "partOfSpeech": "noun",
     "original": "A careful comparison of renewable energy sources reveals significant variation in long-term cost efficiency.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 172
   },
   {
     "word": "compel",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 173
   },
   {
     "word": "compensate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 174
   },
   {
     "word": "compete",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 175
   },
   {
     "word": "competition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 176
   },
   {
     "word": "competitive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 177
   },
   {
     "word": "competitor",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 178
   },
   {
     "word": "complacency",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 179
   },
   {
     "word": "complete",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 180
   },
   {
     "word": "completion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 181
   },
   {
     "word": "complex",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 182
   },
   {
     "word": "complexity",
     "partOfSpeech": "",
     "original": "The legal complexities of the merger delayed the agreement by several months.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 183
   },
   {
     "word": "complexity",
     "partOfSpeech": "",
     "original": "The complexity of the human brain continues to challenge scientists around the world.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 184
   },
   {
     "word": "complicate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 185
   },
   {
     "word": "comply",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 186
   },
   {
     "word": "comprehension",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 187
   },
   {
     "word": "compromise",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 188
   },
   {
     "word": "concentrate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 189
   },
   {
     "word": "concentration",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 190
   },
   {
     "word": "concept",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 191
   },
   {
     "word": "concrete",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 192
   },
   {
     "word": "condition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 193
   },
   {
     "word": "conduct",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 194
   },
   {
     "word": "confirm",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 195
   },
   {
     "word": "conform",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 196
   },
   {
     "word": "conform",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 197
   },
   {
     "word": "conform",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 198
   },
   {
     "word": "confuse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 199
   },
   {
     "word": "confusion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 200
   },
   {
     "word": "congestion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 201
   },
   {
     "word": "connect",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 202
   },
   {
     "word": "connection",
     "partOfSpeech": "noun",
     "original": "His connections allowed him to take chances in Zhengding.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 203
   },
   {
     "word": "conscious",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 204
   },
   {
     "word": "consequence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 205
   },
   {
     "word": "conservative",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 206
   },
   {
     "word": "consider",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 207
   },
   {
     "word": "considerable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 208
   },
   {
     "word": "consideration",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 209
   },
   {
     "word": "conspicuous",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 210
   },
   {
     "word": "consultant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 211
   },
   {
     "word": "contain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 212
   },
   {
     "word": "contaminate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 213
   },
   {
     "word": "contest",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 214
   },
   {
     "word": "context",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 215
   },
   {
     "word": "continuation",
     "partOfSpeech": "noun",
     "original": "The continuation of peace talks after a three-month suspension has renewed hope for a diplomatic resolution.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 216
   },
   {
     "word": "continuation",
     "partOfSpeech": "noun",
     "original": "The new policy represents a natural continuation of the reforms introduced five years ago.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 217
   },
   {
     "word": "continuation",
     "partOfSpeech": "noun",
     "original": "The continuation of deforestation will inevitably accelerate biodiversity loss across the Amazon basin.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 218
   },
   {
     "word": "continue",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 219
   },
   {
     "word": "control",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 220
   },
   {
     "word": "controversial",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 221
   },
   {
     "word": "convey",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 222
   },
   {
     "word": "conviction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 223
   },
   {
     "word": "corporation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 224
   },
   {
     "word": "correct",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 225
   },
   {
     "word": "count",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 226
   },
   {
     "word": "countable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 227
   },
   {
     "word": "create",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 228
   },
   {
     "word": "credibility",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 229
   },
   {
     "word": "crucial",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 230
   },
   {
     "word": "crust",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 231
   },
   {
     "word": "cultivate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 232
   },
   {
     "word": "cultural",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 233
   },
   {
     "word": "culture",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 234
   },
   {
     "word": "curiosity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 235
   },
   {
     "word": "curious",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 236
   },
   {
     "word": "cusp",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 237
   },
   {
     "word": "damage",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 238
   },
   {
     "word": "daunt",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 239
   },
   {
     "word": "deceive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 240
   },
   {
     "word": "deception",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 241
   },
   {
     "word": "decide",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 242
   },
   {
     "word": "decimal",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 243
   },
   {
     "word": "decline",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 244
   },
   {
     "word": "decorate",
     "partOfSpeech": "verb",
     "original": "Although decorative features can make public spaces more visually appealing, local authorities should avoid spending excessive amounts of money on them when more urgent infrastructure problems remain unresolved.",
-    "imitation": "We decorated the living room with some plants and paintings."
+    "imitation": "We decorated the living room with some plants and paintings.",
+    "inputOrder": 245
   },
   {
     "word": "decorate",
     "partOfSpeech": "verb",
     "original": "When public areas are decorated for traditional festivals, they can create a stronger sense of community because residents are given an opportunity to celebrate a shared cultural identity.",
-    "imitation": "We usually decorate our house for Chinese New Year."
+    "imitation": "We usually decorate our house for Chinese New Year.",
+    "inputOrder": 246
   },
   {
     "word": "decorate",
     "partOfSpeech": "verb",
     "original": "People who frequently redecorate their homes may spend considerable amounts of money on interior design, even though such expenditure does not necessarily improve their overall quality of life.",
-    "imitation": "We decorated the bedroom last summer."
+    "imitation": "We decorated the bedroom last summer.",
+    "inputOrder": 247
   },
   {
     "word": "decorate",
     "partOfSpeech": "verb",
     "original": "Traditional buildings that are decorated with locally produced artwork can help preserve regional identity, particularly in communities where rapid urbanisation has weakened connections with the past.",
-    "imitation": "The cake was decorated with fresh fruit."
+    "imitation": "The cake was decorated with fresh fruit.",
+    "inputOrder": 248
   },
   {
     "word": "decorate",
     "partOfSpeech": "verb",
     "original": "Soldiers who demonstrate exceptional courage may be formally decorated for their service, although public recognition cannot fully compensate for the risks they have undertaken.",
-    "imitation": "He was decorated for his bravery."
+    "imitation": "He was decorated for his bravery.",
+    "inputOrder": 249
   },
   {
     "word": "decorative",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 250
   },
   {
     "word": "dedicate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 251
   },
   {
     "word": "dedication",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 252
   },
   {
     "word": "definition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 253
   },
   {
     "word": "definitive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 254
   },
   {
     "word": "defy",
     "partOfSpeech": "verb",
     "original": "Although citizens have a right to express their dissatisfaction, those who deliberately defy the law may undermine social stability if their actions endanger other members of the public.",
-    "imitation": "He openly defied his parents’ wishes."
+    "imitation": "He openly defied his parents’ wishes.",
+    "inputOrder": 255
   },
   {
     "word": "defy",
     "partOfSpeech": "verb",
     "original": "Although many economists predicted that unemployment would rise sharply, the labour market defied expectations as businesses continued to recruit new employees.",
-    "imitation": "The film completely defied my expectations."
+    "imitation": "The film completely defied my expectations.",
+    "inputOrder": 256
   },
   {
     "word": "defy",
     "partOfSpeech": "verb",
     "original": "Rescue workers who defy considerable danger in order to save lives deserve greater public recognition, particularly when they operate in areas affected by natural disasters.",
-    "imitation": "She defied the odds and became a successful athlete."
+    "imitation": "She defied the odds and became a successful athlete.",
+    "inputOrder": 257
   },
   {
     "word": "defy",
     "partOfSpeech": "verb",
     "original": "Some architectural structures appear to defy gravity because their unconventional designs create the impression that enormous sections of the building are suspended without adequate support.",
-    "imitation": "His decision seems to defy logic."
+    "imitation": "His decision seems to defy logic.",
+    "inputOrder": 258
   },
   {
     "word": "defy",
     "partOfSpeech": "verb",
     "original": "The scale of destruction caused by a major natural disaster may defy description, particularly when entire communities lose their homes and essential infrastructure within a matter of hours.",
-    "imitation": "The view from the top defied description."
+    "imitation": "The view from the top defied description.",
+    "inputOrder": 259
   },
   {
     "word": "degradation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 260
   },
   {
     "word": "degrade",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 261
   },
   {
     "word": "delay",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 262
   },
   {
     "word": "deliberate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 263
   },
   {
     "word": "deliberation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 264
   },
   {
     "word": "delicacy",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 265
   },
   {
     "word": "demand",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 266
   },
   {
     "word": "demonstrate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 267
   },
   {
     "word": "depart",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 268
   },
   {
     "word": "departure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 269
   },
   {
     "word": "depend",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 270
   },
   {
     "word": "depict",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 271
   },
   {
     "word": "depletion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 272
   },
   {
     "word": "deposit",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 273
   },
   {
     "word": "depress",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 274
   },
   {
     "word": "design",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 275
   },
   {
     "word": "designate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 276
   },
   {
     "word": "desirable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 277
   },
   {
     "word": "desire",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 278
   },
   {
     "word": "destroy",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 279
   },
   {
     "word": "detail",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 280
   },
   {
     "word": "detect",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 281
   },
   {
     "word": "deter",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 282
   },
   {
     "word": "deteriorate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 283
   },
   {
     "word": "determine",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 284
   },
   {
     "word": "deviate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 285
   },
   {
     "word": "difference",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 286
   },
   {
     "word": "different",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 287
   },
   {
     "word": "diffuse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 288
   },
   {
     "word": "dignity",
     "partOfSpeech": "noun",
     "original": "Although economic growth can improve material living standards, a truly successful society should also ensure that vulnerable people are able to live with dignity rather than being treated merely as a burden on public resources.",
-    "imitation": "Everyone deserves to be treated with dignity."
+    "imitation": "Everyone deserves to be treated with dignity.",
+    "inputOrder": 289
   },
   {
     "word": "dignity",
     "partOfSpeech": "noun",
     "original": "People who lose their jobs should be given adequate financial and psychological support so that they can maintain their dignity while seeking new employment.",
-    "imitation": "She kept her dignity even after being publicly criticised."
+    "imitation": "She kept her dignity even after being publicly criticised.",
+    "inputOrder": 290
   },
   {
     "word": "dignity",
     "partOfSpeech": "noun",
     "original": "Although the politician faced intense criticism, she responded with remarkable dignity, which helped her maintain public respect during a highly controversial period.",
-    "imitation": "He handled the situation with dignity."
+    "imitation": "He handled the situation with dignity.",
+    "inputOrder": 291
   },
   {
     "word": "dignity",
     "partOfSpeech": "noun",
     "original": "Governments should provide affordable healthcare and adequate social care for elderly citizens, because access to such services enables them to remain independent and live with dignity as they age.",
-    "imitation": "The elderly should be afforded the right to live with dignity."
+    "imitation": "The elderly should be afforded the right to live with dignity.",
+    "inputOrder": 292
   },
   {
     "word": "diminish",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 293
   },
   {
     "word": "direct",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 294
   },
   {
     "word": "direction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 295
   },
   {
     "word": "disaster",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 296
   },
   {
     "word": "discourage",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 297
   },
   {
     "word": "discourse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 298
   },
   {
     "word": "discover",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 299
   },
   {
     "word": "discovery",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 300
   },
   {
     "word": "dismay",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 301
   },
   {
     "word": "dismiss",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 302
   },
   {
     "word": "dismissal",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 303
   },
   {
     "word": "dispute",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 304
   },
   {
     "word": "disruption",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 305
   },
   {
     "word": "distinctive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 306
   },
   {
     "word": "distribute",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 307
   },
   {
     "word": "disturbance",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 308
   },
   {
     "word": "dominant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 309
   },
   {
     "word": "downturn",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 310
   },
   {
     "word": "dramatic",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 311
   },
   {
     "word": "drastic",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 312
   },
   {
     "word": "drill",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 313
   },
   {
     "word": "duty",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 314
   },
   {
     "word": "effect",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 315
   },
   {
     "word": "effective",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 316
   },
   {
     "word": "effort",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 317
   },
   {
     "word": "elaborate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 318
   },
   {
     "word": "element",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 319
   },
   {
     "word": "elite",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 320
   },
   {
     "word": "elusive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 321
   },
   {
     "word": "embarrass",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 322
   },
   {
     "word": "embrace",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 323
   },
   {
     "word": "emerge",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 324
   },
   {
     "word": "emergence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 325
   },
   {
     "word": "emergency",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 326
   },
   {
     "word": "emission",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 327
   },
   {
     "word": "emotion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 328
   },
   {
     "word": "emotional",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 329
   },
   {
     "word": "encounter",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 330
   },
   {
     "word": "encounter",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 331
   },
   {
     "word": "encourage",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 332
   },
   {
     "word": "encourage",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 333
   },
   {
     "word": "endanger",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 334
   },
   {
     "word": "enforce",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 335
   },
   {
     "word": "enforcement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 336
   },
   {
     "word": "engage",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 337
   },
   {
     "word": "engagement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 338
   },
   {
     "word": "ensure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 339
   },
   {
     "word": "entablature",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 340
   },
   {
     "word": "enthusiasm",
     "partOfSpeech": "noun",
     "original": "Although academic ability is undoubtedly important, students who approach their studies with genuine enthusiasm are often more likely to remain motivated when they encounter difficulties.",
-    "imitation": "I’ve always had a lot of enthusiasm for learning languages."
+    "imitation": "I’ve always had a lot of enthusiasm for learning languages.",
+    "inputOrder": 341
   },
   {
     "word": "enthusiasm",
     "partOfSpeech": "noun",
     "original": "Employees are more likely to perform effectively when managers create a supportive working environment in which enthusiasm and initiative are genuinely rewarded.",
-    "imitation": "She brings a lot of enthusiasm to the team."
+    "imitation": "She brings a lot of enthusiasm to the team.",
+    "inputOrder": 342
   },
   {
     "word": "enthusiasm",
     "partOfSpeech": "noun",
     "original": "Public enthusiasm for electric vehicles has increased considerably as consumers have become more aware of the environmental consequences of conventional transport.",
-    "imitation": "There’s a lot of enthusiasm for the new sports centre in my neighbourhood."
+    "imitation": "There’s a lot of enthusiasm for the new sports centre in my neighbourhood.",
+    "inputOrder": 343
   },
   {
     "word": "enthusiasm",
     "partOfSpeech": "noun",
     "original": "When young people are encouraged to participate in voluntary work, many respond with enthusiasm because such activities allow them to develop practical skills while contributing to their communities.",
-    "imitation": "He spoke about the project with real enthusiasm."
+    "imitation": "He spoke about the project with real enthusiasm.",
+    "inputOrder": 344
   },
   {
     "word": "entire",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 345
   },
   {
     "word": "entitle",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 346
   },
   {
     "word": "entity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 347
   },
   {
     "word": "entrench",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 348
   },
   {
     "word": "erode",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 349
   },
   {
     "word": "essential",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 350
   },
   {
     "word": "establish",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 351
   },
   {
     "word": "establishment",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 352
   },
   {
     "word": "esteem",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 353
   },
   {
     "word": "estimate",
     "partOfSpeech": "verb",
     "original": "Although it is difficult to determine the exact number of people affected by air pollution, researchers estimate that millions of premature deaths worldwide are linked to poor air quality each year.",
-    "imitation": "I estimate that the journey will take about two hours."
+    "imitation": "I estimate that the journey will take about two hours.",
+    "inputOrder": 354
   },
   {
     "word": "estimate",
     "partOfSpeech": "verb",
     "original": "The total cost of the infrastructure project, which was initially estimated at $2 billion, rose substantially after construction was delayed by several years.",
-    "imitation": "The repairs were estimated at around £500."
+    "imitation": "The repairs were estimated at around £500.",
+    "inputOrder": 355
   },
   {
     "word": "estimate",
     "partOfSpeech": "verb",
     "original": "The global population is estimated to reach approximately 9.7 billion by 2050, which may place considerable pressure on food production and natural resources.",
-    "imitation": "The building is estimated to be over a hundred years old."
+    "imitation": "The building is estimated to be over a hundred years old.",
+    "inputOrder": 356
   },
   {
     "word": "estimate",
     "partOfSpeech": "noun",
     "original": "While current estimates suggest that renewable energy will account for an increasing share of global electricity generation, the pace of this transition will depend heavily on government investment and technological innovation.",
-    "imitation": "My estimate was completely wrong."
+    "imitation": "My estimate was completely wrong.",
+    "inputOrder": 357
   },
   {
     "word": "estimate",
     "partOfSpeech": "noun",
     "original": "Before committing to major renovation work, homeowners should obtain estimates from several contractors so that they can compare prices and avoid unnecessary expenditure.",
-    "imitation": "The mechanic gave me an estimate for the repairs."
+    "imitation": "The mechanic gave me an estimate for the repairs.",
+    "inputOrder": 358
   },
   {
     "word": "etiquette",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 359
   },
   {
     "word": "evacuation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 360
   },
   {
     "word": "evidence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 361
   },
   {
     "word": "evident",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 362
   },
   {
     "word": "examine",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 363
   },
   {
     "word": "exceed",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 364
   },
   {
     "word": "excessive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 365
   },
   {
     "word": "excite",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 366
   },
   {
     "word": "excitement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 367
   },
   {
     "word": "exert",
     "partOfSpeech": "verb",
     "original": "Although governments can exert considerable influence on individual behaviour through taxation and legislation, such measures are unlikely to be effective unless they are accompanied by sustained public education.",
-    "imitation": "Social media exerts a huge influence on the way young people think."
+    "imitation": "Social media exerts a huge influence on the way young people think.",
+    "inputOrder": 368
   },
   {
     "word": "exert",
     "partOfSpeech": "verb",
     "original": "When the public exerts sufficient pressure on large corporations, companies may be compelled to adopt more sustainable practices, particularly if their reputation and profitability are at stake.",
-    "imitation": "My parents never exerted much pressure on me to get high grades."
+    "imitation": "My parents never exerted much pressure on me to get high grades.",
+    "inputOrder": 369
   },
   {
     "word": "exert",
     "partOfSpeech": "verb",
     "original": "Because excessive force exerted on the human body can result in serious injury, employers should ensure that workers who perform physically demanding tasks receive appropriate training.",
-    "imitation": "You need to exert more force to open this door."
+    "imitation": "You need to exert more force to open this door.",
+    "inputOrder": 370
   },
   {
     "word": "exert",
     "partOfSpeech": "verb",
     "original": "Students who consistently exert themselves in demanding academic environments are more likely to develop resilience, provided that the pressure they experience does not become excessive.",
-    "imitation": "I really exerted myself to finish the project on time."
+    "imitation": "I really exerted myself to finish the project on time.",
+    "inputOrder": 371
   },
   {
     "word": "existence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 372
   },
   {
     "word": "expect",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 373
   },
   {
     "word": "expectation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 374
   },
   {
     "word": "explore",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 375
   },
   {
     "word": "expose",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 376
   },
   {
     "word": "express",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 377
   },
   {
     "word": "expression",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 378
   },
   {
     "word": "facade",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 379
   },
   {
     "word": "fastidious",
     "partOfSpeech": "adjective",
     "original": "Although maintaining fastidious standards can initially increase the time and cost involved in a project, such meticulous attention to detail often prevents serious errors from emerging at a later stage.",
-    "imitation": "My supervisor is quite fastidious about the quality of our work."
+    "imitation": "My supervisor is quite fastidious about the quality of our work.",
+    "inputOrder": 380
   },
   {
     "word": "fastidious",
     "partOfSpeech": "adjective",
     "original": "Consumers who become increasingly fastidious about product quality may force manufacturers to improve their standards, even though excessive consumer expectations can also place unnecessary pressure on businesses.",
-    "imitation": "I’m quite fastidious about the restaurants I choose."
+    "imitation": "I’m quite fastidious about the restaurants I choose.",
+    "inputOrder": 381
   },
   {
     "word": "fastidious",
     "partOfSpeech": "adjective",
     "original": "People who are particularly fastidious about cleanliness may feel uncomfortable in overcrowded public spaces, where maintaining consistently high standards of hygiene is often difficult.",
-    "imitation": "My mother is very fastidious about keeping the kitchen clean."
+    "imitation": "My mother is very fastidious about keeping the kitchen clean.",
+    "inputOrder": 382
   },
   {
     "word": "favor",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 383
   },
   {
     "word": "feature",
     "partOfSpeech": "verb",
     "original": "There is a 2.74-acre estate in Loganville, Ga., that features a curvy swimming pool and an ornate gate at the head of its drive.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 384
   },
   {
     "word": "ferment",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 385
   },
   {
     "word": "fiddle",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 386
   },
   {
     "word": "figure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 387
   },
   {
     "word": "flat",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 388
   },
   {
     "word": "float",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 389
   },
   {
     "word": "floral",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 390
   },
   {
     "word": "flourish",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 391
   },
   {
     "word": "fluctuation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 392
   },
   {
     "word": "force",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 393
   },
   {
     "word": "formal",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 394
   },
   {
     "word": "formality",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 395
   },
   {
     "word": "formula",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 396
   },
   {
     "word": "foster",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 397
   },
   {
     "word": "frame",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 398
   },
   {
     "word": "framework",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 399
   },
   {
     "word": "frequent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 400
   },
   {
     "word": "gain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 401
   },
   {
     "word": "gain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 402
   },
   {
     "word": "genuine",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 403
   },
   {
     "word": "genus",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 404
   },
   {
     "word": "granary",
     "partOfSpeech": "noun",
     "original": "Surplus grain can be stored in government granaries to ensure a stable food supply during periods of shortage.",
-    "imitation": "In the past, grain was often collected and stored in state-owned granaries."
+    "imitation": "In the past, grain was often collected and stored in state-owned granaries.",
+    "inputOrder": 405
   },
   {
     "word": "grief",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 406
   },
   {
     "word": "halt",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 407
   },
   {
     "word": "handle",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 408
   },
   {
     "word": "harbour",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 409
   },
   {
     "word": "harbour",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 410
   },
   {
     "word": "hazardous",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 411
   },
   {
     "word": "heed",
     "partOfSpeech": "noun",
     "original": "Governments should pay heed to the concerns of local communities before implementing large-scale infrastructure projects.",
-    "imitation": "Policymakers should pay heed to the concerns of rural communities."
+    "imitation": "Policymakers should pay heed to the concerns of rural communities.",
+    "inputOrder": 412
   },
   {
     "word": "heritage",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 413
   },
   {
     "word": "hierarchical",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 414
   },
   {
     "word": "historic",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 415
   },
   {
     "word": "historical",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 416
   },
   {
     "word": "history",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 417
   },
   {
     "word": "humble",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 418
   },
   {
     "word": "humiliate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 419
   },
   {
     "word": "hygiene",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 420
   },
   {
     "word": "identify",
     "partOfSpeech": "verb",
     "original": "Federal prosecutors have identified 13 such properties, with estimated values ranging from less than $70,000 to more than $1 million, according to records.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 421
   },
   {
     "word": "identity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 422
   },
   {
     "word": "ignorance",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 423
   },
   {
     "word": "illicit",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 424
   },
   {
     "word": "illuminate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 425
   },
   {
     "word": "illustrate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 426
   },
   {
     "word": "immediate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 427
   },
   {
     "word": "immersive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 428
   },
   {
     "word": "impact",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 429
   },
   {
     "word": "impasse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 430
   },
   {
     "word": "implement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 431
   },
   {
     "word": "implication",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 432
   },
   {
     "word": "important",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 433
   },
   {
     "word": "impose",
     "partOfSpeech": "verb",
     "original": "The United States has already imposed debilitating sanctions on Iran’s economy and its leadership, and the Trump administration has previously sanctioned certain foreign businesses and organizations that trade with Tehran.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 434
   },
   {
     "word": "imposition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 435
   },
   {
     "word": "improve",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 436
   },
   {
     "word": "improvement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 437
   },
   {
     "word": "impulse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 438
   },
   {
     "word": "incidence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 439
   },
   {
     "word": "include",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 440
   },
   {
     "word": "incorporate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 441
   },
   {
     "word": "independence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 442
   },
   {
     "word": "independent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 443
   },
   {
     "word": "indicate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 444
   },
   {
     "word": "indication",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 445
   },
   {
     "word": "indigenous",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 446
   },
   {
     "word": "infinity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 447
   },
   {
     "word": "information",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 448
   },
   {
     "word": "initiative",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 449
   },
   {
     "word": "inspire",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 450
   },
   {
     "word": "instruct",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 451
   },
   {
     "word": "instruction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 452
   },
   {
     "word": "instrument",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 453
   },
   {
     "word": "instrument",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 454
   },
   {
     "word": "intend",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 455
   },
   {
     "word": "intense",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 456
   },
   {
     "word": "interact",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 457
   },
   {
     "word": "interaction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 458
   },
   {
     "word": "interactive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 459
   },
   {
     "word": "interrupt",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 460
   },
   {
     "word": "interruption",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 461
   },
   {
     "word": "intricate",
     "partOfSpeech": "adjective",
     "original": "International trade agreements involve intricate legal provisions that require expert interpretation.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 462
   },
   {
     "word": "intricate",
     "partOfSpeech": "adjective",
     "original": "The restoration team spent years preserving the intricate carvings on the ancient temple walls.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 463
   },
   {
     "word": "introduce",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 464
   },
   {
     "word": "introduction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 465
   },
   {
     "word": "invention",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 466
   },
   {
     "word": "invisible",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 467
   },
   {
     "word": "involve",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 468
   },
   {
     "word": "irrigation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 469
   },
   {
     "word": "justify",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 470
   },
   {
     "word": "lantern",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 471
   },
   {
     "word": "leadership",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 472
   },
   {
     "word": "legitimate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 473
   },
   {
     "word": "level",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 474
   },
   {
     "word": "lexical",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 475
   },
   {
     "word": "limitation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 476
   },
   {
     "word": "linguistic",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 477
   },
   {
     "word": "liquid",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 478
   },
   {
     "word": "lore",
     "partOfSpeech": "noun",
     "original": "The preservation of local lore can strengthen a community's cultural identity, particularly in an era when globalisation is gradually eroding many traditional customs.",
-    "imitation": "I grew up hearing a lot of local lore about supposedly haunted buildings, and although I never really believed those stories, they definitely made the town feel more mysterious."
+    "imitation": "I grew up hearing a lot of local lore about supposedly haunted buildings, and although I never really believed those stories, they definitely made the town feel more mysterious.",
+    "inputOrder": 479
   },
   {
     "word": "lore",
     "partOfSpeech": "noun",
     "original": "Traditional agricultural lore, accumulated over generations, can provide valuable insights into sustainable farming practices that are well adapted to local environmental conditions.",
-    "imitation": "There's quite a bit of gardening lore in my family, because my grandparents have been growing their own vegetables for decades and they've picked up all sorts of little tricks along the way."
+    "imitation": "There's quite a bit of gardening lore in my family, because my grandparents have been growing their own vegetables for decades and they've picked up all sorts of little tricks along the way.",
+    "inputOrder": 480
   },
   {
     "word": "lore",
     "partOfSpeech": "noun",
     "original": "Elaborate fictional lore can make novels, films and video games more immersive by giving audiences the impression that the imaginary world has a history extending far beyond the main narrative.",
-    "imitation": "What I love most about the game isn't actually the gameplay; it's the lore, because there's this incredibly detailed history behind virtually every character and location."
+    "imitation": "What I love most about the game isn't actually the gameplay; it's the lore, because there's this incredibly detailed history behind virtually every character and location.",
+    "inputOrder": 481
   },
   {
     "word": "lore",
     "partOfSpeech": "noun",
     "original": "Much of the ancient lore concerning medicinal plants was transmitted orally long before systematic scientific research became widespread.",
-    "imitation": "I'm fascinated by ancient lore, especially the kind of knowledge people developed about plants and astronomy without the benefit of modern technology."
+    "imitation": "I'm fascinated by ancient lore, especially the kind of knowledge people developed about plants and astronomy without the benefit of modern technology.",
+    "inputOrder": 482
   },
   {
     "word": "maintain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 483
   },
   {
     "word": "maple",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 484
+  },
+  {
+    "word": "massive",
+    "partOfSpeech": "",
+    "original": "",
+    "imitation": "",
+    "inputOrder": 719
   },
   {
     "word": "meticulous",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 485
   },
   {
     "word": "mix",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 486
   },
   {
     "word": "mixture",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 487
   },
   {
     "word": "model",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 488
   },
   {
     "word": "moisture",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 489
   },
   {
     "word": "mollusc",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 490
   },
   {
     "word": "morale",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 491
   },
   {
     "word": "navigate",
     "partOfSpeech": "verb",
     "original": "She learned to navigate the challenges of her new job.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 492
   },
   {
     "word": "navigate",
     "partOfSpeech": "verb",
     "original": "It is easy to navigate the website and find useful information.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 493
   },
   {
     "word": "navigate",
     "partOfSpeech": "verb",
     "original": "The captain navigated the ship through the narrow channel.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 494
   },
   {
     "word": "observation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 495
   },
   {
     "word": "observe",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 496
   },
   {
     "word": "obstacle",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 497
   },
   {
     "word": "obtain",
     "partOfSpeech": "verb",
     "original": "The same rules obtain in both countries.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 498
   },
   {
     "word": "obtain",
     "partOfSpeech": "verb",
     "original": "She obtained a visa after submitting all the required documents.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 499
   },
   {
     "word": "occupy",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 500
   },
   {
     "word": "odd",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 501
   },
   {
     "word": "opinion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 502
   },
   {
     "word": "orchestrate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 503
   },
   {
     "word": "ornamental",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 504
   },
   {
     "word": "ossify",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 505
   },
   {
     "word": "outcry",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
-  },
-  {
-    "word": "overlook",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 506
   },
   {
     "word": "overlook",
     "partOfSpeech": "verb",
     "original": "On a private island in Miami, a high-rise apartment overlooks the water.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 508
+  },
+  {
+    "word": "overlook",
+    "partOfSpeech": "",
+    "original": "",
+    "imitation": "",
+    "inputOrder": 507
   },
   {
     "word": "overwhelm",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 509
   },
   {
     "word": "participant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 510
   },
   {
     "word": "passenger",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 511
   },
   {
     "word": "passion",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 512
   },
   {
     "word": "passive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
-  },
-  {
-    "word": "pattern",
-    "partOfSpeech": "noun",
-    "original": "This design serves as a pattern for future products.",
-    "imitation": ""
-  },
-  {
-    "word": "pattern",
-    "partOfSpeech": "noun",
-    "original": "His sleeping pattern changed after he started working at night.",
-    "imitation": ""
-  },
-  {
-    "word": "pattern",
-    "partOfSpeech": "noun",
-    "original": "The dress has a beautiful floral pattern.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 513
   },
   {
     "word": "pattern",
     "partOfSpeech": "verb",
     "original": "The migration routes of certain bird species pattern the landscape in ways that scientists are only beginning to document.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 517
   },
   {
     "word": "pattern",
     "partOfSpeech": "verb",
     "original": "Several developing nations have patterned their educational reforms on the Finnish system of student-centred learning.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 518
+  },
+  {
+    "word": "pattern",
+    "partOfSpeech": "noun",
+    "original": "This design serves as a pattern for future products.",
+    "imitation": "",
+    "inputOrder": 514
+  },
+  {
+    "word": "pattern",
+    "partOfSpeech": "noun",
+    "original": "His sleeping pattern changed after he started working at night.",
+    "imitation": "",
+    "inputOrder": 515
+  },
+  {
+    "word": "pattern",
+    "partOfSpeech": "noun",
+    "original": "The dress has a beautiful floral pattern.",
+    "imitation": "",
+    "inputOrder": 516
   },
   {
     "word": "pearl",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 519
   },
   {
     "word": "performance",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 520
   },
   {
     "word": "performance",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 521
   },
   {
     "word": "permanent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 522
   },
   {
     "word": "permanent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 523
   },
   {
     "word": "persistence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 524
   },
   {
     "word": "persistent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 525
   },
   {
     "word": "pertain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 526
   },
   {
     "word": "plain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 527
   },
   {
     "word": "plate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 528
   },
   {
     "word": "pledge",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 529
   },
   {
     "word": "plum",
     "partOfSpeech": "adjective",
     "original": "Thirty years ago, a young government official with a plum job in Beijing made an odd request: reassignment to a poor rural area.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 530
   },
   {
     "word": "polish",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 531
   },
   {
     "word": "portable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 532
   },
   {
     "word": "position",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 533
   },
   {
     "word": "possession",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 534
   },
   {
     "word": "precise",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 535
   },
   {
     "word": "precision",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 536
   },
   {
     "word": "predict",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 537
   },
   {
     "word": "prepositional",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 538
   },
   {
     "word": "present",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 539
   },
   {
     "word": "preserve",
     "partOfSpeech": "verb",
     "original": "Beijing has some interest in preserving the Iranian regime as a thorn in the side of the United States, he said.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 540
   },
   {
     "word": "pressure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 541
   },
   {
     "word": "prevail",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 542
   },
   {
     "word": "primary",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 543
   },
   {
     "word": "princeling",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 544
   },
   {
     "word": "procedure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 545
   },
   {
     "word": "produce",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 546
   },
   {
     "word": "profound",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 547
   },
   {
     "word": "project",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 548
   },
   {
     "word": "promote",
     "partOfSpeech": "verb",
     "original": "Employees who consistently demonstrate strong leadership skills should be promoted to senior positions on the basis of merit rather than personal connections.",
-    "imitation": "My sister was recently promoted to a managerial position."
+    "imitation": "My sister was recently promoted to a managerial position.",
+    "inputOrder": 549
   },
   {
     "word": "promote",
     "partOfSpeech": "verb",
     "original": "Governments should invest more heavily in public transport, as an efficient transport network can promote economic growth while simultaneously reducing traffic congestion and carbon emissions.",
-    "imitation": "I think schools should do more to promote healthy eating because a lot of children pick up their dietary habits at quite an early age."
+    "imitation": "I think schools should do more to promote healthy eating because a lot of children pick up their dietary habits at quite an early age.",
+    "inputOrder": 550
   },
   {
     "word": "promote",
     "partOfSpeech": "verb",
     "original": "Schools have a responsibility not merely to impart academic knowledge but also to promote values such as tolerance, mutual respect and social responsibility.",
-    "imitation": "One thing I really like about international events is that they can promote greater understanding between people from completely different cultural backgrounds."
+    "imitation": "One thing I really like about international events is that they can promote greater understanding between people from completely different cultural backgrounds.",
+    "inputOrder": 551
   },
   {
     "word": "promote",
     "partOfSpeech": "verb",
     "original": "Social media platforms allow small businesses to promote their products to a global audience without incurring the enormous advertising costs traditionally associated with television and print media.",
-    "imitation": "A friend of mine runs a small bakery, and she mainly promotes it through Instagram because it’s much cheaper than paying for traditional advertising."
+    "imitation": "A friend of mine runs a small bakery, and she mainly promotes it through Instagram because it’s much cheaper than paying for traditional advertising.",
+    "inputOrder": 552
   },
   {
     "word": "promote",
     "partOfSpeech": "verb",
     "original": "Companies frequently use celebrity endorsements to promote new products, particularly when attempting to appeal to younger consumers.",
-    "imitation": "Whenever a company launches a new phone, they seem to promote it absolutely everywhere, so it’s almost impossible not to hear about it."
+    "imitation": "Whenever a company launches a new phone, they seem to promote it absolutely everywhere, so it’s almost impossible not to hear about it.",
+    "inputOrder": 553
   },
   {
     "word": "prompt",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 554
   },
   {
     "word": "prosecutor",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 555
   },
   {
     "word": "protective",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 556
   },
   {
     "word": "provide",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 557
   },
   {
     "word": "proximity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 558
   },
   {
     "word": "publicise",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 559
   },
   {
     "word": "pursue",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 560
   },
   {
     "word": "qualification",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 561
   },
   {
     "word": "quality",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 562
   },
   {
     "word": "quantity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 563
   },
   {
     "word": "rampant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 564
   },
   {
     "word": "range",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 565
   },
   {
     "word": "rare",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 566
   },
   {
     "word": "rear",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 567
   },
   {
     "word": "rear",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 568
   },
   {
     "word": "reason",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 569
   },
   {
     "word": "reasonable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 570
   },
   {
     "word": "reassignment",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 571
   },
   {
     "word": "receive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 572
   },
   {
     "word": "recession",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 573
   },
   {
     "word": "recommend",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 574
   },
   {
     "word": "reduce",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 575
   },
   {
     "word": "reflect",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 576
   },
   {
     "word": "refuse",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 577
   },
   {
     "word": "regular",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 578
   },
   {
     "word": "regular",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 579
   },
   {
     "word": "regularity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 580
   },
   {
     "word": "reliable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 581
   },
   {
     "word": "relieve",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 582
   },
   {
     "word": "reluctant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 583
   },
   {
     "word": "rely",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 584
   },
   {
     "word": "remark",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 585
   },
   {
     "word": "remarkable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 586
   },
   {
     "word": "remember",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 587
   },
   {
     "word": "replace",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 588
   },
   {
     "word": "represent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 589
   },
   {
     "word": "require",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 590
   },
   {
     "word": "requirement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 591
   },
   {
     "word": "resemble",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 592
   },
   {
     "word": "residence",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 593
   },
   {
     "word": "resident",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 594
   },
   {
     "word": "resolute",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 595
   },
   {
     "word": "resolution",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 596
   },
   {
     "word": "restoration",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 597
   },
   {
     "word": "restraint",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 598
   },
   {
     "word": "restrict",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 599
   },
   {
     "word": "restriction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 600
   },
   {
     "word": "resumption",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 601
   },
   {
     "word": "retain",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 602
   },
   {
     "word": "retain",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 603
   },
   {
     "word": "retain",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 604
   },
   {
     "word": "review",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 605
   },
   {
     "word": "rigid",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 606
   },
   {
     "word": "rise",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 607
   },
   {
     "word": "roughly",
     "partOfSpeech": "adverb",
     "original": "According to data from the World Trade Organization, Iranian-Emirati trade was worth roughly $28 billion in 2024.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 608
   },
   {
     "word": "route",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 609
   },
   {
     "word": "safeguard",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 610
   },
   {
     "word": "sample",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 611
   },
   {
     "word": "sanction",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 612
   },
   {
     "word": "satellite",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 613
   },
   {
     "word": "satisfy",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 614
   },
   {
     "word": "savvy",
     "partOfSpeech": "noun",
     "original": "The move offers a window on the political savvy of Mr. Xi, now on the cusp of taking over as China’s supreme leader.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 615
   },
   {
     "word": "scandal",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 616
   },
   {
     "word": "sceptical",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 617
   },
   {
     "word": "scorn",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 618
   },
   {
     "word": "seizure",
     "partOfSpeech": "verb",
     "original": "Mr. Webb, a citizen of the Cayman Islands who was extradited to the United States from Switzerland last week, has multiple properties in the United States, including four in Georgia that are subject to seizure.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 619
   },
   {
     "word": "semantic",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 620
   },
   {
     "word": "sensitive",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 621
   },
   {
     "word": "severe",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 622
   },
   {
     "word": "shallow",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 623
   },
   {
     "word": "sheer",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 624
   },
   {
     "word": "shell",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 625
   },
   {
     "word": "shield",
     "partOfSpeech": "verb",
     "original": "Pakistan and Turkey have so far been relatively shielded from U.S. economic measures against Tehran, even as they have continued significant overland trade with Iran, Mr. Batmanghelidj said.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 626
   },
   {
     "word": "shock",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 627
   },
   {
     "word": "sideline",
     "partOfSpeech": "verb",
     "original": "He pushed through market-oriented reforms when they were still considered cutting edge, and sidelined pro-Maoists.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 628
   },
   {
     "word": "similar",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 629
   },
   {
     "word": "similarity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 630
   },
   {
     "word": "simulation",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 631
   },
   {
     "word": "slab",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 632
   },
   {
     "word": "slope",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 633
   },
   {
     "word": "smooth",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 634
   },
   {
     "word": "solid",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 635
   },
   {
     "word": "source",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 636
   },
   {
     "word": "specification",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 637
   },
   {
     "word": "sprawl",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 638
   },
   {
     "word": "stand",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 639
   },
   {
     "word": "standard",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 640
   },
   {
     "word": "state",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 641
   },
   {
     "word": "statement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 642
   },
   {
     "word": "station",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 643
   },
   {
     "word": "status",
     "partOfSpeech": "noun",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 644
   },
   {
     "word": "sterilize",
     "partOfSpeech": "verb",
     "original": "Medical instruments must be properly sterilized before use.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 645
   },
   {
     "word": "stimulate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 646
   },
   {
     "word": "stingy",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 647
   },
   {
     "word": "stint",
     "partOfSpeech": "noun",
     "original": "His stint in the countryside also helped him form new alliances with other offspring of the elite who would later prove important allies.",
-    "imitation": "I had a brief stint working abroad."
+    "imitation": "I had a brief stint working abroad.",
+    "inputOrder": 648
   },
   {
     "word": "stir",
     "partOfSpeech": "noun",
     "original": "The announcement caused a stir among environmental groups.",
-    "imitation": "It caused quite a stir at the time."
+    "imitation": "It caused quite a stir at the time.",
+    "inputOrder": 649
   },
   {
     "word": "stop",
     "partOfSpeech": "verb",
     "original": "In 2019, India stopped buying Iranian oil altogether, under pressure from Mr. Trump.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 650
   },
   {
     "word": "strengthen",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 651
   },
   {
     "word": "stress",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 652
   },
   {
     "word": "stress",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 653
   },
   {
     "word": "structure",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 654
   },
   {
     "word": "struggle",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 655
   },
   {
     "word": "ststement",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 656
   },
   {
     "word": "subject",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 657
   },
   {
     "word": "substantial",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 658
   },
   {
     "word": "suffer",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 659
   },
   {
     "word": "supersede",
     "partOfSpeech": "",
     "original": "Digital downloads have largely superseded physical media in the music industry.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 660
   },
   {
     "word": "supersede",
     "partOfSpeech": "",
     "original": "The new legislation supersedes all previous regulations regarding data privacy.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 661
   },
   {
     "word": "supplier",
     "partOfSpeech": "noun",
     "original": "Iran was once India’s most important energy supplier.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 662
   },
   {
     "word": "support",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 663
   },
   {
     "word": "surge",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 664
   },
   {
     "word": "surgical",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 665
   },
   {
     "word": "surprise",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 666
   },
   {
     "word": "surrender",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 667
   },
   {
     "word": "suspend",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 668
   },
   {
     "word": "suspension",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 669
   },
   {
     "word": "sustain",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 670
   },
   {
     "word": "sustainable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 671
   },
   {
     "word": "tainted",
     "partOfSpeech": "adjective",
     "original": "Governments should introduce stricter regulations to prevent tainted money from entering the legitimate financial system.",
-    "imitation": "Some businesses may be funded with tainted money obtained through illegal activities."
+    "imitation": "Some businesses may be funded with tainted money obtained through illegal activities.",
+    "inputOrder": 672
   },
   {
     "word": "tangible",
     "partOfSpeech": "adjective",
     "original": "Unless governments take concrete action, it will be difficult to achieve tangible results.",
-    "imitation": "The government needs to produce tangible results rather than make empty promises."
+    "imitation": "The government needs to produce tangible results rather than make empty promises.",
+    "inputOrder": 673
   },
   {
     "word": "target",
     "partOfSpeech": "verb",
     "original": "American sanctions have already targeted Iranian-linked groups in Iraq.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 674
   },
   {
     "word": "tectonic",
     "partOfSpeech": "adjective",
     "original": "The invention of the internet caused a tectonic shift in global communication patterns.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 675
   },
   {
     "word": "tectonic",
     "partOfSpeech": "adjective",
     "original": "The Himalayan mountain range was formed by the collision of two major tectonic plates.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 676
   },
   {
     "word": "terrible",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 677
   },
   {
     "word": "thorn",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 678
   },
   {
     "word": "tile",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 679
   },
   {
     "word": "tissue",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 680
   },
   {
     "word": "toddler",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 681
   },
   {
     "word": "tradition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 682
   },
   {
     "word": "tragical",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 683
   },
   {
     "word": "trajectory",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 684
   },
   {
     "word": "tranquillity",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 685
   },
   {
     "word": "transition",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 686
   },
   {
     "word": "transparency",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 687
   },
   {
     "word": "treat",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 688
   },
   {
     "word": "treaty",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 689
   },
   {
     "word": "trial",
     "partOfSpeech": "noun",
     "original": "The county began holding show trials of criminals throughout the summer and autumn of 1983, according to these government accounts.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 690
   },
   {
     "word": "trigger",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 691
   },
   {
     "word": "uncertainty",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 692
   },
   {
     "word": "undermine",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 693
   },
   {
     "word": "understand",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 694
   },
   {
     "word": "undesirable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 695
   },
   {
     "word": "unfold",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 696
   },
   {
     "word": "uphold",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 697
   },
   {
     "word": "uppermost",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 698
   },
   {
     "word": "urgent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 699
   },
   {
     "word": "valid",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 700
   },
   {
     "word": "valuable",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 701
   },
   {
     "word": "vehicle",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 702
   },
   {
     "word": "vend",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 703
   },
   {
     "word": "vend",
     "partOfSpeech": "verb",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 704
   },
   {
     "word": "vibrant",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 705
   },
   {
     "word": "violate",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 706
   },
   {
     "word": "violent",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 707
   },
   {
     "word": "visible",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 708
   },
   {
     "word": "void",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 709
   },
   {
     "word": "volunteer",
     "partOfSpeech": "verb",
     "original": "In 1982, when Mr. Xi volunteered for rural duty, he did so along with two other up-and-coming officials, including Liu Yuan, son of the former head of state under Mao, Liu Shaoqi.",
-    "imitation": "I volunteered for a community project."
-  },
-  {
-    "word": "vulnerable",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": ""
+    "imitation": "I volunteered for a community project.",
+    "inputOrder": 710
   },
   {
     "word": "vulnerable",
     "partOfSpeech": "adjective",
     "original": "Developing economies may be more vulnerable to fluctuations in global markets.",
-    "imitation": "Coastal cities are vulnerable to rising sea levels."
+    "imitation": "Coastal cities are vulnerable to rising sea levels.",
+    "inputOrder": 712
+  },
+  {
+    "word": "vulnerable",
+    "partOfSpeech": "",
+    "original": "",
+    "imitation": "",
+    "inputOrder": 711
   },
   {
     "word": "warn",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 713
   },
   {
     "word": "weaken",
     "partOfSpeech": "",
     "original": "",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 714
   },
   {
     "word": "yogurt",
     "partOfSpeech": "noun",
     "original": "Plain yogurt contains live bacterial cultures that can benefit digestive health.",
-    "imitation": ""
+    "imitation": "",
+    "inputOrder": 715
   },
   {
     "word": "zealous",
     "partOfSpeech": "adjective",
     "original": "Zealous advocates of environmental protection often play an important role in raising public awareness and placing pressure on governments to adopt more sustainable policies.",
-    "imitation": "My history teacher was incredibly zealous about his subject, and his enthusiasm was actually quite infectious, so even students who weren’t particularly interested in history tended to enjoy his lessons."
+    "imitation": "My history teacher was incredibly zealous about his subject, and his enthusiasm was actually quite infectious, so even students who weren’t particularly interested in history tended to enjoy his lessons.",
+    "inputOrder": 716
   },
   {
     "word": "zealous",
     "partOfSpeech": "adjective",
     "original": "Although zealous supporters of technological innovation often emphasize its economic benefits, policymakers should also consider its potential impact on employment, privacy and social inequality.",
-    "imitation": "I wouldn’t say I’m a zealous supporter of any particular political idea; I tend to look at individual policies rather than automatically agreeing with one side."
+    "imitation": "I wouldn’t say I’m a zealous supporter of any particular political idea; I tend to look at individual policies rather than automatically agreeing with one side.",
+    "inputOrder": 717
   },
   {
     "word": "zealous",
     "partOfSpeech": "adjective",
     "original": "Overly zealous enforcement of minor regulations can undermine public trust, particularly when citizens feel that the punishment imposed is disproportionate to the offence committed.",
-    "imitation": "Some teachers can be a bit too zealous when it comes to discipline, and I think being excessively strict can sometimes make students afraid of making even minor mistakes."
+    "imitation": "Some teachers can be a bit too zealous when it comes to discipline, and I think being excessively strict can sometimes make students afraid of making even minor mistakes.",
+    "inputOrder": 718
   }
 ]
