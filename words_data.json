@@ -975,16 +975,16 @@
   {
     "word": "bid",
     "partOfSpeech": "verb",
-    "original": "Companies that bid for government contracts should be required to disclose relevant financial information so that public authorities can ensure that taxpayer money is spent transparently.",
-    "imitation": "The company bid for a major construction contract.",
-    "addedOrder": 141
-  },
-  {
-    "word": "bid",
-    "partOfSpeech": "noun",
     "original": "Although online auctions have made it easier for consumers to bid for rare items, inexperienced buyers may end up paying far more than an object is actually worth if they become overly competitive.",
     "imitation": "I bid £50 for the painting.",
     "addedOrder": 140
+  },
+  {
+    "word": "bid",
+    "partOfSpeech": "verb",
+    "original": "Companies that bid for government contracts should be required to disclose relevant financial information so that public authorities can ensure that taxpayer money is spent transparently.",
+    "imitation": "The company bid for a major construction contract.",
+    "addedOrder": 141
   },
   {
     "word": "bilateral",
