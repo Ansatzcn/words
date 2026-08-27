@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-25-word-pos-input-order-v1">
+    <meta name="app-build" content="2026-08-21-edit-selection-order-v2">
     <title>Words</title>
     <style>
         * {
@@ -139,8 +139,8 @@
             background: #0f172a;
         }
         .toolbar .btn-sync {
-            background: #AE0B2A;
-            border: 1px solid #AE0B2A;
+            background: #1E40AF;
+            border: 1px solid #1E40AF;
             padding: 0.4rem 1.2rem;
             border-radius: 40px;
             font-weight: 500;
@@ -150,7 +150,7 @@
             font-size: 0.85rem;
         }
         .toolbar .btn-sync:hover {
-            background: #1d4ed8;
+            background: #1E3A8A;
         }
         .toolbar .btn-sync:disabled {
             opacity: 0.6;
@@ -330,7 +330,7 @@
         }
         .pos-option.is-current {
             background: #eef2ff;
-            color: #1e3a8a;
+            color: #1E3A8A;
             font-weight: 650;
         }
         .pos-option-control {
@@ -369,7 +369,7 @@
             border: 1px solid #bfdbfe;
             border-radius: 999px;
             background: #eff6ff;
-            color: #AE0B2A;
+            color: #1E40AF;
             font-family: inherit;
             font-size: 0.82rem;
             font-weight: 600;
@@ -503,7 +503,7 @@
 
         .word-table .word-imitation {
             font-style: normal;
-            color: #AE0B2A;
+            color: #1E40AF;
         }
         .word-table .edit-link {
             flex: 0 0 auto;
@@ -523,7 +523,7 @@
         }
         .word-table .edit-link:hover,
         .word-table .edit-link:focus-visible {
-            color: #1e3a8a;
+            color: #1E3A8A;
             outline: none;
         }
         .empty-row td {
@@ -717,7 +717,7 @@
             background: #dc2626;
         }
         .toast.info {
-            background: #AE0B2A;
+            background: #1E40AF;
         }
         .toast.hidden {
             display: none;
@@ -856,7 +856,7 @@
             margin-top: 4px;
         }
         .config-box .form-group .hint a {
-            color: #AE0B2A;
+            color: #1E40AF;
             text-decoration: none;
         }
         .config-box .form-group .hint a:hover {
@@ -880,7 +880,7 @@
             height: 16px;
             margin: 0;
             padding: 0;
-            accent-color: #AE0B2A;
+            accent-color: #1E40AF;
             cursor: pointer;
         }
         .config-box .token-save-hint {
@@ -941,13 +941,13 @@
             z-index: 900;
             border: 0;
             border-radius: 50%;
-            background: #AE0B2A;
+            background: #1E40AF;
             color: white;
             font-family: inherit;
             font-size: 0.74rem;
             line-height: 1;
             cursor: pointer;
-            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.28);
+            box-shadow: 0 3px 10px rgba(30, 64, 175, 0.28);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -963,7 +963,7 @@
         .back-to-top:focus-visible {
             opacity: 1;
             color: white;
-            background: #1d4ed8;
+            background: #1E3A8A;
             transform: translateY(-50%) translateX(-2px);
             outline: none;
         }
@@ -1054,7 +1054,58 @@
                 font-size: 0.68rem;
             }
         }
-    </style>
+    
+/* Words 总表：单词 1.2rem，其余 1rem；仅“听说”为主色 */
+.word-table,
+.word-table th,
+.word-table td,
+.word-table .word-part-of-speech,
+.word-table .word-original,
+.word-table .word-imitation,
+.word-table .edit-link{
+    font-size:1rem!important;
+}
+.word-table .word-title-text{
+    font-size:1.2rem!important;
+    line-height:1.4;
+}
+.word-table .col-word,
+.word-table .word-title-text,
+.word-table .word-part-of-speech,
+.word-table .word-original,
+.word-table .edit-link{
+    color:#000!important;
+}
+.word-table .word-imitation{
+    color:#1E40AF!important;
+}
+.word-table .edit-link:hover,
+.word-table .edit-link:focus-visible{
+    color:#000!important;
+}
+
+/* 回到顶部：主色实心圆，无箭头/无文字 */
+.back-to-top{
+    background:#1E40AF!important;
+    color:#1E40AF!important;
+    border:0!important;
+    border-radius:50%!important;
+    font-size:0!important;
+    text-indent:-9999px!important;
+    overflow:hidden!important;
+}
+.back-to-top::before,
+.back-to-top::after{
+    content:none!important;
+    display:none!important;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible{
+    background:#1E3A8A!important;
+    color:#1E3A8A!important;
+}
+
+</style>
 </head>
 <body>
     <div class="container">
@@ -1510,38 +1561,13 @@
                     original: typeof item.original === 'string'
                         ? item.original.trim()
                         : (typeof item.example === 'string' ? item.example.trim() : ''),
-                    imitation: typeof item.imitation === 'string' ? item.imitation.trim() : '',
-                    inputOrder: Number.isSafeInteger(item.inputOrder) && item.inputOrder >= 0
-                        ? item.inputOrder
-                        : null
+                    imitation: typeof item.imitation === 'string' ? item.imitation.trim() : ''
                 };
             }
 
             function normalizeWordList(value) {
                 if (!Array.isArray(value)) return [];
-
-                const normalized = value.map(normalizeWordItem).filter(Boolean);
-                let nextInputOrder = normalized.reduce((maxOrder, item) => (
-                    Number.isSafeInteger(item.inputOrder)
-                        ? Math.max(maxOrder, item.inputOrder)
-                        : maxOrder
-                ), -1) + 1;
-
-                for (const item of normalized) {
-                    if (!Number.isSafeInteger(item.inputOrder)) {
-                        item.inputOrder = nextInputOrder++;
-                    }
-                }
-
-                return normalized;
-            }
-
-            function getNextInputOrder() {
-                return words.reduce((maxOrder, item) => (
-                    Number.isSafeInteger(item.inputOrder)
-                        ? Math.max(maxOrder, item.inputOrder)
-                        : maxOrder
-                ), -1) + 1;
+                return value.map(normalizeWordItem).filter(Boolean);
             }
 
             const fingerprintCollator = new Intl.Collator('en', {
@@ -1555,8 +1581,7 @@
                         word: item.word,
                         partOfSpeech: item.partOfSpeech,
                         original: item.original,
-                        imitation: item.imitation,
-                        inputOrder: item.inputOrder
+                        imitation: item.imitation
                     }))
                     .sort((a, b) => {
                         const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
@@ -1564,7 +1589,7 @@
                             const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
                         }
-                        return a.inputOrder - b.inputOrder;
+                        return 0;
                     });
                 return JSON.stringify(canonical);
             }
@@ -2430,7 +2455,8 @@
                     [partOfSpeechHistory[targetIndex], partOfSpeechHistory[index]];
 
                 savePartOfSpeechHistory();
-                applySortAndRender();
+                renderPartOfSpeechCombo('add');
+                renderPartOfSpeechCombo('edit');
             }
 
             // ---------- 排序与渲染 ----------
@@ -2439,29 +2465,14 @@
                 numeric: true
             });
 
-            function getPartOfSpeechRank(value) {
-                const key = partOfSpeechKey(value);
-                const index = partOfSpeechHistory.findIndex(item => partOfSpeechKey(item) === key);
-                return index >= 0 ? index : partOfSpeechHistory.length;
-            }
-
             function sortWords(order) {
                 const direction = order || sortOrder;
                 const multiplier = direction === 'asc' ? 1 : -1;
                 words.sort((a, b) => {
-                    // 1. 首要规则：单词按现有字母顺序排序；升/降序切换逻辑保持不变。
                     const primary = wordCollator.compare(a.word || '', b.word || '');
                     if (primary !== 0) return primary * multiplier;
 
-                    // 2. 同名单词：严格按照词性下拉菜单当前顺序排列。
-                    const partOfSpeechRankDiff =
-                        getPartOfSpeechRank(a.partOfSpeech) - getPartOfSpeechRank(b.partOfSpeech);
-                    if (partOfSpeechRankDiff !== 0) return partOfSpeechRankDiff;
-
-                    // 3. 同名单词且同词性：按照最初录入先后排列，不受后续编辑影响。
-                    const aInputOrder = Number.isSafeInteger(a.inputOrder) ? a.inputOrder : Number.MAX_SAFE_INTEGER;
-                    const bInputOrder = Number.isSafeInteger(b.inputOrder) ? b.inputOrder : Number.MAX_SAFE_INTEGER;
-                    return aInputOrder - bInputOrder;
+                    return 0;
                 });
             }
 
@@ -2598,8 +2609,7 @@
                     word,
                     partOfSpeech,
                     original: originalInput.value.trim(),
-                    imitation: imitationInput.value.trim(),
-                    inputOrder: getNextInputOrder()
+                    imitation: imitationInput.value.trim()
                 });
 
                 applySortAndRender();
