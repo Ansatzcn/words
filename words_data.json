@@ -974,17 +974,17 @@
   },
   {
     "word": "bid",
-    "partOfSpeech": "noun",
-    "original": "Although online auctions have made it easier for consumers to bid for rare items, inexperienced buyers may end up paying far more than an object is actually worth if they become overly competitive.",
-    "imitation": "I bid £50 for the painting.",
-    "addedOrder": 140
+    "partOfSpeech": "verb",
+    "original": "Companies that bid for government contracts should be required to disclose relevant financial information so that public authorities can ensure that taxpayer money is spent transparently.",
+    "imitation": "The company bid for a major construction contract.",
+    "addedOrder": 141
   },
   {
     "word": "bid",
     "partOfSpeech": "noun",
-    "original": "Political candidates increasingly rely on social media in their bids for office, as digital platforms allow them to reach large numbers of voters at relatively little cost.",
-    "imitation": "Our local football club made a serious bid for the championship last season, but they lost several key players towards the end of the competition.",
-    "addedOrder": 141
+    "original": "Although online auctions have made it easier for consumers to bid for rare items, inexperienced buyers may end up paying far more than an object is actually worth if they become overly competitive.",
+    "imitation": "I bid £50 for the painting.",
+    "addedOrder": 140
   },
   {
     "word": "bilateral",
