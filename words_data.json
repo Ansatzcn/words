@@ -3081,6 +3081,13 @@
   },
   {
     "word": "heed",
+    "partOfSpeech": "verb",
+    "original": "While large-scale urban development can stimulate economic activity, local authorities should heed the concerns of existing residents so that regeneration does not come at the expense of community cohesion.",
+    "imitation": "The government should heed public concerns.",
+    "addedOrder": 759
+  },
+  {
+    "word": "heed",
     "partOfSpeech": "noun",
     "original": "Although young people should be encouraged to make independent decisions, they would be wise to heed the advice of experienced adults when facing choices that could have long-term consequences.",
     "imitation": "I usually heed my parents' advice.",
