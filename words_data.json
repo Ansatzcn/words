@@ -3074,6 +3074,13 @@
   },
   {
     "word": "heed",
+    "partOfSpeech": "verb",
+    "original": "If governments continue to pursue short-term economic growth without heeding warnings about environmental degradation, they may eventually face ecological problems that are far more costly to resolve.",
+    "imitation": "He didn't heed the warning.",
+    "addedOrder": 758
+  },
+  {
+    "word": "heed",
     "partOfSpeech": "noun",
     "original": "Although young people should be encouraged to make independent decisions, they would be wise to heed the advice of experienced adults when facing choices that could have long-term consequences.",
     "imitation": "I usually heed my parents' advice.",
