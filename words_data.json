@@ -2668,13 +2668,6 @@
   },
   {
     "word": "estimate",
-    "partOfSpeech": "verb",
-    "original": "The global population is estimated to reach approximately 9.7 billion by 2050, which may place considerable pressure on food production and natural resources.",
-    "imitation": "The building is estimated to be over a hundred years old.",
-    "addedOrder": 373
-  },
-  {
-    "word": "estimate",
     "partOfSpeech": "noun",
     "original": "While current estimates suggest that renewable energy will account for an increasing share of global electricity generation, the pace of this transition will depend heavily on government investment and technological innovation.",
     "imitation": "My estimate was completely wrong.",
