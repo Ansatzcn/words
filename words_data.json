@@ -232,13 +232,6 @@
   },
   {
     "word": "absolute",
-    "partOfSpeech": "noun",
-    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
-    "imitation": "",
-    "addedOrder": 34
-  },
-  {
-    "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth.",
     "imitation": "",
@@ -250,6 +243,13 @@
     "original": "The scientific experiment must be conducted under absolute control of all environmental variables.",
     "imitation": "",
     "addedOrder": 36
+  },
+  {
+    "word": "absolute",
+    "partOfSpeech": "noun",
+    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
+    "imitation": "",
+    "addedOrder": 34
   },
   {
     "word": "absorb",
@@ -2961,6 +2961,13 @@
     "addedOrder": 406
   },
   {
+    "word": "flippant",
+    "partOfSpeech": "",
+    "original": "",
+    "imitation": "",
+    "addedOrder": 811
+  },
+  {
     "word": "float",
     "partOfSpeech": "",
     "original": "",
@@ -5524,6 +5531,13 @@
   },
   {
     "word": "volunteer",
+    "partOfSpeech": "adjective",
+    "original": "Although volunteer work rarely provides substantial financial benefits, it can improve young people's employability because it allows them to demonstrate responsibility, teamwork and social awareness.",
+    "imitation": "I did some volunteer work during university.",
+    "addedOrder": 782
+  },
+  {
+    "word": "volunteer",
     "partOfSpeech": "verb",
     "original": "Although volunteers are not normally motivated by financial rewards, their contribution can be indispensable to charities that would otherwise struggle to provide essential services to disadvantaged communities.",
     "imitation": "I worked as a volunteer at a local charity.",
@@ -5549,13 +5563,6 @@
     "original": "When schools ask for student volunteers to organise community events, those who participate may develop leadership skills that cannot easily be acquired through conventional classroom instruction.",
     "imitation": "The teacher asked for a volunteer.",
     "addedOrder": 779
-  },
-  {
-    "word": "volunteer",
-    "partOfSpeech": "adjective",
-    "original": "Although volunteer work rarely provides substantial financial benefits, it can improve young people's employability because it allows them to demonstrate responsibility, teamwork and social awareness.",
-    "imitation": "I did some volunteer work during university.",
-    "addedOrder": 782
   },
   {
     "word": "vulnerable",
