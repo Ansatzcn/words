@@ -5026,6 +5026,13 @@
     "addedOrder": 692
   },
   {
+    "word": "taint",
+    "partOfSpeech": "verb",
+    "original": "If industrial waste is discharged into rivers without adequate treatment, it may taint local water supplies, thereby exposing nearby communities to serious health risks.",
+    "imitation": "The chemicals tainted the water.",
+    "addedOrder": 773
+  },
+  {
     "word": "tainted",
     "partOfSpeech": "adjective",
     "original": "Governments should introduce stricter regulations to prevent tainted money from entering the legitimate financial system.",
