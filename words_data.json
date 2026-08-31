@@ -5397,6 +5397,13 @@
     "addedOrder": 734
   },
   {
+    "word": "vulnerable",
+    "partOfSpeech": "adjective",
+    "original": "Countries that rely heavily on a single industry are particularly vulnerable to economic shocks, since a sudden decline in global demand can lead to widespread unemployment and substantial losses in government revenue.",
+    "imitation": "Small businesses are vulnerable to sudden changes in the economy.",
+    "addedOrder": 784
+  },
+  {
     "word": "warn",
     "partOfSpeech": "",
     "original": "",
