@@ -3262,6 +3262,13 @@
     "addedOrder": 804
   },
   {
+    "word": "identify",
+    "partOfSpeech": "verb",
+    "original": "When individuals are required to identify themselves before accessing sensitive digital services, the risk of fraud can be reduced, although excessive identity checks may make such systems less convenient to use.",
+    "imitation": "He identified himself as a police officer.",
+    "addedOrder": 805
+  },
+  {
     "word": "identity",
     "partOfSpeech": "",
     "original": "",
