@@ -232,6 +232,13 @@
   },
   {
     "word": "absolute",
+    "partOfSpeech": "noun",
+    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
+    "imitation": "",
+    "addedOrder": 34
+  },
+  {
+    "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth.",
     "imitation": "",
@@ -243,13 +250,6 @@
     "original": "The scientific experiment must be conducted under absolute control of all environmental variables.",
     "imitation": "",
     "addedOrder": 36
-  },
-  {
-    "word": "absolute",
-    "partOfSpeech": "noun",
-    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
-    "imitation": "",
-    "addedOrder": 34
   },
   {
     "word": "absorb",
@@ -4842,6 +4842,13 @@
     "original": "Historical monuments can stir a strong sense of national identity among visitors because they provide a tangible connection to events that have shaped a country's collective memory.",
     "imitation": "That song always stirs old memories.",
     "addedOrder": 767
+  },
+  {
+    "word": "stir",
+    "partOfSpeech": "verb",
+    "original": "Although controversial policies may initially stir public anger, they can still gain widespread acceptance if governments explain their long-term benefits clearly and implement them in a transparent manner.",
+    "imitation": "The decision stirred a lot of controversy.",
+    "addedOrder": 769
   },
   {
     "word": "stop",
