@@ -246,6 +246,15 @@
             width: 100%;
             max-width: 100%;
             min-width: 0;
+            font-family: "Times New Roman", serif;
+        }
+
+        /* 词性下拉菜单：强制统一使用 Times New Roman，避免按钮/下拉项使用系统 UI 字体 */
+        .pos-combo input,
+        .pos-combo button,
+        .pos-panel,
+        .pos-panel * {
+            font-family: "Times New Roman", serif !important;
         }
         .pos-primary-row {
             display: grid;
