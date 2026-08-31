@@ -5363,6 +5363,13 @@
   },
   {
     "word": "volunteer",
+    "partOfSpeech": "verb",
+    "original": "Although employees should not be required to disclose unnecessary personal information, they may choose to volunteer relevant details if doing so enables their employer to provide appropriate support.",
+    "imitation": "He volunteered some useful information.",
+    "addedOrder": 781
+  },
+  {
+    "word": "volunteer",
     "partOfSpeech": "noun",
     "original": "When schools ask for student volunteers to organise community events, those who participate may develop leadership skills that cannot easily be acquired through conventional classroom instruction.",
     "imitation": "The teacher asked for a volunteer.",
