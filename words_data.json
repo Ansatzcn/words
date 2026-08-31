@@ -232,13 +232,6 @@
   },
   {
     "word": "absolute",
-    "partOfSpeech": "noun",
-    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
-    "imitation": "",
-    "addedOrder": 34
-  },
-  {
-    "word": "absolute",
     "partOfSpeech": "adjective",
     "original": "In a world of moral relativism, some philosophers still argue for the existence of absolute truth.",
     "imitation": "",
@@ -250,6 +243,13 @@
     "original": "The scientific experiment must be conducted under absolute control of all environmental variables.",
     "imitation": "",
     "addedOrder": 36
+  },
+  {
+    "word": "absolute",
+    "partOfSpeech": "noun",
+    "original": "Respect for human dignity should be treated as a moral absolute in any civilised society.",
+    "imitation": "",
+    "addedOrder": 34
   },
   {
     "word": "absorb",
@@ -3358,6 +3358,13 @@
     "original": "",
     "imitation": "",
     "addedOrder": 464
+  },
+  {
+    "word": "inexorable",
+    "partOfSpeech": "",
+    "original": "",
+    "imitation": "",
+    "addedOrder": 768
   },
   {
     "word": "infinity",
