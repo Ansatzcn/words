@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="app-build" content="2026-08-27-pos-sort-added-order-v3">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="app-build" content="2026-09-01-cross-terminal-force-refresh-v1">
     <title>Words</title>
     <style>
         * {
@@ -123,6 +126,11 @@
         .toolbar .btn-outline:hover {
             background: #f1f5f9;
             border-color: #94a3b8;
+        }
+
+        .toolbar .btn-outline:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
         }
         .toolbar .btn-primary-outline {
             background: #1e293b;
@@ -1343,6 +1351,9 @@
             const MAX_CONFLICT_BACKUPS = 10;
             const MAX_SYNC_BYTES = 750 * 1024;
             const AUTO_SYNC_DELAY = 700;
+            // 页面保持打开时也要持续检查云端，避免其他终端更新后本页长期停留在旧版本。
+            const CLOUD_REFRESH_INTERVAL = 10 * 1000;
+            const CLOUD_REFRESH_MIN_GAP = 1500;
 
             // ---------- 全局状态 ----------
             let words = [];
@@ -1351,6 +1362,8 @@
             let isSyncing = false;
             let syncQueued = false;
             let autoSyncTimer = null;
+            let cloudRefreshTimer = null;
+            let lastCloudRefreshAt = 0;
             let hasStoredLocalData = false;
             let partOfSpeechHistory = [];
             let partOfSpeechHistoryStored = false;
@@ -2043,6 +2056,11 @@
                 };
 
                 const options = { method, headers };
+                if (method === 'GET') {
+                    // 浏览器手动刷新或页面自动检查时必须重新向 GitHub 请求最新内容，
+                    // 不允许复用浏览器 HTTP 缓存中的旧响应。
+                    options.cache = 'no-store';
+                }
                 if (body !== null) {
                     headers['Content-Type'] = 'application/json';
                     options.body = JSON.stringify(body);
@@ -2396,6 +2414,50 @@
                 }
 
                 return result.ok;
+            }
+
+            // ---------- 跨终端云端刷新 ----------
+            async function refreshOpenPageFromCloud(reason = 'timer') {
+                if (!isConfigValid()) return { ok: false, skipped: true, changed: false };
+                if (document.hidden) return { ok: false, skipped: true, changed: false };
+                if (isSyncing) return { ok: false, skipped: true, changed: false };
+
+                // 本地已有未同步修改时绝不自动用云端覆盖；交给原有安全同步/冲突机制处理。
+                if (hasUnsyncedLocalChanges()) {
+                    return { ok: false, skipped: true, changed: false };
+                }
+
+                const now = Date.now();
+                if (now - lastCloudRefreshAt < CLOUD_REFRESH_MIN_GAP) {
+                    return { ok: false, skipped: true, changed: false };
+                }
+                lastCloudRefreshAt = now;
+
+                const beforeFingerprint = getWordsFingerprint(words);
+                const ok = await syncToCloud(false, false);
+                const changed = ok && getWordsFingerprint(words) !== beforeFingerprint;
+
+                if (changed) {
+                    showToast('检测到其他终端的云端更新，当前页面已自动刷新', 'success');
+                }
+                return { ok, skipped: false, changed };
+            }
+
+            function startCloudRefreshLoop() {
+                if (cloudRefreshTimer !== null) {
+                    clearInterval(cloudRefreshTimer);
+                    cloudRefreshTimer = null;
+                }
+                if (!isConfigValid()) return;
+
+                cloudRefreshTimer = window.setInterval(() => {
+                    refreshOpenPageFromCloud('timer');
+                }, CLOUD_REFRESH_INTERVAL);
+            }
+
+            function triggerImmediateCloudRefresh(reason) {
+                if (!isConfigValid() || document.hidden) return;
+                refreshOpenPageFromCloud(reason);
             }
 
             function scheduleAutoSync() {
@@ -2821,6 +2883,7 @@
                 }
 
                 closeConfigModal();
+                startCloudRefreshLoop();
                 showToast('配置已保存，正在安全同步...', 'info');
                 syncToCloud(true, true);
             }
@@ -3042,6 +3105,14 @@
 
             backToTopBtn.addEventListener('click', fastScrollToTop);
 
+            // 页面从后台切回、窗口重新获得焦点、网络恢复时，立即检查云端。
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) triggerImmediateCloudRefresh('visibility');
+            });
+            window.addEventListener('focus', () => triggerImmediateCloudRefresh('focus'));
+            window.addEventListener('pageshow', () => triggerImmediateCloudRefresh('pageshow'));
+            window.addEventListener('online', () => triggerImmediateCloudRefresh('online'));
+
             window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
             updateBackToTopVisibility();
 
@@ -3060,6 +3131,7 @@
 
             if (isConfigValid()) {
                 ensureSyncTarget();
+                startCloudRefreshLoop();
                 syncToCloud(false, false);
             } else {
                 setCloudStatus('offline', '未配置');
