@@ -5356,6 +5356,13 @@
   },
   {
     "word": "volunteer",
+    "partOfSpeech": "verb",
+    "original": "If university students volunteer to participate in community projects, they can gain practical experience while contributing to the welfare of people who may otherwise receive limited support.",
+    "imitation": "I volunteered to help with the event.",
+    "addedOrder": 780
+  },
+  {
+    "word": "volunteer",
     "partOfSpeech": "noun",
     "original": "When schools ask for student volunteers to organise community events, those who participate may develop leadership skills that cannot easily be acquired through conventional classroom instruction.",
     "imitation": "The teacher asked for a volunteer.",
