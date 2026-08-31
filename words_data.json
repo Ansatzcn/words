@@ -5033,6 +5033,13 @@
     "addedOrder": 773
   },
   {
+    "word": "taint",
+    "partOfSpeech": "verb",
+    "original": "Although the company had previously enjoyed a strong reputation for ethical conduct, allegations of corruption tainted its public image and significantly weakened consumer trust.",
+    "imitation": "The scandal tainted his reputation.",
+    "addedOrder": 774
+  },
+  {
     "word": "tainted",
     "partOfSpeech": "adjective",
     "original": "Governments should introduce stricter regulations to prevent tainted money from entering the legitimate financial system.",
