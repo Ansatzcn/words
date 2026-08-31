@@ -4824,9 +4824,9 @@
   },
   {
     "word": "stir",
-    "partOfSpeech": "",
-    "original": "",
-    "imitation": "",
+    "partOfSpeech": "verb",
+    "original": "Although modern food processors can save considerable time, many traditional recipes still require ingredients to be stirred slowly by hand so that their texture and consistency can be properly controlled.",
+    "imitation": "I stirred some sugar into my coffee.",
     "addedOrder": 765
   },
   {
