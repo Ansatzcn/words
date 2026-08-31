@@ -5404,6 +5404,13 @@
     "addedOrder": 784
   },
   {
+    "word": "vulnerable",
+    "partOfSpeech": "adjective",
+    "original": "As public services become increasingly dependent on digital infrastructure, poorly protected computer networks may become vulnerable to cyberattacks, which can disrupt essential services and compromise sensitive personal data.",
+    "imitation": "The old computer system is vulnerable to hacking.",
+    "addedOrder": 785
+  },
+  {
     "word": "warn",
     "partOfSpeech": "",
     "original": "",
