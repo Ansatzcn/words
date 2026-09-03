@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="app-build" content="2026-09-01-cross-terminal-force-refresh-v1">
+    <meta name="app-build" content="2026-09-02-prewrite-three-way-merge-v2">
     <title>Words</title>
     <style>
         * {
@@ -1345,11 +1345,14 @@
             const TOKEN_SESSION_KEY = `${STORAGE_NAMESPACE}:token_session`;
             const STORAGE_KEY = `${STORAGE_NAMESPACE}:words`;
             const PART_OF_SPEECH_HISTORY_KEY = `${STORAGE_NAMESPACE}:part_of_speech_history_v1`;
-            const SYNC_SCHEMA_VERSION = 5;
-            const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v5`;
-            const CONFLICT_BACKUP_KEY = `${STORAGE_NAMESPACE}:conflict_backups_v5`;
+            const SYNC_SCHEMA_VERSION = 6;
+            const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v6`;
+            const LEGACY_SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v5`;
+            const CONFLICT_BACKUP_KEY = `${STORAGE_NAMESPACE}:conflict_backups_v6`;
+            const DEVICE_ID_KEY = `${STORAGE_NAMESPACE}:device_id_v1`;
             const MAX_CONFLICT_BACKUPS = 10;
             const MAX_SYNC_BYTES = 750 * 1024;
+            const MAX_SYNC_RETRIES = 4;
             const AUTO_SYNC_DELAY = 700;
             // 页面保持打开时也要持续检查云端，避免其他终端更新后本页长期停留在旧版本。
             const CLOUD_REFRESH_INTERVAL = 10 * 1000;
@@ -1386,8 +1389,11 @@
                 target: '',
                 remoteSha: null,
                 lastSyncedFingerprint: null,
-                lastSyncAt: null
+                lastSyncAt: null,
+                baselineWords: null,
+                legacyFingerprintV5: null
             };
+            let deviceIdCache = '';
 
             // ---------- DOM 引用 ----------
             const wordInput = document.getElementById('wordInput');
@@ -1569,6 +1575,33 @@
                 return normalized;
             }
 
+            function getDeviceId() {
+                if (deviceIdCache) return deviceIdCache;
+                const stored = safeLocalGet(DEVICE_ID_KEY);
+                if (typeof stored === 'string' && stored.trim()) {
+                    deviceIdCache = stored.trim();
+                    return deviceIdCache;
+                }
+
+                const randomPart = (globalThis.crypto && typeof globalThis.crypto.randomUUID === 'function')
+                    ? globalThis.crypto.randomUUID().replace(/-/g, '')
+                    : `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 14)}`;
+                deviceIdCache = `d_${randomPart}`;
+                safeLocalSet(DEVICE_ID_KEY, deviceIdCache);
+                return deviceIdCache;
+            }
+
+            function createWordId() {
+                const randomPart = (globalThis.crypto && typeof globalThis.crypto.randomUUID === 'function')
+                    ? globalThis.crypto.randomUUID().replace(/-/g, '')
+                    : `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 16)}`;
+                return `w_${getDeviceId().slice(-12)}_${randomPart}`;
+            }
+
+            function normalizeWordId(value) {
+                return typeof value === 'string' ? value.normalize('NFKC').trim() : '';
+            }
+
             function normalizeWordItem(item) {
                 if (!item || typeof item !== 'object' || typeof item.word !== 'string') {
                     return null;
@@ -1582,6 +1615,7 @@
                     : null;
 
                 return {
+                    id: normalizeWordId(item.id),
                     word,
                     partOfSpeech: normalizePartOfSpeechValue(item.partOfSpeech),
                     original: typeof item.original === 'string'
@@ -1596,22 +1630,37 @@
                 if (!Array.isArray(value)) return [];
 
                 const normalized = value.map(normalizeWordItem).filter(Boolean);
-                const seenOrders = new Set();
-                const needsOrderMigration = normalized.some(item => {
-                    if (!Number.isSafeInteger(item.addedOrder) || item.addedOrder <= 0 || seenOrders.has(item.addedOrder)) {
-                        return true;
-                    }
-                    seenOrders.add(item.addedOrder);
-                    return false;
-                });
+                const usedOrders = new Set();
+                let nextOrder = normalized.reduce((maxOrder, item) => {
+                    return Number.isSafeInteger(item.addedOrder) && item.addedOrder > maxOrder
+                        ? item.addedOrder
+                        : maxOrder;
+                }, 0) + 1;
 
-                // 旧数据没有 addedOrder 时，按当前保存顺序一次性补齐。
-                // 原版本对同词比较返回 0，现代浏览器稳定排序会保留这些条目的原相对顺序。
-                if (needsOrderMigration) {
-                    return normalized.map((item, index) => ({
-                        ...item,
-                        addedOrder: index + 1
-                    }));
+                // addedOrder 是用户看到的添加顺序编码。旧数据缺失或同一列表内部重复时，
+                // 仅重新分配发生问题的条目，不整体重排已有编码。
+                for (const item of normalized) {
+                    if (!Number.isSafeInteger(item.addedOrder) || item.addedOrder <= 0 || usedOrders.has(item.addedOrder)) {
+                        while (usedOrders.has(nextOrder)) nextOrder += 1;
+                        item.addedOrder = nextOrder;
+                        nextOrder += 1;
+                    }
+                    usedOrders.add(item.addedOrder);
+                }
+
+                // 旧版本没有稳定 id。以既有 addedOrder 生成确定性的 legacy id，
+                // 这样不同终端升级时，同一旧词条仍能被识别为同一条记录。
+                const usedIds = new Set();
+                for (const item of normalized) {
+                    const baseId = item.id || `legacy_${item.addedOrder}`;
+                    let candidate = baseId;
+                    let suffix = 2;
+                    while (usedIds.has(candidate)) {
+                        candidate = `${baseId}~${suffix}`;
+                        suffix += 1;
+                    }
+                    item.id = candidate;
+                    usedIds.add(candidate);
                 }
 
                 return normalized;
@@ -1631,6 +1680,29 @@
             });
 
             function getWordsFingerprint(list) {
+                const canonical = normalizeWordList(list)
+                    .map(item => ({
+                        id: item.id,
+                        word: item.word,
+                        partOfSpeech: item.partOfSpeech,
+                        original: item.original,
+                        imitation: item.imitation,
+                        addedOrder: item.addedOrder
+                    }))
+                    .sort((a, b) => {
+                        const idCompared = fingerprintCollator.compare(a.id, b.id);
+                        if (idCompared !== 0) return idCompared;
+                        const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
+                        for (const field of fields) {
+                            const compared = fingerprintCollator.compare(a[field], b[field]);
+                            if (compared !== 0) return compared;
+                        }
+                        return a.addedOrder - b.addedOrder;
+                    });
+                return JSON.stringify(canonical);
+            }
+
+            function getLegacyV5Fingerprint(list) {
                 const canonical = normalizeWordList(list)
                     .map(item => ({
                         word: item.word,
@@ -1965,40 +2037,74 @@
                     target,
                     remoteSha: null,
                     lastSyncedFingerprint: null,
-                    lastSyncAt: null
+                    lastSyncAt: null,
+                    baselineWords: null,
+                    legacyFingerprintV5: null
                 };
             }
 
             function loadSyncMeta() {
-                // 只读取当前网页实例的同步基线，绝不复用其他仓库页面的同步状态。
+                // v6 保存完整同步基线，用于字段级三方合并。
                 const stored = safeLocalGet(SYNC_META_KEY);
-                if (!stored) {
-                    syncMeta = createEmptySyncMeta();
-                    return;
+                if (stored) {
+                    try {
+                        const parsed = JSON.parse(stored);
+                        if (parsed && parsed.schemaVersion === SYNC_SCHEMA_VERSION) {
+                            syncMeta = {
+                                schemaVersion: SYNC_SCHEMA_VERSION,
+                                target: typeof parsed.target === 'string' ? parsed.target : '',
+                                remoteSha: typeof parsed.remoteSha === 'string' ? parsed.remoteSha : null,
+                                lastSyncedFingerprint: typeof parsed.lastSyncedFingerprint === 'string'
+                                    ? parsed.lastSyncedFingerprint
+                                    : null,
+                                lastSyncAt: typeof parsed.lastSyncAt === 'string' ? parsed.lastSyncAt : null,
+                                baselineWords: Array.isArray(parsed.baselineWords)
+                                    ? normalizeWordList(parsed.baselineWords)
+                                    : null,
+                                legacyFingerprintV5: typeof parsed.legacyFingerprintV5 === 'string'
+                                    ? parsed.legacyFingerprintV5
+                                    : null
+                            };
+                            return;
+                        }
+                    } catch (error) {
+                        console.error('同步元数据 v6 解析失败:', error);
+                    }
                 }
 
-                try {
-                    const parsed = JSON.parse(stored);
-                    if (!parsed || parsed.schemaVersion !== SYNC_SCHEMA_VERSION) {
-                        syncMeta = createEmptySyncMeta();
+                // 从 v5 平滑迁移：若当前本地内容仍等于 v5 的最后同步指纹，
+                // 当前本地快照即可安全作为三方合并基线。
+                const legacyStored = safeLocalGet(LEGACY_SYNC_META_KEY);
+                if (legacyStored) {
+                    try {
+                        const legacy = JSON.parse(legacyStored);
+                        const localSnapshot = normalizeWordList(words);
+                        const localFingerprintV5 = getLegacyV5Fingerprint(localSnapshot);
+                        const canUseLocalAsBaseline = legacy && legacy.schemaVersion === 5 &&
+                            typeof legacy.lastSyncedFingerprint === 'string' &&
+                            legacy.lastSyncedFingerprint === localFingerprintV5;
+
+                        syncMeta = {
+                            schemaVersion: SYNC_SCHEMA_VERSION,
+                            target: typeof legacy?.target === 'string' ? legacy.target : '',
+                            remoteSha: typeof legacy?.remoteSha === 'string' ? legacy.remoteSha : null,
+                            lastSyncedFingerprint: typeof legacy?.lastSyncedFingerprint === 'string'
+                                ? legacy.lastSyncedFingerprint
+                                : null,
+                            lastSyncAt: typeof legacy?.lastSyncAt === 'string' ? legacy.lastSyncAt : null,
+                            baselineWords: canUseLocalAsBaseline ? localSnapshot : null,
+                            legacyFingerprintV5: typeof legacy?.lastSyncedFingerprint === 'string'
+                                ? legacy.lastSyncedFingerprint
+                                : null
+                        };
                         saveSyncMeta();
                         return;
+                    } catch (error) {
+                        console.error('同步元数据 v5 迁移失败:', error);
                     }
-
-                    syncMeta = {
-                        schemaVersion: SYNC_SCHEMA_VERSION,
-                        target: typeof parsed.target === 'string' ? parsed.target : '',
-                        remoteSha: typeof parsed.remoteSha === 'string' ? parsed.remoteSha : null,
-                        lastSyncedFingerprint: typeof parsed.lastSyncedFingerprint === 'string'
-                            ? parsed.lastSyncedFingerprint
-                            : null,
-                        lastSyncAt: typeof parsed.lastSyncAt === 'string' ? parsed.lastSyncAt : null
-                    };
-                } catch (error) {
-                    console.error('同步元数据解析失败:', error);
-                    syncMeta = createEmptySyncMeta();
-                    saveSyncMeta();
                 }
+
+                syncMeta = createEmptySyncMeta();
             }
 
             function saveSyncMeta() {
@@ -2015,12 +2121,15 @@
             }
 
             function recordSynced(snapshot, remoteSha) {
+                const normalized = normalizeWordList(snapshot);
                 syncMeta = {
                     schemaVersion: SYNC_SCHEMA_VERSION,
                     target: getSyncTarget(),
                     remoteSha: remoteSha || null,
-                    lastSyncedFingerprint: getWordsFingerprint(snapshot),
-                    lastSyncAt: new Date().toISOString()
+                    lastSyncedFingerprint: getWordsFingerprint(normalized),
+                    lastSyncAt: new Date().toISOString(),
+                    baselineWords: normalized,
+                    legacyFingerprintV5: null
                 };
                 saveSyncMeta();
             }
@@ -2194,176 +2303,280 @@
                 saveConflictBackups(backups);
             }
 
-            // ---------- 冲突处理 ----------
-            async function adoptRemote(remote, expectedLocalFingerprint, showToastMsg, revalidate = true) {
-                if (getWordsFingerprint(words) !== expectedLocalFingerprint) {
-                    syncQueued = true;
-                    showToast('同步期间本地数据发生变化，已保留本地内容并重新排队同步', 'info');
-                    return { ok: false, conflict: false };
-                }
+            // ---------- 字段级三方合并 ----------
+            const MERGE_FIELDS = ['word', 'partOfSpeech', 'original', 'imitation'];
 
-                let candidate = remote;
-                if (revalidate) {
-                    const latest = await readRemoteFile();
-                    if (!latest.exists) {
-                        setCloudStatus('offline', '存在冲突');
-                        showToast('准备下载时发现云端文件已被删除，未覆盖本地数据', 'error');
-                        return { ok: false, conflict: true };
+            function cloneWordItem(item) {
+                return item ? { ...item } : null;
+            }
+
+            function wordItemsEqual(a, b) {
+                if (!a || !b) return a === b;
+                return a.id === b.id &&
+                    a.word === b.word &&
+                    a.partOfSpeech === b.partOfSpeech &&
+                    a.original === b.original &&
+                    a.imitation === b.imitation &&
+                    a.addedOrder === b.addedOrder;
+            }
+
+            function mapWordsById(list) {
+                return new Map(normalizeWordList(list).map(item => [item.id, item]));
+            }
+
+            function allocateCollisionWordId(usedIds) {
+                let id = createWordId();
+                while (usedIds.has(id)) id = createWordId();
+                usedIds.add(id);
+                return id;
+            }
+
+            function mergeExistingWord(baseItem, localItem, remoteItem) {
+                const merged = { id: localItem.id };
+                for (const field of MERGE_FIELDS) {
+                    const baseValue = baseItem[field];
+                    const localChanged = localItem[field] !== baseValue;
+                    const remoteChanged = remoteItem[field] !== baseValue;
+
+                    // 只有同一条目的同一字段两边都改成不同值时才发生真正字段冲突；
+                    // 当前执行同步的平台（local）优先。不同字段的修改会自然同时保留。
+                    if (localChanged) {
+                        merged[field] = localItem[field];
+                    } else if (remoteChanged) {
+                        merged[field] = remoteItem[field];
+                    } else {
+                        merged[field] = baseValue;
                     }
-                    candidate = latest;
                 }
 
-                if (getWordsFingerprint(words) !== expectedLocalFingerprint) {
+                const localOrderChanged = localItem.addedOrder !== baseItem.addedOrder;
+                const remoteOrderChanged = remoteItem.addedOrder !== baseItem.addedOrder;
+                merged.addedOrder = localOrderChanged
+                    ? localItem.addedOrder
+                    : (remoteOrderChanged ? remoteItem.addedOrder : baseItem.addedOrder);
+                return merged;
+            }
+
+            function resolveAddedOrderCollisions(list, localIds) {
+                const items = list.map(item => ({ ...item }));
+                let nextOrder = items.reduce((maxOrder, item) => {
+                    return Number.isSafeInteger(item.addedOrder) && item.addedOrder > maxOrder
+                        ? item.addedOrder
+                        : maxOrder;
+                }, 0) + 1;
+
+                // 当前操作平台已有的编码优先保留；远端合并进来的碰撞项自动获得新编码。
+                const priority = [...items].sort((a, b) => {
+                    const aLocal = localIds.has(a.id) ? 0 : 1;
+                    const bLocal = localIds.has(b.id) ? 0 : 1;
+                    if (aLocal !== bLocal) return aLocal - bLocal;
+                    if (a.addedOrder !== b.addedOrder) return a.addedOrder - b.addedOrder;
+                    return fingerprintCollator.compare(a.id, b.id);
+                });
+
+                const used = new Set();
+                const reassigned = new Map();
+                for (const item of priority) {
+                    let order = item.addedOrder;
+                    if (!Number.isSafeInteger(order) || order <= 0 || used.has(order)) {
+                        while (used.has(nextOrder)) nextOrder += 1;
+                        order = nextOrder;
+                        nextOrder += 1;
+                    }
+                    used.add(order);
+                    reassigned.set(item.id, order);
+                }
+
+                return items.map(item => ({
+                    ...item,
+                    addedOrder: reassigned.get(item.id)
+                }));
+            }
+
+            function threeWayMergeWords(baseSnapshot, localSnapshot, remoteSnapshot) {
+                const baseMap = mapWordsById(baseSnapshot || []);
+                const localMap = mapWordsById(localSnapshot || []);
+                const remoteMap = mapWordsById(remoteSnapshot || []);
+                const allIds = new Set([...baseMap.keys(), ...localMap.keys(), ...remoteMap.keys()]);
+                const usedIds = new Set(allIds);
+                const merged = [];
+                let idCollisions = 0;
+                let fieldConflicts = 0;
+
+                for (const id of allIds) {
+                    const baseItem = baseMap.get(id) || null;
+                    const localItem = localMap.get(id) || null;
+                    const remoteItem = remoteMap.get(id) || null;
+
+                    if (!baseItem) {
+                        // 两端独立新增：ID 不同则分别保留；若极小概率碰巧生成同一 ID，
+                        // 当前平台保留原 ID，另一条自动换新 ID，绝不丢失任何新增记录。
+                        if (localItem && remoteItem) {
+                            if (wordItemsEqual(localItem, remoteItem)) {
+                                merged.push(cloneWordItem(localItem));
+                            } else {
+                                merged.push(cloneWordItem(localItem));
+                                const remoteClone = cloneWordItem(remoteItem);
+                                remoteClone.id = allocateCollisionWordId(usedIds);
+                                merged.push(remoteClone);
+                                idCollisions += 1;
+                            }
+                        } else if (localItem) {
+                            merged.push(cloneWordItem(localItem));
+                        } else if (remoteItem) {
+                            merged.push(cloneWordItem(remoteItem));
+                        }
+                        continue;
+                    }
+
+                    if (!localItem && !remoteItem) {
+                        // 两边都删除。
+                        continue;
+                    }
+
+                    if (!localItem && remoteItem) {
+                        // 本地删除、远端未改：删除成立；若远端同时修改，则保留修改后的条目，避免数据丢失。
+                        if (!wordItemsEqual(baseItem, remoteItem)) merged.push(cloneWordItem(remoteItem));
+                        continue;
+                    }
+
+                    if (localItem && !remoteItem) {
+                        // 远端删除、本地未改：删除成立；若本地同时修改，则保留当前平台修改后的条目。
+                        if (!wordItemsEqual(baseItem, localItem)) merged.push(cloneWordItem(localItem));
+                        continue;
+                    }
+
+                    for (const field of MERGE_FIELDS) {
+                        const localChanged = localItem[field] !== baseItem[field];
+                        const remoteChanged = remoteItem[field] !== baseItem[field];
+                        if (localChanged && remoteChanged && localItem[field] !== remoteItem[field]) {
+                            fieldConflicts += 1;
+                        }
+                    }
+                    merged.push(mergeExistingWord(baseItem, localItem, remoteItem));
+                }
+
+                const localIds = new Set(localMap.keys());
+                const orderResolved = resolveAddedOrderCollisions(merged, localIds);
+                return {
+                    words: normalizeWordList(orderResolved),
+                    stats: { idCollisions, fieldConflicts }
+                };
+            }
+
+            function rebaseLiveChanges(attemptLocalSnapshot, liveSnapshot, committedSnapshot) {
+                // 同步请求飞行期间如果用户又进行了编辑，把这些新编辑重新应用到刚提交的合并结果之上。
+                return threeWayMergeWords(attemptLocalSnapshot, liveSnapshot, committedSnapshot).words;
+            }
+
+            function finalizeSuccessfulSync(committedSnapshot, remoteSha, attemptLocalSnapshot, attemptLocalFingerprint, showToastMsg, message) {
+                const normalizedCommitted = normalizeWordList(committedSnapshot);
+                const liveSnapshot = normalizeWordList(words);
+                const liveChangedDuringSync = getWordsFingerprint(liveSnapshot) !== attemptLocalFingerprint;
+
+                recordSynced(normalizedCommitted, remoteSha);
+
+                if (liveChangedDuringSync) {
+                    words = rebaseLiveChanges(attemptLocalSnapshot, liveSnapshot, normalizedCommitted);
                     syncQueued = true;
-                    showToast('下载期间本地数据发生变化，已保留本地内容并重新排队同步', 'info');
-                    return { ok: false, conflict: false };
+                } else {
+                    words = normalizedCommitted;
                 }
 
-                saveConflictBackup(words, 'before_remote_replace');
-                words = normalizeWordList(candidate.words);
                 applySortAndRender();
-                recordSynced(words, candidate.sha);
-                setCloudStatus('online', '已连接');
-                if (showToastMsg) {
-                    showToast(`已从 GitHub 更新 ${words.length} 个条目`, 'success');
-                }
-                return { ok: true, conflict: false };
+                setCloudStatus(syncQueued ? 'offline' : 'online', syncQueued ? '待同步' : '已连接');
+                if (syncQueued) lastSyncTime.textContent = '有未同步修改';
+                if (showToastMsg && message) showToast(message, 'success');
+
+                return {
+                    ok: true,
+                    conflict: false,
+                    uploadedFingerprint: getWordsFingerprint(normalizedCommitted)
+                };
             }
 
-            async function resolveRemoteDeletion(localSnapshot, interactive) {
-                setCloudStatus('offline', '云端文件已删除');
-
-                if (!interactive) {
-                    showToast('检测到云端数据文件已被删除，已停止自动同步；请点击“同步”决定是否重新创建', 'error');
-                    return { ok: false, conflict: true };
-                }
-
-                const recreate = confirm(
-                    '检测到云端数据文件已被删除。\n\n' +
-                    '点击“确定”：用当前本地数据重新创建云端文件。\n' +
-                    '点击“取消”：保留本地数据并停止同步，不创建云端文件。'
-                );
-
-                if (!recreate) {
-                    showToast('已保留本地数据，云端文件仍保持删除状态', 'info');
-                    return { ok: false, conflict: true };
-                }
-
-                // 确认期间云端可能重新出现；只有仍不存在时才允许创建。
-                const latest = await readRemoteFile();
-                if (latest.exists) {
-                    const error = new Error('确认期间云端文件已重新出现，请重新同步后选择版本');
-                    error.status = 409;
-                    throw error;
-                }
-
-                const newSha = await writeRemoteFile(localSnapshot, null);
-                recordSynced(localSnapshot, newSha);
-                setCloudStatus('online', '已连接');
-                showToast(`已重新创建云端文件并同步 ${localSnapshot.length} 个条目`, 'success');
-                return { ok: true, conflict: false, uploadedFingerprint: getWordsFingerprint(localSnapshot) };
-            }
-
-            async function resolveConflict(remote, localSnapshot, localFingerprint, interactive) {
-                setCloudStatus('offline', '存在冲突');
-
-                if (!interactive) {
-                    showToast('检测到本地和云端都发生了修改，已停止自动同步；请点击“同步”选择保留哪一份', 'error');
-                    return { ok: false, conflict: true };
-                }
-
-                const useLocal = confirm(
-                    '检测到同步冲突：本地和云端都发生了修改。\n\n' +
-                    '点击“确定”：用本地数据覆盖刚才读取到的云端版本。\n' +
-                    '点击“取消”：继续选择是否用云端数据覆盖本地。'
-                );
-
-                if (useLocal) {
-                    saveConflictBackup(remote.words, 'remote_before_local_override');
-                    // 必须使用发现冲突时的 SHA。若云端在用户确认期间再次变化，GitHub 会拒绝写入。
-                    const newSha = await writeRemoteFile(localSnapshot, remote.sha);
-                    recordSynced(localSnapshot, newSha);
-                    setCloudStatus('online', '已连接');
-                    showToast(`已用本地 ${localSnapshot.length} 个条目覆盖云端`, 'success');
-                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
-                }
-
-                const useRemote = confirm(
-                    '是否用云端数据覆盖本地？\n\n' +
-                    '点击“确定”：重新读取最新云端数据，本地当前数据会保存为冲突备份。\n' +
-                    '点击“取消”：暂不处理，任何一方都不会被覆盖。'
-                );
-
-                if (useRemote) {
-                    return adoptRemote(remote, getWordsFingerprint(words), true, true);
-                }
-
-                showToast('已取消同步，未覆盖本地或云端数据', 'info');
-                return { ok: false, conflict: true };
-            }
-
-            // ---------- 同步主流程 ----------
-            async function performSync({ showToastMsg, interactive }) {
+            // ---------- 同步主流程：每次写入前强制读取并三方合并 ----------
+            async function performSyncAttempt({ showToastMsg }) {
                 ensureSyncTarget();
 
-                const localSnapshot = normalizeWordList(words);
-                assertSnapshotSyncSize(localSnapshot);
-                const localFingerprint = getWordsFingerprint(localSnapshot);
-                const baseline = syncMeta.lastSyncedFingerprint;
-                const hasBaseline = typeof baseline === 'string';
+                const attemptLocalSnapshot = normalizeWordList(words);
+                assertSnapshotSyncSize(attemptLocalSnapshot);
+                const attemptLocalFingerprint = getWordsFingerprint(attemptLocalSnapshot);
+                let baselineSnapshot = Array.isArray(syncMeta.baselineWords)
+                    ? normalizeWordList(syncMeta.baselineWords)
+                    : null;
+
+                // 这是所有写入的强制前置读取：每一轮（包括 409/422 重试）都重新取得最新内容和 SHA。
                 const remote = await readRemoteFile();
+                const remoteSnapshot = remote.exists ? remote.words : [];
+                const remoteFingerprint = getWordsFingerprint(remoteSnapshot);
 
-                // 曾经同步成功后远端文件消失，必须由用户决定，不能自动重建。
-                if (!remote.exists && hasBaseline) {
-                    return resolveRemoteDeletion(localSnapshot, interactive);
-                }
-
-                // 真正的首次连接且远端文件不存在时，创建文件；空数组同样是有效数据。
-                if (!remote.exists) {
-                    const newSha = await writeRemoteFile(localSnapshot, null);
-                    recordSynced(localSnapshot, newSha);
-                    setCloudStatus('online', '已连接');
-                    if (showToastMsg) {
-                        showToast(`已创建云端文件并同步 ${localSnapshot.length} 个条目`, 'success');
+                // v5 -> v6 升级时旧版本没有保存完整基线。若旧指纹能证明某一侧仍是上次同步版本，
+                // 就用该侧恢复完整基线；只有“两侧在升级前都已修改”的极端情况无法从旧数据反推基线。
+                if (!baselineSnapshot && typeof syncMeta.legacyFingerprintV5 === 'string') {
+                    const legacyFingerprint = syncMeta.legacyFingerprintV5;
+                    if (getLegacyV5Fingerprint(attemptLocalSnapshot) === legacyFingerprint) {
+                        baselineSnapshot = attemptLocalSnapshot;
+                    } else if (getLegacyV5Fingerprint(remoteSnapshot) === legacyFingerprint) {
+                        baselineSnapshot = remoteSnapshot;
                     }
-                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
+                }
+                if (!baselineSnapshot) baselineSnapshot = [];
+
+                const mergedResult = threeWayMergeWords(baselineSnapshot, attemptLocalSnapshot, remoteSnapshot);
+                const mergedSnapshot = mergedResult.words;
+                const mergedFingerprint = getWordsFingerprint(mergedSnapshot);
+                assertSnapshotSyncSize(mergedSnapshot);
+
+                // 最新远端已经等于合并结果时无需写入，只更新本地和同步基线。
+                if (remote.exists && mergedFingerprint === remoteFingerprint) {
+                    const message = mergedResult.stats.fieldConflicts > 0
+                        ? `已自动合并；${mergedResult.stats.fieldConflicts} 个同字段冲突采用当前平台值`
+                        : '本地与云端已自动合并并一致';
+                    return finalizeSuccessfulSync(
+                        mergedSnapshot,
+                        remote.sha,
+                        attemptLocalSnapshot,
+                        attemptLocalFingerprint,
+                        showToastMsg,
+                        message
+                    );
                 }
 
-                const remoteFingerprint = getWordsFingerprint(remote.words);
+                // 写入必须使用刚刚强制读取到的最新 SHA。远端不存在时不带 SHA 创建文件。
+                const newSha = await writeRemoteFile(mergedSnapshot, remote.exists ? remote.sha : null);
+                const details = [];
+                if (mergedResult.stats.idCollisions > 0) details.push(`${mergedResult.stats.idCollisions} 个重复 ID 已自动重分配`);
+                if (mergedResult.stats.fieldConflicts > 0) details.push(`${mergedResult.stats.fieldConflicts} 个同字段冲突采用当前平台值`);
+                const message = details.length
+                    ? `同步成功：${details.join('；')}`
+                    : `成功同步 ${mergedSnapshot.length} 个条目到 GitHub`;
 
-                // 内容相同：建立或刷新同步基线，不产生无意义提交。
-                if (localFingerprint === remoteFingerprint) {
-                    recordSynced(localSnapshot, remote.sha);
-                    setCloudStatus('online', '已连接');
-                    if (showToastMsg) showToast('本地与云端已一致', 'success');
-                    return { ok: true, conflict: false };
-                }
+                return finalizeSuccessfulSync(
+                    mergedSnapshot,
+                    newSha,
+                    attemptLocalSnapshot,
+                    attemptLocalFingerprint,
+                    showToastMsg,
+                    message
+                );
+            }
 
-                const localChanged = !hasBaseline || localFingerprint !== baseline;
-                const remoteChanged = !hasBaseline || remoteFingerprint !== baseline;
+            async function performSync(options) {
+                let lastError = null;
+                for (let retry = 0; retry <= MAX_SYNC_RETRIES; retry += 1) {
+                    try {
+                        return await performSyncAttempt(options);
+                    } catch (error) {
+                        lastError = error;
+                        const isConcurrentWriteConflict = error && (error.status === 409 || error.status === 422);
+                        if (!isConcurrentWriteConflict || retry >= MAX_SYNC_RETRIES) throw error;
 
-                if (hasBaseline && localChanged && !remoteChanged) {
-                    const newSha = await writeRemoteFile(localSnapshot, remote.sha);
-                    recordSynced(localSnapshot, newSha);
-                    setCloudStatus('online', '已连接');
-                    if (showToastMsg) {
-                        showToast(`成功同步 ${localSnapshot.length} 个条目到 GitHub`, 'success');
+                        // 409/422 后不沿用旧 SHA/旧合并结果；下一轮从 GitHub 重新读取、重新合并、重新写入。
+                        setCloudStatus('syncing', `并发重试 ${retry + 1}/${MAX_SYNC_RETRIES}`);
                     }
-                    return { ok: true, conflict: false, uploadedFingerprint: localFingerprint };
                 }
-
-                if (hasBaseline && !localChanged && remoteChanged) {
-                    // 再读取一次最新 SHA 后采用远端，缩小下载竞态窗口。
-                    return adoptRemote(remote, localFingerprint, showToastMsg, true);
-                }
-
-                if (!hasBaseline && !hasStoredLocalData) {
-                    // 浏览器确实从未保存过本地数据时，才自动采用云端。
-                    return adoptRemote(remote, localFingerprint, showToastMsg, true);
-                }
-
-                // 本地即使是合法空数组，只要已经保存过，也不能自动被云端旧数据覆盖。
-                return resolveConflict(remote, localSnapshot, localFingerprint, interactive);
+                throw lastError || new Error('同步失败');
             }
 
             async function syncToCloud(showToastMsg = true, interactive = showToastMsg) {
@@ -2388,14 +2601,14 @@
                     result = await performSync({ showToastMsg, interactive });
                 } catch (error) {
                     console.error('同步失败:', error);
-                    if (error.status === 409) {
-                        setCloudStatus('offline', '存在冲突');
-                        showToast('云端在上传期间再次发生变化，未覆盖任何数据；请重新点击“同步”', 'error');
-                        result = { ok: false, conflict: true };
+                    if (error.status === 409 || error.status === 422) {
+                        setCloudStatus('offline', '并发同步失败');
+                        showToast(`连续 ${MAX_SYNC_RETRIES} 次重试后云端仍在并发变化，本次未覆盖数据；稍后会再次自动同步`, 'error');
                     } else {
                         setCloudStatus('offline', '同步失败');
                         showToast(`同步失败：${formatError(error)}`, 'error');
                     }
+                    result = { ok: false, conflict: false };
                 } finally {
                     isSyncing = false;
                     syncBtn.disabled = false;
@@ -2406,11 +2619,9 @@
                     syncQueued = true;
                 }
 
-                if (syncQueued && !result.conflict) {
+                if (syncQueued) {
                     syncQueued = false;
                     setTimeout(() => syncToCloud(false, false), 0);
-                } else if (result.conflict) {
-                    syncQueued = false;
                 }
 
                 return result.ok;
@@ -2421,11 +2632,7 @@
                 if (!isConfigValid()) return { ok: false, skipped: true, changed: false };
                 if (document.hidden) return { ok: false, skipped: true, changed: false };
                 if (isSyncing) return { ok: false, skipped: true, changed: false };
-
-                // 本地已有未同步修改时绝不自动用云端覆盖；交给原有安全同步/冲突机制处理。
-                if (hasUnsyncedLocalChanges()) {
-                    return { ok: false, skipped: true, changed: false };
-                }
+                if (!editModal.classList.contains('hidden')) return { ok: false, skipped: true, changed: false };
 
                 const now = Date.now();
                 if (now - lastCloudRefreshAt < CLOUD_REFRESH_MIN_GAP) {
@@ -2434,6 +2641,8 @@
                 lastCloudRefreshAt = now;
 
                 const beforeFingerprint = getWordsFingerprint(words);
+                // 有未同步修改时也进入同一个同步入口；该入口会先强制读取 GitHub 最新内容和 SHA，
+                // 再执行字段级三方合并，因此不会用旧本地快照直接覆盖云端。
                 const ok = await syncToCloud(false, false);
                 const changed = ok && getWordsFingerprint(words) !== beforeFingerprint;
 
@@ -2723,6 +2932,7 @@
 
                 const partOfSpeech = addPartOfSpeechHistory(partOfSpeechInput.value);
                 words.push({
+                    id: createWordId(),
                     word,
                     partOfSpeech,
                     original: originalInput.value.trim(),
@@ -3124,9 +3334,9 @@
             toast.setAttribute('aria-live', 'polite');
 
             loadConfig();
-            loadSyncMeta();
             loadPartOfSpeechHistory();
             loadFromLocal();
+            loadSyncMeta();
             updateLastSyncDisplay();
 
             if (isConfigValid()) {
