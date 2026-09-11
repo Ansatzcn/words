@@ -5,7 +5,7 @@
     "partOfSpeech": "adverb",
     "original": "Although local residents had been warned that the redevelopment project might cause some disruption, many were taken aback by the extent to which rents increased once the area began to attract wealthier newcomers.",
     "imitation": "I was really taken aback by how expensive everything was.",
-    "addedOrder": 1
+    "addedOrder": 873
   },
   {
     "id": "legacy_2",
@@ -6910,5 +6910,13 @@
     "original": "",
     "imitation": "",
     "addedOrder": 872
+  },
+  {
+    "id": "w_ee107f634b5c_cab293c66b8642e8b7b518f4269e7b07",
+    "word": "intact",
+    "partOfSpeech": "",
+    "original": "",
+    "imitation": "",
+    "addedOrder": 1
   }
 ]
