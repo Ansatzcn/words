@@ -7005,5 +7005,12 @@
     "partOfSpeech": "verb",
     "imitation": "I grabbed my phone before leaving the house.",
     "addedOrder": 1010
+  },
+  {
+    "id": "w_ee107f634b5c_91ca595a0b6c4817937376eeff7ac236",
+    "word": "grab",
+    "partOfSpeech": "verb",
+    "imitation": "She grabbed my arm when she saw the car approaching.",
+    "addedOrder": 1011
   }
 ]
