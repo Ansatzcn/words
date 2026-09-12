@@ -7110,5 +7110,12 @@
     "partOfSpeech": "verb",
     "imitation": "My teacher spent the evening marking our essays.",
     "addedOrder": 1025
+  },
+  {
+    "id": "w_ee107f634b5c_4b1b535e0a61442ab3810b68b25c50c4",
+    "word": "mark",
+    "partOfSpeech": "noun",
+    "imitation": "I got a high mark in my English exam.",
+    "addedOrder": 1026
   }
 ]
