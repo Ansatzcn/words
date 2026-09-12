@@ -6669,5 +6669,12 @@
     "partOfSpeech": "adjective",
     "imitation": "My grandparents live in a remote village surrounded by mountains.",
     "addedOrder": 962
+  },
+  {
+    "id": "w_ee107f634b5c_99759daaf0b94f969281d01f44f7bbfd",
+    "word": "remote",
+    "partOfSpeech": "adjective",
+    "imitation": "The idea seemed remote from the realities of everyday life.",
+    "addedOrder": 963
   }
 ]
