@@ -6613,5 +6613,12 @@
     "partOfSpeech": "verb",
     "imitation": "The plane was hijacked shortly after take-off.",
     "addedOrder": 954
+  },
+  {
+    "id": "w_ee107f634b5c_2d943a3d0a3d467f957e8a8e41175c4b",
+    "word": "hijack",
+    "partOfSpeech": "verb",
+    "imitation": "One person hijacked the entire discussion and refused to listen to anyone else.",
+    "addedOrder": 955
   }
 ]
