@@ -6571,5 +6571,12 @@
     "partOfSpeech": "verb",
     "imitation": "I unfolded the map and worked out where we were.",
     "addedOrder": 948
+  },
+  {
+    "id": "w_ee107f634b5c_6fb3514367dc479b9a440e8a88339dc2",
+    "word": "unfold",
+    "partOfSpeech": "verb",
+    "imitation": "The truth gradually unfolded over the next few days.",
+    "addedOrder": 949
   }
 ]
