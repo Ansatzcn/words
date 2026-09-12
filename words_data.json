@@ -6662,5 +6662,12 @@
     "partOfSpeech": "verb",
     "imitation": "Property prices crashed during the financial crisis.",
     "addedOrder": 961
+  },
+  {
+    "id": "w_ee107f634b5c_a7eac9b80ea84d079cc4a0c3c3494757",
+    "word": "remote",
+    "partOfSpeech": "adjective",
+    "imitation": "My grandparents live in a remote village surrounded by mountains.",
+    "addedOrder": 962
   }
 ]
