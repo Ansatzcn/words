@@ -1591,8 +1591,8 @@
   {
     "id": "legacy_217",
     "word": "congestion",
-    "partOfSpeech": "",
-    "imitation": "",
+    "partOfSpeech": "noun",
+    "imitation": "Traffic congestion is a serious problem in many large cities.",
     "addedOrder": 217
   },
   {
