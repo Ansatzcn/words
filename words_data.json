@@ -6641,5 +6641,12 @@
     "partOfSpeech": "verb",
     "imitation": "The aircraft crashed shortly after leaving the airport.",
     "addedOrder": 958
+  },
+  {
+    "id": "w_ee107f634b5c_b1dea08e296e4f61848391d4de3e1c12",
+    "word": "crash",
+    "partOfSpeech": "noun",
+    "imitation": "Fortunately, everyone survived the crash.",
+    "addedOrder": 959
   }
 ]
