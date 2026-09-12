@@ -6949,5 +6949,12 @@
     "partOfSpeech": "noun",
     "imitation": "The architect showed us the floor plan of the new building.",
     "addedOrder": 1002
+  },
+  {
+    "id": "w_ee107f634b5c_12d689e9a7864c64af0133eaf57f9d5a",
+    "word": "plan",
+    "partOfSpeech": "verb",
+    "imitation": "I plan to continue my studies after graduation.",
+    "addedOrder": 1003
   }
 ]
