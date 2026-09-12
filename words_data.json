@@ -7180,5 +7180,12 @@
     "partOfSpeech": "noun",
     "imitation": "The shop allows customers to take certain products home on approval.",
     "addedOrder": 1036
+  },
+  {
+    "id": "w_ee107f634b5c_b4d19847bfc4419d93257934056fca49",
+    "word": "ostrich",
+    "partOfSpeech": "noun",
+    "imitation": "An ostrich can run remarkably fast despite its enormous size.",
+    "addedOrder": 1037
   }
 ]
