@@ -6242,5 +6242,12 @@
     "partOfSpeech": "verb",
     "imitation": "Travel has challenged the way I think about other cultures.",
     "addedOrder": 900
+  },
+  {
+    "id": "w_ee107f634b5c_b7552ba124604827a341bfd23e1ce551",
+    "word": "appropriate",
+    "partOfSpeech": "verb",
+    "imitation": "The government appropriated more money for public healthcare.",
+    "addedOrder": 901
   }
 ]
