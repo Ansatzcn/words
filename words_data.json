@@ -6998,5 +6998,12 @@
     "partOfSpeech": "noun",
     "imitation": "I would rather ask a professional for advice.",
     "addedOrder": 1009
+  },
+  {
+    "id": "w_ee107f634b5c_49f9ddbe49f744d1ba1608ffbb1b2a76",
+    "word": "grab",
+    "partOfSpeech": "verb",
+    "imitation": "I grabbed my phone before leaving the house.",
+    "addedOrder": 1010
   }
 ]
