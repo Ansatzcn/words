@@ -6410,5 +6410,12 @@
     "partOfSpeech": "",
     "imitation": "I enjoy socializing with my friends at weekends.",
     "addedOrder": 925
+  },
+  {
+    "id": "w_ee107f634b5c_c760a7b0d3814d0daf1fc3c135cd6964",
+    "word": "socialize",
+    "partOfSpeech": "verb",
+    "imitation": "Joining a sports club helped me socialize with people from different backgrounds.",
+    "addedOrder": 926
   }
 ]
