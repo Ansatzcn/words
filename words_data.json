@@ -6914,5 +6914,12 @@
     "partOfSpeech": "noun",
     "imitation": "I think we should learn from the past rather than dwell on it.",
     "addedOrder": 997
+  },
+  {
+    "id": "w_ee107f634b5c_2939d12d7735421daeac8a7d3ff65933",
+    "word": "past",
+    "partOfSpeech": "adverb",
+    "imitation": "A cyclist sped past before I had time to react.",
+    "addedOrder": 998
   }
 ]
