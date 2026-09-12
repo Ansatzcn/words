@@ -6907,5 +6907,12 @@
     "partOfSpeech": "adjective",
     "imitation": "My past experiences have made me much more independent.",
     "addedOrder": 996
+  },
+  {
+    "id": "w_ee107f634b5c_cd4662f88356464f9c44fc84eddc6200",
+    "word": "past",
+    "partOfSpeech": "noun",
+    "imitation": "I think we should learn from the past rather than dwell on it.",
+    "addedOrder": 997
   }
 ]
