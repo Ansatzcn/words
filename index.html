@@ -16,7 +16,7 @@
         }
         body {
             background: #f5f7fa;
-            font-family: "Times New Roman", serif;
+            font-family: Georgia, "Microsoft YaHei", "微软雅黑", sans-serif;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -254,15 +254,15 @@
             width: 100%;
             max-width: 100%;
             min-width: 0;
-            font-family: "Times New Roman", serif;
+            font-family: Georgia, "Microsoft YaHei", "微软雅黑", sans-serif;
         }
 
-        /* 词性下拉菜单：强制统一使用 Times New Roman，避免按钮/下拉项使用系统 UI 字体 */
+        /* 词性下拉菜单：英文字母使用 Georgia，中文使用微软雅黑，避免按钮/下拉项使用系统 UI 字体 */
         .pos-combo input,
         .pos-combo button,
         .pos-panel,
         .pos-panel * {
-            font-family: "Times New Roman", serif !important;
+            font-family: Georgia, "Microsoft YaHei", "微软雅黑", sans-serif !important;
         }
         .pos-primary-row {
             display: grid;
@@ -1075,13 +1075,13 @@
     font-size:1rem!important;
 }
 .word-table .word-imitation{
-    font-family:"Times New Roman", serif!important;
+    font-family:Georgia, "Microsoft YaHei", "微软雅黑", sans-serif!important;
     font-size:1.1rem!important;
     font-weight:400!important;
     line-height:1.4;
 }
 .word-table .word-title-text{
-    font-family:"Times New Roman", serif!important;
+    font-family:Georgia, "Microsoft YaHei", "微软雅黑", sans-serif!important;
     font-size:1.05rem!important;
     line-height:1.4;
 }
@@ -1151,6 +1151,10 @@
                 添加
             </h2>
             <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="imitationInput">例句</label>
+                    <textarea id="imitationInput" rows="1"></textarea>
+                </div>
                 <div class="form-group">
                     <label for="wordInput">单词</label>
                     <input type="text" id="wordInput" autofocus>
@@ -1166,10 +1170,6 @@
                             <div id="partOfSpeechOptions"></div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="imitationInput">例句</label>
-                    <textarea id="imitationInput" rows="1"></textarea>
                 </div>
                 <button class="btn-primary" id="addBtn">添加</button>
             </div>
