@@ -6886,5 +6886,12 @@
     "partOfSpeech": "noun",
     "imitation": "The air strike caused extensive damage to the area.",
     "addedOrder": 993
+  },
+  {
+    "id": "w_ee107f634b5c_f0dc6d78a4004b01ab58c220e744de63",
+    "word": "past",
+    "partOfSpeech": "preposition",
+    "imitation": "I stayed at the office well past midnight to finish the report.",
+    "addedOrder": 994
   }
 ]
