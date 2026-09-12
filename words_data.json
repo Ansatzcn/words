@@ -6557,5 +6557,12 @@
     "partOfSpeech": "noun",
     "imitation": "I had severe nasal congestion when I caught a cold.",
     "addedOrder": 946
+  },
+  {
+    "id": "w_ee107f634b5c_11404f20276947bd9957d76de87a2fb1",
+    "word": "congestion",
+    "partOfSpeech": "noun",
+    "imitation": "The website became slow because of network congestion.",
+    "addedOrder": 947
   }
 ]
