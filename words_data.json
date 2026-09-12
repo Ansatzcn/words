@@ -6872,5 +6872,12 @@
     "partOfSpeech": "verb",
     "imitation": "The workers voted to strike over pay and working conditions.",
     "addedOrder": 991
+  },
+  {
+    "id": "w_ee107f634b5c_d5327722a1014f1b9423f359435a6378",
+    "word": "strike",
+    "partOfSpeech": "noun",
+    "imitation": "The train strike caused major disruption across the city.",
+    "addedOrder": 992
   }
 ]
