@@ -7229,5 +7229,12 @@
     "partOfSpeech": "noun",
     "imitation": "My grandmother made a beautiful quilt from pieces of old fabric.",
     "addedOrder": 1043
+  },
+  {
+    "id": "w_ee107f634b5c_9e82e64eb4c44cf9b9675725e8864d5e",
+    "word": "quilt",
+    "partOfSpeech": "verb",
+    "imitation": "She quilts the fabric by hand to create intricate patterns.",
+    "addedOrder": 1044
   }
 ]
