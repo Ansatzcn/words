@@ -7103,5 +7103,12 @@
     "partOfSpeech": "verb",
     "imitation": "I marked the important dates on my calendar.",
     "addedOrder": 1024
+  },
+  {
+    "id": "w_ee107f634b5c_ee7d0656277746868955fd35ded3fde4",
+    "word": "mark",
+    "partOfSpeech": "verb",
+    "imitation": "My teacher spent the evening marking our essays.",
+    "addedOrder": 1025
   }
 ]
