@@ -6879,5 +6879,12 @@
     "partOfSpeech": "noun",
     "imitation": "The train strike caused major disruption across the city.",
     "addedOrder": 992
+  },
+  {
+    "id": "w_ee107f634b5c_d175999dfa4a40bd9f436f31066349af",
+    "word": "strike",
+    "partOfSpeech": "noun",
+    "imitation": "The air strike caused extensive damage to the area.",
+    "addedOrder": 993
   }
 ]
