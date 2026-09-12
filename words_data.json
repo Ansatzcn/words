@@ -6851,5 +6851,12 @@
     "partOfSpeech": "verb",
     "imitation": "A powerful storm struck the coast overnight.",
     "addedOrder": 988
+  },
+  {
+    "id": "w_ee107f634b5c_367fa59417064f46b194433ed2590ec8",
+    "word": "strike",
+    "partOfSpeech": "verb",
+    "imitation": "It suddenly struck me that I had left my passport at home.",
+    "addedOrder": 989
   }
 ]
