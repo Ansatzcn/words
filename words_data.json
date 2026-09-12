@@ -6634,5 +6634,12 @@
     "partOfSpeech": "verb",
     "imitation": "The car lost control and crashed into a tree.",
     "addedOrder": 957
+  },
+  {
+    "id": "w_ee107f634b5c_ef81f35e1b0b42a7a8d5ffaef4a4e448",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "The aircraft crashed shortly after leaving the airport.",
+    "addedOrder": 958
   }
 ]
