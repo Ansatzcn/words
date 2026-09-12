@@ -7047,5 +7047,12 @@
     "partOfSpeech": "noun",
     "imitation": "I saved the document before turning off my laptop.",
     "addedOrder": 1016
+  },
+  {
+    "id": "w_ee107f634b5c_41e3dbbe69db40e4aaffafb5bcd2f274",
+    "word": "scene",
+    "partOfSpeech": "noun",
+    "imitation": "The street was a chaotic scene after the storm.",
+    "addedOrder": 1017
   }
 ]
