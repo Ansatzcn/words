@@ -6921,5 +6921,12 @@
     "partOfSpeech": "adverb",
     "imitation": "A cyclist sped past before I had time to react.",
     "addedOrder": 998
+  },
+  {
+    "id": "w_ee107f634b5c_6e930b97b1c343bea049a724a1ce186f",
+    "word": "plan",
+    "partOfSpeech": "noun",
+    "imitation": "We made a clear plan before starting the project.",
+    "addedOrder": 999
   }
 ]
