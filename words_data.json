@@ -6249,5 +6249,12 @@
     "partOfSpeech": "verb",
     "imitation": "The government appropriated more money for public healthcare.",
     "addedOrder": 901
+  },
+  {
+    "id": "w_ee107f634b5c_5f0ab5103f684d7dbf2d3846bbbbe653",
+    "word": "appropriate",
+    "partOfSpeech": "adjective",
+    "imitation": "This outfit is appropriate for a formal interview.",
+    "addedOrder": 902
   }
 ]
