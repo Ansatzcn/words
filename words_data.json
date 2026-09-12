@@ -6935,5 +6935,12 @@
     "partOfSpeech": "noun",
     "imitation": "I had plans to meet some friends after work.",
     "addedOrder": 1000
+  },
+  {
+    "id": "w_ee107f634b5c_01643d975d4b4af18febeeda603d469d",
+    "word": "plan",
+    "partOfSpeech": "noun",
+    "imitation": "The government needs a long-term plan to improve public transport.",
+    "addedOrder": 1001
   }
 ]
