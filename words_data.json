@@ -7271,5 +7271,12 @@
     "partOfSpeech": "noun",
     "imitation": "A neutral expert acted as an umpire in the dispute.",
     "addedOrder": 1049
+  },
+  {
+    "id": "w_ee107f634b5c_72f8aa8968164b7ca7e62998be3e6334",
+    "word": "umpire",
+    "partOfSpeech": "verb",
+    "imitation": "She regularly umpires local tennis matches at weekends.",
+    "addedOrder": 1050
   }
 ]
