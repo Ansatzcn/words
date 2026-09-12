@@ -483,21 +483,19 @@
             border-bottom: none;
         }
         .word-table .col-word {
+            position: relative;
             font-weight: 600;
             color: #0f172a;
             white-space: normal;
             min-width: 100px;
-        }
-        .word-table .word-title-row {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 1rem;
-            width: 100%;
+            padding-right: 4rem;
         }
         .word-table .word-title-text {
             min-width: 0;
             overflow-wrap: anywhere;
+        }
+        .word-table .word-imitation + .word-title-text {
+            margin-top: 0.1rem;
         }
         .word-table .word-part-of-speech {
             margin-top: 0.12rem;
@@ -507,23 +505,19 @@
             white-space: normal;
             overflow-wrap: anywhere;
         }
-        .word-table .word-original,
         .word-table .word-imitation {
-            margin-top: 0.1rem;
+            margin-top: 0;
             color: #334155;
             font-weight: 400;
             font-style: normal;
-            line-height: 1.32;
+            line-height: 1.4;
             white-space: normal;
             overflow-wrap: anywhere;
         }
-
-        .word-table .word-imitation {
-            font-style: normal;
-            color: #1E40AF;
-        }
         .word-table .edit-link {
-            flex: 0 0 auto;
+            position: absolute;
+            right: 1.2rem;
+            bottom: 0.58rem;
             margin: 0;
             border: none;
             background: none;
@@ -1072,28 +1066,27 @@
             }
         }
     
-/* Words 总表：词汇 1.1rem，其余 1rem；仅“听说”为主色 */
+/* Words 总表：例句与单词 1.1rem，其余 1rem；仅单词为主色 */
 .word-table,
 .word-table th,
 .word-table td,
 .word-table .word-part-of-speech,
-.word-table .word-original,
-.word-table .word-imitation,
 .word-table .edit-link{
     font-size:1rem!important;
 }
-.word-table .word-title-text{
+.word-table .word-title-text,
+.word-table .word-imitation{
+    font-family:"Times New Roman", serif!important;
     font-size:1.1rem!important;
     line-height:1.4;
 }
 .word-table .col-word,
-.word-table .word-title-text,
 .word-table .word-part-of-speech,
-.word-table .word-original,
+.word-table .word-imitation,
 .word-table .edit-link{
     color:#000!important;
 }
-.word-table .word-imitation{
+.word-table .word-title-text{
     color:#1E40AF!important;
 }
 .word-table .edit-link:hover,
@@ -1169,12 +1162,8 @@
                     </div>
                 </div>
                 <div class="form-group full-width">
-                    <label for="imitationInput">听说</label>
+                    <label for="imitationInput">例句</label>
                     <textarea id="imitationInput" rows="1"></textarea>
-                </div>
-                <div class="form-group full-width">
-                    <label for="originalInput">读写</label>
-                    <textarea id="originalInput" rows="1"></textarea>
                 </div>
                 <button class="btn-primary" id="addBtn">添加</button>
             </div>
@@ -1224,12 +1213,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="editImitation">听说</label>
-                <textarea id="editImitation" placeholder="请输入听说" rows="2"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="editOriginal">读写</label>
-                <textarea id="editOriginal" placeholder="请输入读写" rows="2"></textarea>
+                <label for="editImitation">例句</label>
+                <textarea id="editImitation" placeholder="请输入例句" rows="2"></textarea>
             </div>
             <div class="modal-actions">
                 <button class="btn-modal delete" id="editDeleteBtn" type="button">删除</button>
@@ -1407,7 +1392,6 @@
             const partOfSpeechTrigger = document.getElementById('partOfSpeechTrigger');
             const partOfSpeechPanel = document.getElementById('partOfSpeechPanel');
             const partOfSpeechOptions = document.getElementById('partOfSpeechOptions');
-            const originalInput = document.getElementById('originalInput');
             const imitationInput = document.getElementById('imitationInput');
             const addBtn = document.getElementById('addBtn');
             const tableBody = document.getElementById('tableBody');
@@ -1431,7 +1415,6 @@
             const editPartOfSpeechTrigger = document.getElementById('editPartOfSpeechTrigger');
             const editPartOfSpeechPanel = document.getElementById('editPartOfSpeechPanel');
             const editPartOfSpeechOptions = document.getElementById('editPartOfSpeechOptions');
-            const editOriginal = document.getElementById('editOriginal');
             const editImitation = document.getElementById('editImitation');
             const editDeleteBtn = document.getElementById('editDeleteBtn');
             const editCancelBtn = document.getElementById('editCancelBtn');
@@ -1623,9 +1606,6 @@
                     id: normalizeWordId(item.id),
                     word,
                     partOfSpeech: normalizePartOfSpeechValue(item.partOfSpeech),
-                    original: typeof item.original === 'string'
-                        ? item.original.trim()
-                        : (typeof item.example === 'string' ? item.example.trim() : ''),
                     imitation: typeof item.imitation === 'string' ? item.imitation.trim() : '',
                     addedOrder
                 };
@@ -1690,14 +1670,13 @@
                         id: item.id,
                         word: item.word,
                         partOfSpeech: item.partOfSpeech,
-                        original: item.original,
                         imitation: item.imitation,
                         addedOrder: item.addedOrder
                     }))
                     .sort((a, b) => {
                         const idCompared = fingerprintCollator.compare(a.id, b.id);
                         if (idCompared !== 0) return idCompared;
-                        const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
+                        const fields = ['word', 'partOfSpeech', 'imitation'];
                         for (const field of fields) {
                             const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
@@ -1712,12 +1691,11 @@
                     .map(item => ({
                         word: item.word,
                         partOfSpeech: item.partOfSpeech,
-                        original: item.original,
                         imitation: item.imitation,
                         addedOrder: item.addedOrder
                     }))
                     .sort((a, b) => {
-                        const fields = ['word', 'partOfSpeech', 'original', 'imitation'];
+                        const fields = ['word', 'partOfSpeech', 'imitation'];
                         for (const field of fields) {
                             const compared = fingerprintCollator.compare(a[field], b[field]);
                             if (compared !== 0) return compared;
@@ -2204,7 +2182,7 @@
                 if (raw.baseItem) mutation.baseItem = cloneMutationItem(raw.baseItem);
                 if (raw.changes && typeof raw.changes === 'object') {
                     const changes = {};
-                    for (const field of ['word', 'partOfSpeech', 'original', 'imitation']) {
+                    for (const field of ['word', 'partOfSpeech', 'imitation']) {
                         if (Object.prototype.hasOwnProperty.call(raw.changes, field)) {
                             changes[field] = typeof raw.changes[field] === 'string'
                                 ? raw.changes[field]
@@ -2291,7 +2269,7 @@
 
             function buildEditChanges(beforeItem, afterItem) {
                 const changes = {};
-                for (const field of ['word', 'partOfSpeech', 'original', 'imitation']) {
+                for (const field of ['word', 'partOfSpeech', 'imitation']) {
                     if ((beforeItem?.[field] ?? '') !== (afterItem?.[field] ?? '')) {
                         changes[field] = afterItem?.[field] ?? '';
                     }
@@ -2601,7 +2579,6 @@
                 return a.id === b.id &&
                     a.word === b.word &&
                     a.partOfSpeech === b.partOfSpeech &&
-                    a.original === b.original &&
                     a.imitation === b.imitation &&
                     a.addedOrder === b.addedOrder;
             }
@@ -2611,7 +2588,6 @@
                 return a.id === b.id &&
                     a.word === b.word &&
                     a.partOfSpeech === b.partOfSpeech &&
-                    a.original === b.original &&
                     a.imitation === b.imitation;
             }
 
@@ -2727,7 +2703,7 @@
                         // 因此两端修改不同字段会自动合并，同一字段冲突时当前平台值优先。
                         const edited = { ...items[index] };
                         for (const [field, value] of Object.entries(mutation.changes || {})) {
-                            if (['word', 'partOfSpeech', 'original', 'imitation'].includes(field)) {
+                            if (['word', 'partOfSpeech', 'imitation'].includes(field)) {
                                 edited[field] = value;
                             }
                         }
@@ -3181,13 +3157,9 @@
                 tableBody.innerHTML = words.map((item, index) => {
                     const word = escapeHtml(item.word);
                     const partOfSpeech = escapeHtml(item.partOfSpeech);
-                    const original = escapeHtml(item.original);
                     const imitation = escapeHtml(item.imitation);
                     const partOfSpeechHtml = partOfSpeech
                         ? `<div class="word-part-of-speech">${partOfSpeech}</div>`
-                        : '';
-                    const originalHtml = original
-                        ? `<div class="word-original">${original}</div>`
                         : '';
                     const imitationHtml = imitation
                         ? `<div class="word-imitation">${imitation}</div>`
@@ -3195,13 +3167,10 @@
                     return `
                         <tr data-index="${index}">
                             <td class="col-word">
-                                <div class="word-title-row">
-                                    <div class="word-title-text">${word}</div>
-                                    <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
-                                </div>
-                                ${partOfSpeechHtml}
                                 ${imitationHtml}
-                                ${originalHtml}
+                                <div class="word-title-text">${word}</div>
+                                ${partOfSpeechHtml}
+                                <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
                             </td>
                         </tr>
                     `;
@@ -3219,7 +3188,6 @@
                 const item = words[index];
                 editWordInput.value = item.word;
                 editPartOfSpeechInput.value = item.partOfSpeech;
-                editOriginal.value = item.original;
                 editImitation.value = item.imitation;
                 renderPartOfSpeechCombo('edit');
                 editModal.classList.remove('hidden');
@@ -3252,7 +3220,6 @@
                     ...beforeItem,
                     word,
                     partOfSpeech,
-                    original: editOriginal.value.trim(),
                     imitation: editImitation.value.trim()
                 };
 
@@ -3297,7 +3264,6 @@
                     id: createWordId(),
                     word,
                     partOfSpeech,
-                    original: originalInput.value.trim(),
                     imitation: imitationInput.value.trim(),
                     addedOrder: getNextAddedOrder()
                 };
@@ -3311,7 +3277,6 @@
 
                 wordInput.value = '';
                 partOfSpeechInput.value = '';
-                originalInput.value = '';
                 imitationInput.value = '';
                 setPartOfSpeechPanelOpen('add', false);
                 renderPartOfSpeechCombo('add');
