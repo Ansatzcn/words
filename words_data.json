@@ -6956,5 +6956,12 @@
     "partOfSpeech": "verb",
     "imitation": "I plan to continue my studies after graduation.",
     "addedOrder": 1003
+  },
+  {
+    "id": "w_ee107f634b5c_601b739c4d584ced8b048486a13ebe59",
+    "word": "plan",
+    "partOfSpeech": "verb",
+    "imitation": "We spent several weeks planning our trip to Japan.",
+    "addedOrder": 1004
   }
 ]
