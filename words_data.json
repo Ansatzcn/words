@@ -6809,5 +6809,12 @@
     "partOfSpeech": "verb",
     "imitation": "I rushed home as soon as I heard the news.",
     "addedOrder": 982
+  },
+  {
+    "id": "w_ee107f634b5c_bf4d80125ff7434dbd8c1a722a5a1b9c",
+    "word": "rush",
+    "partOfSpeech": "verb",
+    "imitation": "I don't like being rushed into making important decisions.",
+    "addedOrder": 983
   }
 ]
