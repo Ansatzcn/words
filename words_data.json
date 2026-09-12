@@ -6788,5 +6788,12 @@
     "partOfSpeech": "verb",
     "imitation": "Could you shift your chair slightly to the left?",
     "addedOrder": 979
+  },
+  {
+    "id": "w_ee107f634b5c_f81f7ae059dd413facac161fe42aaae3",
+    "word": "shift",
+    "partOfSpeech": "verb",
+    "imitation": "Many companies have shifted their focus from growth to efficiency.",
+    "addedOrder": 980
   }
 ]
