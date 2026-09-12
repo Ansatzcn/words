@@ -7012,5 +7012,12 @@
     "partOfSpeech": "verb",
     "imitation": "She grabbed my arm when she saw the car approaching.",
     "addedOrder": 1011
+  },
+  {
+    "id": "w_ee107f634b5c_e1d731510baa47c9961010db765cd521",
+    "word": "grab",
+    "partOfSpeech": "verb",
+    "imitation": "I usually grab a coffee on my way to work.",
+    "addedOrder": 1012
   }
 ]
