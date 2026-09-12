@@ -7236,5 +7236,12 @@
     "partOfSpeech": "verb",
     "imitation": "She quilts the fabric by hand to create intricate patterns.",
     "addedOrder": 1044
+  },
+  {
+    "id": "w_ee107f634b5c_d32fe4b6c758437fb026a4e0f5086507",
+    "word": "quilted",
+    "partOfSpeech": "adjective",
+    "imitation": "A quilted jacket provides excellent insulation in cold weather.",
+    "addedOrder": 1045
   }
 ]
