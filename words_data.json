@@ -6942,5 +6942,12 @@
     "partOfSpeech": "noun",
     "imitation": "The government needs a long-term plan to improve public transport.",
     "addedOrder": 1001
+  },
+  {
+    "id": "w_ee107f634b5c_89d43ea57bd74459b5454a3a3420565a",
+    "word": "plan",
+    "partOfSpeech": "noun",
+    "imitation": "The architect showed us the floor plan of the new building.",
+    "addedOrder": 1002
   }
 ]
