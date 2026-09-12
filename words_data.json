@@ -6606,5 +6606,12 @@
     "partOfSpeech": "verb",
     "imitation": "The disease mainly attacks the respiratory system.",
     "addedOrder": 953
+  },
+  {
+    "id": "w_ee107f634b5c_ece2487c5a0e41c39df44090e7205a82",
+    "word": "hijack",
+    "partOfSpeech": "verb",
+    "imitation": "The plane was hijacked shortly after take-off.",
+    "addedOrder": 954
   }
 ]
