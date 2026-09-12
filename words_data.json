@@ -6928,5 +6928,12 @@
     "partOfSpeech": "noun",
     "imitation": "We made a clear plan before starting the project.",
     "addedOrder": 999
+  },
+  {
+    "id": "w_ee107f634b5c_95b0878fd7c3407cae9a9e6ad635d61a",
+    "word": "plan",
+    "partOfSpeech": "noun",
+    "imitation": "I had plans to meet some friends after work.",
+    "addedOrder": 1000
   }
 ]
