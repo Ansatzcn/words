@@ -6648,5 +6648,12 @@
     "partOfSpeech": "noun",
     "imitation": "Fortunately, everyone survived the crash.",
     "addedOrder": 959
+  },
+  {
+    "id": "w_ee107f634b5c_254cc068c8fc4f4a88c7bd8fea1ebcc9",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "My laptop crashed just before I finished my assignment.",
+    "addedOrder": 960
   }
 ]
