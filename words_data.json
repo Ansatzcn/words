@@ -6844,5 +6844,12 @@
     "partOfSpeech": "verb",
     "imitation": "The vehicle struck a tree and came to an immediate stop.",
     "addedOrder": 987
+  },
+  {
+    "id": "w_ee107f634b5c_23dd7e8ee66c4bb9a465a7aca346ed10",
+    "word": "strike",
+    "partOfSpeech": "verb",
+    "imitation": "A powerful storm struck the coast overnight.",
+    "addedOrder": 988
   }
 ]
