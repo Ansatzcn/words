@@ -6781,5 +6781,12 @@
     "partOfSpeech": "noun",
     "imitation": "There has been a noticeable shift in people's attitudes towards remote work.",
     "addedOrder": 978
+  },
+  {
+    "id": "w_ee107f634b5c_e14fe62f62b749f29b2fec895e268888",
+    "word": "shift",
+    "partOfSpeech": "verb",
+    "imitation": "Could you shift your chair slightly to the left?",
+    "addedOrder": 979
   }
 ]
