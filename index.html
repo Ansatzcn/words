@@ -1066,7 +1066,7 @@
             }
         }
     
-/* Words 总表：例句 1.1rem、单词 1.05rem、词性 1rem；仅单词为主色 */
+/* Words 总表：例句 1.05rem、单词 1.05rem、词性 1rem；仅单词为主色 */
 .word-table,
 .word-table th,
 .word-table td,
@@ -1076,7 +1076,7 @@
 }
 .word-table .word-imitation{
     font-family:Georgia, "Microsoft YaHei", "微软雅黑", sans-serif!important;
-    font-size:1.1rem!important;
+    font-size:1.05rem!important;
     font-weight:400!important;
     line-height:1.4;
 }
@@ -1203,6 +1203,10 @@
         <div class="modal-box">
             <h3>编辑条目</h3>
             <div class="form-group">
+                <label for="editImitation">例句</label>
+                <textarea id="editImitation" rows="2"></textarea>
+            </div>
+            <div class="form-group">
                 <label for="editWordInput">单词</label>
                 <input type="text" id="editWordInput" autocomplete="off" placeholder="请输入单词">
             </div>
@@ -1217,10 +1221,6 @@
                         <div id="editPartOfSpeechOptions"></div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="editImitation">例句</label>
-                <textarea id="editImitation" placeholder="请输入例句" rows="2"></textarea>
             </div>
             <div class="modal-actions">
                 <button class="btn-modal delete" id="editDeleteBtn" type="button">删除</button>
