@@ -6858,5 +6858,12 @@
     "partOfSpeech": "verb",
     "imitation": "It suddenly struck me that I had left my passport at home.",
     "addedOrder": 989
+  },
+  {
+    "id": "w_ee107f634b5c_52e2b37c63514d0d83aa88b7e610858f",
+    "word": "strike",
+    "partOfSpeech": "verb",
+    "imitation": "The city struck me as surprisingly peaceful.",
+    "addedOrder": 990
   }
 ]
