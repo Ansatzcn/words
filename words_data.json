@@ -6564,5 +6564,12 @@
     "partOfSpeech": "noun",
     "imitation": "The website became slow because of network congestion.",
     "addedOrder": 947
+  },
+  {
+    "id": "w_ee107f634b5c_0aadfae0365a4409a2cbea6f670dbb71",
+    "word": "unfold",
+    "partOfSpeech": "verb",
+    "imitation": "I unfolded the map and worked out where we were.",
+    "addedOrder": 948
   }
 ]
