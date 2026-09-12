@@ -7096,5 +7096,12 @@
     "partOfSpeech": "verb",
     "imitation": "The ceremony marked the beginning of a new chapter for the city.",
     "addedOrder": 1023
+  },
+  {
+    "id": "w_ee107f634b5c_c968ae0f28fa49c1b44a5794489e1465",
+    "word": "mark",
+    "partOfSpeech": "verb",
+    "imitation": "I marked the important dates on my calendar.",
+    "addedOrder": 1024
   }
 ]
