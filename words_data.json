@@ -6963,5 +6963,12 @@
     "partOfSpeech": "verb",
     "imitation": "We spent several weeks planning our trip to Japan.",
     "addedOrder": 1004
+  },
+  {
+    "id": "w_ee107f634b5c_980422f9fdc64e37b68cf421cab95649",
+    "word": "plan",
+    "partOfSpeech": "verb",
+    "imitation": "I prefer to plan ahead rather than leave everything until the last minute.",
+    "addedOrder": 1005
   }
 ]
