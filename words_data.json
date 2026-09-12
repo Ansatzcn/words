@@ -6627,5 +6627,12 @@
     "partOfSpeech": "verb",
     "imitation": "Hackers hijacked several accounts and used them to spread false information.",
     "addedOrder": 956
+  },
+  {
+    "id": "w_ee107f634b5c_70d11cb5d5034751ab06723a1d15a325",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "The car lost control and crashed into a tree.",
+    "addedOrder": 957
   }
 ]
