@@ -7089,5 +7089,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1022
+  },
+  {
+    "id": "w_ee107f634b5c_674ee3b8c8cd45dd87c348b30f78ed13",
+    "word": "mark",
+    "partOfSpeech": "verb",
+    "imitation": "The ceremony marked the beginning of a new chapter for the city.",
+    "addedOrder": 1023
   }
 ]
