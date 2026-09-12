@@ -6823,5 +6823,12 @@
     "partOfSpeech": "verb",
     "imitation": "People sometimes rush to judge others without knowing the full story.",
     "addedOrder": 984
+  },
+  {
+    "id": "w_ee107f634b5c_b7d7787d848743b0850ec7c28cdb1982",
+    "word": "rush",
+    "partOfSpeech": "noun",
+    "imitation": "I was in such a rush that I left my phone at home.",
+    "addedOrder": 985
   }
 ]
