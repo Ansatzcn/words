@@ -6865,5 +6865,12 @@
     "partOfSpeech": "verb",
     "imitation": "The city struck me as surprisingly peaceful.",
     "addedOrder": 990
+  },
+  {
+    "id": "w_ee107f634b5c_8f71c3b6a69040ccb63d247eba2ae9b0",
+    "word": "strike",
+    "partOfSpeech": "verb",
+    "imitation": "The workers voted to strike over pay and working conditions.",
+    "addedOrder": 991
   }
 ]
