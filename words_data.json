@@ -6655,5 +6655,12 @@
     "partOfSpeech": "verb",
     "imitation": "My laptop crashed just before I finished my assignment.",
     "addedOrder": 960
+  },
+  {
+    "id": "w_ee107f634b5c_2c63d0919be14364bf2a8def07ac0738",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "Property prices crashed during the financial crisis.",
+    "addedOrder": 961
   }
 ]
