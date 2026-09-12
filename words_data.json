@@ -6900,5 +6900,12 @@
     "partOfSpeech": "preposition",
     "imitation": "I walk past that café almost every morning.",
     "addedOrder": 995
+  },
+  {
+    "id": "w_ee107f634b5c_bbda5155c55d4d0ba6ba2242c0ab81b4",
+    "word": "past",
+    "partOfSpeech": "adjective",
+    "imitation": "My past experiences have made me much more independent.",
+    "addedOrder": 996
   }
 ]
