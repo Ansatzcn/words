@@ -7509,5 +7509,12 @@
     "partOfSpeech": "adverb",
     "imitation": "I saw firsthand how difficult the job could be.",
     "addedOrder": 1084
+  },
+  {
+    "id": "w_ee107f634b5c_1b4421d813c243edbe433c2b496ad31d",
+    "word": "account",
+    "partOfSpeech": "noun",
+    "imitation": "I opened a separate bank account for my savings.",
+    "addedOrder": 1085
   }
 ]
