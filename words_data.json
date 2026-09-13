@@ -7404,5 +7404,12 @@
     "partOfSpeech": "verb",
     "imitation": "Researchers must zero in on the root cause of the problem.",
     "addedOrder": 1069
+  },
+  {
+    "id": "w_ee107f634b5c_e8e51d856867486fb0625d8855b614ef",
+    "word": "congressman",
+    "partOfSpeech": "noun",
+    "imitation": "The congressman spoke to local residents about the new proposal.",
+    "addedOrder": 1070
   }
 ]
