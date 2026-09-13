@@ -7649,5 +7649,12 @@
     "partOfSpeech": "verb",
     "imitation": "After the race, I stripped off my wet jacket and changed into dry clothes.",
     "addedOrder": 1104
+  },
+  {
+    "id": "w_ee107f634b5c_2596b2678298435bb7e020f86d64a4f6",
+    "word": "strip",
+    "partOfSpeech": "verb",
+    "imitation": "The official was stripped of his position after the investigation.",
+    "addedOrder": 1105
   }
 ]
