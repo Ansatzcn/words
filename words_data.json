@@ -5070,8 +5070,8 @@
   {
     "id": "legacy_680",
     "word": "suffer",
-    "partOfSpeech": "",
-    "imitation": "",
+    "partOfSpeech": "verb",
+    "imitation": "He suffered a serious injury during the match.",
     "addedOrder": 680
   },
   {
