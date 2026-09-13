@@ -2515,8 +2515,8 @@
   {
     "id": "legacy_343",
     "word": "emergency",
-    "partOfSpeech": "",
-    "imitation": "",
+    "partOfSpeech": "noun",
+    "imitation": "You should always know what to do in an emergency.",
     "addedOrder": 343
   },
   {
