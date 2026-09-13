@@ -7488,5 +7488,12 @@
     "partOfSpeech": "noun",
     "imitation": "The new policy could cause serious injury to small businesses.",
     "addedOrder": 1081
+  },
+  {
+    "id": "w_ee107f634b5c_6192e80193e84d039b6c7b7006fc4ddd",
+    "word": "emergency",
+    "partOfSpeech": "adjective",
+    "imitation": "The patient received emergency treatment at the hospital.",
+    "addedOrder": 1082
   }
 ]
