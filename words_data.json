@@ -7670,5 +7670,12 @@
     "partOfSpeech": "verb",
     "imitation": "The accident severed several power lines and left the neighborhood without electricity.",
     "addedOrder": 1107
+  },
+  {
+    "id": "w_ee107f634b5c_d981369ef9b44243ac8503d912288a44",
+    "word": "sever",
+    "partOfSpeech": "verb",
+    "imitation": "The company decided to sever ties with its former business partner.",
+    "addedOrder": 1108
   }
 ]
