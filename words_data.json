@@ -7712,5 +7712,12 @@
     "partOfSpeech": "verb",
     "imitation": "He wrapped a scarf around his neck because it was freezing outside.",
     "addedOrder": 1113
+  },
+  {
+    "id": "w_ee107f634b5c_798ee53db33040649a18e274557b3c4c",
+    "word": "wrap",
+    "partOfSpeech": "noun",
+    "imitation": "I usually order a chicken wrap when I need a quick lunch.",
+    "addedOrder": 1114
   }
 ]
