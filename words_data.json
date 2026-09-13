@@ -7502,5 +7502,12 @@
     "partOfSpeech": "adjective",
     "imitation": "I gained firsthand experience of rural life while working on a farm.",
     "addedOrder": 1083
+  },
+  {
+    "id": "w_ee107f634b5c_9e2882e747204c8fb25ed3e0adb2504a",
+    "word": "firsthand",
+    "partOfSpeech": "adverb",
+    "imitation": "I saw firsthand how difficult the job could be.",
+    "addedOrder": 1084
   }
 ]
