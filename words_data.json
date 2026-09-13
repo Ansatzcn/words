@@ -7362,5 +7362,12 @@
     "partOfSpeech": "noun",
     "imitation": "The unemployment rate fell to almost zero.",
     "addedOrder": 1063
+  },
+  {
+    "id": "w_ee107f634b5c_bd5e53feb5584236a68a59b2f4e615a1",
+    "word": "zero",
+    "partOfSpeech": "noun",
+    "imitation": "No technology can guarantee zero risk.",
+    "addedOrder": 1064
   }
 ]
