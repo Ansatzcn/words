@@ -7740,5 +7740,12 @@
     "partOfSpeech": "verb",
     "imitation": "If public trust disappears, the entire system may eventually collapse.",
     "addedOrder": 1117
+  },
+  {
+    "id": "w_ee107f634b5c_b0ed263adf834dff93bc83d7df8a48e3",
+    "word": "collapse",
+    "partOfSpeech": "noun",
+    "imitation": "The collapse of the local economy forced many young people to move away.",
+    "addedOrder": 1118
   }
 ]
