@@ -7719,5 +7719,12 @@
     "partOfSpeech": "noun",
     "imitation": "I usually order a chicken wrap when I need a quick lunch.",
     "addedOrder": 1114
+  },
+  {
+    "id": "w_ee107f634b5c_f83281eedb704c95bed1fc4caef0d7fc",
+    "word": "collapse",
+    "partOfSpeech": "verb",
+    "imitation": "The runner collapsed from exhaustion after crossing the finish line.",
+    "addedOrder": 1115
   }
 ]
