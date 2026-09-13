@@ -7663,5 +7663,12 @@
     "partOfSpeech": "noun",
     "imitation": "There is a narrow strip of land between the road and the river.",
     "addedOrder": 1106
+  },
+  {
+    "id": "w_ee107f634b5c_4b809dd17e73430c82002df3a9a25941",
+    "word": "sever",
+    "partOfSpeech": "verb",
+    "imitation": "The accident severed several power lines and left the neighborhood without electricity.",
+    "addedOrder": 1107
   }
 ]
