@@ -7383,5 +7383,12 @@
     "partOfSpeech": "noun",
     "imitation": "The team finished the match with zero points.",
     "addedOrder": 1066
+  },
+  {
+    "id": "w_ee107f634b5c_00181c273a8a4cd9a07113645ff3b7aa",
+    "word": "zero",
+    "partOfSpeech": "adjective",
+    "imitation": "Many cities are aiming for zero carbon emissions.",
+    "addedOrder": 1067
   }
 ]
