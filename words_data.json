@@ -7397,5 +7397,12 @@
     "partOfSpeech": "verb",
     "imitation": "The researcher zeroed the scale before weighing the sample.",
     "addedOrder": 1068
+  },
+  {
+    "id": "w_ee107f634b5c_3254c55de8a7482dae7727bb5d422c17",
+    "word": "zero",
+    "partOfSpeech": "verb",
+    "imitation": "Researchers must zero in on the root cause of the problem.",
+    "addedOrder": 1069
   }
 ]
