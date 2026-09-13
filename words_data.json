@@ -1787,8 +1787,8 @@
   {
     "id": "legacy_241",
     "word": "correct",
-    "partOfSpeech": "",
-    "imitation": "",
+    "partOfSpeech": "verb",
+    "imitation": "The teacher corrected several mistakes in my essay.",
     "addedOrder": 241
   },
   {
@@ -7516,5 +7516,82 @@
     "partOfSpeech": "noun",
     "imitation": "I opened a separate bank account for my savings.",
     "addedOrder": 1085
+  },
+  {
+    "id": "w_ee107f634b5c_41db94fcc9744a50976bdac92a46a8f8",
+    "word": "account",
+    "partOfSpeech": "noun",
+    "imitation": "She manages several major accounts for the company.",
+    "addedOrder": 1086
+  },
+  {
+    "id": "w_ee107f634b5c_9aaf01f2e739423096a90bb77e320355",
+    "word": "account",
+    "partOfSpeech": "verb",
+    "imitation": "Online sales account for nearly half of the company's revenue.",
+    "addedOrder": 1087
+  },
+  {
+    "id": "w_ee107f634b5c_b9e26aa5f5cb4644b03f138518488a86",
+    "word": "account",
+    "partOfSpeech": "verb",
+    "imitation": "Several factors may account for the decline in birth rates.",
+    "addedOrder": 1088
+  },
+  {
+    "id": "w_ee107f634b5c_8d7ca6422d7d4a5ab737699b694c94c3",
+    "word": "essay",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1089
+  },
+  {
+    "id": "w_ee107f634b5c_853ce30198ed41b78dde0ee776ba6574",
+    "word": "title",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1090
+  },
+  {
+    "id": "w_ee107f634b5c_c49f6c319fe442b49c1b033ae4fb53f5",
+    "word": "downtown",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1091
+  },
+  {
+    "id": "w_ee107f634b5c_4aea0cff89774775babc59cdc14c76d1",
+    "word": "recollection",
+    "partOfSpeech": "noun",
+    "imitation": "My recollection of that day is still surprisingly clear.",
+    "addedOrder": 1092
+  },
+  {
+    "id": "w_ee107f634b5c_ecdfe0a1fb7e4131b6390c1357a7ad77",
+    "word": "recollection",
+    "partOfSpeech": "noun",
+    "imitation": "I have no recollection of meeting him before.",
+    "addedOrder": 1093
+  },
+  {
+    "id": "w_ee107f634b5c_620e08f5e07f44cd8af7b85b7831480d",
+    "word": "correct",
+    "partOfSpeech": "adjective",
+    "imitation": "I was surprised to find that my first answer was correct.",
+    "addedOrder": 1094
+  },
+  {
+    "id": "w_ee107f634b5c_8b7babea635d4294b2c57ec69457c961",
+    "word": "correct",
+    "partOfSpeech": "adjective",
+    "imitation": "It is important to use the correct equipment when doing this job.",
+    "addedOrder": 1095
+  },
+  {
+    "id": "w_ee107f634b5c_bfae789383a14c578f2cd934128963df",
+    "word": "dimension",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1096
   }
 ]
