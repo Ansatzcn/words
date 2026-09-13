@@ -7726,5 +7726,12 @@
     "partOfSpeech": "verb",
     "imitation": "The runner collapsed from exhaustion after crossing the finish line.",
     "addedOrder": 1115
+  },
+  {
+    "id": "w_ee107f634b5c_7d9aef7afd1149a7900f0761e3cd76ef",
+    "word": "exhaustion",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1116
   }
 ]
