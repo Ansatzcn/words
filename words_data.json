@@ -7355,5 +7355,12 @@
     "partOfSpeech": "adjective",
     "imitation": "He gave me an intense look but said nothing.",
     "addedOrder": 1062
+  },
+  {
+    "id": "w_ee107f634b5c_606573bf67f742d1a21ff5712eb67173",
+    "word": "zero",
+    "partOfSpeech": "noun",
+    "imitation": "The unemployment rate fell to almost zero.",
+    "addedOrder": 1063
   }
 ]
