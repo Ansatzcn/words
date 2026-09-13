@@ -1297,8 +1297,8 @@
   {
     "id": "legacy_175",
     "word": "collapse",
-    "partOfSpeech": "",
-    "imitation": "",
+    "partOfSpeech": "verb",
+    "imitation": "The old building collapsed during the earthquake.",
     "addedOrder": 175
   },
   {
