@@ -7656,5 +7656,12 @@
     "partOfSpeech": "verb",
     "imitation": "The official was stripped of his position after the investigation.",
     "addedOrder": 1105
+  },
+  {
+    "id": "w_ee107f634b5c_88b16304952a4bfca06eaf999398c483",
+    "word": "strip",
+    "partOfSpeech": "noun",
+    "imitation": "There is a narrow strip of land between the road and the river.",
+    "addedOrder": 1106
   }
 ]
