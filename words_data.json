@@ -7705,5 +7705,12 @@
     "partOfSpeech": "verb",
     "imitation": "She wrapped the gift in colorful paper before giving it to her friend.",
     "addedOrder": 1112
+  },
+  {
+    "id": "w_ee107f634b5c_a931947a4918463ab1392c7a4d8fdc13",
+    "word": "wrap",
+    "partOfSpeech": "verb",
+    "imitation": "He wrapped a scarf around his neck because it was freezing outside.",
+    "addedOrder": 1113
   }
 ]
