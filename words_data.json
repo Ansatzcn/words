@@ -7621,5 +7621,12 @@
     "partOfSpeech": "adverb",
     "imitation": "The sails were suddenly taken aback by a powerful gust.",
     "addedOrder": 1100
+  },
+  {
+    "id": "w_ee107f634b5c_a6769a9b3713434ba71327f3c094eef1",
+    "word": "gust",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1101
   }
 ]
