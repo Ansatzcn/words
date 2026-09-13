@@ -7292,5 +7292,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1053
+  },
+  {
+    "id": "w_ee107f634b5c_a14d0a44bcdb41b0be7601563ff02023",
+    "word": "record",
+    "partOfSpeech": "verb",
+    "imitation": "I recorded the lecture so that I could listen to it again later.",
+    "addedOrder": 1054
   }
 ]
