@@ -7390,5 +7390,12 @@
     "partOfSpeech": "adjective",
     "imitation": "Many cities are aiming for zero carbon emissions.",
     "addedOrder": 1067
+  },
+  {
+    "id": "w_ee107f634b5c_82259844c4df4b4d857ba076c4d19c4d",
+    "word": "zero",
+    "partOfSpeech": "verb",
+    "imitation": "The researcher zeroed the scale before weighing the sample.",
+    "addedOrder": 1068
   }
 ]
