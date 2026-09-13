@@ -7306,5 +7306,12 @@
     "partOfSpeech": "verb",
     "imitation": "The researchers recorded the results carefully.",
     "addedOrder": 1055
+  },
+  {
+    "id": "w_ee107f634b5c_603d41ea9e454660b90bb62ce31739f7",
+    "word": "record",
+    "partOfSpeech": "noun",
+    "imitation": "The hospital keeps a detailed record of every patient.",
+    "addedOrder": 1056
   }
 ]
