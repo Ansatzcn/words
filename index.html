@@ -1235,7 +1235,7 @@
             <div class="config-scroll-body" tabindex="0">
                 <h3 id="configModalHeading">GitHub 云端配置</h3>
                 <div class="config-desc">
-                    本网页按当前网址路径独立保存本地词条、配置、同步状态和备份，不会读取其他仓库页面的数据。配置后仅与您在下方指定的 GitHub 仓库文件同步。
+                    本网页按当前网址路径独立保存 IndexedDB 配置、词条、同步状态和备份，不会读取其他仓库页面的数据。配置后仅与您在下方指定的 GitHub 仓库文件同步。
                 </div>
                 <div class="form-group">
                     <label for="cfgSavedToken">已保存 Token</label>
@@ -1301,7 +1301,7 @@
     <script>
         (async function() {
             // ---------- 页面实例隔离与 IndexedDB 持久化存储 ----------
-            // IndexedDB/内存会话缓存 按域名共享，不按 GitHub 仓库路径隔离。
+            // IndexedDB 持久层与内存运行态按当前网页实例隔离。
             // 使用当前网页的 origin + pathname 生成稳定命名空间，使不同仓库页面互不读取配置、词条、同步基线和备份。
             function getPageInstanceIdentity() {
                 let pathname = window.location.pathname || '/';
@@ -1329,19 +1329,19 @@
 
             const PAGE_INSTANCE_ID = hashIdentity(getPageInstanceIdentity());
             const STORAGE_NAMESPACE = `english_wordbook:${PAGE_INSTANCE_ID}`;
-            const CONFIG_KEY = `${STORAGE_NAMESPACE}:config`;
-            const TOKEN_LOCAL_KEY = `${STORAGE_NAMESPACE}:token_local`; // 旧版单 Token 键，仅用于迁移
-            const TOKEN_PROFILES_KEY = `${STORAGE_NAMESPACE}:token_profiles_v1`;
-            const TOKEN_SESSION_KEY = `${STORAGE_NAMESPACE}:token_session`;
-            const STORAGE_KEY = `${STORAGE_NAMESPACE}:words`;
-            const PART_OF_SPEECH_HISTORY_KEY = `${STORAGE_NAMESPACE}:part_of_speech_history_v1`;
+            const WORDS_CONFIG_STORE = `${STORAGE_NAMESPACE}:config`;
+            const WORDS_TOKEN_PROFILE_STORE = `${STORAGE_NAMESPACE}:token_local`; // IndexedDB Token Profile 存储
+            const WORDS_TOKEN_PROFILE_STORE_V1 = `${STORAGE_NAMESPACE}:token_profiles_v1`;
+            const WORDS_SESSION_TOKEN_STORE = `${STORAGE_NAMESPACE}:token_session`;
+            const WORDS_ENTRIES_STORE = `${STORAGE_NAMESPACE}:words`;
+            const WORDS_POS_HISTORY_STORE = `${STORAGE_NAMESPACE}:part_of_speech_history_v1`;
             const SYNC_SCHEMA_VERSION = 7;
-            const SYNC_META_KEY = `${STORAGE_NAMESPACE}:sync_meta_v7`;
-            const LEGACY_SYNC_META_V6_KEY = `${STORAGE_NAMESPACE}:sync_meta_v6`;
-            const LEGACY_SYNC_META_V5_KEY = `${STORAGE_NAMESPACE}:sync_meta_v5`;
-            const PENDING_MUTATIONS_KEY = `${STORAGE_NAMESPACE}:pending_mutations_v1`;
-            const CONFLICT_BACKUP_KEY = `${STORAGE_NAMESPACE}:conflict_backups_v7`;
-            const DEVICE_ID_KEY = `${STORAGE_NAMESPACE}:device_id_v1`;
+            const WORDS_SYNC_META_STORE = `${STORAGE_NAMESPACE}:sync_meta_v7`;
+            const REMOVED_ARCHIVED_SYNC_META_V6 = `${STORAGE_NAMESPACE}:sync_meta_v6`;
+            const REMOVED_ARCHIVED_SYNC_META_V5 = `${STORAGE_NAMESPACE}:sync_meta_v5`;
+            const WORDS_PENDING_MUTATIONS_STORE = `${STORAGE_NAMESPACE}:pending_mutations_v1`;
+            const WORDS_CONFLICT_BACKUP_STORE = `${STORAGE_NAMESPACE}:conflict_backups_v7`;
+            const WORDS_DEVICE_ID_STORE = `${STORAGE_NAMESPACE}:device_id_v1`;
             const MAX_CONFLICT_BACKUPS = 10;
             const MAX_SYNC_BYTES = 750 * 1024;
             const MAX_SYNC_RETRIES = 4;
@@ -1384,7 +1384,7 @@
                 lastSyncedFingerprint: null,
                 lastSyncAt: null,
                 baselineWords: null,
-                legacyFingerprintV5: null
+                archivedFingerprintV5: null
             };
             let deviceIdCache = '';
             let pendingMutations = [];
@@ -1445,7 +1445,7 @@
             // ---------- 通用工具 ----------
             // ---------- IndexedDB 持久化存储 ----------
             // 兼容旧代码调用方式：读取同步返回内存缓存，写入异步落盘到 IndexedDB。
-            // 应用启动时先加载 IndexedDB，因此页面业务逻辑无需依赖浏览器 Web Storage。
+            // 应用启动时先加载 IndexedDB；页面业务逻辑不依赖浏览器 Web Storage。
             const durableStore = {
                 dbName: 'WordsDurableDB',
                 storeName: 'kv',
@@ -1578,7 +1578,7 @@
             }
 
             function loadPartOfSpeechHistory() {
-                const stored = safeLocalGet(PART_OF_SPEECH_HISTORY_KEY);
+                const stored = safeLocalGet(WORDS_POS_HISTORY_STORE);
                 partOfSpeechHistoryStored = stored !== null;
                 if (!stored) {
                     partOfSpeechHistory = [];
@@ -1595,7 +1595,7 @@
 
             function savePartOfSpeechHistory() {
                 partOfSpeechHistory = uniquePartOfSpeech(partOfSpeechHistory);
-                safeLocalSet(PART_OF_SPEECH_HISTORY_KEY, JSON.stringify(partOfSpeechHistory));
+                safeLocalSet(WORDS_POS_HISTORY_STORE, JSON.stringify(partOfSpeechHistory));
                 partOfSpeechHistoryStored = true;
             }
 
@@ -1619,7 +1619,7 @@
 
             function getDeviceId() {
                 if (deviceIdCache) return deviceIdCache;
-                const stored = safeLocalGet(DEVICE_ID_KEY);
+                const stored = safeLocalGet(WORDS_DEVICE_ID_STORE);
                 if (typeof stored === 'string' && stored.trim()) {
                     deviceIdCache = stored.trim();
                     return deviceIdCache;
@@ -1629,7 +1629,7 @@
                     ? globalThis.crypto.randomUUID().replace(/-/g, '')
                     : `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 14)}`;
                 deviceIdCache = `d_${randomPart}`;
-                safeLocalSet(DEVICE_ID_KEY, deviceIdCache);
+                safeLocalSet(WORDS_DEVICE_ID_STORE, deviceIdCache);
                 return deviceIdCache;
             }
 
@@ -1687,11 +1687,11 @@
                     usedOrders.add(item.addedOrder);
                 }
 
-                // 旧版本没有稳定 id。以既有 addedOrder 生成确定性的 legacy id，
+                // 旧版本没有稳定 id。以既有 addedOrder 生成确定性的 archived id，
                 // 这样不同终端升级时，同一旧词条仍能被识别为同一条记录。
                 const usedIds = new Set();
                 for (const item of normalized) {
-                    const baseId = item.id || `legacy_${item.addedOrder}`;
+                    const baseId = item.id || `archived_${item.addedOrder}`;
                     let candidate = baseId;
                     let suffix = 2;
                     while (usedIds.has(candidate)) {
@@ -1855,7 +1855,7 @@
             }
 
             function loadTokenProfiles() {
-                const stored = safeLocalGet(TOKEN_PROFILES_KEY);
+                const stored = safeLocalGet(WORDS_TOKEN_PROFILE_STORE_V1);
                 if (!stored) return [];
                 try {
                     const parsed = JSON.parse(stored);
@@ -1868,7 +1868,7 @@
             }
 
             function saveTokenProfiles() {
-                safeLocalSet(TOKEN_PROFILES_KEY, JSON.stringify(tokenProfiles));
+                safeLocalSet(WORDS_TOKEN_PROFILE_STORE_V1, JSON.stringify(tokenProfiles));
             }
 
             function getTokenProfileLabel(profile, index) {
@@ -1977,7 +1977,7 @@
             }
 
             function loadConfig() {
-                const stored = safeLocalGet(CONFIG_KEY);
+                const stored = safeLocalGet(WORDS_CONFIG_STORE);
                 let parsed = {};
                 if (stored) {
                     try {
@@ -1990,24 +1990,24 @@
                 tokenProfiles = loadTokenProfiles();
 
                 // 将旧版单 Token 自动迁移到多 Token 列表，避免覆盖或丢失。
-                const legacyToken = safeLocalGet(TOKEN_LOCAL_KEY) || '';
-                if (legacyToken && !tokenProfiles.some(item => item.token === legacyToken)) {
+                const archivedToken = safeLocalGet(WORDS_TOKEN_PROFILE_STORE) || '';
+                if (archivedToken && !tokenProfiles.some(item => item.token === archivedToken)) {
                     tokenProfiles.push({
                         id: createTokenProfileId(),
                         name: '已保存 Token',
-                        token: legacyToken,
+                        token: archivedToken,
                         owner: typeof parsed.owner === 'string' ? parsed.owner : '',
                         repo: typeof parsed.repo === 'string' ? parsed.repo : '',
                         file: typeof parsed.file === 'string' && parsed.file.trim() ? parsed.file.trim() : 'wordbook_data.json',
                         updatedAt: new Date().toISOString()
                     });
                     saveTokenProfiles();
-                    safeLocalRemove(TOKEN_LOCAL_KEY);
+                    safeLocalRemove(WORDS_TOKEN_PROFILE_STORE);
                 }
 
                 const requestedId = typeof parsed.activeTokenId === 'string' ? parsed.activeTokenId : '';
                 const activeProfile = tokenProfiles.find(item => item.id === requestedId) || tokenProfiles[0] || null;
-                const sessionToken = safeSessionGet(TOKEN_SESSION_KEY) || '';
+                const sessionToken = safeSessionGet(WORDS_SESSION_TOKEN_STORE) || '';
                 const rememberToken = typeof parsed.rememberToken === 'boolean'
                     ? parsed.rememberToken
                     : true;
@@ -2048,13 +2048,13 @@
 
                 if (config.rememberToken) {
                     config.activeTokenId = upsertCurrentTokenProfile();
-                    safeSessionRemove(TOKEN_SESSION_KEY);
+                    safeSessionRemove(WORDS_SESSION_TOKEN_STORE);
                 } else {
                     config.activeTokenId = '';
-                    safeSessionSet(TOKEN_SESSION_KEY, config.token);
+                    safeSessionSet(WORDS_SESSION_TOKEN_STORE, config.token);
                 }
 
-                safeLocalSet(CONFIG_KEY, JSON.stringify({
+                safeLocalSet(WORDS_CONFIG_STORE, JSON.stringify({
                     owner: config.owner,
                     repo: config.repo,
                     file: config.file,
@@ -2076,12 +2076,12 @@
                     lastSyncedFingerprint: null,
                     lastSyncAt: null,
                     baselineWords: null,
-                    legacyFingerprintV5: null
+                    archivedFingerprintV5: null
                 };
             }
 
             function loadSyncMeta() {
-                const stored = safeLocalGet(SYNC_META_KEY);
+                const stored = safeLocalGet(WORDS_SYNC_META_STORE);
                 if (stored) {
                     try {
                         const parsed = JSON.parse(stored);
@@ -2097,8 +2097,8 @@
                                 baselineWords: Array.isArray(parsed.baselineWords)
                                     ? normalizeWordList(parsed.baselineWords)
                                     : null,
-                                legacyFingerprintV5: typeof parsed.legacyFingerprintV5 === 'string'
-                                    ? parsed.legacyFingerprintV5
+                                archivedFingerprintV5: typeof parsed.archivedFingerprintV5 === 'string'
+                                    ? parsed.archivedFingerprintV5
                                     : null
                             };
                             return;
@@ -2109,7 +2109,7 @@
                 }
 
                 // 优先迁移 v6：它已经保存完整 baselineWords，可无损继续字段级合并。
-                const v6Stored = safeLocalGet(LEGACY_SYNC_META_V6_KEY);
+                const v6Stored = safeLocalGet(REMOVED_ARCHIVED_SYNC_META_V6);
                 if (v6Stored) {
                     try {
                         const parsed = JSON.parse(v6Stored);
@@ -2125,8 +2125,8 @@
                                 baselineWords: Array.isArray(parsed.baselineWords)
                                     ? normalizeWordList(parsed.baselineWords)
                                     : null,
-                                legacyFingerprintV5: typeof parsed.legacyFingerprintV5 === 'string'
-                                    ? parsed.legacyFingerprintV5
+                                archivedFingerprintV5: typeof parsed.archivedFingerprintV5 === 'string'
+                                    ? parsed.archivedFingerprintV5
                                     : null
                             };
                             saveSyncMeta();
@@ -2138,25 +2138,25 @@
                 }
 
                 // 再兼容 v5。只有旧指纹能够证明本地仍是最后同步版本时，才把本地作为完整基线。
-                const v5Stored = safeLocalGet(LEGACY_SYNC_META_V5_KEY);
+                const v5Stored = safeLocalGet(REMOVED_ARCHIVED_SYNC_META_V5);
                 if (v5Stored) {
                     try {
-                        const legacy = JSON.parse(v5Stored);
+                        const archived = JSON.parse(v5Stored);
                         const localSnapshot = normalizeWordList(words);
                         const localFingerprintV5 = getLegacyV5Fingerprint(localSnapshot);
-                        const canUseLocalAsBaseline = legacy && legacy.schemaVersion === 5 &&
-                            typeof legacy.lastSyncedFingerprint === 'string' &&
-                            legacy.lastSyncedFingerprint === localFingerprintV5;
+                        const canUseLocalAsBaseline = archived && archived.schemaVersion === 5 &&
+                            typeof archived.lastSyncedFingerprint === 'string' &&
+                            archived.lastSyncedFingerprint === localFingerprintV5;
 
                         syncMeta = {
                             schemaVersion: SYNC_SCHEMA_VERSION,
-                            target: typeof legacy?.target === 'string' ? legacy.target : '',
-                            remoteSha: typeof legacy?.remoteSha === 'string' ? legacy.remoteSha : null,
+                            target: typeof archived?.target === 'string' ? archived.target : '',
+                            remoteSha: typeof archived?.remoteSha === 'string' ? archived.remoteSha : null,
                             lastSyncedFingerprint: null,
-                            lastSyncAt: typeof legacy?.lastSyncAt === 'string' ? legacy.lastSyncAt : null,
+                            lastSyncAt: typeof archived?.lastSyncAt === 'string' ? archived.lastSyncAt : null,
                             baselineWords: canUseLocalAsBaseline ? localSnapshot : null,
-                            legacyFingerprintV5: typeof legacy?.lastSyncedFingerprint === 'string'
-                                ? legacy.lastSyncedFingerprint
+                            archivedFingerprintV5: typeof archived?.lastSyncedFingerprint === 'string'
+                                ? archived.lastSyncedFingerprint
                                 : null
                         };
                         saveSyncMeta();
@@ -2170,7 +2170,7 @@
             }
 
             function saveSyncMeta() {
-                safeLocalSet(SYNC_META_KEY, JSON.stringify(syncMeta));
+                safeLocalSet(WORDS_SYNC_META_STORE, JSON.stringify(syncMeta));
                 updateLastSyncDisplay();
             }
 
@@ -2183,7 +2183,7 @@
                     lastSyncedFingerprint: getWordsFingerprint(normalized),
                     lastSyncAt: new Date().toISOString(),
                     baselineWords: normalized,
-                    legacyFingerprintV5: null
+                    archivedFingerprintV5: null
                 };
                 saveSyncMeta();
             }
@@ -2249,7 +2249,7 @@
             }
 
             function readPendingMutationsFromStorage() {
-                const stored = safeLocalGet(PENDING_MUTATIONS_KEY);
+                const stored = safeLocalGet(WORDS_PENDING_MUTATIONS_STORE);
                 if (!stored) return [];
                 try {
                     const parsed = JSON.parse(stored);
@@ -2278,7 +2278,7 @@
             }
 
             function loadPendingMutations() {
-                pendingJournalInitialized = safeLocalGet(PENDING_MUTATIONS_KEY) !== null;
+                pendingJournalInitialized = safeLocalGet(WORDS_PENDING_MUTATIONS_STORE) !== null;
                 pendingMutations = readPendingMutationsFromStorage();
             }
 
@@ -2299,7 +2299,7 @@
                     : mergePendingMutationLists(readPendingMutationsFromStorage(), pendingMutations);
                 if (removeSet.size) next = next.filter(item => !removeSet.has(item.opId));
                 pendingMutations = next;
-                const ok = safeLocalSet(PENDING_MUTATIONS_KEY, JSON.stringify(pendingMutations));
+                const ok = safeLocalSet(WORDS_PENDING_MUTATIONS_STORE, JSON.stringify(pendingMutations));
                 if (ok) pendingJournalInitialized = true;
                 updateLastSyncDisplay();
                 return ok;
@@ -2582,7 +2582,7 @@
             // ---------- 冲突备份 ----------
             function loadConflictBackups() {
                 const backups = [];
-                const stored = safeLocalGet(CONFLICT_BACKUP_KEY);
+                const stored = safeLocalGet(WORDS_CONFLICT_BACKUP_STORE);
 
                 if (stored) {
                     try {
@@ -2609,7 +2609,7 @@
             }
 
             function saveConflictBackups(backups) {
-                safeLocalSet(CONFLICT_BACKUP_KEY, JSON.stringify(backups.slice(-MAX_CONFLICT_BACKUPS)));
+                safeLocalSet(WORDS_CONFLICT_BACKUP_STORE, JSON.stringify(backups.slice(-MAX_CONFLICT_BACKUPS)));
             }
 
             function saveConflictBackup(snapshot, source) {
@@ -3073,7 +3073,7 @@
 
             // ---------- 本地存储 ----------
             function loadFromLocal() {
-                const stored = safeLocalGet(STORAGE_KEY);
+                const stored = safeLocalGet(WORDS_ENTRIES_STORE);
                 hasStoredLocalData = stored !== null;
 
                 if (stored) {
@@ -3092,7 +3092,7 @@
             }
 
             function saveToLocal() {
-                safeLocalSet(STORAGE_KEY, JSON.stringify(words));
+                safeLocalSet(WORDS_ENTRIES_STORE, JSON.stringify(words));
             }
 
             // ---------- 词性下拉与历史管理 ----------
