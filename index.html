@@ -1299,9 +1299,9 @@
     <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        (function() {
-            // ---------- 页面实例隔离与本地存储 ----------
-            // localStorage/sessionStorage 按域名共享，不按 GitHub 仓库路径隔离。
+        (async function() {
+            // ---------- 页面实例隔离与 IndexedDB 持久化存储 ----------
+            // IndexedDB/内存会话缓存 按域名共享，不按 GitHub 仓库路径隔离。
             // 使用当前网页的 origin + pathname 生成稳定命名空间，使不同仓库页面互不读取配置、词条、同步基线和备份。
             function getPageInstanceIdentity() {
                 let pathname = window.location.pathname || '/';
@@ -1443,62 +1443,111 @@
             let toastTimer = null;
 
             // ---------- 通用工具 ----------
-            function safeLocalGet(key) {
+            // ---------- IndexedDB 持久化存储 ----------
+            // 兼容旧代码调用方式：读取同步返回内存缓存，写入异步落盘到 IndexedDB。
+            // 应用启动时先加载 IndexedDB，因此页面业务逻辑无需依赖浏览器 Web Storage。
+            const durableStore = {
+                dbName: 'WordsDurableDB',
+                storeName: 'kv',
+                cache: new Map(),
+                db: null
+            };
+
+            function openDurableDatabase() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(durableStore.dbName, 1);
+                    request.onupgradeneeded = function(event) {
+                        const db = event.target.result;
+                        if (!db.objectStoreNames.contains(durableStore.storeName)) {
+                            db.createObjectStore(durableStore.storeName);
+                        }
+                    };
+                    request.onsuccess = function(event) {
+                        durableStore.db = event.target.result;
+                        resolve(durableStore.db);
+                    };
+                    request.onerror = function() {
+                        reject(request.error);
+                    };
+                });
+            }
+
+            async function initDurableStorage() {
                 try {
-                    return localStorage.getItem(key);
+                    await openDurableDatabase();
+                    await new Promise((resolve, reject) => {
+                        const tx = durableStore.db.transaction(durableStore.storeName, 'readonly');
+                        const store = tx.objectStore(durableStore.storeName);
+                        const request = store.openCursor();
+                        request.onsuccess = function(event) {
+                            const cursor = event.target.result;
+                            if (cursor) {
+                                durableStore.cache.set(cursor.key, cursor.value);
+                                cursor.continue();
+                            } else {
+                                resolve();
+                            }
+                        };
+                        request.onerror = () => reject(request.error);
+                    });
                 } catch (error) {
-                    console.error('读取本地存储失败:', error);
-                    return null;
+                    console.error('IndexedDB 初始化失败:', error);
                 }
+            }
+
+            function durablePut(key, value) {
+                durableStore.cache.set(key, value);
+                if (!durableStore.db) return false;
+                try {
+                    const tx = durableStore.db.transaction(durableStore.storeName, 'readwrite');
+                    tx.objectStore(durableStore.storeName).put(value, key);
+                    return true;
+                } catch (error) {
+                    console.error('IndexedDB 写入失败:', error);
+                    return false;
+                }
+            }
+
+            function durableRemove(key) {
+                durableStore.cache.delete(key);
+                if (!durableStore.db) return false;
+                try {
+                    const tx = durableStore.db.transaction(durableStore.storeName, 'readwrite');
+                    tx.objectStore(durableStore.storeName).delete(key);
+                    return true;
+                } catch (error) {
+                    console.error('IndexedDB 删除失败:', error);
+                    return false;
+                }
+            }
+
+            function safeLocalGet(key) {
+                return durableStore.cache.has(key) ? durableStore.cache.get(key) : null;
             }
 
             function safeLocalSet(key, value) {
-                try {
-                    localStorage.setItem(key, value);
-                    return true;
-                } catch (error) {
-                    console.error('写入本地存储失败:', error);
-                    showToast(`本地保存失败：${error.message}`, 'error');
-                    return false;
-                }
+                return durablePut(key, value);
             }
 
             function safeLocalRemove(key) {
-                try {
-                    localStorage.removeItem(key);
-                    return true;
-                } catch (error) {
-                    console.error('删除本地存储失败:', error);
-                    return false;
-                }
+                return durableRemove(key);
             }
 
+            // 临时会话数据也改为页面内存保存，不再使用浏览器会话存储。
+            const volatileSessionStore = new Map();
+
             function safeSessionGet(key) {
-                try {
-                    return sessionStorage.getItem(key);
-                } catch (error) {
-                    return null;
-                }
+                return volatileSessionStore.has(key) ? volatileSessionStore.get(key) : null;
             }
 
             function safeSessionSet(key, value) {
-                try {
-                    sessionStorage.setItem(key, value);
-                    return true;
-                } catch (error) {
-                    showToast(`Token 临时保存失败：${error.message}`, 'error');
-                    return false;
-                }
+                volatileSessionStore.set(key, value);
+                return true;
             }
 
             function safeSessionRemove(key) {
-                try {
-                    sessionStorage.removeItem(key);
-                    return true;
-                } catch (error) {
-                    console.error('删除会话存储失败:', error);
-                    return false;
-                }
+                volatileSessionStore.delete(key);
+                return true;
             }
 
             const partOfSpeechCollator = new Intl.Collator('en', {
@@ -2753,7 +2802,7 @@
                 const attemptIds = new Set((attemptMutations || []).map(item => item.opId));
 
                 // 同一浏览器其他标签页可能在本次请求期间又写入新的待同步操作。
-                // 先重新合并 localStorage 中的最新日志，再只移除本次已确认提交的 opId。
+                // 先重新合并 IndexedDB 中的最新日志，再只移除本次已确认提交的 opId。
                 refreshPendingMutationsFromStorage();
                 const remainingMutations = pendingMutations.filter(item => !attemptIds.has(item.opId));
                 const localPriorityIds = new Set(liveSnapshot.map(item => item.id));
@@ -3684,6 +3733,8 @@
             sortWordHead.setAttribute('role', 'button');
             toast.setAttribute('role', 'status');
             toast.setAttribute('aria-live', 'polite');
+
+            await initDurableStorage();
 
             loadConfig();
             loadPartOfSpeechHistory();
