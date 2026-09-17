@@ -526,8 +526,8 @@
             font-size: 0.88rem;
             font-weight: 500;
             line-height: 1.5;
-            text-decoration: underline;
-            text-underline-offset: 2px;
+            text-decoration: none;
+            text-underline-offset: 0;
             cursor: pointer;
             transition: color 0.15s;
         }
@@ -3224,7 +3224,7 @@
                                 ${imitationHtml}
                                 <div class="word-title-text">${word}</div>
                                 ${partOfSpeechHtml}
-                                <button type="button" class="edit-link" data-index="${index}" title="编辑">编辑</button>
+                                <button type="button" class="edit-link" data-index="${index}" title="编辑">${escapeHtml(item.partOfSpeech || "编辑")}</button>
                             </td>
                         </tr>
                     `;
