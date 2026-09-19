@@ -7810,5 +7810,12 @@
     "partOfSpeech": "verb",
     "imitation": "Regular exercise can help people control their weight.",
     "addedOrder": 1127
+  },
+  {
+    "id": "w_d7677e16b9fc_cd4bb88d3f9547029408753cf7529587",
+    "word": "security",
+    "partOfSpeech": "noun",
+    "imitation": "Airport security has become much stricter in recent years.",
+    "addedOrder": 1128
   }
 ]
