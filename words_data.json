@@ -7845,5 +7845,12 @@
     "partOfSpeech": "preposition",
     "imitation": "Following the meeting, the university announced several changes to its policy.",
     "addedOrder": 1132
+  },
+  {
+    "id": "w_d7677e16b9fc_6cc60f334e2f43b195cc808eed05dacb",
+    "word": "following",
+    "partOfSpeech": "adjective",
+    "imitation": "During the following week, I spent most of my time preparing for the exam.",
+    "addedOrder": 1133
   }
 ]
