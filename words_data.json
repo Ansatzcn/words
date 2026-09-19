@@ -7775,5 +7775,12 @@
     "partOfSpeech": "verb",
     "imitation": "College students need to learn how to deal with stress effectively.",
     "addedOrder": 1122
+  },
+  {
+    "id": "w_d7677e16b9fc_fe19c0febf1240c9bb14cd4a46944afd",
+    "word": "deal",
+    "partOfSpeech": "verb",
+    "imitation": "The lecture deals with the effects of climate change on agriculture.",
+    "addedOrder": 1123
   }
 ]
