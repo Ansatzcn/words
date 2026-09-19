@@ -496,14 +496,6 @@
         .word-table .word-imitation + .word-title-text {
             margin-top: 0.1rem;
         }
-        .word-table .word-part-of-speech {
-            margin-top: 0.12rem;
-            color: #475569;
-            font-weight: 500;
-            line-height: 1.3;
-            white-space: normal;
-            overflow-wrap: anywhere;
-        }
         .word-table .word-imitation {
             margin-top: 0;
             color: #334155;
@@ -523,9 +515,9 @@
             padding: 0;
             color: #64748b;
             font-family: inherit;
-            font-size: 0.88rem;
-            font-weight: 500;
-            line-height: 1.5;
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.4;
             text-decoration: none;
             text-underline-offset: 0;
             cursor: pointer;
@@ -1065,12 +1057,10 @@
             }
         }
     
-/* Words 总表：例句 1.05rem 主色加粗、单词 1.05rem 黑色、词性 1rem */
+/* Words 总表：例句 1.05rem 主色加粗；单词与右下角词性链接同为 1.05rem */
 .word-table,
 .word-table th,
-.word-table td,
-.word-table .word-part-of-speech,
-.word-table .edit-link{
+.word-table td{
     font-size:1rem!important;
 }
 .word-table .word-imitation{
@@ -1086,13 +1076,18 @@
     line-height:1.4;
 }
 .word-table .col-word,
-.word-table .word-part-of-speech,
 .word-table .edit-link{
     color:#000!important;
 }
 .word-table .word-title-text{
     color:#000!important;
     font-weight:400!important;
+}
+.word-table .edit-link{
+    font-family:"Times New Roman", "Microsoft YaHei", "微软雅黑", sans-serif!important;
+    font-size:1.05rem!important;
+    font-weight:400!important;
+    line-height:1.4!important;
 }
 .word-table .edit-link:hover,
 .word-table .edit-link:focus-visible{
@@ -3212,9 +3207,6 @@
                     const word = escapeHtml(item.word);
                     const partOfSpeech = escapeHtml(item.partOfSpeech);
                     const imitation = escapeHtml(item.imitation);
-                    const partOfSpeechHtml = partOfSpeech
-                        ? `<div class="word-part-of-speech">${partOfSpeech}</div>`
-                        : '';
                     const imitationHtml = imitation
                         ? `<div class="word-imitation">${imitation}</div>`
                         : '';
@@ -3223,8 +3215,7 @@
                             <td class="col-word">
                                 ${imitationHtml}
                                 <div class="word-title-text">${word}</div>
-                                ${partOfSpeechHtml}
-                                <button type="button" class="edit-link" data-index="${index}" title="编辑">${escapeHtml(item.partOfSpeech || "编辑")}</button>
+                                <button type="button" class="edit-link" data-index="${index}" title="编辑">${partOfSpeech || "编辑"}</button>
                             </td>
                         </tr>
                     `;
