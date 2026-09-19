@@ -7908,5 +7908,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1141
+  },
+  {
+    "id": "w_d7677e16b9fc_4f508459bac948a1a605d366e1dcc9ba",
+    "word": "sparse",
+    "partOfSpeech": "adjective",
+    "imitation": "Because reliable data on the long-term effects of the policy remain sparse, researchers should avoid drawing overly broad conclusions.",
+    "addedOrder": 1142
   }
 ]
