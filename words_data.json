@@ -7922,5 +7922,12 @@
     "partOfSpeech": "adjective",
     "imitation": "Governments often struggle to provide affordable public transportation in regions with sparse populations because operating costs are spread across relatively few residents.",
     "addedOrder": 1143
+  },
+  {
+    "id": "w_d7677e16b9fc_5ac6f8db71744b2e80382de0a83b5634",
+    "word": "constitute",
+    "partOfSpeech": "verb",
+    "imitation": "Transportation, housing, and energy consumption constitute a substantial proportion of a modern city's environmental impact.",
+    "addedOrder": 1144
   }
 ]
