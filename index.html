@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="app-build" content="2026-09-05-durable-outbox-sync-v3">
+    <meta name="app-build" content="2026-09-19-fullwidth-imitation-v1">
     <title>Words</title>
     <style>
         * {
@@ -1069,6 +1069,17 @@
     font-weight:700!important;
     line-height:1.4;
     color:#1E40AF!important;
+
+    /* 例句始终占满整栏；右下角编辑按钮悬浮，不参与例句宽度计算 */
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin-right:0!important;
+    padding-right:0!important;
+    box-sizing:border-box;
+    white-space:normal!important;
+    overflow-wrap:break-word!important;
+    word-break:normal!important;
 }
 .word-table .word-title-text{
     font-family:"Times New Roman", "Microsoft YaHei", "微软雅黑", sans-serif!important;
