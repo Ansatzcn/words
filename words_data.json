@@ -7782,5 +7782,12 @@
     "partOfSpeech": "verb",
     "imitation": "The lecture deals with the effects of climate change on agriculture.",
     "addedOrder": 1123
+  },
+  {
+    "id": "w_d7677e16b9fc_b896d5709db54a119ef4163267de071a",
+    "word": "control",
+    "partOfSpeech": "noun",
+    "imitation": "Strict pollution control can improve air quality in large cities.",
+    "addedOrder": 1124
   }
 ]
