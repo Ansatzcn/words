@@ -7936,5 +7936,12 @@
     "partOfSpeech": "verb",
     "imitation": "A temporary decline in economic growth does not necessarily constitute evidence of a long-term economic crisis.",
     "addedOrder": 1145
+  },
+  {
+    "id": "w_d7677e16b9fc_e56538d3d3ce4eeaa08fd4732573774d",
+    "word": "collectively",
+    "partOfSpeech": "adverb",
+    "imitation": "Governments should collectively address climate change because no single country can effectively solve a problem that crosses national borders.",
+    "addedOrder": 1146
   }
 ]
