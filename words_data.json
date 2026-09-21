@@ -7957,5 +7957,12 @@
     "partOfSpeech": "verb",
     "imitation": "Population growth tends to slow as countries become wealthier and provide broader access to education.",
     "addedOrder": 1148
+  },
+  {
+    "id": "w_d7677e16b9fc_b360d5720b814887a3f10e9a48433490",
+    "word": "slow",
+    "partOfSpeech": "adjective",
+    "imitation": "Although scientific progress can be slow, carefully tested discoveries are generally more reliable than conclusions reached in haste.",
+    "addedOrder": 1149
   }
 ]
