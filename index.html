@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="app-build" content="2026-09-19-fullwidth-imitation-v1">
+    <meta name="app-build" content="2026-09-22-html-backup-v1">
     <title>Words</title>
     <style>
         * {
@@ -1144,7 +1144,7 @@
                 <button class="btn-outline" id="configBtn">配置</button>
                 <button class="btn-outline" id="exportBtn">导出</button>
                 <button class="btn-outline" id="importBtn">导入</button>
-                <input type="file" id="fileInput" accept=".json" style="display: none;">
+                <input type="file" id="fileInput" accept=".html,.htm,.json,text/html,application/json" style="display: none;">
             </div>
             <div class="right-group">
                 <span style="font-size:0.8rem;color:#94a3b8;" id="lastSyncTime">未同步</span>
@@ -1350,6 +1350,10 @@
             const WORDS_DEVICE_ID_STORE = `${STORAGE_NAMESPACE}:device_id_v1`;
             const MAX_CONFLICT_BACKUPS = 10;
             const MAX_SYNC_BYTES = 750 * 1024;
+            const MAX_HTML_BACKUP_BYTES = 5 * 1024 * 1024;
+            const HTML_BACKUP_FORMAT = 'words-html-backup';
+            const HTML_BACKUP_VERSION = 1;
+            const HTML_BACKUP_PAYLOAD_ID = 'wordsHtmlBackupPayload';
             const MAX_SYNC_RETRIES = 4;
             const AUTO_SYNC_DELAY = 2500;
             const API_TIMEOUT_MS = 20000;
@@ -3340,8 +3344,59 @@
             }
 
             // ---------- 导出/导入 ----------
-            function downloadJson(data, filename) {
-                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+            function getExportSiteName() {
+                const rawName = (document.title || 'website').normalize('NFKC').trim().toLocaleLowerCase('en');
+                const cleaned = rawName
+                    .replace(/\.html?$/i, '')
+                    .replace(/[^\p{L}\p{N}_-]+/gu, '');
+                return cleaned || 'website';
+            }
+
+            function getTenDigitUnixTimestamp() {
+                return String(Math.floor(Date.now() / 1000)).padStart(10, '0').slice(-10);
+            }
+
+            function createHtmlBackupPayload(unixTimestamp) {
+                const normalizedWords = normalizeWordList(words);
+                return {
+                    format: HTML_BACKUP_FORMAT,
+                    version: HTML_BACKUP_VERSION,
+                    siteName: getExportSiteName(),
+                    exportedAtUnix: Number(unixTimestamp),
+                    exportedAt: new Date(Number(unixTimestamp) * 1000).toISOString(),
+                    appBuild: document.querySelector('meta[name="app-build"]')?.content || '',
+                    data: {
+                        words: normalizedWords,
+                        partOfSpeechHistory: uniquePartOfSpeech(partOfSpeechHistory),
+                        sortOrder
+                    },
+                    checksum: hashIdentity(getWordsFingerprint(normalizedWords))
+                };
+            }
+
+            function serializeCurrentPageWithBackup(payload) {
+                // 克隆当前完整页面，因此导出的 HTML 同时保留此刻的 HTML/CSS/JS 与当前可见内容。
+                // 恢复数据放在 inert application/json 节点中；导入时只读取 JSON 文本，不执行备份文件里的脚本。
+                const pageClone = document.documentElement.cloneNode(true);
+                pageClone.querySelector(`#${HTML_BACKUP_PAYLOAD_ID}`)?.remove();
+
+                const backupScript = document.createElement('script');
+                backupScript.type = 'application/json';
+                backupScript.id = HTML_BACKUP_PAYLOAD_ID;
+                backupScript.setAttribute('data-format', HTML_BACKUP_FORMAT);
+                backupScript.setAttribute('data-version', String(HTML_BACKUP_VERSION));
+                // 转义“<”可防止词条内容中的脚本结束标签提前结束数据节点。
+                backupScript.textContent = JSON.stringify(payload).replace(/</g, '\\u003c');
+
+                const body = pageClone.querySelector('body');
+                if (!body) throw new Error('当前页面缺少 body，无法生成完整 HTML 备份。');
+                body.appendChild(backupScript);
+
+                return `<!DOCTYPE html>\n${pageClone.outerHTML}`;
+            }
+
+            function downloadHtml(content, filename) {
+                const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;
@@ -3353,29 +3408,103 @@
             }
 
             function exportData() {
-                if (words.length === 0) {
-                    alert('单词列表为空，没有什么可导出的。');
-                    return;
+                try {
+                    const unixTimestamp = getTenDigitUnixTimestamp();
+                    const siteName = getExportSiteName();
+                    const payload = createHtmlBackupPayload(unixTimestamp);
+                    const html = serializeCurrentPageWithBackup(payload);
+                    downloadHtml(html, `${siteName}${unixTimestamp}.html`);
+                    showToast(`导出成功：${siteName}${unixTimestamp}.html`, 'success');
+                } catch (error) {
+                    console.error('导出 HTML 备份失败:', error);
+                    alert(`导出失败：${error.message}`);
                 }
-                downloadJson(words, `wordbook_backup_${new Date().toISOString().slice(0, 10)}.json`);
-                showToast('导出成功', 'success');
+            }
+
+            function parseHtmlBackup(text) {
+                const backupDocument = new DOMParser().parseFromString(text, 'text/html');
+                const payloadNode = backupDocument.getElementById(HTML_BACKUP_PAYLOAD_ID);
+                if (!payloadNode) {
+                    throw new Error('HTML 文件中未找到 Words 恢复数据。请使用本网站“导出”生成的 HTML 备份。');
+                }
+
+                let payload;
+                try {
+                    payload = JSON.parse(payloadNode.textContent || '');
+                } catch (error) {
+                    throw new Error(`HTML 恢复数据已损坏：${error.message}`);
+                }
+
+                if (!payload || payload.format !== HTML_BACKUP_FORMAT || payload.version !== HTML_BACKUP_VERSION) {
+                    throw new Error('HTML 备份格式或版本不受支持。');
+                }
+
+                const importedWords = payload.data?.words;
+                if (!Array.isArray(importedWords)) {
+                    throw new Error('HTML 备份中没有有效的词条数组。');
+                }
+
+                const normalizedWords = normalizeWordList(importedWords);
+                if (payload.checksum) {
+                    const actualChecksum = hashIdentity(getWordsFingerprint(normalizedWords));
+                    if (actualChecksum !== payload.checksum) {
+                        throw new Error('HTML 备份完整性校验失败，文件可能已被截断或修改。');
+                    }
+                }
+
+                return {
+                    words: importedWords,
+                    partOfSpeechHistory: Array.isArray(payload.data?.partOfSpeechHistory)
+                        ? payload.data.partOfSpeechHistory
+                        : null,
+                    sortOrder: payload.data?.sortOrder === 'desc' ? 'desc' : 'asc',
+                    source: 'HTML'
+                };
+            }
+
+            function parseImportFile(text, file) {
+                const fileName = (file?.name || '').toLocaleLowerCase('en');
+                const mimeType = (file?.type || '').toLocaleLowerCase('en');
+                const looksLikeHtml = /\.html?$/.test(fileName)
+                    || mimeType.includes('text/html')
+                    || /^\s*(?:<!doctype\s+html\b|<html\b)/i.test(text);
+
+                if (looksLikeHtml) return parseHtmlBackup(text);
+
+                // 继续兼容旧版 JSON 数组备份，防止用户现有历史备份失效。
+                const parsed = JSON.parse(text);
+                if (Array.isArray(parsed)) {
+                    return { words: parsed, partOfSpeechHistory: null, sortOrder, source: 'JSON' };
+                }
+                if (parsed && Array.isArray(parsed.words)) {
+                    return {
+                        words: parsed.words,
+                        partOfSpeechHistory: Array.isArray(parsed.partOfSpeechHistory) ? parsed.partOfSpeechHistory : null,
+                        sortOrder: parsed.sortOrder === 'desc' ? 'desc' : sortOrder,
+                        source: 'JSON'
+                    };
+                }
+                throw new Error('JSON 文件格式错误：未找到词条数组。');
             }
 
             function importData(file) {
-                if (!file || file.size > MAX_SYNC_BYTES) {
-                    alert('文件过大，请选择不超过 750 KB 的 JSON 文件，以确保能够安全同步到 GitHub。');
+                if (!file) return;
+
+                const fileName = (file.name || '').toLocaleLowerCase('en');
+                const mimeType = (file.type || '').toLocaleLowerCase('en');
+                const isHtmlFile = /\.html?$/.test(fileName) || mimeType.includes('text/html');
+                const maxFileBytes = isHtmlFile ? MAX_HTML_BACKUP_BYTES : MAX_SYNC_BYTES;
+                if (file.size > maxFileBytes) {
+                    const limitText = isHtmlFile ? '5 MB' : '750 KB';
+                    alert(`文件过大，请选择不超过 ${limitText} 的备份文件。`);
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     try {
-                        const imported = JSON.parse(event.target.result);
-                        if (!Array.isArray(imported)) {
-                            alert('文件格式错误：根节点必须是数组。');
-                            return;
-                        }
-
+                        const parsedBackup = parseImportFile(String(event.target.result || ''), file);
+                        const imported = parsedBackup.words;
                         const valid = normalizeWordList(imported);
                         if (valid.length === 0 && imported.length > 0) {
                             alert('文件中没有找到有效的单词数据。');
@@ -3398,10 +3527,16 @@
                         for (const mutation of importMutations) enqueueMutation(mutation);
 
                         words = valid;
+                        if (Array.isArray(parsedBackup.partOfSpeechHistory)) {
+                            partOfSpeechHistory = uniquePartOfSpeech(parsedBackup.partOfSpeechHistory);
+                            savePartOfSpeechHistory();
+                        }
+                        sortOrder = parsedBackup.sortOrder;
                         applySortAndRender();
                         markLocalChange();
-                        showToast(`成功导入 ${words.length} 个条目；已先保存到本地待同步队列`, 'success');
+                        showToast(`成功从 ${parsedBackup.source} 备份导入 ${words.length} 个条目；已先保存到本地待同步队列`, 'success');
                     } catch (error) {
+                        console.error('解析备份文件失败:', error);
                         alert(`解析文件失败：${error.message}`);
                     }
                 };
