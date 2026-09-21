@@ -8097,5 +8097,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1169
+  },
+  {
+    "id": "w_d7677e16b9fc_c6eeea57e0d34eaf8655a8a33f00e542",
+    "word": "pose",
+    "partOfSpeech": "verb",
+    "imitation": "The investigator posed as a customer in order to observe how the company treated ordinary consumers.",
+    "addedOrder": 1170
   }
 ]
