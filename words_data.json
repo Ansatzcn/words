@@ -8034,5 +8034,12 @@
     "partOfSpeech": "verb",
     "imitation": "Laboratory workers must be properly trained before they are allowed to handle potentially dangerous chemicals.",
     "addedOrder": 1160
+  },
+  {
+    "id": "w_d7677e16b9fc_13d53204766949f88cec1d253df550af",
+    "word": "handle",
+    "partOfSpeech": "verb",
+    "imitation": "Ancient manuscripts must be handled with extreme care because even slight physical pressure can damage the fragile material.",
+    "addedOrder": 1161
   }
 ]
