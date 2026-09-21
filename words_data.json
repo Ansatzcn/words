@@ -8076,5 +8076,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1166
+  },
+  {
+    "id": "w_d7677e16b9fc_f8df1066b7084dc485447e6dda5c5462",
+    "word": "pose",
+    "partOfSpeech": "verb",
+    "imitation": "The discovery poses an important question about how early humans adapted to dramatic changes in climate.",
+    "addedOrder": 1167
   }
 ]
