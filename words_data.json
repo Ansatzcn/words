@@ -8160,5 +8160,12 @@
     "partOfSpeech": "verb",
     "imitation": "Providing children with access to high quality educational resources can accelerate their intellectual development and improve their long term academic performance.",
     "addedOrder": 1179
+  },
+  {
+    "id": "w_d7677e16b9fc_f23d0267ea924f60a6095c090fd612a3",
+    "word": "rare",
+    "partOfSpeech": "adjective",
+    "imitation": "Several rare species of birds depend entirely on the island's remaining forests for survival.",
+    "addedOrder": 1180
   }
 ]
