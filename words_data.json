@@ -24,14 +24,14 @@
     "id": "legacy_4",
     "word": "abaft",
     "partOfSpeech": "adverb",
-    "imitation": "As the storm intensified, several crew members moved abaft to inspect the equipment near the rear of the vessel.",
+    "imitation": "The sailors moved abaft during the sudden storm.",
     "addedOrder": 4
   },
   {
     "id": "legacy_5",
     "word": "abaft",
     "partOfSpeech": "preposition",
-    "imitation": "The research equipment was installed abaft the main cabin so that scientists could conduct their observations without interfering with the crew's routine operations.",
+    "imitation": "The crew stored the equipment abaft the main mast.",
     "addedOrder": 5
   },
   {
@@ -8202,5 +8202,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1185
+  },
+  {
+    "id": "w_d7677e16b9fc_230f9da1fb304171b04a4ab3b17689aa",
+    "word": "equipment",
+    "partOfSpeech": "",
+    "imitation": "",
+    "addedOrder": 1186
   }
 ]
