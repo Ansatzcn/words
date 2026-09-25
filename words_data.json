@@ -8314,5 +8314,12 @@
     "partOfSpeech": "verb",
     "imitation": "The agency abated the penalty after reviewing the new evidence.",
     "addedOrder": 1202
+  },
+  {
+    "id": "w_d7677e16b9fc_b37942b9142d474baa9b270e792a0ce5",
+    "word": "abate",
+    "partOfSpeech": "verb",
+    "imitation": "The legal action abated after the parties reached a settlement.",
+    "addedOrder": 1203
   }
 ]
