@@ -8223,5 +8223,12 @@
     "partOfSpeech": "verb",
     "imitation": "The grieving father abandoned himself to despair.",
     "addedOrder": 1189
+  },
+  {
+    "id": "w_d7677e16b9fc_be761101b61948a4a11277ac24b33b1c",
+    "word": "abandoned",
+    "partOfSpeech": "adjective",
+    "imitation": "The volunteers rescued an abandoned dog from the empty warehouse.",
+    "addedOrder": 1190
   }
 ]
