@@ -8335,5 +8335,19 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1206
+  },
+  {
+    "id": "w_d7677e16b9fc_50cc1ec534e04af193068be72a42aab2",
+    "word": "absorb",
+    "partOfSpeech": "verb",
+    "imitation": "The expanding empire gradually absorbed several neighboring kingdoms.",
+    "addedOrder": 1207
+  },
+  {
+    "id": "w_d7677e16b9fc_cc06594a854b45f08b97ec62cb091714",
+    "word": "absorb",
+    "partOfSpeech": "verb",
+    "imitation": "The growing economy absorbed thousands of new workers.",
+    "addedOrder": 1208
   }
 ]
