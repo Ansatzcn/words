@@ -122,21 +122,21 @@
     "id": "legacy_18",
     "word": "abate",
     "partOfSpeech": "verb",
-    "imitation": "The intense pain gradually abated after a few hours.",
+    "imitation": "The severe storm gradually abated before dawn.",
     "addedOrder": 18
   },
   {
     "id": "legacy_19",
     "word": "abate",
     "partOfSpeech": "verb",
-    "imitation": "Public concern about air pollution has not abated.",
+    "imitation": "Stricter regulations significantly abated industrial pollution in the region.",
     "addedOrder": 19
   },
   {
     "id": "legacy_20",
     "word": "abate",
     "partOfSpeech": "verb",
-    "imitation": "The new policy could abate traffic congestion in major cities.",
+    "imitation": "The city ordered the factory to abate the hazardous noise.",
     "addedOrder": 20
   },
   {
@@ -8307,5 +8307,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1201
+  },
+  {
+    "id": "w_d7677e16b9fc_144e4c997b39426ba2ede03a7b620224",
+    "word": "abate",
+    "partOfSpeech": "verb",
+    "imitation": "The agency abated the penalty after reviewing the new evidence.",
+    "addedOrder": 1202
   }
 ]
