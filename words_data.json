@@ -8412,5 +8412,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1217
+  },
+  {
+    "id": "w_d7677e16b9fc_f2d0c2888cf547efaea91034437a1de7",
+    "word": "account",
+    "partOfSpeech": "verb",
+    "imitation": "The manager accounted for every dollar in the research budget.",
+    "addedOrder": 1218
   }
 ]
