@@ -8426,5 +8426,12 @@
     "partOfSpeech": "verb",
     "imitation": "Human activity accounts for much of the habitat destruction in the region.",
     "addedOrder": 1219
+  },
+  {
+    "id": "w_d7677e16b9fc_4137c86de14546018c20f61ba54e8f59",
+    "word": "account",
+    "partOfSpeech": "noun",
+    "imitation": "By all accounts, the archaeological expedition was remarkably successful.",
+    "addedOrder": 1220
   }
 ]
