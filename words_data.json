@@ -8685,5 +8685,12 @@
     "partOfSpeech": "verb",
     "imitation": "She bid three hearts during the final round.",
     "addedOrder": 1259
+  },
+  {
+    "id": "w_d7677e16b9fc_4d6b88928510496eabc0d6df1d2bd54d",
+    "word": "bid",
+    "partOfSpeech": "noun",
+    "imitation": "His final bid surprised the other players.",
+    "addedOrder": 1260
   }
 ]
