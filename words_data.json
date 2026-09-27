@@ -8615,5 +8615,12 @@
     "partOfSpeech": "noun",
     "imitation": "The manager confirmed her availability for the afternoon meeting.",
     "addedOrder": 1248
+  },
+  {
+    "id": "w_d7677e16b9fc_4e6855bf42d44ba29b75f63536cc857a",
+    "word": "availability",
+    "partOfSpeech": "noun",
+    "imitation": "Room availability decreases sharply during the tourist season.",
+    "addedOrder": 1249
   }
 ]
