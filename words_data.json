@@ -8692,5 +8692,12 @@
     "partOfSpeech": "noun",
     "imitation": "His final bid surprised the other players.",
     "addedOrder": 1260
+  },
+  {
+    "id": "w_d7677e16b9fc_eb0b59ff052a43fab658812301cb803d",
+    "word": "candidate",
+    "partOfSpeech": "noun",
+    "imitation": "Each candidate must complete the examination within three hours.",
+    "addedOrder": 1261
   }
 ]
