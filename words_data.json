@@ -8622,5 +8622,12 @@
     "partOfSpeech": "noun",
     "imitation": "Greater healthcare availability can improve outcomes in rural communities.",
     "addedOrder": 1250
+  },
+  {
+    "id": "w_d7677e16b9fc_763dbbcfeacb412abd46e657a668bdc9",
+    "word": "bail",
+    "partOfSpeech": "verb",
+    "imitation": "The government bailed out the struggling bank during the financial crisis.",
+    "addedOrder": 1251
   }
 ]
