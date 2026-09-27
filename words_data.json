@@ -8671,5 +8671,12 @@
     "partOfSpeech": "verb",
     "imitation": "The commander bade the soldiers remain silent.",
     "addedOrder": 1257
+  },
+  {
+    "id": "w_d7677e16b9fc_b54d1ae9834b452286618d12221c63da",
+    "word": "bid",
+    "partOfSpeech": "verb",
+    "imitation": "The retiring professor bid farewell to his colleagues.",
+    "addedOrder": 1258
   }
 ]
