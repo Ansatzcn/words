@@ -8664,5 +8664,12 @@
     "partOfSpeech": "noun",
     "imitation": "The organization launched a new bid for international recognition.",
     "addedOrder": 1256
+  },
+  {
+    "id": "w_d7677e16b9fc_8437ca25c6b649e4a83ef068d892c692",
+    "word": "bid",
+    "partOfSpeech": "verb",
+    "imitation": "The commander bade the soldiers remain silent.",
+    "addedOrder": 1257
   }
 ]
