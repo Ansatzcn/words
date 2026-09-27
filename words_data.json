@@ -8559,5 +8559,12 @@
     "partOfSpeech": "verb",
     "imitation": "The research team attacked the problem from several different perspectives.",
     "addedOrder": 1240
+  },
+  {
+    "id": "w_d7677e16b9fc_d03d5cbdc80a415e83710052aa7e2145",
+    "word": "attack",
+    "partOfSpeech": "noun",
+    "imitation": "The patient suffered a severe asthma attack during the night.",
+    "addedOrder": 1241
   }
 ]
