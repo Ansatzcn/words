@@ -8699,5 +8699,12 @@
     "partOfSpeech": "noun",
     "imitation": "Each candidate must complete the examination within three hours.",
     "addedOrder": 1261
+  },
+  {
+    "id": "w_d7677e16b9fc_b2aaec6bcca741b9b1037cf9a0c9df10",
+    "word": "candidate",
+    "partOfSpeech": "noun",
+    "imitation": "The doctoral candidate conducted extensive research on marine ecosystems.",
+    "addedOrder": 1262
   }
 ]
