@@ -8489,5 +8489,12 @@
     "partOfSpeech": "verb",
     "imitation": "The young poet affected an unusually formal style of dress.",
     "addedOrder": 1228
+  },
+  {
+    "id": "w_d7677e16b9fc_cd9806a4e250469ea6f82ba8e3c1df4e",
+    "word": "affect",
+    "partOfSpeech": "noun",
+    "imitation": "The patient displayed a noticeably flat affect during the interview.",
+    "addedOrder": 1229
   }
 ]
