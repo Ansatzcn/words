@@ -8545,5 +8545,12 @@
     "partOfSpeech": "verb",
     "imitation": "The virus attacks cells in the respiratory system.",
     "addedOrder": 1238
+  },
+  {
+    "id": "w_d7677e16b9fc_bf991435fa7240bab1468783dc586fee",
+    "word": "attack",
+    "partOfSpeech": "verb",
+    "imitation": "Acidic water gradually attacks the limestone surface.",
+    "addedOrder": 1239
   }
 ]
