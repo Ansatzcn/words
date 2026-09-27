@@ -8622,5 +8622,12 @@
     "partOfSpeech": "noun",
     "imitation": "Room availability decreases sharply during the tourist season.",
     "addedOrder": 1249
+  },
+  {
+    "id": "w_d7677e16b9fc_400a717d93654a94bb8dde9f98cf48ee",
+    "word": "availability",
+    "partOfSpeech": "noun",
+    "imitation": "Greater healthcare availability can improve outcomes in rural communities.",
+    "addedOrder": 1250
   }
 ]
