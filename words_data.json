@@ -8650,5 +8650,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1254
+  },
+  {
+    "id": "w_d7677e16b9fc_0854407552f44d68897afb0d125efcda",
+    "word": "bid",
+    "partOfSpeech": "noun",
+    "imitation": "The committee rejected the company's bid for the public transportation project.",
+    "addedOrder": 1255
   }
 ]
