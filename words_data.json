@@ -8881,5 +8881,12 @@
     "partOfSpeech": "noun",
     "imitation": "The medication relieved the patient's nasal congestion.",
     "addedOrder": 1288
+  },
+  {
+    "id": "w_d7677e16b9fc_51a144b0c37943dfac53358f130f5f42",
+    "word": "congestion",
+    "partOfSpeech": "noun",
+    "imitation": "Port congestion delayed the delivery of essential supplies.",
+    "addedOrder": 1289
   }
 ]
