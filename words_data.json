@@ -8776,5 +8776,12 @@
     "partOfSpeech": "noun",
     "imitation": "The young athlete accepted the champion's challenge.",
     "addedOrder": 1272
+  },
+  {
+    "id": "w_d7677e16b9fc_189e2f040ec049d693f84b5d6847f84c",
+    "word": "challenge",
+    "partOfSpeech": "verb",
+    "imitation": "The organization challenged the legality of the new regulation.",
+    "addedOrder": 1273
   }
 ]
