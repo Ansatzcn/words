@@ -8951,5 +8951,12 @@
     "partOfSpeech": "verb",
     "imitation": "The operator controlled the robotic arm from a remote station.",
     "addedOrder": 1298
+  },
+  {
+    "id": "w_d7677e16b9fc_3ca68b7d21694f8896ca6b9974e1fb55",
+    "word": "control",
+    "partOfSpeech": "verb",
+    "imitation": "Public health measures successfully controlled the spread of the infection.",
+    "addedOrder": 1299
   }
 ]
