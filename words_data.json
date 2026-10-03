@@ -8972,5 +8972,12 @@
     "partOfSpeech": "noun",
     "imitation": "The pilot checked the flight controls before departure.",
     "addedOrder": 1301
+  },
+  {
+    "id": "w_d7677e16b9fc_8e41b6858ab84a9bb22bc28b69b4438e",
+    "word": "control",
+    "partOfSpeech": "noun",
+    "imitation": "The untreated plants served as the control in the experiment.",
+    "addedOrder": 1302
   }
 ]
