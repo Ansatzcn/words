@@ -8958,5 +8958,12 @@
     "partOfSpeech": "verb",
     "imitation": "Public health measures successfully controlled the spread of the infection.",
     "addedOrder": 1299
+  },
+  {
+    "id": "w_d7677e16b9fc_cc1361f1c0d94d879d5a9f0960498a72",
+    "word": "control",
+    "partOfSpeech": "noun",
+    "imitation": "The government introduced stricter controls on hazardous chemicals.",
+    "addedOrder": 1300
   }
 ]
