@@ -7878,7 +7878,7 @@
     "id": "w_d7677e16b9fc_0e7b000b4a2e48caa538ab8d1df5af40",
     "word": "constitute",
     "partOfSpeech": "verb",
-    "imitation": "A temporary decline in economic growth does not necessarily constitute evidence of a long-term economic crisis.",
+    "imitation": "The deliberate destruction of evidence constitutes a serious violation of research ethics.",
     "addedOrder": 1145
   },
   {
@@ -8916,5 +8916,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1293
+  },
+  {
+    "id": "w_d7677e16b9fc_c3963011df13490a9a6ce8d7d3524905",
+    "word": "constitute",
+    "partOfSpeech": "verb",
+    "imitation": "The agreement constituted a new council for regional cooperation.",
+    "addedOrder": 1294
   }
 ]
