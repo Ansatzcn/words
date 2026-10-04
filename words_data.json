@@ -9091,5 +9091,12 @@
     "partOfSpeech": "verb",
     "imitation": "The computer crashed before the researcher saved the data.",
     "addedOrder": 1319
+  },
+  {
+    "id": "w_d7677e16b9fc_21966849fadb407c95e69a5436d8833a",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "The unexpected software error crashed the entire system.",
+    "addedOrder": 1320
   }
 ]
