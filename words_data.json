@@ -9112,5 +9112,12 @@
     "partOfSpeech": "verb",
     "imitation": "The exhausted student crashed after the final examination.",
     "addedOrder": 1322
+  },
+  {
+    "id": "w_d7677e16b9fc_a6fe666c4fe94fa192d540234d6c16b2",
+    "word": "crash",
+    "partOfSpeech": "noun",
+    "imitation": "A sudden crash awakened everyone in the house.",
+    "addedOrder": 1323
   }
 ]
