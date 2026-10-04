@@ -9126,5 +9126,12 @@
     "partOfSpeech": "noun",
     "imitation": "The system crash destroyed several hours of unsaved work.",
     "addedOrder": 1324
+  },
+  {
+    "id": "w_d7677e16b9fc_ff45887f86cd42e993a069c2e36494b4",
+    "word": "crash",
+    "partOfSpeech": "noun",
+    "imitation": "The market crash eliminated billions of dollars in investment value.",
+    "addedOrder": 1325
   }
 ]
