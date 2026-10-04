@@ -9119,5 +9119,12 @@
     "partOfSpeech": "noun",
     "imitation": "A sudden crash awakened everyone in the house.",
     "addedOrder": 1323
+  },
+  {
+    "id": "w_d7677e16b9fc_83263d6e438e41e3a8ffb3d3ace9d663",
+    "word": "crash",
+    "partOfSpeech": "noun",
+    "imitation": "The system crash destroyed several hours of unsaved work.",
+    "addedOrder": 1324
   }
 ]
