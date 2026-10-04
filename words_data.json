@@ -9084,5 +9084,12 @@
     "partOfSpeech": "adjective",
     "imitation": "Formal ceremonies require the correct form of address.",
     "addedOrder": 1318
+  },
+  {
+    "id": "w_d7677e16b9fc_8b0dff9795d14d368459feaeb8fc974d",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "The computer crashed before the researcher saved the data.",
+    "addedOrder": 1319
   }
 ]
