@@ -9203,5 +9203,12 @@
     "partOfSpeech": "verb",
     "imitation": "The company deals in specialized medical equipment.",
     "addedOrder": 1335
+  },
+  {
+    "id": "w_d7677e16b9fc_c60f96af77d0410b98862e3bc07af8c3",
+    "word": "deal",
+    "partOfSpeech": "verb",
+    "imitation": "The manufacturer deals with suppliers across several countries.",
+    "addedOrder": 1336
   }
 ]
