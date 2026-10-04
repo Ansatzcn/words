@@ -9028,5 +9028,12 @@
     "partOfSpeech": "verb",
     "imitation": "The professor politely corrected the student's misunderstanding.",
     "addedOrder": 1310
+  },
+  {
+    "id": "w_d7677e16b9fc_c1e298490eb3400a8ece55a402da257a",
+    "word": "correct",
+    "partOfSpeech": "verb",
+    "imitation": "The teacher corrected the students' essays after class.",
+    "addedOrder": 1311
   }
 ]
