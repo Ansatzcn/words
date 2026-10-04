@@ -9098,5 +9098,12 @@
     "partOfSpeech": "verb",
     "imitation": "The unexpected software error crashed the entire system.",
     "addedOrder": 1320
+  },
+  {
+    "id": "w_d7677e16b9fc_87e5577a23db40efb9d77066c01757b3",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "Housing prices crashed after speculative demand disappeared.",
+    "addedOrder": 1321
   }
 ]
