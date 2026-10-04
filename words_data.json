@@ -9035,5 +9035,12 @@
     "partOfSpeech": "verb",
     "imitation": "The teacher corrected the students' essays after class.",
     "addedOrder": 1311
+  },
+  {
+    "id": "w_d7677e16b9fc_49d39da9845f43df8a5c2a7ef25a1849",
+    "word": "correct",
+    "partOfSpeech": "verb",
+    "imitation": "The procedure corrected the patient's vision successfully.",
+    "addedOrder": 1312
   }
 ]
