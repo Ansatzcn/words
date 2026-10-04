@@ -9042,5 +9042,12 @@
     "partOfSpeech": "verb",
     "imitation": "The procedure corrected the patient's vision successfully.",
     "addedOrder": 1312
+  },
+  {
+    "id": "w_d7677e16b9fc_c78de2e2511348a3b228af50a83f37fd",
+    "word": "correct",
+    "partOfSpeech": "verb",
+    "imitation": "The researchers corrected for age differences in the statistical analysis.",
+    "addedOrder": 1313
   }
 ]
