@@ -9105,5 +9105,12 @@
     "partOfSpeech": "verb",
     "imitation": "Housing prices crashed after speculative demand disappeared.",
     "addedOrder": 1321
+  },
+  {
+    "id": "w_d7677e16b9fc_f6309131f47d4966a78973648106b7e3",
+    "word": "crash",
+    "partOfSpeech": "verb",
+    "imitation": "The exhausted student crashed after the final examination.",
+    "addedOrder": 1322
   }
 ]
