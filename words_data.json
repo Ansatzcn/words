@@ -9553,5 +9553,12 @@
     "partOfSpeech": "noun",
     "imitation": "The young runner defeated a highly competitive field.",
     "addedOrder": 1386
+  },
+  {
+    "id": "w_d7677e16b9fc_91be11f3c5aa4ba0adbbd28070a1f00a",
+    "word": "field",
+    "partOfSpeech": "verb",
+    "imitation": "The party fielded several experienced candidates in the election.",
+    "addedOrder": 1387
   }
 ]
