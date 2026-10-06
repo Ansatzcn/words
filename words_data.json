@@ -9546,5 +9546,12 @@
     "partOfSpeech": "verb",
     "imitation": "The committee accurately estimated the significance of the discovery.",
     "addedOrder": 1384
+  },
+  {
+    "id": "w_d7677e16b9fc_f8808f83022c4c9080068f4b7d1cd58a",
+    "word": "estimate",
+    "partOfSpeech": "noun",
+    "imitation": "The historian's estimate of the ruler's influence changed after new evidence emerged.",
+    "addedOrder": 1385
   }
 ]
