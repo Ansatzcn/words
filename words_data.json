@@ -9336,5 +9336,12 @@
     "partOfSpeech": "verb",
     "imitation": "The engineer carefully documented every stage of the testing procedure.",
     "addedOrder": 1354
+  },
+  {
+    "id": "w_d7677e16b9fc_2a4544c470ef44aeb615cbe96aabf2ef",
+    "word": "education",
+    "partOfSpeech": "noun",
+    "imitation": "Her university education prepared her for a demanding scientific career.",
+    "addedOrder": 1355
   }
 ]
