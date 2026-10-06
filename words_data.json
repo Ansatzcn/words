@@ -9469,5 +9469,12 @@
     "partOfSpeech": "noun",
     "imitation": "Employees may contact the supervisor directly in an emergency.",
     "addedOrder": 1373
+  },
+  {
+    "id": "w_d7677e16b9fc_901dcd05be2a4c58b53435210bd8af79",
+    "word": "emergency",
+    "partOfSpeech": "noun",
+    "imitation": "Every laboratory must maintain adequate emergency equipment.",
+    "addedOrder": 1374
   }
 ]
