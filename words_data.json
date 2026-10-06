@@ -9560,5 +9560,12 @@
     "partOfSpeech": "verb",
     "imitation": "The party fielded several experienced candidates in the election.",
     "addedOrder": 1387
+  },
+  {
+    "id": "w_d7677e16b9fc_d6b4fbe548c7416aa5aaadc3570fff5e",
+    "word": "field",
+    "partOfSpeech": "verb",
+    "imitation": "The professor fielded several difficult questions after the lecture.",
+    "addedOrder": 1388
   }
 ]
