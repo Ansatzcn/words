@@ -9518,5 +9518,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1380
+  },
+  {
+    "id": "w_d7677e16b9fc_9454bb2c1a2440bfab7b2f8d06977987",
+    "word": "era",
+    "partOfSpeech": "noun",
+    "imitation": "Artificial intelligence has introduced a new era of scientific discovery.",
+    "addedOrder": 1381
   }
 ]
