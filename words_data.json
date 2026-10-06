@@ -9210,5 +9210,12 @@
     "partOfSpeech": "verb",
     "imitation": "The manufacturer deals with suppliers across several countries.",
     "addedOrder": 1336
+  },
+  {
+    "id": "w_d7677e16b9fc_6aeac5e06f3e4f168acdf18a9c8e614a",
+    "word": "decorate",
+    "partOfSpeech": "verb",
+    "imitation": "The owners decorated the apartment before renting it to new tenants.",
+    "addedOrder": 1337
   }
 ]
