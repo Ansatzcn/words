@@ -9539,5 +9539,12 @@
     "partOfSpeech": "verb",
     "imitation": "Engineers estimated the repair cost at several million dollars.",
     "addedOrder": 1383
+  },
+  {
+    "id": "w_d7677e16b9fc_639baef1fb9646f3af2e37660574ac26",
+    "word": "estimate",
+    "partOfSpeech": "verb",
+    "imitation": "The committee accurately estimated the significance of the discovery.",
+    "addedOrder": 1384
   }
 ]
