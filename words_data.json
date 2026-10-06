@@ -9455,5 +9455,12 @@
     "partOfSpeech": "noun",
     "imitation": "Severe breathing difficulty can constitute a medical emergency.",
     "addedOrder": 1371
+  },
+  {
+    "id": "w_d7677e16b9fc_6de1413d653542c3bb85b7f53029678d",
+    "word": "emergency",
+    "partOfSpeech": "noun",
+    "imitation": "The government declared a national emergency after the devastating earthquake.",
+    "addedOrder": 1372
   }
 ]
