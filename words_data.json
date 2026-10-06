@@ -9623,5 +9623,12 @@
     "partOfSpeech": "verb",
     "imitation": "Several companies tried to grab a larger share of the market.",
     "addedOrder": 1397
+  },
+  {
+    "id": "w_d7677e16b9fc_d0e017b79fc2405d8dfb7c325378a064",
+    "word": "grab",
+    "partOfSpeech": "noun",
+    "imitation": "The child made a quick grab for the falling toy.",
+    "addedOrder": 1398
   }
 ]
