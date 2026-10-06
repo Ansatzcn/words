@@ -9532,5 +9532,12 @@
     "partOfSpeech": "noun",
     "imitation": "The inscription dates from the early centuries of the Common Era.",
     "addedOrder": 1382
+  },
+  {
+    "id": "w_d7677e16b9fc_891fe00f84224be7867c69f88ef5574b",
+    "word": "estimate",
+    "partOfSpeech": "verb",
+    "imitation": "Engineers estimated the repair cost at several million dollars.",
+    "addedOrder": 1383
   }
 ]
