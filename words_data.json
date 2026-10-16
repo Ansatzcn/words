@@ -7976,7 +7976,7 @@
     "id": "w_d7677e16b9fc_189d747c2ccb4cf39ff81ff2e59f5030",
     "word": "handle",
     "partOfSpeech": "noun",
-    "imitation": "The design of the tool's handle allows workers to use it comfortably for extended periods of time.",
+    "imitation": "The door handle was made of solid metal.",
     "addedOrder": 1163
   },
   {
@@ -9658,5 +9658,12 @@
     "partOfSpeech": "verb",
     "imitation": "The company handles agricultural products from several regions.",
     "addedOrder": 1403
+  },
+  {
+    "id": "w_d7677e16b9fc_0d7bcfb725804aefbf079b71ecd0f656",
+    "word": "handle",
+    "partOfSpeech": "verb",
+    "imitation": "The pilot handled the aircraft skillfully during the storm.",
+    "addedOrder": 1404
   }
 ]
