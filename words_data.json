@@ -9728,5 +9728,12 @@
     "partOfSpeech": "noun",
     "imitation": "The company has a long history of successful innovation.",
     "addedOrder": 1414
+  },
+  {
+    "id": "w_d7677e16b9fc_b488704587ae4f7dbaa2d53f38badd90",
+    "word": "history",
+    "partOfSpeech": "noun",
+    "imitation": "The doctor reviewed the patient's medical history before recommending treatment.",
+    "addedOrder": 1415
   }
 ]
