@@ -9693,5 +9693,12 @@
     "partOfSpeech": "verb",
     "imitation": "The group hijacked the original proposal and used it to promote its own interests.",
     "addedOrder": 1409
+  },
+  {
+    "id": "w_d7677e16b9fc_642c730c83f94c10bed4628223aa7cf9",
+    "word": "hijack",
+    "partOfSpeech": "verb",
+    "imitation": "The attacker hijacked the user's account and changed the password.",
+    "addedOrder": 1410
   }
 ]
