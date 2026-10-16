@@ -9700,5 +9700,12 @@
     "partOfSpeech": "verb",
     "imitation": "The attacker hijacked the user's account and changed the password.",
     "addedOrder": 1410
+  },
+  {
+    "id": "w_d7677e16b9fc_f43e47ffe1744d00b8efc2a0a019d846",
+    "word": "hijack",
+    "partOfSpeech": "noun",
+    "imitation": "The hijack ended after the passengers were safely evacuated.",
+    "addedOrder": 1411
   }
 ]
