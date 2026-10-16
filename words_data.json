@@ -9665,5 +9665,26 @@
     "partOfSpeech": "verb",
     "imitation": "The pilot handled the aircraft skillfully during the storm.",
     "addedOrder": 1404
+  },
+  {
+    "id": "w_d7677e16b9fc_e406f799853d4a74b559ef58e9649e1a",
+    "word": "handle",
+    "partOfSpeech": "noun",
+    "imitation": "The researcher published the article under an anonymous online handle.",
+    "addedOrder": 1405
+  },
+  {
+    "id": "w_d7677e16b9fc_d64cfae804284013a8632f6e9f669fcc",
+    "word": "handle",
+    "partOfSpeech": "noun",
+    "imitation": "The exchange handles billions of dollars in transactions each year.",
+    "addedOrder": 1406
+  },
+  {
+    "id": "w_d7677e16b9fc_3ff88fb12d3f499aa55d6a1e7fb85b2d",
+    "word": "handle",
+    "partOfSpeech": "noun",
+    "imitation": "The teacher handled the disagreement between the students professionally.",
+    "addedOrder": 1407
   }
 ]
