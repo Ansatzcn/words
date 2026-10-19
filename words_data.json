@@ -9756,5 +9756,12 @@
     "partOfSpeech": "",
     "imitation": "",
     "addedOrder": 1418
+  },
+  {
+    "id": "w_d7677e16b9fc_f57316dc3b184d7a928b41f65b3d3e9f",
+    "word": "identify",
+    "partOfSpeech": "verb",
+    "imitation": "The researchers identified the substance as a previously unknown mineral.",
+    "addedOrder": 1419
   }
 ]
