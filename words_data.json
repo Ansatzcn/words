@@ -9784,5 +9784,12 @@
     "partOfSpeech": "verb",
     "imitation": "All visitors must identify themselves at the security desk.\n所有访客都必须在安保服务台核实自己的身份。",
     "addedOrder": 1422
+  },
+  {
+    "id": "w_d7677e16b9fc_8e511489781448d189eda530efe8717d",
+    "word": "bid",
+    "partOfSpeech": "noun",
+    "imitation": "His final bid surprised the other players.\n他最后一次叫牌让其他玩家感到意外。",
+    "addedOrder": 1423
   }
 ]
